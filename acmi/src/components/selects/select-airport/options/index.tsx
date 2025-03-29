@@ -7,27 +7,27 @@ export interface OptionsProps extends IRenderOptionsProps {
   onChange: (option: ISelectOption) => void;
 }
 
-export const Options = ({ options, isLoading,setIsOpen, onChange }: OptionsProps) => {
+export const Options = ({ options, isLoading, setIsOpen, onChange }: OptionsProps) => {
   const isEmpty = options.length === 0;
 
   const onHandleChange = (option: ISelectOption) => {
     onChange(option);
-    setIsOpen(false)
+    setIsOpen(false);
   };
 
   return (
-    <div className="bg-white border w-full rounded-[0_0_12px_12px] border-t-0 border-blue-dark px-3 pb-2.5 text-blue-dark">
+    <div className="border-blue-dark text-blue-dark w-full rounded-[0_0_12px_12px] border border-t-0 bg-white px-3 pb-2.5">
       {isEmpty && !isLoading && <p className="text-gray-dark w-full text-center">No options</p>}
 
       {!isEmpty && !isLoading && (
-        <div className="overflow-y-auto scroll-bar-mini max-h-[120px]">
+        <div className="scroll-bar-mini max-h-[120px] overflow-y-auto">
           {options.map((option) => (
             <div
               key={option.value}
               onClick={() => onHandleChange(option)}
-              className="text-blue-dark flex items-center leading-[19px] gap-4 text-[16px] py-1 px-1 cursor-pointer hover:bg-slate-300 duration-200 "
+              className="text-blue-dark flex cursor-pointer items-center gap-4 px-1 py-1 text-[16px] leading-[19px] duration-200 hover:bg-slate-300"
             >
-              <Plain className="w-6 h-3 shrink-0" />
+              <Plain className="h-3 w-6 shrink-0" />
 
               <span className="text-[inherit]">{option.text}</span>
             </div>
@@ -36,8 +36,8 @@ export const Options = ({ options, isLoading,setIsOpen, onChange }: OptionsProps
       )}
 
       {isLoading && (
-        <div className=" flex items-center justify-center">
-          <span className="block w-5 h-5  border-3 border-blue-dark rounded-full border-t-transparent animate-spin duration-1000"></span>
+        <div className="flex items-center justify-center">
+          <span className="border-blue-dark block h-5 w-5 animate-spin rounded-full border-3 border-t-transparent duration-1000" />
         </div>
       )}
     </div>
