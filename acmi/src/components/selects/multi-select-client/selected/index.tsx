@@ -72,11 +72,11 @@ export const Selected = ({
             <p
               key={item.value}
               onClick={() => onChange(item as ISelectOption)}
-              className="flex gap-1 cursor-pointer hover:text-red-400 duration-100 items-center justify-center text-white text-sm bg-blue-dark px-2 py-[2px]"
+              className="flex rounded-sm gap-1 cursor-pointer hover:text-red-400 duration-100 items-center justify-center text-white text-sm bg-blue-dark px-2 py-[2px]"
             >
               {(item as ISelectOption)?.text}
 
-              <Cross className="w-4 h-4" />
+              <Cross className="w-2.5 h-2.5 shrink-0" />
             </p>
           ))}
         </div>
