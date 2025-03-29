@@ -51,7 +51,7 @@ export const Selected = ({
 
   return (
     <div className={wrapper}>
-      <div className="flex gap-2 " onClick={() => !isDisabled && setIsOpen(true)}>
+      <div className="flex gap-2" onClick={() => !isDisabled && setIsOpen(true)}>
         <span className="text-blue-dark text-nowrap">{label}</span>
 
         <input
@@ -63,7 +63,7 @@ export const Selected = ({
           placeholder={placeholder}
           onBlur={() => setIsFocused(false)}
           onChange={(e) => setFilter(e.target.value)}
-          className="text-gray-dark outline-none w-full min-w-1/2 disabled:cursor-not-allowed"
+          className="text-gray-dark w-full min-w-1/2 outline-none disabled:cursor-not-allowed"
         />
       </div>
 
@@ -71,13 +71,13 @@ export const Selected = ({
         <div className="flex gap-2">
           <p
             onClick={onHandleChange}
-            className="flex rounded-sm gap-1 cursor-pointer w-full hover:text-red-400 duration-100 items-center justify-center text-white text-sm bg-blue-dark px-2 py-[2px]"
+            className="bg-blue-dark flex w-full cursor-pointer items-center justify-center gap-1 rounded-sm px-2 py-[2px] text-sm text-white duration-100 hover:text-red-400"
           >
-            <Plain className="w-4 h-2 shrink-0 mr-1" />
+            <Plain className="mr-1 h-2 w-4 shrink-0" />
 
             {(option as ISelectOption)?.text}
 
-            <Cross className="w-2.5 h-2.5 shrink-0 ml-auto" />
+            <Cross className="ml-auto h-2.5 w-2.5 shrink-0" />
           </p>
         </div>
       )}
