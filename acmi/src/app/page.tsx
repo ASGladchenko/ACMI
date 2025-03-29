@@ -5,11 +5,11 @@ import { useState } from 'react';
 import { BodySwitcher, Input, SelectClient, MultiSelectClient, Checkbox, ISelectOption } from '@/components';
 
 export default function Home() {
-  const [certifications, setCertifications] = useState<string | ''>('');
+  const [certifications, setCertifications] = useState<string>('');
   const [selected, setSelected] = useState<ISelectOption | null>(null);
   const [multi, setMulti] = useState<ISelectOption[] | []>([]);
 
-  const [minPax, setMinPax] = useState<string | ''>('');
+  const [minPax, setMinPax] = useState<string>('');
 
   const handleSelect = (option: ISelectOption | null) => {
     setSelected(option);
