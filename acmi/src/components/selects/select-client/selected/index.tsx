@@ -47,7 +47,7 @@ export const Selected = ({
 
   return (
     <div className={wrapper}>
-      <div className="flex gap-2 " onClick={() => !isDisabled && setIsOpen(true)}>
+      <div className="flex gap-2" onClick={() => !isDisabled && setIsOpen(true)}>
         <span className="text-blue-dark text-nowrap">{label}</span>
 
         <input
@@ -59,19 +59,19 @@ export const Selected = ({
           placeholder={placeholder}
           onBlur={() => setIsFocused(false)}
           onChange={(e) => setFilter(e.target.value)}
-          className="text-gray-dark outline-none w-full min-w-1/2 disabled:cursor-not-allowed"
+          className="text-gray-dark w-full min-w-1/2 outline-none disabled:cursor-not-allowed"
         />
       </div>
 
       {option && (
-        <div className="flex gap-2 ">
+        <div className="flex gap-2">
           <p
             onClick={() => onChange(null)}
-            className="flex rounded-sm gap-1 cursor-pointer hover:text-red-400 duration-100 items-center justify-center text-white text-sm bg-blue-dark px-2 py-[2px]"
+            className="bg-blue-dark flex cursor-pointer items-center justify-center gap-1 rounded-sm px-2 py-[2px] text-sm text-white duration-100 hover:text-red-400"
           >
             {(option as ISelectOption)?.text}
 
-            <Cross className="w-2.5 h-2.5 " />
+            <Cross className="h-2.5 w-2.5" />
           </p>
         </div>
       )}
