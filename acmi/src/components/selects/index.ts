@@ -1,3 +1,9 @@
-export {SelectClient} from './select-client';
+export { SelectClient } from './select-client';
+export { MultiSelectClient } from './multi-select-client';
 
-export type {SelectLogicWrapperProps, ISelectOption, IRenderOptionsProps, IRenderSelectedProps} from './select-logic/types';
+export type {
+  ISelectOption,
+  IRenderOptionsProps,
+  IRenderSelectedProps,
+  SelectLogicWrapperProps,
+} from './select-logic/types';

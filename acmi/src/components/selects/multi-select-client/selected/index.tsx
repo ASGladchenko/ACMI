@@ -5,12 +5,13 @@ import { Cross } from '@/assets/svg';
 
 import { IRenderSelectedProps, ISelectOption } from '../../select-logic/types';
 
-export interface SelectedProps extends IRenderSelectedProps {
+export interface SelectedProps extends Omit<IRenderSelectedProps, 'option'> {
   label: string;
   filter: string;
+  option: ISelectOption[];
   isDisabled?: boolean;
   setFilter: (filter: string) => void;
-  onChange: (option: ISelectOption | null) => void;
+  onChange: (option: ISelectOption) => void;
 }
 
 export const Selected = ({
@@ -45,6 +46,8 @@ export const Selected = ({
     isOpen && 'rounded-[12px_12px_0_0] border-b-0'
   );
 
+  const isNotEmpty = option && option.length > 0;
+
   return (
     <div className={wrapper}>
       <div className="flex gap-2 " onClick={() => !isDisabled && setIsOpen(true)}>
@@ -63,16 +66,19 @@ export const Selected = ({
         />
       </div>
 
-      {option && (
-        <div className="flex gap-2 ">
-          <p
-            onClick={() => onChange(null)}
-            className="flex gap-1 cursor-pointer hover:text-red-400 duration-100 items-center justify-center text-white text-sm bg-blue-dark px-2 py-[2px]"
-          >
-            {(option as ISelectOption)?.text}
+      {isNotEmpty && (
+        <div className="flex gap-2 scroll-bar-mini overflow-x-auto pb-0.5">
+          {option.map((item) => (
+            <p
+              key={item.value}
+              onClick={() => onChange(item as ISelectOption)}
+              className="flex gap-1 cursor-pointer hover:text-red-400 duration-100 items-center justify-center text-white text-sm bg-blue-dark px-2 py-[2px]"
+            >
+              {(item as ISelectOption)?.text}
 
-            <Cross className="w-4 h-4" />
-          </p>
+              <Cross className="w-4 h-4" />
+            </p>
+          ))}
         </div>
       )}
     </div>
