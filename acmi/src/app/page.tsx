@@ -2,7 +2,16 @@
 
 import { useState } from 'react';
 
-import { BodySwitcher, Input, SelectClient, MultiSelectClient, Checkbox, ISelectOption, SelectAirport } from '@/components';
+import {
+  BodySwitcher,
+  Input,
+  SelectClient,
+  MultiSelectClient,
+  Checkbox,
+  ISelectOption,
+  SelectAirport,
+  Button,
+} from '@/components';
 
 export default function Home() {
   const [certifications, setCertifications] = useState<string>('');
@@ -31,18 +40,17 @@ export default function Home() {
     { text: 'test9', value: 'test9' },
   ];
 
-   const airports = [
-{ text: 'LCA Larnaca, Cyprus', value: 'LCA' },
-{ text: 'LAR Laramie, USA', value: 'LAR' },
-{ text: 'LAS Las-Vegas, USA', value: 'LAS' },
-{ text: 'LAX Los Angeles, USA', value: 'LAX' },
-{ text: 'LCY London City, UK', value: 'LCY' },
-{ text: 'LED Saint Petersburg, Russia', value: 'LED' },
-{ text: 'LIS Lisbon, Portugal', value: 'LIS' },
-{ text: 'LIM Lima, Peru', value: 'LIM' },
-{ text: 'LHE Lahore, Pakistan', value: 'LHE' },
-{ text: 'LYS Lyon, France', value: 'LYS' },
-
+  const airports = [
+    { text: 'LCA Larnaca, Cyprus', value: 'LCA' },
+    { text: 'LAR Laramie, USA', value: 'LAR' },
+    { text: 'LAS Las-Vegas, USA', value: 'LAS' },
+    { text: 'LAX Los Angeles, USA', value: 'LAX' },
+    { text: 'LCY London City, UK', value: 'LCY' },
+    { text: 'LED Saint Petersburg, Russia', value: 'LED' },
+    { text: 'LIS Lisbon, Portugal', value: 'LIS' },
+    { text: 'LIM Lima, Peru', value: 'LIM' },
+    { text: 'LHE Lahore, Pakistan', value: 'LHE' },
+    { text: 'LYS Lyon, France', value: 'LYS' },
   ];
 
   return (
@@ -113,14 +121,23 @@ export default function Home() {
         selected={selected}
         placeholder="enter"
         onChange={handleSelect}
-        className='max-w-[330px]'
+        className="max-w-[330px]"
       />
-      
+
       <Checkbox
         label="Galley ovens"
         subLabel="tick if mandatory"
         onChange={(value) => console.log(value)}
       />
+
+      <Button loading>Proceed to offer</Button>
+      <Button buttonType="outline">Proceed to offer</Button>
+      <Button loading buttonType="outline">
+        Proceed to offer
+      </Button>
+      <Button loading buttonType="ghost">
+        Proceed to offer
+      </Button>
     </div>
   );
 }

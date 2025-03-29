@@ -9,16 +9,16 @@ export const Options = ({ options, isLoading, onChange }: OptionsProps) => {
   const isEmpty = options.length === 0;
 
   return (
-    <div className="bg-white border w-full rounded-[0_0_12px_12px] border-t-0 border-blue-dark px-3 pb-2.5 text-blue-dark">
+    <div className="border-blue-dark text-blue-dark w-full rounded-[0_0_12px_12px] border border-t-0 bg-white px-3 pb-2.5">
       {isEmpty && !isLoading && <p className="text-gray-dark w-full text-center">No options</p>}
 
       {!isEmpty && !isLoading && (
-        <div className="overflow-y-auto scroll-bar-mini max-h-[120px]">
+        <div className="scroll-bar-mini max-h-[120px] overflow-y-auto">
           {options.map((option) => (
             <div
               key={option.value}
               onClick={() => onChange(option)}
-              className="leading-[19px] text-[16px] py-1 px-1 cursor-pointer hover:bg-slate-300 duration-200 "
+              className="cursor-pointer px-1 py-1 text-[16px] leading-[19px] duration-200 hover:bg-slate-300"
             >
               <span className="text-blue-dark text-[inherit">{option.text}</span>
             </div>
@@ -27,8 +27,8 @@ export const Options = ({ options, isLoading, onChange }: OptionsProps) => {
       )}
 
       {isLoading && (
-        <div className=" flex items-center justify-center">
-          <span className="block w-5 h-5  border-3 border-blue-dark rounded-full border-t-transparent animate-spin duration-1000"></span>
+        <div className="flex items-center justify-center">
+          <span className="border-blue-dark block h-5 w-5 animate-spin rounded-full border-3 border-t-transparent duration-1000"></span>
         </div>
       )}
     </div>
