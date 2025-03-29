@@ -36,6 +36,10 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* shadow */
+  --shadow-inner-glow: inset 0px 0px 4px 2px rgba(26, 67, 107, 0.5);
+  --shadow-inner-glow-active: inset 0px 0px 4px 4px rgba(26, 67, 107, 0.5);
 }
 
 @media (prefers-color-scheme: dark) {

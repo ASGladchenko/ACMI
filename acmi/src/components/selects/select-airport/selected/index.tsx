@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { cn } from '@/utils';
-import { Cross } from '@/assets/svg';
+import { Cross, Plain } from '@/assets/svg';
 
 import { IRenderSelectedProps, ISelectOption } from '../../select-logic/types';
 
@@ -45,6 +45,10 @@ export const Selected = ({
     isOpen && 'rounded-[12px_12px_0_0] border-b-0'
   );
 
+  const onHandleChange = () => {
+    onChange(null);
+  };
+
   return (
     <div className={wrapper}>
       <div className="flex gap-2" onClick={() => !isDisabled && setIsOpen(true)}>
@@ -66,12 +70,14 @@ export const Selected = ({
       {option && (
         <div className="flex gap-2">
           <p
-            onClick={() => onChange(null)}
-            className="bg-blue-dark flex cursor-pointer items-center justify-center gap-1 rounded-sm px-2 py-[2px] text-sm text-white duration-100 hover:text-red-400"
+            onClick={onHandleChange}
+            className="bg-blue-dark flex w-full cursor-pointer items-center justify-center gap-1 rounded-sm px-2 py-[2px] text-sm text-white duration-100 hover:text-red-400"
           >
+            <Plain className="mr-1 h-2 w-4 shrink-0" />
+
             {(option as ISelectOption)?.text}
 
-            <Cross className="h-2.5 w-2.5" />
+            <Cross className="ml-auto h-2.5 w-2.5 shrink-0" />
           </p>
         </div>
       )}

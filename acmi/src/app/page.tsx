@@ -9,6 +9,7 @@ import {
   MultiSelectClient,
   Checkbox,
   ISelectOption,
+  SelectAirport,
   Button,
 } from '@/components';
 
@@ -37,6 +38,19 @@ export default function Home() {
     { text: 'test7', value: 'test7' },
     { text: 'test8', value: 'test8' },
     { text: 'test9', value: 'test9' },
+  ];
+
+  const airports = [
+    { text: 'LCA Larnaca, Cyprus', value: 'LCA' },
+    { text: 'LAR Laramie, USA', value: 'LAR' },
+    { text: 'LAS Las-Vegas, USA', value: 'LAS' },
+    { text: 'LAX Los Angeles, USA', value: 'LAX' },
+    { text: 'LCY London City, UK', value: 'LCY' },
+    { text: 'LED Saint Petersburg, Russia', value: 'LED' },
+    { text: 'LIS Lisbon, Portugal', value: 'LIS' },
+    { text: 'LIM Lima, Peru', value: 'LIM' },
+    { text: 'LHE Lahore, Pakistan', value: 'LHE' },
+    { text: 'LYS Lyon, France', value: 'LYS' },
   ];
 
   return (
@@ -100,19 +114,28 @@ export default function Home() {
         className="max-w-[300px]"
         onChange={handleMultiSelect}
       />
+
+      <SelectAirport
+        label="Ops from"
+        options={airports}
+        selected={selected}
+        placeholder="enter"
+        onChange={handleSelect}
+        className="max-w-[330px]"
+      />
+
       <Checkbox
         label="Galley ovens"
         subLabel="tick if mandatory"
         onChange={(value) => console.log(value)}
       />
 
-      <Button disabled loading>
+      <Button loading>Proceed to offer</Button>
+      <Button buttonType="outline">Proceed to offer</Button>
+      <Button loading buttonType="outline">
         Proceed to offer
       </Button>
-      <Button disabled loading buttonType="outline">
-        Proceed to offer
-      </Button>
-      <Button disabled loading buttonType="ghost">
+      <Button loading buttonType="ghost">
         Proceed to offer
       </Button>
     </div>
