@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 
-import { ISelectOption } from '@/components/selects';
-import { BodySwitcher, Input, SelectClient, MultiSelectClient,Checkbox } from '@/components';
+import { BodySwitcher, Input, SelectClient, MultiSelectClient, Checkbox, ISelectOption } from '@/components';
 
 export default function Home() {
   const [certifications, setCertifications] = useState<string | ''>('');
