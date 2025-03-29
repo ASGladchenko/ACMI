@@ -6,45 +6,63 @@ import { Selected } from './selected';
 import { SelectLogic } from '../select-logic';
 import { ISelectOption, SelectLogicWrapperProps } from '../select-logic/types';
 
-export interface SelectClientProps
+export interface MultiSelectClientProps
   extends Omit<
     SelectLogicWrapperProps,
     'selectedOption' | 'renderOptions' | 'renderSelected' | 'onChange'
   > {
   label: string;
-  selected: ISelectOption | null;
-  onChange: (option: ISelectOption | null) => void;
+  selected: ISelectOption[];
+  onChange: (option: ISelectOption[]) => void;
 }
 
-export const SelectClient = ({
+export const MultiSelectClient = ({
   label,
-  selected,
   onChange,
-  className,
   isLoading,
   isDisabled,
+  selected = [],
   ...restProps
-}: SelectClientProps) => {
+}: MultiSelectClientProps) => {
   const [filter, setFilter] = useState('');
+
+  const handleOptionChange = (option: ISelectOption) => {
+    const currentSelected = selected as ISelectOption[];
+
+    const isOptionInSelected = currentSelected.some(
+      (selectedOption) => selectedOption.value === option.value
+    );
+
+    if (!isOptionInSelected) {
+      onChange([...currentSelected, option]);
+    } else {
+      onChange(currentSelected.filter((selectedOption) => selectedOption.value !== option.value));
+    }
+  };
 
   return (
     <SelectLogic
       {...restProps}
-      className={className}
       isLoading={isLoading}
       isDisabled={isDisabled}
       selectedOption={selected}
       renderOptions={({ ...props }) => (
-        <Options {...props} isLoading={isLoading} onChange={onChange} />
+        <Options
+          {...props}
+          selected={selected}
+          isLoading={isLoading}
+          onChange={handleOptionChange}
+        />
       )}
       renderSelected={({ ...props }) => (
         <Selected
+          {...props}
           label={label}
           filter={filter}
-          onChange={onChange}
           setFilter={setFilter}
           isDisabled={isDisabled}
-          {...props}
+          onChange={handleOptionChange}
+          option={selected as ISelectOption[]}
         />
       )}
     />

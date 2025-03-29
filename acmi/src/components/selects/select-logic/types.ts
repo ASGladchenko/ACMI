@@ -26,7 +26,7 @@ export interface SelectLogicWrapperProps {
   isDisabled?: boolean;
   listClassName?: string;
   options: ISelectOption[];
-  selectedOption: ISelectOption  | null;
+  selectedOption: ISelectOption | ISelectOption[] | null;
   renderOptions: ({ options, isOpen, setIsOpen }: IRenderOptionsProps) => React.ReactNode;
   renderSelected: ({ option, placeholder, isOpen }: IRenderSelectedProps) => React.ReactNode;
 }
