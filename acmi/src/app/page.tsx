@@ -2,7 +2,15 @@
 
 import { useState } from 'react';
 
-import { BodySwitcher, Input, SelectClient, MultiSelectClient, Checkbox, ISelectOption } from '@/components';
+import {
+  BodySwitcher,
+  Input,
+  SelectClient,
+  MultiSelectClient,
+  Checkbox,
+  ISelectOption,
+  Button,
+} from '@/components';
 
 export default function Home() {
   const [certifications, setCertifications] = useState<string>('');
@@ -97,6 +105,16 @@ export default function Home() {
         subLabel="tick if mandatory"
         onChange={(value) => console.log(value)}
       />
+
+      <Button disabled loading>
+        Proceed to offer
+      </Button>
+      <Button disabled loading buttonType="outline">
+        Proceed to offer
+      </Button>
+      <Button disabled loading buttonType="ghost">
+        Proceed to offer
+      </Button>
     </div>
   );
 }
