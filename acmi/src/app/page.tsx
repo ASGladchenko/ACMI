@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import { ISelectOption } from '@/components/selects';
-import { BodySwitcher, Input, SelectClient, MultiSelectClient } from '@/components';
+import { BodySwitcher, Input, SelectClient, MultiSelectClient,Checkbox } from '@/components';
 
 export default function Home() {
   const [certifications, setCertifications] = useState<string | ''>('');
@@ -33,7 +33,7 @@ export default function Home() {
   ];
 
   return (
-    <div className='w-dvw h-dvh bg-slate-500 bg-[url("../assets/svg/bg.svg")] bg-auto'>
+    <div className='h-dvh w-dvw bg-slate-500 bg-[url("../assets/svg/bg.svg")] bg-auto'>
       <BodySwitcher className="w-[200px]" />
 
       <Input
@@ -92,6 +92,11 @@ export default function Home() {
         placeholder="enter"
         className="max-w-[300px]"
         onChange={handleMultiSelect}
+      />
+      <Checkbox
+        label="Galley ovens"
+        subLabel="tick if mandatory"
+        onChange={(value) => console.log(value)}
       />
     </div>
   );
