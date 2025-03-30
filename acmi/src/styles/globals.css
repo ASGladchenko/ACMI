@@ -4,6 +4,7 @@
 
 * {
   box-sizing: border-box;
+  /* font-family: var(--font-inter), sans-serif; */
 }
 
 :root {
@@ -34,8 +35,9 @@
   --color-white-dark: #e2e2e2;
   --color-white-light: #e9e9e9;
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-roboto: var(--font-roboto);
+  --font-inter: var(--font-inter);
+  --font-montserrat: var(--font-montserrat);
 
   /* shadow */
   --shadow-inner-glow: inset 0px 0px 4px 2px rgba(26, 67, 107, 0.5);
@@ -52,7 +54,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
 }
 
 .scroll-bar-mini {
