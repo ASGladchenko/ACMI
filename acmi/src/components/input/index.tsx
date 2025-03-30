@@ -32,10 +32,11 @@ export const Input = ({ label, className, type = 'string', onChange, ...props }:
 
   return (
     <label className={wrapper}>
-      <span className="max-w-1/2 w-max text-blue-dark text-nowrap">{label}</span>
+      <span className="text-blue-dark w-max max-w-1/2 text-nowrap">{label}</span>
+
       <input
-        className="w-full min-w-1/2 text-gray-dark outline-none"
         {...props}
+        className="text-gray-dark w-full min-w-1/2 outline-none"
         onChange={onHandleChange}
       />
     </label>

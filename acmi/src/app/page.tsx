@@ -3,20 +3,27 @@
 import { useState } from 'react';
 
 import {
-  BodySwitcher,
   Input,
-  SelectClient,
-  MultiSelectClient,
+  Button,
   Checkbox,
+  BodySwitcher,
+  SelectClient,
   ISelectOption,
   SelectAirport,
-  Button,
+  MultiSelectClient,
+  DateOpsFrom,
+  FilterLayout,
 } from '@/components';
+
+import { FilterLayoutValue } from '@/components/filters/filter-layout';
+import { emptyState } from '@/components/filters/filter-layout/config';
 
 export default function Home() {
   const [certifications, setCertifications] = useState<string>('');
   const [selected, setSelected] = useState<ISelectOption | null>(null);
   const [multi, setMulti] = useState<ISelectOption[] | []>([]);
+  const [date, setDate] = useState<[Date | null, Date | null]>([null, null]);
+  const [filter, setFilter] = useState<FilterLayoutValue>(emptyState);
 
   const [minPax, setMinPax] = useState<string>('');
 
@@ -131,13 +138,25 @@ export default function Home() {
       />
 
       <Button loading>Proceed to offer</Button>
+
       <Button buttonType="outline">Proceed to offer</Button>
+
       <Button loading buttonType="outline">
         Proceed to offer
       </Button>
+
       <Button loading buttonType="ghost">
         Proceed to offer
       </Button>
+
+      <DateOpsFrom
+        className="max-w-[380px]"
+        initialEnd={date[1]}
+        initialStart={date[0]}
+        onChange={(dates) => setDate(dates)}
+      />
+
+      <FilterLayout className="max-w-[330px]" values={filter} onChange={setFilter} />
     </div>
   );
 }
