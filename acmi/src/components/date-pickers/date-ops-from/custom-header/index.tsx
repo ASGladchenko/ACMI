@@ -42,7 +42,7 @@ export const CustomHeaderDatePiker = ({
 
   return (
     <div className="flex items-center justify-between bg-gray-200 px-4 py-2">
-      {!customHeaderCount && (
+      {!Boolean(customHeaderCount) && (
         <button
           onClick={decreaseMonth}
           disabled={isPrevDisabled}
@@ -52,7 +52,7 @@ export const CustomHeaderDatePiker = ({
         </button>
       )}
 
-      {!customHeaderCount && (
+      {!Boolean(customHeaderCount) && (
         <PickerSelect
           options={month}
           className="mr-auto"
