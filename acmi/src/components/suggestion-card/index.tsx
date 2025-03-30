@@ -25,19 +25,19 @@ export const SuggestionCard = ({
   indicativePrice,
 }: AircraftProps) => {
   return (
-    <div className="flex items-center gap-[30px] rounded-[15px] border border-[#9E9E9E] py-5 pr-[17px] pl-1 shadow-[0_4px_4px_0_#DDE7EE]">
+    <div className="border-gray-light flex items-center gap-[30px] rounded-[15px] border py-5 pr-[17px] pl-1 shadow-[0_4px_4px_0_#DDE7EE]">
       <div className="relative aspect-[340/210] h-auto w-full max-w-[340px] overflow-hidden rounded-[12px_0_0_12px] blur-[2px]">
         <Image src={imageUrl} alt={model} fill />
       </div>
 
-      <div className="text-gray-medium font-Roboto flex w-full flex-col">
-        <span className="text-blue-deep font-Montserrat text-[25px] leading-[30px] font-bold">
+      <div className="text-gray-medium font-roboto flex w-full flex-col">
+        <span className="text-blue-deep font-montserrat text-[25px] leading-[30px] font-bold">
           {model}
         </span>
 
         <div className="align-center mb-5 flex gap-1">
           <span className="text-[16px] leading-[30px]">provided by</span>
-          <span className="text-blue-deep font-Montserrat text-[25px] leading-[30px] font-bold">
+          <span className="text-blue-deep font-montserrat text-[25px] leading-[30px] font-bold">
             {provider}
           </span>
         </div>
@@ -73,10 +73,10 @@ export const SuggestionCard = ({
           </div>
 
           <div className="flex w-1/2 flex-col items-center">
-            <span className="text-blue-deep font-Montserrat text-[25px] leading-[30px] font-bold">
+            <span className="text-blue-deep font-montserrat text-[25px] leading-[30px] font-bold">
               Indicative Price:
             </span>
-            <span className="text-blue-deep font-Montserrat mb-2.5 text-[25px] leading-[30px] font-bold">
+            <span className="text-blue-deep font-montserrat mb-2.5 text-[25px] leading-[30px] font-bold">
               {indicativePrice}
             </span>
 
