@@ -3,20 +3,22 @@
 import { useState } from 'react';
 
 import {
-  BodySwitcher,
   Input,
-  SelectClient,
-  MultiSelectClient,
+  Button,
   Checkbox,
+  BodySwitcher,
+  SelectClient,
   ISelectOption,
   SelectAirport,
-  Button,
+  MultiSelectClient,
+  DateOpsFrom,
 } from '@/components';
 
 export default function Home() {
   const [certifications, setCertifications] = useState<string>('');
   const [selected, setSelected] = useState<ISelectOption | null>(null);
   const [multi, setMulti] = useState<ISelectOption[] | []>([]);
+  const [date, setDate] = useState<[Date | null, Date | null]>([null, null]);
 
   const [minPax, setMinPax] = useState<string>('');
 
@@ -131,13 +133,23 @@ export default function Home() {
       />
 
       <Button loading>Proceed to offer</Button>
+
       <Button buttonType="outline">Proceed to offer</Button>
+
       <Button loading buttonType="outline">
         Proceed to offer
       </Button>
+
       <Button loading buttonType="ghost">
         Proceed to offer
       </Button>
+
+      <DateOpsFrom
+        className="max-w-[380px]"
+        initialEnd={date[1]}
+        initialStart={date[0]}
+        onChange={(dates) => setDate(dates)}
+      />
     </div>
   );
 }
