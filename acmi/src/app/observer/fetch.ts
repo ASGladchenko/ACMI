@@ -1,10 +1,13 @@
-import { Card } from './cards';
+import { mockAircrafts } from './mock';
 
-export const fetchData = async (start: number, count: number): Promise<Card[]> => {
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/todos?_start=${start}&_limit=${count}`,
-    { cache: 'no-store' }
-  );
-  const newCards: Card[] = await res.json();
-  return newCards;
+export type Aircraft = (typeof mockAircrafts)[0];
+
+export const fetchMockAircrafts = async (start: number, count: number): Promise<Aircraft[]> => {
+  // Имитируем задержку как на реальном сервере
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  // Имитируем пагинацию
+  const paginatedData = mockAircrafts.slice(start, start + count);
+
+  return Promise.resolve(paginatedData);
 };

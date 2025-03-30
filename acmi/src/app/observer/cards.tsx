@@ -1,29 +1,22 @@
 'use client';
 
-import { InfiniteScrollList } from '@/components';
+import { AircraftProps, InfiniteScrollList, SuggestionCard } from '@/components';
 
-import { fetchData } from './fetch';
-import { RenderItem } from './render-element';
-
-export interface Card {
-  id: number;
-  title: string;
-  userId: number;
-  completed: boolean;
-}
+import { fetchMockAircrafts } from './fetch';
 
 export interface CardListServerProps {
   limit: number;
-  initialCards: Card[];
+  initialCards: AircraftProps[];
 }
 
 export const Cards = ({ limit, initialCards }: CardListServerProps) => {
   return (
-    <InfiniteScrollList<Card>
+    <InfiniteScrollList<AircraftProps>
       limit={limit}
-      fetchData={fetchData}
+      className="gap-10"
       initialData={initialCards}
-      renderItem={(item, index) => <RenderItem card={item} index={index} />}
+      fetchData={fetchMockAircrafts}
+      renderItem={(item) => <SuggestionCard {...item} />}
     />
   );
 };

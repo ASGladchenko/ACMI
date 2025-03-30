@@ -1,8 +1,14 @@
 import { Cards } from '@/app/observer/cards';
-import { fetchData } from '@/app/observer/fetch';
+import { fetchMockAircrafts } from '@/app/observer/fetch';
+
+const LIMIT = 5;
 
 export default async function Page() {
-  const initialCards = await fetchData(0, 5);
+  const initialCards = await fetchMockAircrafts(0, LIMIT);
 
-  return <Cards limit={5} initialCards={initialCards} />;
+  return (
+    <div className="bg-white">
+      <Cards limit={LIMIT} initialCards={initialCards} />
+    </div>
+  );
 }
