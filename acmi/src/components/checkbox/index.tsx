@@ -13,7 +13,7 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
 
 export const Checkbox = ({ label, subLabel, className, onChange, ...props }: CheckboxProps) => {
   const wrapper = cn(
-    'bg-white flex gap-3 text-[16px] rounded-xl border border-blue-dark leading-[19px] w-full px-3 py-2.5 cursor-pointer',
+    'bg-white flex gap-3 text-[16px] rounded-xl border border-blue-dark leading-[19px] w-full px-3 py-2.5 cursor-pointer font-inter',
     className
   );
 

@@ -14,7 +14,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
 
 export const Input = ({ label, className, type = 'string', onChange, ...props }: InputProps) => {
   const wrapper = cn(
-    'bg-white flex gap-2 text-[16px] rounded-xl border-[1px] border-blue-dark leading-[19px] w-full px-3 py-2.5',
+    'bg-white flex gap-2 text-[16px] rounded-xl border-[1px] border-blue-dark leading-[19px] w-full px-3 py-2.5 font-inter',
     className
   );
 

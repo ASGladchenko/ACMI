@@ -19,7 +19,7 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const styles = cn(
-    'flex items-center justify-center gap-2 w-full text-[14px] font-medium rounded-xl leading-[18px] px-5 py-2.5 cursor-pointer',
+    'flex items-center justify-center gap-2 w-full text-[14px] font-medium rounded-xl leading-[18px] px-5 py-2.5 cursor-pointer font-inter',
     configButton[buttonType],
     className
   );
