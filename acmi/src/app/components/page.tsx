@@ -5,7 +5,6 @@ import { useState } from 'react';
 import {
   Input,
   Button,
-  Header,
   Checkbox,
   DateOpsFrom,
   BodySwitcher,
@@ -14,13 +13,12 @@ import {
   ISelectOption,
   SelectAirport,
   MultiSelectClient,
-  Footer,
 } from '@/components';
 
 import { FilterLayoutValue } from '@/components/filters/filter-layout';
 import { emptyState } from '@/components/filters/filter-layout/config';
 
-export default function Home() {
+export default function Components() {
   const [certifications, setCertifications] = useState<string>('');
   const [selected, setSelected] = useState<ISelectOption | null>(null);
   const [multi, setMulti] = useState<ISelectOption[] | []>([]);
@@ -64,7 +62,6 @@ export default function Home() {
 
   return (
     <div className="min-h-dvh w-full bg-slate-500 bg-[url('../assets/svg/bg.svg')] bg-auto">
-      <Header />
 
       <BodySwitcher className="w-[200px]" />
 
@@ -162,7 +159,6 @@ export default function Home() {
 
       <FilterLayout className="max-w-[330px]" values={filter} onChange={setFilter} />
 
-      <Footer />
     </div>
   );
 }

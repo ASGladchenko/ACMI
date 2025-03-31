@@ -1,8 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 import type { LinkProps } from 'next/link';
 
-import { LogoBlue } from '@/assets/svg';
 import { cn } from '@/utils';
+import { LogoBlue } from '@/assets/svg';
 
 export interface LogoProps extends Omit<LinkProps, 'href'> {
   href?: string;

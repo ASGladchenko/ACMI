@@ -1,3 +1,5 @@
+'use client';
+
 import Link, { LinkProps } from 'next/link';
 
 import { cn } from '@/utils';
