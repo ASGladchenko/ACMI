@@ -1,5 +1,5 @@
-import { ClientLink } from '../links';
 import { Logo } from '../logo';
+import { ClientLink } from '../links';
 
 export const Footer = ({}) => {
   return (

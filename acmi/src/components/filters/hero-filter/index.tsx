@@ -3,10 +3,10 @@
 import { useState } from 'react';
 
 import {
-  BodySwitcher,
+  Input,
   Button,
   DateOpsFrom,
-  Input,
+  BodySwitcher,
   ISelectOption,
   SelectAirport,
 } from '@/components';
@@ -59,7 +59,7 @@ export const HeroFilter = ({}) => {
         onChange={(dates) => setDate(dates)}
       />
       <Button loading buttonType="standard" className="max-w-[180px] justify-self-end">
-        Find{' '}
+        Find
       </Button>
     </div>
   );

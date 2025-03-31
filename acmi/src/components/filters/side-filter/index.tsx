@@ -46,7 +46,6 @@ export const SideFilter = ({}) => {
 
   const [selects, setSelects] = useState<typeof initialSelects>(initialSelects);
 
-  console.log({ checkBoxes, selects });
 
   const handleCheckBoxChange = (name: string, value: boolean) => {
     setCheckBoxes({

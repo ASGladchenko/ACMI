@@ -11,13 +11,7 @@ export interface ClientLinkProps extends LinkProps {
   children: React.ReactNode;
 }
 
-export const ClientLink = ({
-  children,
-  className,
-  isActive,
-  isDisabled,
-  ...props
-}: ClientLinkProps) => {
+export const ClientLink = ({ children, isActive, className, isDisabled, ...props }: ClientLinkProps) => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     if (isDisabled) {
       e.preventDefault();

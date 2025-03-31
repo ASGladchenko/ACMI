@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import type { LinkProps } from 'next/link';
 
@@ -17,6 +15,7 @@ export const Logo = ({ href = '/', size = 'lg', ...props }: LogoProps) => {
     size === 'm' && 'w-[155px]',
     size === 'lg' && 'w-[208px]'
   );
+
   return (
     <Link href={href} {...props}>
       <LogoBlue className={cl} />
