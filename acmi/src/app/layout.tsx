@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Roboto, Montserrat, Inter } from 'next/font/google';
 
+
 import '@/styles/globals.css';
 
 const montserrat = Montserrat({

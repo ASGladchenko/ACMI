@@ -9,6 +9,8 @@
 
 :root {
   --blue-dark: #1a436b;
+  --blue-dark-08: rgba(26, 67, 107, 0.8);
+  --blue-dark-05: rgba(26, 67, 107, 0.5);
   --blue-deep: #316292;
   --gray-dark: #474747;
 
@@ -40,8 +42,11 @@
   --font-montserrat: var(--font-montserrat);
 
   /* shadow */
-  --shadow-inner-glow: inset 0px 0px 4px 2px rgba(26, 67, 107, 0.5);
-  --shadow-inner-glow-active: inset 0px 0px 4px 4px rgba(26, 67, 107, 0.5);
+  --shadow-inner-glow: inset 0px 0px 4px 2px var(--blue-dark-05);
+  --shadow-inner-glow-active: inset 0px 0px 4px 4px var(--blue-dark-05);
+  --shadow-sm-black: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  --drop-shadow-link: 0px 0px 2px var(--blue-dark-08);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -52,7 +57,6 @@
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), sans-serif;
 }
