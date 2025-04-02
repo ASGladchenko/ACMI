@@ -12,8 +12,8 @@ export interface LogoProps extends Omit<LinkProps, 'href'> {
 export const Logo = ({ href = '/', size = 'lg', ...props }: LogoProps) => {
   const cl = cn(
     'text-blue-dark hover:drop-shadow-link flex shrink-0 duration-200',
-    size === 'm' && 'w-[155px]',
-    size === 'lg' && 'w-[208px]'
+    size === 'm' && 'w-[100px] mob:w-[155px] ',
+    size === 'lg' && 'w-[160px] mob:w-[208px]'
   );
 
   return (
