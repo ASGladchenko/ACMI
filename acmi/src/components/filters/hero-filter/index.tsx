@@ -35,30 +35,33 @@ export const HeroFilter = ({}) => {
   const [date, setDate] = useState<[Date | null, Date | null]>([null, null]);
 
   return (
-    <div className="bg-white-dark shadow-sm-black flex flex-wrap items-start justify-between gap-2.5 rounded-xl px-2.5 py-4">
-      <BodySwitcher className="max-w-max" />
+    <div className="bg-white-dark shadow-sm-black tablet: flex flex-wrap items-start justify-end gap-2.5 rounded-xl px-2.5 py-4">
+      <BodySwitcher
+        className="tablet:-order-2 tablet:max-w-max desktop:order-1 w-full"
+        btnClassName="max-w-full tablet:max-w-max"
+      />
       <SelectAirport
         label="Ops from"
         options={airports}
         selected={selected}
         onChange={handleSelect}
-        className="max-w-[330px]"
+        className="laptop:basis-[330px] tablet:-order-0 desktop:order-2 grow-1"
       />
       <Input
         type="number"
         value={minPax}
         label="Min Pax"
         placeholder="enter"
-        className="basis-[180px]"
+        className="laptop:max-w-[180px] tablet:max-w-[calc(100%-206px)] tablet:-order-1 desktop:order-3"
         onChange={(value) => setMinPax(value)}
       />
       <DateOpsFrom
         initialEnd={date[1]}
         initialStart={date[0]}
-        className="max-w-[380px]"
+        className="laptop:basis-[380px] tablet:max-w-[calc(100%-190px)] desktop:order-4 grow-1"
         onChange={(dates) => setDate(dates)}
       />
-      <Button loading buttonType="standard" className="max-w-[180px] justify-self-end">
+      <Button loading className="tablet:max-w-[180px] desktop:order-5">
         Find
       </Button>
     </div>

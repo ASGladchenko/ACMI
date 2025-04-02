@@ -2,13 +2,13 @@ import { HeroFilter } from '../filters';
 
 export const HeroBanner = ({}) => {
   return (
-    <section className="bg-blue-dark flex items-center justify-center bg-[url('../assets/svg/bg.svg')]">
-      <div className="w-full max-w-[1440px] px-[35px] py-5.5">
-        <h1 className="font-montserrat text-4xl leading-[60px] font-semibold text-white">
+    <section className="bg-blue-dark bg-repeat- flex items-center justify-center bg-[url('../assets/svg/bg.svg')] bg-[left_bottom]">
+      <div className="mobile:px-[35px] w-full max-w-[1440px] px-4 py-5.5">
+        <h1 className="font-montserrat tablet:text-left laptop:mb-0 tablet:text-4xl tablet:leading-[60px] mb-2.5 text-center text-2xl leading-[120%] font-semibold text-white min-[390px]:text-3xl">
           Your One-Stop ACMI Marketplace
         </h1>
 
-        <h2 className="mb-2.5 text-lg leading-5.5 font-bold text-white">
+        <h2 className="tablet:text-left mb-2.5 text-center text-lg leading-5.5 font-bold text-white">
           Book, manage, and lease aircraft with ease
         </h2>
 

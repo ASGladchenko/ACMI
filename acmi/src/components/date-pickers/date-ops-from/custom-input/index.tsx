@@ -18,6 +18,9 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
       className
     );
 
+    const spanClass =
+      'text-gray-dark leading-[120%] w-max-content text-xs min-[390px]:text-base shrink-0 text-center';
+
     const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
       if (onChange) {
@@ -37,18 +40,20 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
 
     return (
       <label className={wrapper}>
-        <span className="text-blue-dark w-full max-w-[86px] min-w-min grow-1 text-nowrap">
+        <span className="text-blue-dark w-full max-w-max min-w-min grow-1 text-nowrap">
           {label}
         </span>
 
-        <span className="text-gray-dark w-[120px] shrink-0 text-center">{start || 'from'}</span>
+        <span className={spanClass}>{start || 'from'}</span>
         <span className="text-gray-dark">-</span>
-        <span className="text-gray-dark w-[120px] shrink-0 text-center">{end || 'to'}</span>
+        <span className={spanClass}>{end || 'to'}</span>
 
-        <Cross
-          onClick={onClear}
-          className="text-gray-dark ml-auto h-4 w-4 shrink-0 duration-200 hover:text-red-400"
-        />
+        {value && (
+          <Cross
+            onClick={onClear}
+            className="text-gray-dark ml-auto h-4 w-4 shrink-0 duration-200 hover:text-red-400"
+          />
+        )}
 
         <input
           ref={ref}
