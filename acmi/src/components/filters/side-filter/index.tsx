@@ -1,11 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-
+import { useFilters } from '@/context';
 import { SelectClient, Checkbox, FilterLayout, ISelectOption } from '@/components';
-
-import { emptyState } from '../filter-layout/config';
-import { FilterLayoutValue } from '../filter-layout';
 
 const options = [
   { text: 'test', value: 'test' },
@@ -19,31 +15,8 @@ const options = [
   { text: 'test9', value: 'test9' },
 ];
 
-const initialCheckBoxes = {
-  ACT: false,
-  IFE: false,
-  All: false,
-  IOSA: false,
-  WiFi: false,
-  ISPS: false,
-  Galley: false,
-  Winglets: false,
-  Dangerous: false,
-};
-
-const initialSelects = {
-  aircraftTypes: null as ISelectOption | null,
-  certifications: null as ISelectOption | null,
-  etops: null as ISelectOption | null,
-  maxAge: null as ISelectOption | null,
-  maxNoiseLevel: null as ISelectOption | null,
-  minApproachCat: null as ISelectOption | null,
-};
-
-export const SideFilter = ({}) => {
-  const [filter, setFilter] = useState<FilterLayoutValue>(emptyState);
-  const [selects, setSelects] = useState<typeof initialSelects>(initialSelects);
-  const [checkBoxes, setCheckBoxes] = useState<typeof initialCheckBoxes>(initialCheckBoxes);
+export const SideFilter = () => {
+  const { setCheckBoxes, checkBoxes, selects, setSelects } = useFilters();
 
   const handleCheckBoxChange = (name: string, value: boolean) => {
     setCheckBoxes({
@@ -70,7 +43,7 @@ export const SideFilter = ({}) => {
           onChange={(option) => handleSelectChange('aircraftTypes', option as ISelectOption)}
         />
 
-        <FilterLayout values={filter} onChange={setFilter} />
+        <FilterLayout />
 
         <SelectClient
           options={options}

@@ -10,7 +10,6 @@ export { Logo } from './logo';
 export { SuggestionCard } from './suggestion-card';
 
 export type { AircraftProps } from './suggestion-card';
-export type { FilterLayoutValue } from './filters/filter-layout';
 
 export * from './date-pickers';
 export * from './filters';

@@ -1,25 +1,20 @@
 import { cn } from '@/utils';
 
-import { emptyState } from './config';
-import { FilterItem } from './filter-item';
+import { useFilters } from '@/context';
 
-export interface FilterLayoutValue {
-  first: string;
-  economy: string;
-  business: string;
-  premiumEconomy: string;
-}
+import { FilterItem } from './filter-item';
 
 export interface FilterLayoutProps {
   className?: string;
-  values: FilterLayoutValue;
-  onChange: (values: FilterLayoutValue) => void;
 }
 
-export const FilterLayout = ({ className, values = emptyState, onChange }: FilterLayoutProps) => {
-  const handleEconomyChange = (value: string, type: keyof FilterLayoutValue) => {
-    const newValues = { ...values, [type]: value };
-    onChange(newValues);
+export const FilterLayout = ({ className }: FilterLayoutProps) => {
+  const { filter, setFilter } = useFilters();
+  const handleEconomyChange = (value: string, type: keyof typeof filter) => {
+    setFilter({
+      ...filter,
+      [type]: value,
+    });
   };
 
   return (
@@ -33,22 +28,22 @@ export const FilterLayout = ({ className, values = emptyState, onChange }: Filte
       <FilterItem
         name="economy"
         label="Economy"
-        value={values.economy}
+        value={filter.economy}
         onChange={handleEconomyChange}
       />
       <FilterItem
         name="premiumEconomy"
         label="Premium economy"
-        value={values.premiumEconomy}
+        value={filter.premiumEconomy}
         onChange={handleEconomyChange}
       />
       <FilterItem
         name="business"
         label="Business"
-        value={values.business}
+        value={filter.business}
         onChange={handleEconomyChange}
       />
-      <FilterItem name="first" label="First" value={values.first} onChange={handleEconomyChange} />
+      <FilterItem name="first" label="First" value={filter.first} onChange={handleEconomyChange} />
     </div>
   );
 };
