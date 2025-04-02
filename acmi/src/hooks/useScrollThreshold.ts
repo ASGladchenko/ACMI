@@ -13,7 +13,11 @@ export const useScrollThreshold = (threshold: number) => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      if (typeof window === 'undefined') return;
+
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [threshold]);
 
   return isPastThreshold;

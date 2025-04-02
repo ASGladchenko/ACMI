@@ -10,7 +10,11 @@ export const useWindowWidth = () => {
     const handleResize = () => setWidth(window.innerWidth);
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      if (typeof window === 'undefined') return;
+
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return { width, isMobile: width <= 768 };
