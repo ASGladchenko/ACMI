@@ -7,7 +7,8 @@ export const getStyles = (isOpen: boolean) => {
       isOpen && 'translate-x-0 '
     ),
     button: cn(
-      'border-blue-dark text-blue-dark fixed top-5 right-3 z-[10] translate-y-full cursor-pointer rounded-xl border bg-white p-2 shadow-xl duration-100'
+      'border-blue-dark text-blue-dark fixed top-5 left-3 desktop:left-[calc(100dvw/2-670px)] z-[10] translate-y-full cursor-pointer rounded-xl border bg-white p-2 shadow-xl desktop:p-5',
+      isOpen && 'opacity-0'
     ),
     wrapper: cn(
       'fixed z-[1100] top-0 left-0 h-dvh w-dvw -translate-x-full  ',

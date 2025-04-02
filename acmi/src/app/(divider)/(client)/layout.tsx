@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="laptop:px-[35px] mx-auto flex min-h-[calc(100dvh-467px)] max-w-[1440px] flex-row items-start bg-white px-4">
         <SideFilter />
 
-        <AdvancedSearch mainSearch />
+        <AdvancedSearch />
 
         <div className="w-full">{children}</div>
       </div>
