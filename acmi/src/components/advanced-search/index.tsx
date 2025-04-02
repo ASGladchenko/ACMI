@@ -16,17 +16,17 @@ import {
   SelectAirport,
   FilterLayoutValue,
 } from '@/components';
+import { useScrollThreshold, useWindowWidth } from '@/hooks';
 
 import { emptyState } from '../filters/filter-layout/config';
 import { airports, initialCheckBoxes, initialSelects, options } from './config';
 
 import { getStyles } from './styles';
 
-export interface IAdvancedSearchProps {
-  mainSearch?: boolean;
-}
+export const AdvancedSearch = ({}) => {
+  const { width } = useWindowWidth();
+  const isNeedSearch = useScrollThreshold(1300);
 
-export const AdvancedSearch = ({ mainSearch = false }: IAdvancedSearchProps) => {
   const [minPax, setMinPax] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<ISelectOption | null>(null);
@@ -55,6 +55,11 @@ export const AdvancedSearch = ({ mainSearch = false }: IAdvancedSearchProps) => 
     });
   };
 
+  const isAlwaysSearch = width < 1024;
+  if (!isAlwaysSearch && !isNeedSearch) {
+    return null;
+  }
+
   const { container, button, wrapper, overlay, itemContainer, item } = getStyles(isOpen);
 
   return (
@@ -79,34 +84,30 @@ export const AdvancedSearch = ({ mainSearch = false }: IAdvancedSearchProps) => 
             </div>
 
             <div className={itemContainer}>
-              {mainSearch && (
-                <>
-                  <BodySwitcher className={item} btnClassName="max-w-full" />
+              <BodySwitcher className={item} btnClassName="max-w-full" />
 
-                  <Input
-                    type="number"
-                    value={minPax}
-                    label="Min Pax"
-                    className={item}
-                    placeholder="enter"
-                    onChange={(value) => setMinPax(value)}
-                  />
-                  <SelectAirport
-                    label="Ops from"
-                    options={airports}
-                    selected={selected}
-                    className={item}
-                    onChange={handleSelect}
-                  />
+              <Input
+                type="number"
+                value={minPax}
+                label="Min Pax"
+                className={item}
+                placeholder="enter"
+                onChange={(value) => setMinPax(value)}
+              />
+              <SelectAirport
+                label="Ops from"
+                options={airports}
+                selected={selected}
+                className={item}
+                onChange={handleSelect}
+              />
 
-                  <DateOpsFrom
-                    className={item}
-                    initialEnd={date[1]}
-                    initialStart={date[0]}
-                    onChange={(dates) => setDate(dates)}
-                  />
-                </>
-              )}
+              <DateOpsFrom
+                className={item}
+                initialEnd={date[1]}
+                initialStart={date[0]}
+                onChange={(dates) => setDate(dates)}
+              />
 
               <FilterLayout values={filter} onChange={setFilter} />
               <SelectClient

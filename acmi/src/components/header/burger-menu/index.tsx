@@ -15,7 +15,7 @@ export const BurgerMenu = ({ isOpen, setIsOpen }: BurgerMenuProps) => {
 
   return (
     <>
-      <RemoveScroll enabled={isOpen}>
+      <RemoveScroll enabled={isOpen} className="laptop:hidden">
         <button className="laptop:hidden group" onClick={() => setIsOpen(!isOpen)}>
           <Burger className="text-blue-dark group-hover:drop-shadow-link tablet:w-8 tablet:h-8 h-6 w-6 cursor-pointer duration-100" />
         </button>

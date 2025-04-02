@@ -12,7 +12,7 @@ export const Header = ({}) => {
     <>
       <header className="sticky top-0 left-0 z-[999] bg-white shadow-md">
         <div className="laptop:px-[35px] mx-auto flex w-full max-w-[1440px] flex-wrap items-center justify-between px-4 py-2">
-          <Logo onClick={() => setIsOpen(!isOpen)} />
+          <Logo onClick={() => setIsOpen(false)} />
 
           <nav className="laptop:flex hidden items-center gap-10">
             <ClientLink href="/">Home</ClientLink>
