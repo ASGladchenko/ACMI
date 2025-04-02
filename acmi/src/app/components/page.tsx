@@ -15,15 +15,11 @@ import {
   MultiSelectClient,
 } from '@/components';
 
-import { FilterLayoutValue } from '@/components/filters/filter-layout';
-import { emptyState } from '@/components/filters/filter-layout/config';
-
 export default function Components() {
   const [certifications, setCertifications] = useState<string>('');
   const [selected, setSelected] = useState<ISelectOption | null>(null);
   const [multi, setMulti] = useState<ISelectOption[] | []>([]);
   const [date, setDate] = useState<[Date | null, Date | null]>([null, null]);
-  const [filter, setFilter] = useState<FilterLayoutValue>(emptyState);
 
   const [minPax, setMinPax] = useState<string>('');
 
@@ -62,7 +58,6 @@ export default function Components() {
 
   return (
     <div className="min-h-dvh w-full bg-slate-500 bg-[url('../assets/svg/bg.svg')] bg-auto">
-
       <BodySwitcher className="w-[200px]" />
 
       <Input
@@ -157,8 +152,7 @@ export default function Components() {
         onChange={(dates) => setDate(dates)}
       />
 
-      <FilterLayout className="max-w-[330px]" values={filter} onChange={setFilter} />
-
+      <FilterLayout className="max-w-[330px]" />
     </div>
   );
 }
