@@ -1,7 +1,13 @@
 import { regExp } from '@/constants';
 
-import { FilterLayoutValue } from '..';
 import { lngConfig } from '../config';
+
+export interface FilterLayoutValue {
+  first: string;
+  economy: string;
+  business: string;
+  premiumEconomy: string;
+}
 
 export interface FilterItemProps {
   value: string;

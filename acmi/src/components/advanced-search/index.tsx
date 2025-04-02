@@ -14,32 +14,29 @@ import {
   SelectClient,
   ISelectOption,
   SelectAirport,
-  FilterLayoutValue,
 } from '@/components';
 import { useScrollThreshold, useWindowWidth } from '@/hooks';
 
-import { emptyState } from '../filters/filter-layout/config';
-import { airports, initialCheckBoxes, initialSelects, options } from './config';
+import { airports, options } from './config';
 
 import { getStyles } from './styles';
+import { useFilters } from '@/context';
 
 export const AdvancedSearch = ({}) => {
   const { width } = useWindowWidth();
   const isNeedSearch = useScrollThreshold(1300);
+  const {
+    filter,
+    selects,
+    setFilter,
+    checkBoxes,
+    setSelects,
+    dateInterval,
+    setCheckBoxes,
+    setDateInterval,
+  } = useFilters();
 
-  const [minPax, setMinPax] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<ISelectOption | null>(null);
-
-  const handleSelect = (option: ISelectOption | null) => {
-    setSelected(option);
-  };
-
-  const [date, setDate] = useState<[Date | null, Date | null]>([null, null]);
-
-  const [filter, setFilter] = useState<FilterLayoutValue>(emptyState);
-  const [selects, setSelects] = useState<typeof initialSelects>(initialSelects);
-  const [checkBoxes, setCheckBoxes] = useState<typeof initialCheckBoxes>(initialCheckBoxes);
 
   const handleCheckBoxChange = (name: string, value: boolean) => {
     setCheckBoxes({
@@ -88,28 +85,28 @@ export const AdvancedSearch = ({}) => {
 
               <Input
                 type="number"
-                value={minPax}
+                value={filter.minPax}
                 label="Min Pax"
                 className={item}
                 placeholder="enter"
-                onChange={(value) => setMinPax(value)}
+                onChange={(value) => setFilter({ ...filter, minPax: value })}
               />
               <SelectAirport
                 label="Ops from"
-                options={airports}
-                selected={selected}
                 className={item}
-                onChange={handleSelect}
+                options={airports}
+                selected={selects.fromLocation}
+                onChange={(option) => handleSelectChange('fromLocation', option as ISelectOption)}
               />
 
               <DateOpsFrom
                 className={item}
-                initialEnd={date[1]}
-                initialStart={date[0]}
-                onChange={(dates) => setDate(dates)}
+                initialEnd={dateInterval[1]}
+                initialStart={dateInterval[0]}
+                onChange={(dates) => setDateInterval(dates)}
               />
 
-              <FilterLayout values={filter} onChange={setFilter} />
+              <FilterLayout />
               <SelectClient
                 className={item}
                 options={options}
