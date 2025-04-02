@@ -61,7 +61,7 @@ export const HeroFilter = ({}) => {
         className="laptop:basis-[380px] tablet:max-w-[calc(100%-190px)] desktop:order-4 grow-1"
         onChange={(dates) => setDate(dates)}
       />
-      <Button loading buttonType="standard" className="tablet:max-w-[180px] desktop:order-5">
+      <Button loading className="tablet:max-w-[180px] desktop:order-5">
         Find
       </Button>
     </div>

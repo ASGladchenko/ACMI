@@ -69,7 +69,7 @@ export const AdvancedSearch = ({ mainSearch = false }: IAdvancedSearchProps) => 
 
           <div className={container}>
             <div className="mb-2 flex justify-between">
-              <Button loading buttonType="standard" className="max-w-[180px]">
+              <Button loading className="max-w-[180px]">
                 Find
               </Button>
 
