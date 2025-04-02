@@ -6,6 +6,8 @@ export const useScrollThreshold = (threshold: number) => {
   const [isPastThreshold, setIsPastThreshold] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const handleScroll = () => {
       setIsPastThreshold(window.scrollY > threshold);
     };
