@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Button } from '../button';
+import { getIntlNumberFormat } from '@/utils';
 
 export interface AircraftProps {
   id: number;
@@ -66,8 +67,8 @@ export const SuggestionCard = ({
             </div>
             <div className="flex">
               <span className="text-[18px] leading-[30px] font-bold text-nowrap">BH Price:</span>
-              <span className="mr-[100px] w-full text-right text-[16px] leading-[30px]">
-                {bhPrice}
+              <span className="mr-[100px] w-full text-right text-[18px] leading-[30px] font-bold text-nowrap">
+                $ {getIntlNumberFormat({ value: Number(bhPrice) })}
               </span>
             </div>
           </div>
@@ -76,8 +77,11 @@ export const SuggestionCard = ({
             <span className="text-blue-deep font-montserrat text-[25px] leading-[30px] font-bold">
               Indicative Price:
             </span>
-            <span className="text-blue-deep font-montserrat mb-2.5 text-[25px] leading-[30px] font-bold">
-              {indicativePrice}
+            <span className="text-blue-deep font-montserrat mb-2.5 text-[25px] leading-[30px] font-bold text-nowrap">
+              $
+              {getIntlNumberFormat({
+                value: Number(indicativePrice),
+              })}
             </span>
 
             <Button className="w-[150px]">Proceed to offer</Button>
