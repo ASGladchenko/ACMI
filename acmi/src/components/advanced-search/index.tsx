@@ -25,6 +25,7 @@ import { useFilters } from '@/context';
 export const AdvancedSearch = ({}) => {
   const { width } = useWindowWidth();
   const isNeedSearch = useScrollThreshold(1300);
+
   const {
     filter,
     selects,
