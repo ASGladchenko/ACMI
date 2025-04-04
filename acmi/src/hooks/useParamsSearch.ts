@@ -17,10 +17,8 @@ export const useParamsSearch = ({
 
     if (prevParamsRef.current === current) return;
     prevParamsRef.current = current;
-    console.log({ searchParams });
-    const parsed = parseSearchParams(searchParams);
 
-    console.log({ parsed });
+    const parsed = parseSearchParams(searchParams);
 
     setCheckBoxes(parsed.checkBoxes);
     setFilter(parsed.filter);
