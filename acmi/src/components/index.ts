@@ -15,5 +15,6 @@ export * from './date-pickers';
 export * from './filters';
 export * from './links';
 export * from './modal';
+export * from './pages';
 export * from './selects';
 export * from './switchers';

@@ -1,10 +1,10 @@
 'use client';
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { createContext, useContext, useState, ReactNode, useEffect, useRef } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { ISelectOption } from '@/components';
 
-import { generateSearchParams, parseSearchParams } from '../utils';
+import { generateSearchParams } from '../utils';
 
 export interface SelectOption {
   value: string;
@@ -56,17 +56,22 @@ interface FiltersContextType {
 const FiltersContext = createContext<FiltersContextType | undefined>(undefined);
 
 export const FiltersProvider = ({ children }: { children: ReactNode }) => {
-  const searchParams = useSearchParams();
-
   const [selects, setSelects] = useState(initialSelects);
   const [checkBoxes, setCheckBoxes] = useState(initialCheckBoxes);
   const [filter, setFilter] = useState(emptyState);
   const [dateInterval, setDateInterval] = useState<[Date | null, Date | null]>([null, null]);
 
+  const initializedRef = useRef(false);
+
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
+    if (!initializedRef.current) {
+      initializedRef.current = true;
+      return;
+    }
+
     const query = generateSearchParams({
       filter,
       selects,
@@ -77,21 +82,6 @@ export const FiltersProvider = ({ children }: { children: ReactNode }) => {
     const url = `${pathname}?${query}`;
     router.replace(url, { scroll: false });
   }, [filter, checkBoxes, selects, dateInterval]);
-
-  useEffect(() => {
-    const rawParams: Record<string, string> = {};
-
-    searchParams.forEach((value, key) => {
-      rawParams[key] = value;
-    });
-
-    const parsed = parseSearchParams(rawParams);
-
-    setCheckBoxes(parsed.checkBoxes);
-    setFilter(parsed.filter);
-    setSelects(parsed.selects);
-    setDateInterval(parsed.dateInterval);
-  }, []);
 
   return (
     <FiltersContext.Provider
