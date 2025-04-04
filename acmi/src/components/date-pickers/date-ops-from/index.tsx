@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 
 import { cn } from '@/utils';
@@ -35,6 +35,11 @@ export const DateOpsFrom = ({
   const datePlusOneMonth = startDate
     ? new Date(startDate.getFullYear(), startDate.getMonth() + 1, startDate.getDate())
     : new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+
+  useEffect(() => {
+    setStartDate(initialStart);
+    setEndDate(initialEnd);
+  }, [initialStart, initialEnd]);
 
   return (
     <div className={cn('w-full [&>div]:w-full', className)}>

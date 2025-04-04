@@ -1,6 +1,15 @@
 'use client';
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { ISelectOption } from '@/components';
+
+import { generateSearchParams, parseSearchParams } from '../utils';
+
+export interface SelectOption {
+  value: string;
+  text: string;
+}
 
 export const initialCheckBoxes = {
   ACT: false,
@@ -23,7 +32,7 @@ export const emptyState = {
   premiumEconomy: '',
 };
 
-export const initialSelects = {
+export const initialSelects: Record<string, ISelectOption | null> = {
   etops: null,
   maxAge: null,
   fromLocation: null,
@@ -47,12 +56,42 @@ interface FiltersContextType {
 const FiltersContext = createContext<FiltersContextType | undefined>(undefined);
 
 export const FiltersProvider = ({ children }: { children: ReactNode }) => {
+  const searchParams = useSearchParams();
+
   const [selects, setSelects] = useState(initialSelects);
   const [checkBoxes, setCheckBoxes] = useState(initialCheckBoxes);
   const [filter, setFilter] = useState(emptyState);
   const [dateInterval, setDateInterval] = useState<[Date | null, Date | null]>([null, null]);
 
-  console.log({ selects, checkBoxes, filter, dateInterval });
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const query = generateSearchParams({
+      filter,
+      selects,
+      checkBoxes,
+      dateInterval,
+    });
+
+    const url = `${pathname}?${query}`;
+    router.replace(url, { scroll: false });
+  }, [filter, checkBoxes, selects, dateInterval]);
+
+  useEffect(() => {
+    const rawParams: Record<string, string> = {};
+
+    searchParams.forEach((value, key) => {
+      rawParams[key] = value;
+    });
+
+    const parsed = parseSearchParams(rawParams);
+
+    setCheckBoxes(parsed.checkBoxes);
+    setFilter(parsed.filter);
+    setSelects(parsed.selects);
+    setDateInterval(parsed.dateInterval);
+  }, []);
 
   return (
     <FiltersContext.Provider
