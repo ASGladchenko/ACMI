@@ -1,6 +1,15 @@
 'use client';
+import { createContext, useContext, useState, ReactNode, useEffect, useRef } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { ISelectOption } from '@/components';
+
+import { generateSearchParams } from '../utils';
+
+export interface SelectOption {
+  value: string;
+  text: string;
+}
 
 export const initialCheckBoxes = {
   ACT: false,
@@ -23,7 +32,7 @@ export const emptyState = {
   premiumEconomy: '',
 };
 
-export const initialSelects = {
+export const initialSelects: Record<string, ISelectOption | null> = {
   etops: null,
   maxAge: null,
   fromLocation: null,
@@ -52,7 +61,27 @@ export const FiltersProvider = ({ children }: { children: ReactNode }) => {
   const [filter, setFilter] = useState(emptyState);
   const [dateInterval, setDateInterval] = useState<[Date | null, Date | null]>([null, null]);
 
-  console.log({ selects, checkBoxes, filter, dateInterval });
+  const initializedRef = useRef(false);
+
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (!initializedRef.current) {
+      initializedRef.current = true;
+      return;
+    }
+
+    const query = generateSearchParams({
+      filter,
+      selects,
+      checkBoxes,
+      dateInterval,
+    });
+
+    const url = `${pathname}?${query}`;
+    router.replace(url, { scroll: false });
+  }, [filter, checkBoxes, selects, dateInterval]);
 
   return (
     <FiltersContext.Provider
