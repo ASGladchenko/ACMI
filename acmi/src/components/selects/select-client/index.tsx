@@ -23,9 +23,14 @@ export const SelectClient = ({
   className,
   isLoading,
   isDisabled,
+  options,
   ...restProps
 }: SelectClientProps) => {
   const [filter, setFilter] = useState('');
+
+  const filteredOptions = options.filter((option) =>
+    option.text.toLowerCase().includes(filter.toLowerCase())
+  );
 
   return (
     <SelectLogic
@@ -33,9 +38,10 @@ export const SelectClient = ({
       className={className}
       isLoading={isLoading}
       isDisabled={isDisabled}
+      options={filteredOptions}
       selectedOption={selected}
       renderOptions={({ ...props }) => (
-        <Options {...props} isLoading={isLoading} onChange={onChange} />
+        <Options {...props} isLoading={isLoading} onChange={onChange} setFilter={setFilter} />
       )}
       renderSelected={({ ...props }) => (
         <Selected

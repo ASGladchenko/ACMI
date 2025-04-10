@@ -47,7 +47,7 @@ export const SuggestionCard = ({
         </div>
 
         <div className="desktop:flex contents">
-          <div className="card-info desktop:w-1/2 mr-[100px] flex w-full flex-col">
+          <div className="card-info desktop:w-1/2 desktop:mr-[100px] flex w-full flex-col">
             <div className="flex">
               <span className="text-[18px] leading-[30px] font-bold text-nowrap">MSN:</span>
               <span className="w-full text-right text-[16px] leading-[30px]">{msn}</span>
@@ -72,11 +72,11 @@ export const SuggestionCard = ({
             </div>
           </div>
 
-          <div className="card-price desktop:w-1/2 desktop:gap-0 desktop:flex-col flex w-full flex-wrap items-center gap-2">
+          <div className="card-price desktop:pt-0 desktop:w-1/2 desktop:gap-0 desktop:flex-col desktop:items-center flex w-full flex-wrap items-baseline gap-2 pt-[20px]">
             <span className="text-blue-deep font-montserrat desktop:text-[25px] desktop:leading-[30px] text-xl font-bold">
               Indicative Price:
             </span>
-            <span className="text-blue-deep font-montserrat desktop:mb-2.5 desktop:ml-0 desktop:text-[25px] desktop:leading-[30px] ml-auto text-xl font-bold text-nowrap">
+            <span className="text-blue-deep font-montserrat desktop:mb-2.5 desktop:text-[25px] desktop:leading-[30px] ml-auto text-xl font-bold text-nowrap min-[520px]:ml-0">
               $
               {getIntlNumberFormat({
                 value: Number(indicativePrice),

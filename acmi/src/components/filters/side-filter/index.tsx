@@ -1,7 +1,13 @@
 'use client';
 
 import { useFilters } from '@/context';
-import { SelectClient, Checkbox, FilterLayout, ISelectOption } from '@/components';
+import {
+  SelectClient,
+  Checkbox,
+  FilterLayout,
+  ISelectOption,
+  MultiSelectClient,
+} from '@/components';
 
 const options = [
   { text: 'test', value: 'test' },
@@ -16,7 +22,8 @@ const options = [
 ];
 
 export const SideFilter = () => {
-  const { setCheckBoxes, checkBoxes, selects, setSelects } = useFilters();
+  const { checkBoxes, setCheckBoxes, selects, setSelects, setMultiSelects, multiSelects } =
+    useFilters();
 
   const handleCheckBoxChange = (name: string, value: boolean) => {
     setCheckBoxes({
@@ -32,15 +39,22 @@ export const SideFilter = () => {
     });
   };
 
+  const handleMultiSelectChange = (name: string, value: ISelectOption[]) => {
+    setMultiSelects({
+      ...multiSelects,
+      [name]: value,
+    });
+  };
+
   return (
     <>
       <div className="bg-white-dark shadow-sm-black laptop:flex hidden w-[325px] flex-col gap-1.5 px-2.5 py-4.5">
-        <SelectClient
+        <MultiSelectClient
           options={options}
           placeholder="enter"
           label="Aircraft types"
-          selected={selects.aircraftTypes}
-          onChange={(option) => handleSelectChange('aircraftTypes', option as ISelectOption)}
+          selected={multiSelects.aircraftTypes || []}
+          onChange={(option) => handleMultiSelectChange('aircraftTypes', option as ISelectOption[])}
         />
 
         <FilterLayout />
@@ -88,53 +102,44 @@ export const SideFilter = () => {
         <Checkbox
           label="IOSA"
           checked={checkBoxes.IOSA}
-          subLabel="tick if mandatory"
           onChange={(value) => handleCheckBoxChange('IOSA', value)}
         />
         <Checkbox
           label="ACT"
           checked={checkBoxes.ACT}
-          subLabel="tick if mandatory"
           onChange={(value) => handleCheckBoxChange('ACT', value)}
         />
         <Checkbox
           label="Galley ovens"
           checked={checkBoxes.Galley}
-          subLabel="tick if mandatory"
           onChange={(value) => handleCheckBoxChange('Galley', value)}
         />
         <Checkbox
           label="WiFi"
           checked={checkBoxes.WiFi}
-          subLabel="tick if mandatory"
           onChange={(value) => handleCheckBoxChange('WiFi', value)}
         />
         <Checkbox
           label="IFE"
           checked={checkBoxes.IFE}
-          subLabel="tick if mandatory"
           onChange={(value) => handleCheckBoxChange('IFE', value)}
         />
         <Checkbox
           label="ISPS"
           checked={checkBoxes.ISPS}
-          subLabel="tick if mandatory"
           onChange={(value) => handleCheckBoxChange('ISPS', value)}
         />
         <Checkbox
           label="All male crew"
           checked={checkBoxes.All}
-          subLabel="tick if mandatory"
           onChange={(value) => handleCheckBoxChange('All', value)}
         />
         <Checkbox
           label="Winglets/Sharklets"
-          subLabel="tick if mandatory"
           checked={checkBoxes.Winglets}
           onChange={(value) => handleCheckBoxChange('Winglets', value)}
         />
         <Checkbox
-          subLabel="tick if mandatory"
           checked={checkBoxes.Dangerous}
           label="Dangerous goods certification"
           onChange={(value) => handleCheckBoxChange('Dangerous', value)}

@@ -1,15 +1,35 @@
+import { cn } from '@/utils';
 import { IRenderOptionsProps, ISelectOption } from '../../select-logic/types';
 
 export interface OptionsProps extends IRenderOptionsProps {
   isLoading?: boolean;
+  setFilter: (filter: string) => void;
   onChange: (option: ISelectOption) => void;
 }
 
-export const Options = ({ options, isLoading, onChange }: OptionsProps) => {
+export const Options = ({
+  options,
+  isLoading,
+  onChange,
+  setIsOpen,
+  setFilter,
+  isOpen,
+}: OptionsProps) => {
   const isEmpty = options.length === 0;
 
+  const handleChange = (option: ISelectOption) => {
+    onChange(option);
+    setFilter('');
+    setIsOpen(false);
+  };
+
+  const cl = cn(
+    'border-blue-dark text-blue-dark w-full rounded-[0_0_12px_12px] border border-t-0 bg-white px-3 pb-2.5',
+    isOpen && 'border-[3px] border-t-0'
+  );
+
   return (
-    <div className="border-blue-dark text-blue-dark w-full rounded-[0_0_12px_12px] border border-t-0 bg-white px-3 pb-2.5">
+    <div className={cl}>
       {isEmpty && !isLoading && <p className="text-gray-dark w-full text-center">No options</p>}
 
       {!isEmpty && !isLoading && (
@@ -17,7 +37,7 @@ export const Options = ({ options, isLoading, onChange }: OptionsProps) => {
           {options.map((option) => (
             <div
               key={option.value}
-              onClick={() => onChange(option)}
+              onClick={() => handleChange(option)}
               className="cursor-pointer px-1 py-1 text-[16px] leading-[19px] duration-200 hover:bg-slate-300"
             >
               <span className="text-blue-dark text-[inherit">{option.text}</span>

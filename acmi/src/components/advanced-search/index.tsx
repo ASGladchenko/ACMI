@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 
 import { Cross } from '@/assets/svg';
+import { useFilters } from '@/context';
+import { useScrollThreshold, useWindowWidth } from '@/hooks';
 import {
   Input,
   Button,
@@ -14,13 +16,12 @@ import {
   SelectClient,
   ISelectOption,
   SelectAirport,
+  MultiSelectClient,
 } from '@/components';
-import { useScrollThreshold, useWindowWidth } from '@/hooks';
 
 import { airports, options } from './config';
 
 import { getStyles } from './styles';
-import { useFilters } from '@/context';
 
 export const AdvancedSearch = ({}) => {
   const { width } = useWindowWidth();
@@ -33,11 +34,20 @@ export const AdvancedSearch = ({}) => {
     checkBoxes,
     setSelects,
     dateInterval,
+    multiSelects,
+    setMultiSelects,
     setCheckBoxes,
     setDateInterval,
   } = useFilters();
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleMultiSelectChange = (name: string, value: ISelectOption[]) => {
+    setMultiSelects({
+      ...multiSelects,
+      [name]: value,
+    });
+  };
 
   const handleCheckBoxChange = (name: string, value: boolean) => {
     setCheckBoxes({
@@ -108,13 +118,16 @@ export const AdvancedSearch = ({}) => {
               />
 
               <FilterLayout />
-              <SelectClient
+
+              <MultiSelectClient
                 className={item}
                 options={options}
                 placeholder="enter"
                 label="Aircraft types"
-                selected={selects.aircraftTypes}
-                onChange={(option) => handleSelectChange('aircraftTypes', option as ISelectOption)}
+                selected={multiSelects.aircraftTypes || []}
+                onChange={(option) =>
+                  handleMultiSelectChange('aircraftTypes', option as ISelectOption[])
+                }
               />
 
               <SelectClient
@@ -166,60 +179,57 @@ export const AdvancedSearch = ({}) => {
                 label="IOSA"
                 checked={checkBoxes.IOSA}
                 className={item}
-                subLabel="tick if mandatory"
                 onChange={(value) => handleCheckBoxChange('IOSA', value)}
               />
+
               <Checkbox
                 label="ACT"
                 className={item}
                 checked={checkBoxes.ACT}
-                subLabel="tick if mandatory"
                 onChange={(value) => handleCheckBoxChange('ACT', value)}
               />
+
               <Checkbox
                 className={item}
                 label="Galley ovens"
                 checked={checkBoxes.Galley}
-                subLabel="tick if mandatory"
                 onChange={(value) => handleCheckBoxChange('Galley', value)}
               />
+
               <Checkbox
                 label="WiFi"
                 className={item}
                 checked={checkBoxes.WiFi}
-                subLabel="tick if mandatory"
                 onChange={(value) => handleCheckBoxChange('WiFi', value)}
               />
               <Checkbox
                 label="IFE"
                 className={item}
                 checked={checkBoxes.IFE}
-                subLabel="tick if mandatory"
                 onChange={(value) => handleCheckBoxChange('IFE', value)}
               />
+
               <Checkbox
                 label="ISPS"
                 className={item}
                 checked={checkBoxes.ISPS}
-                subLabel="tick if mandatory"
                 onChange={(value) => handleCheckBoxChange('ISPS', value)}
               />
               <Checkbox
                 className={item}
                 label="All male crew"
                 checked={checkBoxes.All}
-                subLabel="tick if mandatory"
                 onChange={(value) => handleCheckBoxChange('All', value)}
               />
+
               <Checkbox
                 className={item}
                 label="Winglets/Sharklets"
-                subLabel="tick if mandatory"
                 checked={checkBoxes.Winglets}
                 onChange={(value) => handleCheckBoxChange('Winglets', value)}
               />
+
               <Checkbox
-                subLabel="tick if mandatory"
                 checked={checkBoxes.Dangerous}
                 label="Dangerous goods certification"
                 onChange={(value) => handleCheckBoxChange('Dangerous', value)}

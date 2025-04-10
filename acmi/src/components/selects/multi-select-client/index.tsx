@@ -21,6 +21,7 @@ export const MultiSelectClient = ({
   onChange,
   isLoading,
   isDisabled,
+  placeholder,
   selected = [],
   ...restProps
 }: MultiSelectClientProps) => {
@@ -61,6 +62,7 @@ export const MultiSelectClient = ({
           filter={filter}
           setFilter={setFilter}
           isDisabled={isDisabled}
+          placeholder={placeholder}
           onChange={handleOptionChange}
           option={selected as ISelectOption[]}
         />

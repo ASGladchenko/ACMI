@@ -10,15 +10,20 @@ export interface OptionsProps extends IRenderOptionsProps {
   onChange: (option: ISelectOption) => void;
 }
 
-export const Options = ({ options, isLoading, selected, onChange }: OptionsProps) => {
+export const Options = ({ options, isLoading, selected, onChange, isOpen }: OptionsProps) => {
   const isEmpty = options.length === 0;
 
+  const cl = cn(
+    'border-blue-dark text-blue-dark w-full rounded-[0_0_12px_12px] border border-t-0 bg-white px-3 pb-2.5',
+    isOpen && 'border-[3px] border-t-0'
+  );
+
   return (
-    <div className="bg-white border w-full rounded-[0_0_12px_12px] border-t-0 border-blue-dark px-3 pb-2.5 text-blue-dark">
+    <div className={cl}>
       {isEmpty && !isLoading && <p className="text-gray-dark w-full text-center">No options</p>}
 
       {!isEmpty && !isLoading && (
-        <div className="overflow-y-auto scroll-bar-mini max-h-[120px]">
+        <div className="scroll-bar-mini max-h-[120px] overflow-y-auto">
           {options.map((option) => {
             const isSelected = selected.some(
               (selectedOption) => selectedOption.value === option.value
@@ -31,8 +36,8 @@ export const Options = ({ options, isLoading, selected, onChange }: OptionsProps
 
             return (
               <div key={option.value} onClick={() => onChange(option)} className={className}>
-                <span className="w-full text-blue-dark text-[inherit">{option.text}</span>
-                {isSelected && <Cross className="w-4 h-4 text-blue-dark shrink-0" />}
+                <span className="text-blue-dark text-[inherit w-full">{option.text}</span>
+                {isSelected && <Cross className="text-blue-dark h-4 w-4 shrink-0" />}
               </div>
             );
           })}
@@ -40,8 +45,8 @@ export const Options = ({ options, isLoading, selected, onChange }: OptionsProps
       )}
 
       {isLoading && (
-        <div className=" flex items-center justify-center">
-          <span className="block w-5 h-5  border-3 border-blue-dark rounded-full border-t-transparent animate-spin duration-1000"></span>
+        <div className="flex items-center justify-center">
+          <span className="border-blue-dark block h-5 w-5 animate-spin rounded-full border-3 border-t-transparent duration-1000"></span>
         </div>
       )}
     </div>

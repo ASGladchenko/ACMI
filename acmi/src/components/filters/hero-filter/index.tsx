@@ -5,9 +5,10 @@ import {
   Button,
   DateOpsFrom,
   BodySwitcher,
+  SelectClient,
   ISelectOption,
-  SelectAirport,
 } from '@/components';
+
 import { useFilters } from '@/context';
 
 const airports = [
@@ -39,7 +40,8 @@ export const HeroFilter = ({}) => {
         btnClassName="max-w-full tablet:max-w-max"
         className="tablet:-order-2 tablet:max-w-max desktop:order-1 w-full"
       />
-      <SelectAirport
+
+      <SelectClient
         label="Ops from"
         options={airports}
         selected={selects.fromLocation}
