@@ -77,7 +77,7 @@ export const AdvancedSearch = ({}) => {
               </Button>
 
               <button className="group" onClick={() => setIsOpen(false)}>
-                <Cross className="text-blue-dark hover:shadow-link h-8 w-8 cursor-pointer duration-100" />
+                <Cross className="text-blue-dark group-hover:drop-shadow-link h-6 w-6 cursor-pointer duration-200" />
               </button>
             </div>
 

@@ -3,11 +3,11 @@ import { cn } from '@/utils';
 export const getStyles = (isOpen: boolean) => {
   return {
     container: cn(
-      'bg-white-dark shadow-sm-black w-full tablet:w-[600px] flex-col gap-1.5 px-2.5 py-4.5 -translate-x-full h-full duration-100 ease-linear',
+      'bg-white-dark shadow-sm-black w-full tablet:w-[600px] flex-col gap-1.5 px-2.5 py-4.5 -translate-x-full h-full duration-300 ease-linear',
       isOpen && 'translate-x-0 '
     ),
     button: cn(
-      'border-blue-dark text-blue-dark fixed top-5 left-3 desktop:left-[calc(100dvw/2-670px)] z-[10] translate-y-full cursor-pointer rounded-xl border bg-white p-2 shadow-xl desktop:p-5',
+      'border-blue-dark text-blue-dark fixed top-5 left-3 desktop:left-[calc(100dvw/2-670px)] z-[10] translate-y-full cursor-pointer rounded-xl border bg-white p-2 shadow-xl desktop:p-5 hover:[&>svg]:drop-shadow-glow',
       isOpen && 'opacity-0'
     ),
     wrapper: cn(
