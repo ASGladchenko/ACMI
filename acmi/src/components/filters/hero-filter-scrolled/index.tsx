@@ -26,7 +26,12 @@ export const HeroFilterScrolled = ({}) => {
   return (
     <>
       <MobileScrolledFilter />
-      <HeroFilter portalId="calendar-hero-scrolled" className={cl} />
+
+      <HeroFilter
+        className={cl}
+        portalId="calendar-hero-scrolled"
+        onFind={() => console.log('find')}
+      />
     </>
   );
 };

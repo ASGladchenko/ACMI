@@ -11,17 +11,7 @@ import { cn } from '@/utils';
 import { useFilters } from '@/context';
 import { useScrollThreshold } from '@/hooks';
 
-const options = [
-  { text: 'test', value: 'test' },
-  { text: 'test2', value: 'test2' },
-  { text: 'test3', value: 'test3' },
-  { text: 'test4', value: 'test4' },
-  { text: 'test5', value: 'test5' },
-  { text: 'test6', value: 'test6' },
-  { text: 'test7', value: 'test7' },
-  { text: 'test8', value: 'test8' },
-  { text: 'test9', value: 'test9' },
-];
+import { options } from '@/components/mock';
 
 export interface SideFilterProps {
   className?: string;
@@ -58,7 +48,7 @@ export const SideFilter = ({ className }: SideFilterProps) => {
     'bg-white-dark hidden min-[1240px]:flex hidden w-[325px] flex-col gap-1.5 px-2.5 py-4.5',
     className,
     isFixed &&
-      'sticky top-[76px] scroll-bar-mini h-[calc(100dvh-76px)] overflow-y-auto shrink-0 rounded-t-2xl'
+      'sticky top-[76px] scroll-bar-mini h-[calc(100dvh-76px)] overflow-y-auto shrink-0 rounded-2xl'
   );
 
   return (
