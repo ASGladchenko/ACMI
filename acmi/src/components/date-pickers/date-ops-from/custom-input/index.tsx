@@ -19,7 +19,7 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
     );
 
     const spanClass =
-      'text-gray-dark leading-[120%] w-max-content text-xs min-[390px]:text-base shrink-0 text-center';
+      'text-gray-dark flex-1 leading-[120%] w-max-content text-xs min-[390px]:text-base shrink-0 text-center';
 
     const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
@@ -40,7 +40,7 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
 
     return (
       <label className={wrapper}>
-        <span className="text-blue-dark w-full max-w-max min-w-min grow-1 text-nowrap">
+        <span className="text-blue-dark w-full max-w-max min-w-min flex-0 grow-1 text-nowrap">
           {label}
         </span>
 

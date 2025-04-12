@@ -18,9 +18,11 @@ export interface MultiSelectClientProps
 
 export const MultiSelectClient = ({
   label,
+  options,
   onChange,
   isLoading,
   isDisabled,
+  placeholder,
   selected = [],
   ...restProps
 }: MultiSelectClientProps) => {
@@ -40,11 +42,15 @@ export const MultiSelectClient = ({
     }
   };
 
+  const filteredOptions = options.filter((option) =>
+    option.text.toLowerCase().includes(filter.toLowerCase())
+  );
+
   return (
     <SelectLogic
       {...restProps}
       isLoading={isLoading}
-      isDisabled={isDisabled}
+      options={filteredOptions}
       selectedOption={selected}
       renderOptions={({ ...props }) => (
         <Options
@@ -61,6 +67,7 @@ export const MultiSelectClient = ({
           filter={filter}
           setFilter={setFilter}
           isDisabled={isDisabled}
+          placeholder={placeholder}
           onChange={handleOptionChange}
           option={selected as ISelectOption[]}
         />

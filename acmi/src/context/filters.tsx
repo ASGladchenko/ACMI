@@ -36,19 +36,23 @@ export const initialSelects: Record<string, ISelectOption | null> = {
   etops: null,
   maxAge: null,
   fromLocation: null,
-  aircraftTypes: null,
   maxNoiseLevel: null,
   certifications: null,
   minApproachCat: null,
+};
+export const initialMultiSelects = {
+  aircraftTypes: null,
 };
 
 interface FiltersContextType {
   filter: typeof emptyState;
   selects: typeof initialSelects;
+  multiSelects: typeof initialMultiSelects;
   checkBoxes: typeof initialCheckBoxes;
   dateInterval: [Date | null, Date | null];
   setFilter: React.Dispatch<React.SetStateAction<typeof emptyState>>;
   setSelects: React.Dispatch<React.SetStateAction<typeof initialSelects>>;
+  setMultiSelects: React.Dispatch<React.SetStateAction<typeof initialMultiSelects>>;
   setCheckBoxes: React.Dispatch<React.SetStateAction<typeof initialCheckBoxes>>;
   setDateInterval: React.Dispatch<React.SetStateAction<[Date | null, Date | null]>>;
 }
@@ -58,6 +62,7 @@ const FiltersContext = createContext<FiltersContextType | undefined>(undefined);
 export const FiltersProvider = ({ children }: { children: ReactNode }) => {
   const [selects, setSelects] = useState(initialSelects);
   const [checkBoxes, setCheckBoxes] = useState(initialCheckBoxes);
+  const [multiSelects, setMultiSelects] = useState(initialMultiSelects);
   const [filter, setFilter] = useState(emptyState);
   const [dateInterval, setDateInterval] = useState<[Date | null, Date | null]>([null, null]);
 
@@ -91,8 +96,10 @@ export const FiltersProvider = ({ children }: { children: ReactNode }) => {
         setFilter,
         checkBoxes,
         setSelects,
+        multiSelects,
         dateInterval,
         setCheckBoxes,
+        setMultiSelects,
         setDateInterval,
       }}
     >

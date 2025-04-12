@@ -1,0 +1,56 @@
+@layer {
+  .grid-card-layout {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      'card-model card-model card-model card-model '
+      'card-provider card-provider card-provider card-provider'
+      'card-img card-img card-info card-info'
+      'card-price card-price card-price card-price';
+    gap: 4px 10px;
+  }
+
+  .card-img {
+    grid-area: card-img;
+  }
+
+  .card-model {
+    grid-area: card-model;
+  }
+
+  .card-provider {
+    grid-area: card-provider;
+  }
+
+  .card-info {
+    grid-area: card-info;
+  }
+
+  .card-price {
+    grid-area: card-price;
+  }
+
+  @media screen and (min-width: 1441px) {
+    .grid-card-layout {
+      display: flex;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .grid-card-layout {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-areas:
+        'card-model card-model card-model card-model '
+        'card-provider card-provider card-provider card-provider'
+        'card-info card-info card-info card-info'
+        'card-price card-price card-price card-price';
+      gap: 4px 10px;
+      align-items: start;
+    }
+
+    .card-img {
+      display: none;
+    }
+  }
+}

@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import { cn } from '@/utils';
 
 import { getStyles } from './getStyles';
@@ -9,11 +7,11 @@ import { getStyles } from './getStyles';
 export interface BodySwitcherProps {
   className?: string;
   btnClassName?: string;
+  isWide: boolean;
+  setIsWide: (value: boolean) => void;
 }
 
-export const BodySwitcher = ({ className, btnClassName }: BodySwitcherProps) => {
-  const [isWide, setIsWide] = useState(true);
-
+export const BodySwitcher = ({ className, btnClassName, isWide, setIsWide }: BodySwitcherProps) => {
   const { narrow, wide } = getStyles(isWide, btnClassName);
   const wrapper = cn(
     'p-[2px_3px] rounded-xl border-[1px] border-black bg-white flex gap-[4px]',

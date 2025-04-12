@@ -1,19 +1,13 @@
-import { Cards } from '@/components';
-import { fetchMockAircrafts } from '@/components/pages/cards/fetch';
+import { Footer, GeneralInfo } from '@/components';
 
-const LIMIT = 5;
-
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string>>;
-}) {
-  const initialCards = await fetchMockAircrafts(0, LIMIT);
-  const initialParams = await searchParams;
-
+export default async function Home() {
   return (
-    <div className="laptop:block laptop:pl-6 block py-5">
-      <Cards limit={LIMIT} initialCards={initialCards} searchParams={initialParams} />
-    </div>
+    <>
+      <div className="laptop:px-[35px] mx-auto flex min-h-[calc(100dvh-467px)] max-w-[1440px] flex-row items-start bg-white px-4">
+        <GeneralInfo />
+      </div>
+
+      <Footer />
+    </>
   );
 }
