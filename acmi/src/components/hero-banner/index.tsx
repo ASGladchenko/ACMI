@@ -1,6 +1,8 @@
+'use client';
+
 import { HeroFilter } from '../filters';
 
-export const HeroBanner = ({}) => {
+export const HeroBanner = () => {
   return (
     <section className="bg-blue-dark flex items-center justify-center bg-[url('../assets/svg/bg.svg')] bg-[left_bottom]">
       <div className="laptop:px-[35px] w-full max-w-[1440px] px-5 py-5.5">
