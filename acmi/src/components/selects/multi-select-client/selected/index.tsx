@@ -1,7 +1,4 @@
 'use client';
-
-import { useState } from 'react';
-
 import { cn } from '@/utils';
 import { Cross } from '@/assets/svg';
 
@@ -27,19 +24,11 @@ export const Selected = ({
   isDisabled,
   placeholder,
 }: SelectedProps) => {
-  const [isFocused, setIsFocused] = useState(false);
-
   const onInputClick = (e: React.MouseEvent) => {
-    if (isFocused) {
+    if (isOpen) {
       e.stopPropagation();
       e.preventDefault();
       return;
-    }
-  };
-
-  const onInputFocus = () => {
-    if (!isFocused) {
-      setIsOpen(true);
     }
   };
 
@@ -50,8 +39,18 @@ export const Selected = ({
 
   const isNotEmpty = option && option.length > 0;
 
+  const handleChange = (
+    event: React.MouseEvent<HTMLParagraphElement, MouseEvent>,
+    item: ISelectOption
+  ) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    onChange(item);
+  };
+
   return (
-    <div className={wrapper}>
+    <div className={wrapper} onClick={() => setIsOpen(!isOpen)}>
       <span className="text-blue-dark shrink-0 whitespace-nowrap">{label}</span>
 
       <div className="flex min-w-0 flex-1 items-center gap-1 overflow-hidden">
@@ -60,7 +59,7 @@ export const Selected = ({
             {option.map((item) => (
               <p
                 key={item.value}
-                onClick={() => onChange(item)}
+                onClick={(e) => handleChange(e, item)}
                 className="bg-blue-dark flex flex-shrink-0 cursor-pointer items-center justify-center gap-1 rounded-sm px-2 py-[2px] text-sm text-white hover:text-red-400"
               >
                 {item.text}
@@ -75,9 +74,7 @@ export const Selected = ({
           value={filter}
           disabled={isDisabled}
           onClick={onInputClick}
-          onFocus={onInputFocus}
           placeholder={placeholder}
-          onBlur={() => setIsFocused(false)}
           onChange={(e) => setFilter(e.target.value)}
           className="text-gray-dark min-w-[40px] flex-1 truncate bg-transparent text-ellipsis outline-none"
         />

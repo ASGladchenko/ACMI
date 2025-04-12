@@ -8,23 +8,16 @@ import {
   SelectClient,
   ISelectOption,
 } from '@/components';
-
+import { cn } from '@/utils';
 import { useFilters } from '@/context';
+import { airports } from '@/components/mock';
 
-const airports = [
-  { text: 'LCA Larnaca, Cyprus', value: 'LCA' },
-  { text: 'LAR Laramie, USA', value: 'LAR' },
-  { text: 'LAS Las-Vegas, USA', value: 'LAS' },
-  { text: 'LAX Los Angeles, USA', value: 'LAX' },
-  { text: 'LCY London City, UK', value: 'LCY' },
-  { text: 'LED Saint Petersburg, Russia', value: 'LED' },
-  { text: 'LIS Lisbon, Portugal', value: 'LIS' },
-  { text: 'LIM Lima, Peru', value: 'LIM' },
-  { text: 'LHE Lahore, Pakistan', value: 'LHE' },
-  { text: 'LYS Lyon, France', value: 'LYS' },
-];
+export interface HeroFilterProps {
+  className?: string;
+  portalId?: string;
+}
 
-export const HeroFilter = ({}) => {
+export const HeroFilter = ({ className, portalId }: HeroFilterProps) => {
   const { filter, selects, setFilter, setSelects, dateInterval, setDateInterval } = useFilters();
 
   const handleSelectChange = (name: string, value: ISelectOption) => {
@@ -34,8 +27,13 @@ export const HeroFilter = ({}) => {
     });
   };
 
+  const cl = cn(
+    'bg-white-dark shadow-sm-black flex items-start flex-wrap min-[1360px]:flex-nowrap items-start justify-end gap-2.5 rounded-xl px-2.5 py-4',
+    className
+  );
+
   return (
-    <div className="bg-white-dark shadow-sm-black tablet: flex flex-wrap items-start justify-end gap-2.5 rounded-xl px-2.5 py-4">
+    <div className={cl}>
       <BodySwitcher
         btnClassName="max-w-full tablet:max-w-max"
         className="tablet:-order-2 tablet:max-w-max desktop:order-1 w-full"
@@ -57,6 +55,7 @@ export const HeroFilter = ({}) => {
         className="laptop:max-w-[180px] tablet:max-w-[calc(100%-206px)] tablet:-order-1 desktop:order-3"
       />
       <DateOpsFrom
+        portalId={portalId}
         initialEnd={dateInterval[1]}
         initialStart={dateInterval[0]}
         onChange={(dates) => setDateInterval(dates)}

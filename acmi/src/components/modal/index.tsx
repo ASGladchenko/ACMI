@@ -24,7 +24,7 @@ export const Modal = ({ isOpen, onClose, children }: ChildrenProps<ModalProps>) 
         isOpen={isOpen}
         ariaHideApp={false}
         onRequestClose={onClose}
-        className="absolute top-1/2 left-1/2 max-h-[calc(100dvh-40px)] max-w-[calc(100dvw-40px)] -translate-x-1/2 -translate-y-1/2 overflow-auto"
+        className="absolute top-1/2 left-1/2 max-h-[calc(100dvh-40px)] max-w-[calc(100dvw-20px)] -translate-x-1/2 -translate-y-1/2 overflow-auto outline-none"
         overlayClassName="fixed inset-0 bg-black-10 z-[1000] cursor-pointer"
       >
         {children}

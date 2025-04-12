@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
+import { RemoveScroll } from 'react-remove-scroll';
 
 import { cn } from '@/utils';
 
@@ -14,17 +15,21 @@ export interface DateOpsFromProps {
   className?: string;
   initialEnd: Date | null;
   initialStart: Date | null;
+  portalId?: string;
   onChange: (dates: [Date | null, Date | null]) => void;
 }
 
 export const DateOpsFrom = ({
+  portalId,
   onChange,
   className,
   initialEnd = null,
   initialStart = null,
 }: DateOpsFromProps) => {
-  const [startDate, setStartDate] = useState<Date | null>(initialStart);
-  const [endDate, setEndDate] = useState<Date | null>(initialEnd);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const onHandleChange = (dates: [Date | null, Date | null]) => {
     const [start, end] = dates;
@@ -32,9 +37,10 @@ export const DateOpsFrom = ({
     setEndDate(end);
   };
 
-  const datePlusOneMonth = startDate
-    ? new Date(startDate.getFullYear(), startDate.getMonth() + 1, startDate.getDate())
-    : new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+  const onCloseCalendar = () => {
+    setIsOpen(false);
+    onChange([startDate, endDate]);
+  };
 
   useEffect(() => {
     setStartDate(initialStart);
@@ -43,21 +49,24 @@ export const DateOpsFrom = ({
 
   return (
     <div className={cn('w-full [&>div]:w-full', className)}>
-      <DatePicker
-        withPortal
-        selectsRange
-        monthsShown={2}
-        endDate={endDate}
-        minDate={new Date()}
-        calendarStartDay={1}
-        startDate={startDate}
-        dateFormat="dd/MM/yyyy"
-        onChange={onHandleChange}
-        openToDate={datePlusOneMonth}
-        onCalendarClose={() => onChange([startDate, endDate])}
-        customInput={<CustomInput label="Date" placeholder="from - to " />}
-        renderCustomHeader={({ ...props }) => <CustomHeaderDatePiker {...props} />}
-      />
+      <RemoveScroll enabled={isOpen}>
+        <DatePicker
+          withPortal
+          selectsRange
+          monthsShown={2}
+          endDate={endDate}
+          portalId={portalId}
+          minDate={new Date()}
+          calendarStartDay={1}
+          startDate={startDate}
+          dateFormat="dd/MM/yyyy"
+          onChange={onHandleChange}
+          onCalendarClose={onCloseCalendar}
+          onCalendarOpen={() => setIsOpen(true)}
+          customInput={<CustomInput label="Date" placeholder="from - to " />}
+          renderCustomHeader={({ ...props }) => <CustomHeaderDatePiker {...props} />}
+        />
+      </RemoveScroll>
     </div>
   );
 };

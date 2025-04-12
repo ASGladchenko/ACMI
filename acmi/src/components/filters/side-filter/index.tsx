@@ -1,6 +1,5 @@
 'use client';
 
-import { useFilters } from '@/context';
 import {
   SelectClient,
   Checkbox,
@@ -8,6 +7,9 @@ import {
   ISelectOption,
   MultiSelectClient,
 } from '@/components';
+import { cn } from '@/utils';
+import { useFilters } from '@/context';
+import { useScrollThreshold } from '@/hooks';
 
 const options = [
   { text: 'test', value: 'test' },
@@ -21,7 +23,13 @@ const options = [
   { text: 'test9', value: 'test9' },
 ];
 
-export const SideFilter = () => {
+export interface SideFilterProps {
+  className?: string;
+}
+
+export const SideFilter = ({ className }: SideFilterProps) => {
+  const isFixed = useScrollThreshold(220);
+
   const { checkBoxes, setCheckBoxes, selects, setSelects, setMultiSelects, multiSelects } =
     useFilters();
 
@@ -46,9 +54,16 @@ export const SideFilter = () => {
     });
   };
 
+  const cl = cn(
+    'bg-white-dark hidden min-[1240px]:flex hidden w-[325px] flex-col gap-1.5 px-2.5 py-4.5',
+    className,
+    isFixed &&
+      'sticky top-[76px] scroll-bar-mini h-[calc(100dvh-76px)] overflow-y-auto shrink-0 rounded-t-2xl'
+  );
+
   return (
     <>
-      <div className="bg-white-dark shadow-sm-black laptop:flex hidden w-[325px] flex-col gap-1.5 px-2.5 py-4.5">
+      <div className={cl}>
         <MultiSelectClient
           options={options}
           placeholder="enter"

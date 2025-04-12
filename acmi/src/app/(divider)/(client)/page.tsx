@@ -12,7 +12,7 @@ export default async function Home({
   const initialParams = await searchParams;
 
   return (
-    <div className="laptop:block laptop:pl-6 block py-5">
+    <div className="laptop:block block py-5 min-[1240px]:pl-6">
       <Cards limit={LIMIT} initialCards={initialCards} searchParams={initialParams} />
     </div>
   );

@@ -34,7 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${roboto.variable} ${montserrat.variable} antialiased`}>
+      <body
+        className={`${inter.variable} ${roboto.variable} ${montserrat.variable} gutter antialiased`}
+      >
         {children}
       </body>
     </html>
