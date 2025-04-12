@@ -1,19 +1,23 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { HeroFilter } from '../filters';
 
-export const HeroBanner = ({ isMainPage }: { isMainPage?: boolean }) => {
+export const HeroBanner = ({
+  isMainPage,
+}: {
+  isMainPage?: boolean;
+  searchParams?: URLSearchParams;
+}) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const handleFind = () => {
     // TODO Validation
 
     if (isMainPage) {
-      const paramsString = searchParams?.toString() ?? '';
-      router.push(`/search?${paramsString}`);
+      // TODO params to search page
+      router.push(`/search?`);
     }
   };
   return (
