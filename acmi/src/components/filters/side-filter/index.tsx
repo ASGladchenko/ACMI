@@ -48,7 +48,7 @@ export const SideFilter = ({ className }: SideFilterProps) => {
     'bg-white-dark hidden min-[1240px]:flex hidden w-[325px] flex-col gap-1.5 px-2.5 py-4.5',
     className,
     isFixed &&
-      'sticky top-[76px] scroll-bar-mini h-[calc(100dvh-76px)] overflow-y-auto shrink-0 rounded-2xl'
+      'sticky top-[76px] scroll-bar-mini h-[calc(100dvh-76px)] overflow-y-auto shrink-0 rounded-t-2xl'
   );
 
   return (

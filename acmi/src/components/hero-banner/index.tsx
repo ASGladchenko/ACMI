@@ -12,7 +12,7 @@ export const HeroBanner = ({}) => {
           Book, manage, and lease aircraft with ease
         </h2>
 
-        <HeroFilter />
+        <HeroFilter onFind={() => console.log('find')} portalId="calendar-hero" />
       </div>
     </section>
   );
