@@ -5,7 +5,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <FiltersProvider>
-        <HeroBanner />
+        <HeroBanner isMainPage />
 
         <div className="w-full">{children}</div>
       </FiltersProvider>

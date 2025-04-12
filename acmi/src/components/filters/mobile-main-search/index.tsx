@@ -12,7 +12,16 @@ import {
 import { airports } from '@/components/mock';
 
 export const MobileMainSearch = () => {
-  const { filter, selects, setFilter, setSelects, dateInterval, setDateInterval } = useFilters();
+  const {
+    filter,
+    selects,
+    setFilter,
+    setSelects,
+    checkBoxes,
+    dateInterval,
+    setCheckBoxes,
+    setDateInterval,
+  } = useFilters();
 
   const handleSelectChange = (name: string, value: ISelectOption) => {
     setSelects({
@@ -20,9 +29,22 @@ export const MobileMainSearch = () => {
       [name]: value,
     });
   };
+
+  const handleCheckBoxChange = (name: string, value: boolean) => {
+    setCheckBoxes({
+      ...checkBoxes,
+      [name]: value,
+    });
+  };
+
   return (
     <div className="bg-white-dark tablet:w-[600px] flex w-[calc(100dvw-40px)] flex-col gap-3 rounded-2xl px-3 py-4">
-      <BodySwitcher btnClassName="max-w-full" className="w-full" />
+      <BodySwitcher
+        isWide={checkBoxes.isWideBody}
+        setIsWide={(value) => handleCheckBoxChange('isWideBody', value)}
+        btnClassName="max-w-full"
+        className="w-full"
+      />
 
       <SelectClient
         label="Ops from"

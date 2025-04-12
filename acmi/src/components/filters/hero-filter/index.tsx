@@ -19,11 +19,27 @@ export interface HeroFilterProps {
 }
 
 export const HeroFilter = ({ className, portalId, onFind }: HeroFilterProps) => {
-  const { filter, selects, setFilter, setSelects, dateInterval, setDateInterval } = useFilters();
+  const {
+    filter,
+    selects,
+    setFilter,
+    setSelects,
+    checkBoxes,
+    dateInterval,
+    setCheckBoxes,
+    setDateInterval,
+  } = useFilters();
 
   const handleSelectChange = (name: string, value: ISelectOption) => {
     setSelects({
       ...selects,
+      [name]: value,
+    });
+  };
+
+  const handleCheckBoxChange = (name: string, value: boolean) => {
+    setCheckBoxes({
+      ...checkBoxes,
       [name]: value,
     });
   };
@@ -42,7 +58,9 @@ export const HeroFilter = ({ className, portalId, onFind }: HeroFilterProps) => 
   return (
     <div className={cl}>
       <BodySwitcher
+        isWide={checkBoxes.isWideBody}
         btnClassName="max-w-full tablet:max-w-max"
+        setIsWide={(value) => handleCheckBoxChange('isWideBody', value)}
         className="tablet:-order-2 tablet:max-w-max desktop:order-1 w-full"
       />
 
