@@ -1,6 +1,7 @@
 export { Button } from './button';
 export { Checkbox } from './checkbox';
 export { Footer } from './footer';
+export { GeneralInfo } from './general-info';
 export { Header } from './header';
 export { HeroBanner } from './hero-banner';
 export { InfiniteScrollList } from './infinite-scroll-list';

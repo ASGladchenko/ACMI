@@ -13,11 +13,12 @@ import { useFilters } from '@/context';
 import { airports } from '@/components/mock';
 
 export interface HeroFilterProps {
-  className?: string;
   portalId?: string;
+  className?: string;
+  onFind: () => void;
 }
 
-export const HeroFilter = ({ className, portalId }: HeroFilterProps) => {
+export const HeroFilter = ({ className, portalId, onFind }: HeroFilterProps) => {
   const { filter, selects, setFilter, setSelects, dateInterval, setDateInterval } = useFilters();
 
   const handleSelectChange = (name: string, value: ISelectOption) => {
@@ -25,6 +26,12 @@ export const HeroFilter = ({ className, portalId }: HeroFilterProps) => {
       ...selects,
       [name]: value,
     });
+  };
+
+  const onHandleFind = () => {
+    if (onFind) {
+      onFind();
+    }
   };
 
   const cl = cn(
@@ -61,7 +68,7 @@ export const HeroFilter = ({ className, portalId }: HeroFilterProps) => {
         onChange={(dates) => setDateInterval(dates)}
         className="laptop:basis-[380px] tablet:max-w-[calc(100%-190px)] desktop:order-4 grow-1"
       />
-      <Button loading className="tablet:max-w-[180px] desktop:order-5">
+      <Button onClick={onHandleFind} className="tablet:max-w-[180px] desktop:order-5">
         Find
       </Button>
     </div>

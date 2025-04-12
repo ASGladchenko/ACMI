@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Footer, Header } from '@/components';
+import { Header } from '@/components';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -14,7 +14,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         Components
       </Link>
-      <Footer />
     </>
   );
 }
