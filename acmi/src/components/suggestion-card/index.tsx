@@ -29,7 +29,7 @@ export const SuggestionCard = ({
   indicativePrice,
 }: AircraftProps) => {
   return (
-    <div className="border-gray-light desktop:flex grid-card-layout desktop:pl-1 items-center gap-[30px] rounded-[15px] border py-5 pr-4 pl-4 shadow-[0_4px_4px_0_#DDE7EE]">
+    <div className="border-gray-light desktop:flex grid-card-layout desktop:pl-1 w-full items-center gap-[30px] rounded-[15px] border py-5 pr-4 pl-4 shadow-[0_4px_4px_0_#DDE7EE]">
       <div className="card-img cover desktop:max-w-[340px] desktop:h-auto relative aspect-[340/210] max-h-40 w-full overflow-hidden rounded-[12px_0_0_12px] blur-[2px]">
         <Image src={imageUrl} alt={model} fill />
       </div>

@@ -1,19 +1,15 @@
-import { Cards } from '@/components';
 import { fetchMockAircrafts } from '@/components/pages/cards/fetch';
+
+import { PaginatedSuggestionList } from '@/components';
 
 const LIMIT = 5;
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string>>;
-}) {
+export default async function Home() {
   const initialCards = await fetchMockAircrafts(0, LIMIT);
-  const initialParams = await searchParams;
 
   return (
     <div className="laptop:block block py-5 min-[1240px]:pl-6">
-      <Cards limit={LIMIT} initialCards={initialCards} searchParams={initialParams} />
+      <PaginatedSuggestionList isHasMore={true} initialData={initialCards} />
     </div>
   );
 }
