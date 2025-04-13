@@ -4,7 +4,7 @@ import { SearchParams } from '@/types';
 
 const LIMIT = 5;
 
-export default async function Home({ searchParams }: { searchParams: SearchParams }) {
+export default async function Home({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const initialCards = await fetchMockAircrafts(0, LIMIT);
   const initialParams = await searchParams;
 
