@@ -1,22 +1,13 @@
 import { cn } from '@/utils';
+import { queryParams } from '@/constants';
 
-import { useFilters } from '@/context';
-
-import { FilterItem } from './filter-item';
+import { SearchFilterItem } from './filter-item/search-filter-item';
 
 export interface FilterLayoutProps {
   className?: string;
 }
 
 export const FilterLayout = ({ className }: FilterLayoutProps) => {
-  const { filter, setFilter } = useFilters();
-  const handleEconomyChange = (value: string, type: keyof typeof filter) => {
-    setFilter({
-      ...filter,
-      [type]: value,
-    });
-  };
-
   return (
     <div
       className={cn(
@@ -25,25 +16,17 @@ export const FilterLayout = ({ className }: FilterLayoutProps) => {
       )}
     >
       <p className="text-base font-bold">Layout:</p>
-      <FilterItem
-        name="economy"
-        label="Economy"
-        value={filter.economy}
-        onChange={handleEconomyChange}
-      />
-      <FilterItem
+      <SearchFilterItem queryName={queryParams.economy} name="economy" label="Economy" />
+
+      <SearchFilterItem
         name="premiumEconomy"
         label="Premium economy"
-        value={filter.premiumEconomy}
-        onChange={handleEconomyChange}
+        queryName={queryParams.premiumEconomy}
       />
-      <FilterItem
-        name="business"
-        label="Business"
-        value={filter.business}
-        onChange={handleEconomyChange}
-      />
-      <FilterItem name="first" label="First" value={filter.first} onChange={handleEconomyChange} />
+
+      <SearchFilterItem queryName={queryParams.business} name="business" label="Business" />
+
+      <SearchFilterItem queryName={queryParams.first} name="first" label="First" />
     </div>
   );
 };

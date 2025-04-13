@@ -1,14 +1,13 @@
-import { HeroBanner } from '@/components';
-import { FiltersProvider } from '@/context';
+import { HeroBanner, QuerySync } from '@/components';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  console.log('Layout hero');
   return (
     <>
-      <FiltersProvider>
-        <HeroBanner isMainPage />
+      <QuerySync />
+      <HeroBanner isMainPage />
 
-        <div className="w-full">{children}</div>
-      </FiltersProvider>
+      <div className="w-full">{children}</div>
     </>
   );
 }

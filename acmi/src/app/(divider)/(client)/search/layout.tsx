@@ -1,18 +1,15 @@
-import { FiltersProvider } from '@/context';
 import { HeroFilterScrolled, SideFilter } from '@/components';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <FiltersProvider>
-        <div className="laptop:px-[35px] mx-auto flex min-h-[calc(100dvh-467px)] max-w-[1440px] flex-row items-start bg-white px-4">
-          <SideFilter />
+      <div className="laptop:px-[35px] mx-auto flex min-h-[calc(100dvh-467px)] max-w-[1440px] flex-row items-start bg-white px-4">
+        <SideFilter />
 
-          <HeroFilterScrolled />
+        <HeroFilterScrolled />
 
-          <div className="w-full">{children}</div>
-        </div>
-      </FiltersProvider>
+        <div className="w-full">{children}</div>
+      </div>
     </>
   );
 }
