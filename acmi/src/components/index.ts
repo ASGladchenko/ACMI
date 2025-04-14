@@ -6,11 +6,11 @@ export { Header } from './header';
 export { HeroBanner } from './hero-banner';
 export { InfiniteScrollList } from './infinite-scroll-list';
 export { Input } from './input';
-export { LoadMore } from './load-more';
 export { Logo } from './logo';
 export { Modal } from './modal';
 export { PaginatedSuggestionList } from './paginated-suggestion-list';
 export { SearchCheckbox } from './checkbox/search-checkbox';
+export { SearchParamsInput } from './input/search-params-input';
 export { SuggestionCard } from './suggestion-card';
 
 export type { AircraftProps } from './suggestion-card';

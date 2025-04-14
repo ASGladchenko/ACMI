@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { AircraftProps, LoadMore, SuggestionCard } from '@/components';
+import { AircraftProps, Button, SuggestionCard } from '@/components';
 import { fetchMockAircrafts } from '../pages/cards/fetch';
 
 export interface PaginatedSuggestionListProps {
@@ -38,7 +38,16 @@ export const PaginatedSuggestionList = ({
     <div className="flex w-full flex-col items-center gap-10">
       {!isEmpty && data.map((item) => <SuggestionCard key={item.id} {...item} />)}
 
-      {isHasMore && <LoadMore onClick={onFetchMore} isLoading={isLoading} />}
+      {isHasMore && (
+        <Button
+          onClick={onFetchMore}
+          loading={isLoading}
+          buttonType="outline"
+          className="w-full p-5"
+        >
+          Load more
+        </Button>
+      )}
 
       {isEmpty && <h2 className="w-full text-center text-2xl font-bold">No results found</h2>}
     </div>
