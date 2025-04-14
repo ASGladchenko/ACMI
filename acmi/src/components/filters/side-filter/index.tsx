@@ -1,29 +1,33 @@
 'use client';
 
-import { cn } from '@/utils';
 import { queryParams } from '@/constants';
 import { options } from '@/components/mock';
 import { useScrollThreshold } from '@/hooks';
-import { FilterLayout, SearchCheckbox, SearchMultiSelect, SearchSelectClient } from '@/components';
+import {
+  Button,
+  FilterLayout,
+  SearchCheckbox,
+  SearchMultiSelect,
+  SearchSelectClient,
+} from '@/components';
+
+import { getStyles } from './styles';
 
 export interface SideFilterProps {
   className?: string;
+  type?: 'standard' | 'portal';
+  onFind?: () => void;
 }
 
-export const SideFilter = ({ className }: SideFilterProps) => {
+export const SideFilter = ({ className, onFind, type = 'standard' }: SideFilterProps) => {
   console.log('SideFilter');
   const isFixed = useScrollThreshold(220);
 
-  const cl = cn(
-    'bg-white-dark hidden min-[1240px]:flex hidden w-[325px] flex-col gap-1.5 px-2.5 py-4.5',
-    className,
-    isFixed &&
-      'sticky top-[76px] scroll-bar-mini h-[calc(100dvh-76px)] overflow-y-auto shrink-0 rounded-t-2xl'
-  );
+  const styles = getStyles({ isFixed, className, type });
 
   return (
     <>
-      <div className={cl}>
+      <div className={styles[type] || ''}>
         <SearchMultiSelect
           options={options}
           placeholder="enter"
@@ -68,23 +72,53 @@ export const SideFilter = ({ className }: SideFilterProps) => {
           queryName={queryParams.minApproachCat}
         />
 
-        <SearchCheckbox queryName={queryParams.iosa} label="IOSA" />
+        <SearchCheckbox
+          label="IOSA"
+          queryName={queryParams.iosa}
+          className={styles.checkboxesHalf}
+        />
 
-        <SearchCheckbox queryName={queryParams.act} label="ACT" />
+        <SearchCheckbox className={styles.checkboxesHalf} queryName={queryParams.act} label="ACT" />
 
-        <SearchCheckbox queryName={queryParams.galley} label="Galley ovens" />
+        <SearchCheckbox
+          label="Galley ovens"
+          queryName={queryParams.galley}
+          className={styles.checkboxesHalf}
+        />
 
-        <SearchCheckbox queryName={queryParams.wifi} label="WiFi" />
+        <SearchCheckbox
+          label="WiFi"
+          queryName={queryParams.wifi}
+          className={styles.checkboxesHalf}
+        />
 
-        <SearchCheckbox queryName={queryParams.ife} label="IFE" />
+        <SearchCheckbox className={styles.checkboxesHalf} queryName={queryParams.ife} label="IFE" />
 
-        <SearchCheckbox queryName={queryParams.isps} label="ISPS" />
+        <SearchCheckbox
+          label="ISPS"
+          queryName={queryParams.isps}
+          className={styles.checkboxesHalf}
+        />
 
-        <SearchCheckbox queryName={queryParams.allMaleCrew} label="All male crew" />
+        <SearchCheckbox
+          label="All male crew"
+          className={styles.checkBoxFull}
+          queryName={queryParams.allMaleCrew}
+        />
 
-        <SearchCheckbox queryName={queryParams.wingletsSharklets} label="Winglets/Sharklets" />
+        <SearchCheckbox
+          label="Winglets/Sharklets"
+          className={styles.checkBoxFull}
+          queryName={queryParams.wingletsSharklets}
+        />
 
-        <SearchCheckbox queryName={queryParams.dangerous} label="Dangerous goods certification" />
+        <SearchCheckbox
+          className={`${styles.checkBoxFull} min-[600px]:max-w-full`}
+          queryName={queryParams.dangerous}
+          label="Dangerous goods certification"
+        />
+
+        {type === 'portal' && <Button onClick={() => onFind && onFind()}>Find</Button>}
       </div>
     </>
   );

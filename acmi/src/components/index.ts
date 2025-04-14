@@ -5,10 +5,12 @@ export { GeneralInfo } from './general-info';
 export { Header } from './header';
 export { HeroBanner } from './hero-banner';
 export { InfiniteScrollList } from './infinite-scroll-list';
-export { Input, SearchParamsInput } from './input';
+export { Input } from './input';
 export { Logo } from './logo';
 export { Modal } from './modal';
+export { PaginatedSuggestionList } from './paginated-suggestion-list';
 export { SearchCheckbox } from './checkbox/search-checkbox';
+export { SearchParamsInput } from './input/search-params-input';
 export { SuggestionCard } from './suggestion-card';
 
 export type { AircraftProps } from './suggestion-card';
