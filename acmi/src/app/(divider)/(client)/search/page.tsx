@@ -1,13 +1,10 @@
 import { Cards } from '@/components';
 import { fetchMockAircrafts } from '@/components/pages/cards/fetch';
+import { SearchParams } from '@/types';
 
 const LIMIT = 5;
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string>>;
-}) {
+export default async function Home({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const initialCards = await fetchMockAircrafts(0, LIMIT);
   const initialParams = await searchParams;
 

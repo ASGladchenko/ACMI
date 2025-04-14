@@ -1,19 +1,17 @@
 'use client';
 
+import { SearchParams } from '@/types';
 import { AircraftProps, InfiniteScrollList, SuggestionCard } from '@/components';
 
-import { useParamsSearch } from '@/hooks/useParamsSearch';
 import { fetchMockAircrafts } from './fetch';
 
 export interface CardListServerProps {
   limit: number;
   initialCards: AircraftProps[];
-  searchParams?: Record<string, string>;
+  searchParams?: SearchParams;
 }
 
-export const Cards = ({ limit, initialCards, searchParams }: CardListServerProps) => {
-  useParamsSearch({ searchParams });
-
+export const Cards = ({ limit, initialCards }: CardListServerProps) => {
   return (
     <InfiniteScrollList<AircraftProps>
       limit={limit}

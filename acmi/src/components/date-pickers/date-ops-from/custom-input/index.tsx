@@ -8,11 +8,12 @@ export interface CustomInputProps extends Omit<InputHTMLAttributes<HTMLInputElem
   type?: string;
   value?: string;
   className?: string;
+  onClear: () => void;
   onChange?: (value: string) => void;
 }
 
 export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
-  ({ label, value = '', className, onChange, ...props }, ref) => {
+  ({ label, value = '', className, onChange, onClear, ...props }, ref) => {
     const wrapper = cn(
       'bg-white flex items-center gap-2 text-[16px] rounded-xl border-[1px] border-blue-dark leading-[19px] w-full px-3 py-2.5 cursor-pointer',
       className
@@ -23,6 +24,7 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
 
     const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
+
       if (onChange) {
         onChange(value);
       }
@@ -30,12 +32,13 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
 
     const [start, end] = value.split('-');
 
-    const onClear = (e: React.MouseEvent) => {
+    const handleClear = (e: React.MouseEvent) => {
       if (onChange) {
         e.preventDefault();
 
         onChange('');
       }
+      onClear();
     };
 
     return (
@@ -50,7 +53,7 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
 
         {value && (
           <Cross
-            onClick={onClear}
+            onClick={handleClear}
             className="text-gray-dark ml-auto h-4 w-4 shrink-0 duration-200 hover:text-red-400"
           />
         )}

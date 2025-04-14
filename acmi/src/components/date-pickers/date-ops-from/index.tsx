@@ -13,9 +13,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export interface DateOpsFromProps {
   className?: string;
+  portalId?: string;
   initialEnd: Date | null;
   initialStart: Date | null;
-  portalId?: string;
   onChange: (dates: [Date | null, Date | null]) => void;
 }
 
@@ -42,6 +42,10 @@ export const DateOpsFrom = ({
     onChange([startDate, endDate]);
   };
 
+  const onClear = () => {
+    onChange([null, null]);
+  };
+
   useEffect(() => {
     setStartDate(initialStart);
     setEndDate(initialEnd);
@@ -63,7 +67,7 @@ export const DateOpsFrom = ({
           onChange={onHandleChange}
           onCalendarClose={onCloseCalendar}
           onCalendarOpen={() => setIsOpen(true)}
-          customInput={<CustomInput label="Date" placeholder="from - to " />}
+          customInput={<CustomInput label="Date" placeholder="from - to " onClear={onClear} />}
           renderCustomHeader={({ ...props }) => <CustomHeaderDatePiker {...props} />}
         />
       </RemoveScroll>

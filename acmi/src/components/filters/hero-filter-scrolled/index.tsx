@@ -29,8 +29,8 @@ export const HeroFilterScrolled = ({}) => {
 
       <HeroFilter
         className={cl}
-        portalId="calendar-hero-scrolled"
         onFind={() => console.log('find')}
+        portalId="calendar-hero-scrolled"
       />
     </>
   );

@@ -14,7 +14,6 @@ import {
   SelectAirport,
   MultiSelectClient,
 } from '@/components';
-import { FiltersProvider } from '@/context';
 
 import { airports, options } from '@/components/mock';
 
@@ -131,9 +130,7 @@ export default function Components() {
         onChange={(dates) => setDate(dates)}
       />
 
-      <FiltersProvider>
-        <FilterLayout className="max-w-[330px]" />
-      </FiltersProvider>
+      <FilterLayout className="max-w-[330px]" />
     </div>
   );
 }

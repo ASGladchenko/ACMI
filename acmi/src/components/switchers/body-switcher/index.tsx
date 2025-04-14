@@ -5,9 +5,9 @@ import { cn } from '@/utils';
 import { getStyles } from './getStyles';
 
 export interface BodySwitcherProps {
+  isWide: boolean;
   className?: string;
   btnClassName?: string;
-  isWide: boolean;
   setIsWide: (value: boolean) => void;
 }
 
