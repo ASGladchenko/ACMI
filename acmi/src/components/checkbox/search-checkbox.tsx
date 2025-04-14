@@ -14,7 +14,6 @@ interface SearchCheckboxProps {
 }
 
 export const SearchCheckbox = React.memo(({ queryName, ...props }: SearchCheckboxProps) => {
-  console.log('SearchCheckbox');
   const isChecked = useQueryStore((s) => s.getQuery(queryName) === 'true');
   const setQuery = useQueryStore((s) => s.setQuery);
 

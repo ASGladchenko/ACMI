@@ -13,7 +13,6 @@ interface SearchBodySwitcherProps {
 }
 
 export const SearchBodySwitcher = React.memo(({ queryName, ...props }: SearchBodySwitcherProps) => {
-  console.log('SearchBodySwitcher');
   const isWide = useQueryStore((s) => s.getQuery(queryName) === 'true');
   const setQuery = useQueryStore((s) => s.setQuery);
 

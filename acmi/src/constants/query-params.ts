@@ -16,7 +16,7 @@ export const queryParams = {
   etops: 'etops',
   maxAge: 'max_age',
   maxNoiseLevel: 'max_noise_level',
-  minApproachCat: 'min_approach_cat',
+  ilsCategory: 'min_approach_cat',
   aircraftTypes: 'aircraft_types',
   economy: 'economy',
   business: 'business',

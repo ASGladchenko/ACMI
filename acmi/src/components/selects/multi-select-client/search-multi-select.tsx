@@ -15,30 +15,24 @@ interface SearchMultiSelectProps {
   options: ISelectOption[];
 }
 
-export const SearchMultiSelect = React.memo(
-  ({ queryName, options, ...props }: SearchMultiSelectProps) => {
-    console.log('SearchMultiSelect');
+export const SearchMultiSelect = React.memo(({ queryName, options, ...props }: SearchMultiSelectProps) => {
+  const raw = useQueryStore((s) => s.getQuery(queryName) || '');
+  const setQuery = useQueryStore((s) => s.setQuery);
 
-    const raw = useQueryStore((s) => s.getQuery(queryName) || '');
-    const setQuery = useQueryStore((s) => s.setQuery);
+  const allParams = raw?.split(',') ?? [];
 
-    const allParams = raw?.split(',') ?? [];
+  const selected = options.filter((option) => allParams.includes(option.text));
 
-    const selected = options.filter((option) => allParams.includes(option.text));
+  const onChange = (options: ISelectOption[]) => {
+    if (options.length) {
+      const joined = options.map((opt) => opt.text).join(',');
+      setQuery(queryName, joined);
+    } else {
+      setQuery(queryName, null);
+    }
+  };
 
-    const onChange = (options: ISelectOption[]) => {
-      if (options.length) {
-        const joined = options.map((opt) => opt.text).join(',');
-        setQuery(queryName, joined);
-      } else {
-        setQuery(queryName, null);
-      }
-    };
-
-    return (
-      <MultiSelectClient {...props} onChange={onChange} selected={selected} options={options} />
-    );
-  }
-);
+  return <MultiSelectClient {...props} onChange={onChange} selected={selected} options={options} />;
+});
 
 SearchMultiSelect.displayName = 'SearchMultiSelect';

@@ -8,8 +8,6 @@ import { ArrowDown, Filters } from '@/assets/svg';
 import { HeroFilter, Modal, SideFilter } from '@/components';
 
 export const MobileScrolledFilter = ({}) => {
-  console.log('MobileScrolledFilter');
-
   const [from, to] = queryParams.dates.split(',');
 
   const fromDate = useQueryStore((state) => state.getQuery(from) ?? null);

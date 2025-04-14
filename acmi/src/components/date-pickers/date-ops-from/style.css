@@ -1,0 +1,6 @@
+@media screen and (max-width: 768px) {
+  #calendar-hero .react-datepicker__month-container,
+  #calendar-mobile-main .react-datepicker__month-container {
+    width: 100%;
+  }
+}

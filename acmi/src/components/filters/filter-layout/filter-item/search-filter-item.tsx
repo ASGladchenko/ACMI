@@ -13,7 +13,6 @@ interface SearchFilterItemProps {
 }
 
 export const SearchFilterItem = React.memo(({ queryName, ...props }: SearchFilterItemProps) => {
-  console.log('SearchFilterItem');
   const value = useQueryStore((s) => s.getQuery(queryName) || '');
   const setQuery = useQueryStore((s) => s.setQuery);
 

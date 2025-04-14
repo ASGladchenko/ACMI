@@ -17,7 +17,6 @@ interface SearchSelectClientProps {
 
 export const SearchSelectClient = React.memo(
   ({ options, queryName, ...props }: SearchSelectClientProps) => {
-    console.log('OpsFrom');
 
     const opsFrom = useQueryStore((s) => s.getQuery(queryName));
     const setQuery = useQueryStore((s) => s.setQuery);
