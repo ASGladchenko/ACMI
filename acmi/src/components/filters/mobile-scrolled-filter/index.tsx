@@ -2,15 +2,27 @@
 
 import { useState } from 'react';
 
-import { useFilters } from '@/context';
+import { useQueryStore } from '@/store';
+import { queryParams } from '@/constants';
 import { ArrowDown, Filters } from '@/assets/svg';
-import { MobileAdvancedSearch, MobileMainSearch, Modal } from '@/components';
+import { HeroFilter, MobileAdvancedSearch, Modal } from '@/components';
 
 export const MobileScrolledFilter = ({}) => {
+  console.log('MobileScrolledFilter');
+
+  const [from, to] = queryParams.dates.split(',');
+
+  const opsFrom = useQueryStore((state) => state.getQuery(queryParams.opsFrom) ?? '');
+  const minPax = useQueryStore((state) => state.getQuery(queryParams.minPax) ?? '');
+  const isWide = useQueryStore((state) => state.getQuery(queryParams.isWide) ?? '');
+  const fromDate = useQueryStore((state) => state.getQuery(from) ?? null);
+  const toValueDate = useQueryStore((state) => state.getQuery(to) ?? null);
+
+  const dateFrom = fromDate ? new Date(Number(fromDate)) : null;
+  const dateTo = toValueDate ? new Date(Number(toValueDate)) : null;
+
   const [modal, setModal] = useState(-1);
   const [isOpen, setIsOpen] = useState(false);
-
-  const { filter, selects, checkBoxes, dateInterval } = useFilters();
 
   const toDate = (date: Date | null) => {
     const isDate = date instanceof Date;
@@ -36,16 +48,16 @@ export const MobileScrolledFilter = ({}) => {
         >
           <div className="flex flex-wrap">
             <p className="border-blue-dark px-2 text-xs min-[1024px]:border-r min-[1240px]:py-2">
-              Ops from : {selects.fromLocation?.text || 'unset'}
+              Ops from : {opsFrom || 'unset'}
             </p>
             <p className="border-blue-dark px-2 text-xs min-[1024px]:border-r min-[1240px]:py-2">
-              Min Pax : {filter.minPax || 'unset'}
+              Min Pax : {minPax || 'unset'}
             </p>
             <p className="border-blue-dark px-2 text-xs min-[1024px]:border-r min-[1240px]:py-2">
-              Body : {checkBoxes.isWideBody ? 'Wide' : 'Narrow'}
+              Body : {isWide ? 'Wide' : 'Narrow'}
             </p>
             <p className="px-2 text-xs min-[1240px]:py-2">
-              Date : {toDate(dateInterval[0]) || 'from'} - {toDate(dateInterval[1]) || 'to'}
+              Date : {toDate(dateFrom) || 'from'} - {toDate(dateTo) || 'to'}
             </p>
           </div>
 
@@ -60,7 +72,13 @@ export const MobileScrolledFilter = ({}) => {
 
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
         <>
-          {modal === 1 && <MobileMainSearch />}
+          {modal === 1 && (
+            <HeroFilter
+              type="portal"
+              portalId="calendar-mobile-main"
+              onFind={() => console.log('find')}
+            />
+          )}
 
           {modal === 2 && <MobileAdvancedSearch />}
         </>
