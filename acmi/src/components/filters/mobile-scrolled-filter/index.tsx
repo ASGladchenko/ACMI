@@ -5,18 +5,18 @@ import { useState } from 'react';
 import { useQueryStore } from '@/store';
 import { queryParams } from '@/constants';
 import { ArrowDown, Filters } from '@/assets/svg';
-import { HeroFilter, MobileAdvancedSearch, Modal } from '@/components';
+import { HeroFilter, Modal, SideFilter } from '@/components';
 
 export const MobileScrolledFilter = ({}) => {
   console.log('MobileScrolledFilter');
 
   const [from, to] = queryParams.dates.split(',');
 
-  const opsFrom = useQueryStore((state) => state.getQuery(queryParams.opsFrom) ?? '');
-  const minPax = useQueryStore((state) => state.getQuery(queryParams.minPax) ?? '');
-  const isWide = useQueryStore((state) => state.getQuery(queryParams.isWide) ?? '');
   const fromDate = useQueryStore((state) => state.getQuery(from) ?? null);
   const toValueDate = useQueryStore((state) => state.getQuery(to) ?? null);
+  const minPax = useQueryStore((state) => state.getQuery(queryParams.minPax) ?? '');
+  const isWide = useQueryStore((state) => state.getQuery(queryParams.isWide) ?? '');
+  const opsFrom = useQueryStore((state) => state.getQuery(queryParams.opsFrom) ?? '');
 
   const dateFrom = fromDate ? new Date(Number(fromDate)) : null;
   const dateTo = toValueDate ? new Date(Number(toValueDate)) : null;
@@ -80,7 +80,7 @@ export const MobileScrolledFilter = ({}) => {
             />
           )}
 
-          {modal === 2 && <MobileAdvancedSearch />}
+          {modal === 2 && <SideFilter type="portal" />}
         </>
       </Modal>
     </>
