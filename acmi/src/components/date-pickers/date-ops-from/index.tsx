@@ -10,6 +10,7 @@ import { CustomInput } from './custom-input';
 import { CustomHeaderDatePiker } from './custom-header';
 
 import 'react-datepicker/dist/react-datepicker.css';
+import './style.css';
 
 export interface DateOpsFromProps {
   className?: string;
@@ -52,7 +53,7 @@ export const DateOpsFrom = ({
   }, [initialStart, initialEnd]);
 
   return (
-    <div className={cn('w-full [&>div]:w-full', className)}>
+    <div className={cn('date-search w-full [&>div]:w-full', className)}>
       <RemoveScroll enabled={isOpen}>
         <DatePicker
           withPortal

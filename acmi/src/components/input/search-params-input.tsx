@@ -16,7 +16,6 @@ export type SearchParamsInputProps = {
 };
 
 export const SearchParamsInput = React.memo(({ queryName, ...props }: SearchParamsInputProps) => {
-  console.log('SearchParamsInput');
   const rawValue = useQueryStore((s) => s.getQuery(queryName) || '');
   const setQuery = useQueryStore((s) => s.setQuery);
 

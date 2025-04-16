@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useFind } from '@/hooks';
 
 import { HeroFilter } from '../filters';
 
@@ -10,18 +10,16 @@ export const HeroBanner = ({
   isMainPage?: boolean;
   searchParams?: URLSearchParams;
 }) => {
-  const router = useRouter();
+  const { handleFind } = useFind();
 
-  const handleFind = () => {
-    // TODO Validation
-
+  const onFind = () => {
     if (isMainPage) {
-      // TODO params to search page
-      router.push(`/search?`);
+      handleFind({ path: '/search' });
+    } else {
+      handleFind({ path: '' });
     }
   };
 
-  console.log('HeroBanner');
   return (
     <section className="bg-blue-dark flex items-center justify-center bg-[url('../assets/svg/bg.svg')] bg-[left_bottom]">
       <div className="laptop:px-[35px] w-full max-w-[1440px] px-5 py-5.5">
@@ -33,7 +31,7 @@ export const HeroBanner = ({
           Book, manage, and lease aircraft with ease
         </h2>
 
-        <HeroFilter onFind={handleFind} portalId="calendar-hero" />
+        <HeroFilter onFind={onFind} portalId="calendar-hero" />
       </div>
     </section>
   );

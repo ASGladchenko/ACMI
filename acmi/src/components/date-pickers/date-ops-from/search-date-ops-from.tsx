@@ -13,8 +13,6 @@ interface SearchDateOpsFromProps {
 }
 
 export const SearchDateOpsFrom = React.memo(({ queryName, ...props }: SearchDateOpsFromProps) => {
-  console.log('SearchDateOpsFrom');
-
   const [from, to] = queryName.split(',');
 
   const queryFrom = useQueryStore((s) => s.getQuery(from) || null);

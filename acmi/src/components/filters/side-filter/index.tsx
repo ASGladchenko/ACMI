@@ -1,17 +1,18 @@
 'use client';
 
 import { queryParams } from '@/constants';
-import { options } from '@/components/mock';
 import { useScrollThreshold } from '@/hooks';
 import {
   Button,
   FilterLayout,
   SearchCheckbox,
   SearchMultiSelect,
+  SearchParamsInput,
   SearchSelectClient,
 } from '@/components';
 
 import { getStyles } from './styles';
+import { airCraftTypes, certifications, etopsRaiting, ilsCategory, noiseStage } from '@/config';
 
 export interface SideFilterProps {
   className?: string;
@@ -20,7 +21,6 @@ export interface SideFilterProps {
 }
 
 export const SideFilter = ({ className, onFind, type = 'standard' }: SideFilterProps) => {
-  console.log('SideFilter');
   const isFixed = useScrollThreshold(220);
 
   const styles = getStyles({ isFixed, className, type });
@@ -29,7 +29,7 @@ export const SideFilter = ({ className, onFind, type = 'standard' }: SideFilterP
     <>
       <div className={styles[type] || ''}>
         <SearchMultiSelect
-          options={options}
+          options={airCraftTypes}
           placeholder="enter"
           label="Aircraft types"
           queryName={queryParams.aircraftTypes}
@@ -38,7 +38,7 @@ export const SideFilter = ({ className, onFind, type = 'standard' }: SideFilterP
         <FilterLayout />
 
         <SearchSelectClient
-          options={options}
+          options={certifications}
           placeholder="enter"
           label="Certifications"
           queryName={queryParams.certifications}
@@ -46,30 +46,29 @@ export const SideFilter = ({ className, onFind, type = 'standard' }: SideFilterP
 
         <SearchSelectClient
           label="ETOPS"
-          options={options}
+          options={etopsRaiting}
           placeholder="enter"
           queryName={queryParams.etops}
         />
-
-        <SearchSelectClient
-          options={options}
+        <SearchParamsInput
+          type="number"
           placeholder="enter"
           label="Max age, years"
           queryName={queryParams.maxAge}
         />
 
         <SearchSelectClient
-          options={options}
+          options={noiseStage}
           placeholder="enter"
           label="Max noise level"
           queryName={queryParams.maxNoiseLevel}
         />
 
         <SearchSelectClient
-          options={options}
           placeholder="enter"
-          label="Min approach cat"
-          queryName={queryParams.minApproachCat}
+          label="ILS Category"
+          options={ilsCategory}
+          queryName={queryParams.ilsCategory}
         />
 
         <SearchCheckbox
