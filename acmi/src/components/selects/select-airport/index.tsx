@@ -28,7 +28,7 @@ export const SelectAirport = ({
   ...restProps
 }: SelectClientProps) => {
   const [filter, setFilter] = useState('');
-  const { options, loading, debouncedFilter } = useAirportOptions(filter, 500);
+  const { options, loading, debouncedFilter } = useAirportOptions(filter);
 
   return (
     <SelectLogic
