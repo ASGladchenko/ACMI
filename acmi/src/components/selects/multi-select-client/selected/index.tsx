@@ -52,7 +52,7 @@ export const Selected = ({
 
   return (
     <div className={wrapper} onClick={() => setIsOpen(!isOpen)}>
-      <span className="text-blue-dark shrink-0 whitespace-nowrap">{label}</span>
+      <span className="text-blue-dark shrink-0 font-bold whitespace-nowrap">{label}</span>
 
       <div className="flex min-w-0 flex-1 items-center gap-1 overflow-hidden">
         {isNotEmpty && (

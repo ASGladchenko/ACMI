@@ -4,11 +4,19 @@ import { Plain } from '@/assets/svg';
 import { IRenderOptionsProps, ISelectOption } from '../../select-logic/types';
 
 export interface OptionsProps extends IRenderOptionsProps {
+  filter: string;
   isLoading?: boolean;
   onChange: (option: ISelectOption) => void;
 }
 
-export const Options = ({ options, isOpen, isLoading, setIsOpen, onChange }: OptionsProps) => {
+export const Options = ({
+  options,
+  isOpen,
+  filter,
+  onChange,
+  isLoading,
+  setIsOpen,
+}: OptionsProps) => {
   const isEmpty = options.length === 0;
 
   const onHandleChange = (option: ISelectOption) => {
@@ -23,7 +31,15 @@ export const Options = ({ options, isOpen, isLoading, setIsOpen, onChange }: Opt
 
   return (
     <div className={cl}>
-      {isEmpty && !isLoading && <p className="text-gray-dark w-full text-center">No options</p>}
+      {isEmpty && !isLoading && filter.length < 3 && (
+        <p className="text-gray-dark w-full text-center">
+          Enter at least 3 characters to start the search
+        </p>
+      )}
+
+      {isEmpty && !isLoading && filter.length >= 3 && (
+        <p className="text-gray-dark w-full text-center">No airports found</p>
+      )}
 
       {!isEmpty && !isLoading && (
         <div className="scroll-bar-mini max-h-[120px] overflow-y-auto">
@@ -43,7 +59,7 @@ export const Options = ({ options, isOpen, isLoading, setIsOpen, onChange }: Opt
 
       {isLoading && (
         <div className="flex items-center justify-center">
-          <span className="border-blue-dark block h-5 w-5 animate-spin rounded-full border-3 border-t-transparent duration-1000" />
+          <span className="border-blue-dark block h-8 w-8 animate-spin rounded-full border-3 border-t-transparent duration-1000" />
         </div>
       )}
     </div>

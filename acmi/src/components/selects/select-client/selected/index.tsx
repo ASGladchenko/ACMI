@@ -47,7 +47,7 @@ export const Selected = ({
 
   return (
     <div className={wrapper} onClick={() => !isDisabled && setIsOpen(true)}>
-      <span className="text-blue-dark text-[16px] text-nowrap">{label}</span>
+      <span className="text-blue-dark text-[16px] font-bold text-nowrap">{label}</span>
 
       {option ? (
         <div className="flex w-full gap-2">
