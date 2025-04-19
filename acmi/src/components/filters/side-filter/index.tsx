@@ -2,6 +2,7 @@
 
 import { queryParams } from '@/constants';
 import { useScrollThreshold } from '@/hooks';
+import { airCraftTypes, certifications, etopsRaiting, ilsCategory, noiseStage } from '@/config';
 import {
   Button,
   FilterLayout,
