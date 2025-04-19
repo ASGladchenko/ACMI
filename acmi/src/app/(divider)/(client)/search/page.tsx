@@ -9,11 +9,17 @@ const LIMIT = 5;
 export default async function Home({ searchParams }: SearchParams) {
   const params = await searchParams;
   const body = serializeQuery(params as Record<string, string>);
+  let data;
 
-  const data = await apiFetch('/find_offers', {
-    method: 'POST',
-    body: JSON.stringify(body),
-  });
+  try {
+    data = await apiFetch('/find_offers', {
+      method: 'POST',
+      body: JSON.stringify(body),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+
   console.log({ data });
 
   const initialCards = await fetchMockAircrafts(0, LIMIT);
