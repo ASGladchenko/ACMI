@@ -2,17 +2,11 @@
 
 import React, { useMemo } from 'react';
 
-import {
-  Button,
-  SearchParamsInput,
-  SearchDateOpsFrom,
-  SearchBodySwitcher,
-  SearchSelectClient,
-} from '@/components';
+import { Button, SearchParamsInput, SearchDateOpsFrom, SearchBodySwitcher } from '@/components';
 import { queryParams } from '@/constants';
-import { airports } from '@/components/mock';
 
 import { getStyles, HeroType } from './styles';
+import { SearchSelectAirport } from '@/components/selects/select-airport/search-airport-client';
 
 export interface HeroFilterProps {
   type?: HeroType;
@@ -38,11 +32,10 @@ export const HeroFilter = React.memo(
           btnClassName={styles.bodyBtn}
           queryName={queryParams.isWide}
         />
-        <SearchSelectClient
-          queryName={queryParams.opsFrom}
+        <SearchSelectAirport
           label="Ops from"
-          options={airports}
           className={styles.select}
+          queryName={queryParams.opsFrom}
         />
 
         <SearchParamsInput

@@ -11,7 +11,7 @@ export const getStyles = (type: HeroType, className?: string) => {
       ),
       body: 'tablet:-order-2 tablet:max-w-max desktop:order-1 w-full',
       bodyBtn: 'max-w-full tablet:max-w-max',
-      select: 'laptop:basis-[330px] tablet:-order-0 desktop:order-2 grow-1',
+      select: 'laptop:basis-[330px] tablet:-order-0 desktop:order-2 grow-1 desktop:max-w-[350px]',
       input: 'laptop:max-w-[180px] tablet:max-w-[calc(100%-206px)] tablet:-order-1 desktop:order-3',
       date: 'laptop:basis-[380px] tablet:max-w-[calc(100%-190px)] desktop:order-4 grow-1',
       button: 'tablet:max-w-[180px] desktop:order-5',
