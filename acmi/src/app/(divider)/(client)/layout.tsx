@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Suspense fallback={null}>
         <QuerySync />
       </Suspense>
-      <HeroBanner isMainPage />
+      <HeroBanner />
 
       <div className="w-full">{children}</div>
     </>

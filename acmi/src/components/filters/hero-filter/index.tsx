@@ -18,10 +18,11 @@ export interface HeroFilterProps {
   portalId?: string;
   className?: string;
   onFind: () => void;
+  withButton?: boolean;
 }
 
 export const HeroFilter = React.memo(
-  ({ className, portalId, onFind, type = 'standard' }: HeroFilterProps) => {
+  ({ className, withButton, portalId, onFind, type = 'standard' }: HeroFilterProps) => {
     const styles = useMemo(() => getStyles(type, className), [type, className]);
 
     const onHandleFind = () => {
@@ -57,9 +58,11 @@ export const HeroFilter = React.memo(
           queryName={queryParams.dates}
         />
 
-        <Button onClick={onHandleFind} className={styles.button}>
-          Find
-        </Button>
+        {withButton && (
+          <Button onClick={onHandleFind} className={styles.button}>
+            Find
+          </Button>
+        )}
       </div>
     );
   }
