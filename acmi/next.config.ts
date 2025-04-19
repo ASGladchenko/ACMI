@@ -1,5 +1,10 @@
 import type { NextConfig } from 'next';
 
+if (process.env.NODE_ENV === 'development') {
+  // только в режиме разработки
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+}
+
 const nextConfig: NextConfig = {
   webpack(config) {
     // Grab the existing rule that handles SVG imports
