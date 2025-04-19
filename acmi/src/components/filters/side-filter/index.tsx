@@ -11,7 +11,6 @@ import {
   SearchParamsInput,
   SearchSelectClient,
 } from '@/components';
-import { airCraftTypes, certifications, etopsRaiting, ilsCategory, noiseStage } from '@/config';
 
 import { getStyles } from './styles';
 
