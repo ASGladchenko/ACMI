@@ -2,11 +2,16 @@
 
 import React, { useMemo } from 'react';
 
-import { Button, SearchParamsInput, SearchDateOpsFrom, SearchBodySwitcher } from '@/components';
+import {
+  Button,
+  SearchParamsInput,
+  SearchDateOpsFrom,
+  SearchBodySwitcher,
+  SearchSelectAirport,
+} from '@/components';
 import { queryParams } from '@/constants';
 
 import { getStyles, HeroType } from './styles';
-import { SearchSelectAirport } from '@/components/selects/select-airport/search-airport-client';
 
 export interface HeroFilterProps {
   type?: HeroType;

@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-import { useAirportOptions } from '@/hooks/useAirPortsOptions';
+import { useAirportOptions } from '@/hooks';
 
 import { Options } from './options';
 import { Selected } from './selected';
