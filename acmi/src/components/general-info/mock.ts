@@ -1,19 +1,24 @@
-import { Fees, File, Reliability } from '@/assets/svg';
+import { automatedData, communication, freeUse, smartSearch } from '@/assets/png';
 
 export const mockGeneralInfo = [
   {
-    Icon: Reliability,
-    Title: 'Reliability',
-    text: 'With data flowing to our system by automated algorithm we achieve the highest level of reliability and relevance. No delays, no human factor - our customers see straight to the capacity management system of the ACMI providers.',
+    icon: automatedData,
+    Title: 'Automated Data Feed',
+    text: 'Up-to-date accurate information about aircraft availability coming from automated integrations with ACMI providers ',
   },
   {
-    Icon: Fees,
-    Title: 'Fees',
-    text: 'We do not request upfront payments or deposits, we provide the information to the customer on a success fee basis - te provider gets invoiced for our commissions only if it got the contract and performed the flights which were requested on our portal. For this we have a special set of tools to verify the customer identity and automatically check the ACMI performance.',
+    icon: smartSearch,
+    Title: 'Smart Search Filters',
+    text: 'Set of industry-specific search parameters to find the best-fitting ACMI provider.',
   },
   {
-    Icon: File,
-    Title: 'Terms and conditions',
-    text: 'We do not request upfront payments or deposits, we provide the information to the customer on a success fee basis - te provider gets invoiced for our commissions only if it got the contract and performed the flights which were requested on our portal. For this we have a special set of tools to verify the customer identity and automatically check the ACMI performance.',
+    icon: communication,
+    Title: 'Direct Communication',
+    text: 'Once matched, get contacts of the ACMI operators – no intermediaries.',
+  },
+  {
+    icon: freeUse,
+    Title: 'Free Use',
+    text: 'No costs for browsing or getting contacts.',
   },
 ];

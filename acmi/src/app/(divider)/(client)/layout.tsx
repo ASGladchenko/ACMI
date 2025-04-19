@@ -10,7 +10,7 @@ export default function Layout({ children }: ChildrenProps) {
         <QuerySync />
       </Suspense>
 
-      <HeroBanner isMainPage />
+      <HeroBanner />
 
       <div className="w-full">{children}</div>
     </>
