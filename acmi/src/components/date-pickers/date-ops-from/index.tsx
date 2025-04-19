@@ -40,7 +40,8 @@ export const DateOpsFrom = ({
 
   const onCloseCalendar = () => {
     setIsOpen(false);
-    onChange([startDate, endDate]);
+
+    onChange([startDate, endDate || startDate]);
   };
 
   const onClear = () => {
