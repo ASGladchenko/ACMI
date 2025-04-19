@@ -7,10 +7,9 @@ import {
   SearchParamsInput,
   SearchDateOpsFrom,
   SearchBodySwitcher,
-  SearchSelectClient,
+  SearchSelectAirport,
 } from '@/components';
 import { queryParams } from '@/constants';
-import { airports } from '@/components/mock';
 
 import { getStyles, HeroType } from './styles';
 
@@ -38,11 +37,10 @@ export const HeroFilter = React.memo(
           btnClassName={styles.bodyBtn}
           queryName={queryParams.isWide}
         />
-        <SearchSelectClient
-          queryName={queryParams.opsFrom}
+        <SearchSelectAirport
           label="Ops from"
-          options={airports}
           className={styles.select}
+          queryName={queryParams.opsFrom}
         />
 
         <SearchParamsInput

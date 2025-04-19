@@ -7,14 +7,7 @@ export interface OptionsProps extends IRenderOptionsProps {
   onChange: (option: ISelectOption) => void;
 }
 
-export const Options = ({
-  options,
-  isLoading,
-  onChange,
-  setIsOpen,
-  setFilter,
-  isOpen,
-}: OptionsProps) => {
+export const Options = ({ isOpen, options, onChange, isLoading, setIsOpen, setFilter }: OptionsProps) => {
   const isEmpty = options.length === 0;
 
   const handleChange = (option: ISelectOption) => {

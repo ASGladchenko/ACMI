@@ -1,6 +1,8 @@
 'use client';
 import { useState } from 'react';
 
+import { useAirportOptions } from '@/hooks';
+
 import { Options } from './options';
 import { Selected } from './selected';
 import { SelectLogic } from '../select-logic';
@@ -9,10 +11,10 @@ import { ISelectOption, SelectLogicWrapperProps } from '../select-logic/types';
 export interface SelectClientProps
   extends Omit<
     SelectLogicWrapperProps,
-    'selectedOption' | 'renderOptions' | 'renderSelected' | 'onChange'
+    'selectedOption' | 'renderOptions' | 'renderSelected' | 'onChange' | 'options'
   > {
   label: string;
-  selected: ISelectOption | null;
+  selected: string | null;
   onChange: (option: ISelectOption | null) => void;
 }
 
@@ -26,6 +28,7 @@ export const SelectAirport = ({
   ...restProps
 }: SelectClientProps) => {
   const [filter, setFilter] = useState('');
+  const { options, loading } = useAirportOptions(filter, 500);
 
   return (
     <SelectLogic
@@ -33,9 +36,10 @@ export const SelectAirport = ({
       className={className}
       isLoading={isLoading}
       isDisabled={isDisabled}
-      selectedOption={selected}
+      options={options}
+      selectedOption={selected ? ({ value: selected, text: selected } as ISelectOption) : null}
       renderOptions={({ ...props }) => (
-        <Options {...props} isLoading={isLoading} onChange={onChange} />
+        <Options {...props} isLoading={loading} onChange={onChange} />
       )}
       renderSelected={({ ...props }) => (
         <Selected

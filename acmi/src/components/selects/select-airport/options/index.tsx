@@ -1,3 +1,4 @@
+import { cn } from '@/utils';
 import { Plain } from '@/assets/svg';
 
 import { IRenderOptionsProps, ISelectOption } from '../../select-logic/types';
@@ -7,7 +8,7 @@ export interface OptionsProps extends IRenderOptionsProps {
   onChange: (option: ISelectOption) => void;
 }
 
-export const Options = ({ options, isLoading, setIsOpen, onChange }: OptionsProps) => {
+export const Options = ({ options, isOpen, isLoading, setIsOpen, onChange }: OptionsProps) => {
   const isEmpty = options.length === 0;
 
   const onHandleChange = (option: ISelectOption) => {
@@ -15,8 +16,13 @@ export const Options = ({ options, isLoading, setIsOpen, onChange }: OptionsProp
     setIsOpen(false);
   };
 
+  const cl = cn(
+    'border-blue-dark text-blue-dark w-full rounded-[0_0_12px_12px] border border-t-0 bg-white px-3 pb-2.5',
+    isOpen && 'border-[3px] border-t-0'
+  );
+
   return (
-    <div className="border-blue-dark text-blue-dark w-full rounded-[0_0_12px_12px] border border-t-0 bg-white px-3 pb-2.5">
+    <div className={cl}>
       {isEmpty && !isLoading && <p className="text-gray-dark w-full text-center">No options</p>}
 
       {!isEmpty && !isLoading && (
