@@ -1,10 +1,10 @@
 export const queryParams = {
+  act: 'act',
   minPax: 'min_pax',
   opsFrom: 'ops_from',
   isWide: 'is_wide',
   dates: 'date_from,date_to',
   iosa: 'iosa',
-  act: 'act',
   galley: 'galley',
   wifi: 'wifi',
   ife: 'ife',

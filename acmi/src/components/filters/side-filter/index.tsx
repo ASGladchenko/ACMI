@@ -2,6 +2,7 @@
 
 import { queryParams } from '@/constants';
 import { useScrollThreshold } from '@/hooks';
+import { airCraftTypes, certifications, etopsRaiting, ilsCategory, noiseStage } from '@/config';
 import {
   Button,
   FilterLayout,
@@ -12,7 +13,6 @@ import {
 } from '@/components';
 
 import { getStyles } from './styles';
-import { airCraftTypes, certifications, etopsRaiting, ilsCategory, noiseStage } from '@/config';
 
 export interface SideFilterProps {
   className?: string;

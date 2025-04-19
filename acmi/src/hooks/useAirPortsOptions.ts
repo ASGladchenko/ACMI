@@ -1,9 +1,15 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 
-import { baseApiUrl } from '@/constants';
+import { apiFetch } from '@/fetch-request';
 import { useDebouncedValue } from '@/hooks';
 import { ISelectOption } from '@/components';
+
+interface Airport {
+  icao: string;
+  name: string;
+}
 
 export function useAirportOptions(filter: string, delay = 500) {
   const debouncedFilter = useDebouncedValue(filter, delay);
@@ -14,8 +20,7 @@ export function useAirportOptions(filter: string, delay = 500) {
   const fetchOptions = async (filter: string) => {
     try {
       setLoading(true);
-      const response = await fetch(`${baseApiUrl}/airports/search?q=${filter}`);
-      const data = await response.json();
+      const data = await apiFetch<{ airports: Airport[] }>(`/airports/search?q=${filter}`);
 
       if (!data || !data.airports) return;
 
