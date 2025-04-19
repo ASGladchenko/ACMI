@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { cn } from '@/utils';
 import { Cross, Plain } from '@/assets/svg';
@@ -24,6 +24,7 @@ export const Selected = ({
   isDisabled,
   placeholder,
 }: SelectedProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
 
   const onInputClick = (e: React.MouseEvent) => {
@@ -40,6 +41,13 @@ export const Selected = ({
     }
   };
 
+  const handleDeleteSelected = () => {
+    onChange(null);
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 1);
+  };
+
   const wrapper = cn(
     'w-full bg-white flex border-[1px] rounded-xl border-blue-dark px-3 py-[7px] items-center gap-2 overflow-hidden',
     isOpen && 'rounded-[12px_12px_0_0] border-[3px] border-b-0 pt-[5px] px-[10px] pb-[8px]'
@@ -47,12 +55,12 @@ export const Selected = ({
 
   return (
     <div className={wrapper} onClick={() => !isDisabled && setIsOpen(true)}>
-      <span className="text-blue-dark shrink-0 text-[16px] text-nowrap">{label}</span>
+      <span className="text-blue-dark shrink-0 text-[16px] font-bold text-nowrap">{label}</span>
 
       {option ? (
-        <div className="flex min-w-0 flex-1">
+        <div className="flex max-w-max min-w-0 flex-1">
           <div
-            onClick={() => onChange(null)}
+            onClick={handleDeleteSelected}
             className="bg-blue-dark flex w-full cursor-pointer items-center gap-2 rounded-sm px-2 py-[3px] text-[14px] leading-[17px] font-medium text-white hover:text-red-400"
           >
             <Plain className="h-2 w-4 shrink-0" />
@@ -68,6 +76,7 @@ export const Selected = ({
         <input
           type="text"
           value={filter}
+          ref={inputRef}
           disabled={isDisabled}
           onClick={onInputClick}
           onFocus={onInputFocus}

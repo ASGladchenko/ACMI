@@ -43,7 +43,7 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
 
     return (
       <label className={wrapper}>
-        <span className="text-blue-dark w-full max-w-max min-w-min flex-0 grow-1 text-nowrap">
+        <span className="text-blue-dark w-full max-w-max min-w-min flex-0 grow-1 font-bold text-nowrap">
           {label}
         </span>
 
