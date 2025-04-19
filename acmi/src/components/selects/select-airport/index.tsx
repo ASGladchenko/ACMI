@@ -28,7 +28,7 @@ export const SelectAirport = ({
   ...restProps
 }: SelectClientProps) => {
   const [filter, setFilter] = useState('');
-  const { options, loading } = useAirportOptions(filter, 500);
+  const { options, loading, debouncedFilter } = useAirportOptions(filter, 500);
 
   return (
     <SelectLogic
@@ -39,7 +39,7 @@ export const SelectAirport = ({
       options={options}
       selectedOption={selected ? ({ value: selected, text: selected } as ISelectOption) : null}
       renderOptions={({ ...props }) => (
-        <Options {...props} isLoading={loading} onChange={onChange} />
+        <Options {...props} filter={debouncedFilter} isLoading={loading} onChange={onChange} />
       )}
       renderSelected={({ ...props }) => (
         <Selected
