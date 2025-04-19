@@ -9,11 +9,11 @@ export function serializeQuery(params: Record<string, string>) {
     all_male_crew: null,
     certifications: null,
     dangerous_goods_certification: null,
-    dateFrom: new Date().toISOString(),
+    dateFrom: new Date().toISOString().split('T')[0],
     dateTo: (() => {
       const d = new Date();
       d.setFullYear(d.getFullYear() + 10);
-      return d.toISOString();
+      return d.toISOString().split('T')[0];
     })(),
     etops: null,
     galley_ovens: null,
