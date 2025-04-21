@@ -25,6 +25,8 @@ export default async function Home({ searchParams }: SearchParams) {
     }
   }
 
+  console.log({ initialData });
+
   return (
     <div className="laptop:block block h-full py-5 min-[1240px]:pl-6">
       <PaginatedSuggestionList initialData={initialData || []} />
