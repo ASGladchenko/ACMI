@@ -3,6 +3,9 @@ import type { NextConfig } from 'next';
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const nextConfig: NextConfig = {
+  images: {
+    domains: ['via.placeholder.com'],
+  },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find(

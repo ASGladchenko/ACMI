@@ -8,7 +8,7 @@ import { MobileScrolledFilter } from '../mobile-scrolled-filter';
 
 export const HeroFilterScrolled = ({}) => {
   const { width } = useWindowWidth();
-  const point = width < 1240 ? 380 : 220;
+  const point = width < 1240 ? 380 : 300;
 
   const isRender = useScrollThreshold(point);
   const isAnimated = useDelay(isRender, 5);

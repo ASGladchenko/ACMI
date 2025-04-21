@@ -7,7 +7,7 @@ import { useDebouncedValue } from '@/hooks';
 import { ISelectOption } from '@/components';
 
 interface Airport {
-  icao: string;
+  code: string;
   name: string;
 }
 
@@ -24,9 +24,9 @@ export function useAirportOptions(filter: string, delay = 500) {
 
       if (!data || !data.airports) return;
 
-      const prepareAirports = data.airports.map((airport: { icao: string; name: string }) => ({
-        value: airport.icao,
-        text: `${airport.icao}, ${airport.name}`,
+      const prepareAirports = data.airports.map((airport: { code: string; name: string }) => ({
+        value: airport.code,
+        text: `${airport.code}, ${airport.name}`,
       }));
 
       setOptions(prepareAirports);
