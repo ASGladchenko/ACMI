@@ -1,19 +1,12 @@
+'use client';
+import { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
-import { Button } from '../button';
-import { getIntlNumberFormat } from '@/utils';
 
-export interface AircraftProps {
-  id: number;
-  msn: string;
-  dom: string;
-  model: string;
-  layout: string;
-  bhPrice: string;
-  provider: string;
-  registration: string;
-  indicativePrice: string;
-  imageUrl: StaticImageData;
-}
+import { plain } from '@/assets/webp';
+import { getIntlNumberFormat } from '@/utils';
+import { FindOffersNormalizedProps } from '@/types';
+
+import { Button } from '../button';
 
 import './styles.css';
 
@@ -27,11 +20,13 @@ export const SuggestionCard = ({
   imageUrl,
   registration,
   indicativePrice,
-}: AircraftProps) => {
+}: FindOffersNormalizedProps) => {
+  const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
+
   return (
     <div className="border-gray-light desktop:flex grid-card-layout desktop:pl-1 w-full items-center gap-[30px] rounded-[15px] border py-5 pr-4 pl-4 shadow-[0_4px_4px_0_#DDE7EE]">
       <div className="card-img cover desktop:max-w-[340px] desktop:h-auto relative aspect-[340/210] max-h-40 w-full overflow-hidden rounded-[12px_0_0_12px] blur-[2px]">
-        <Image src={imageUrl} alt={model} fill sizes="100%" />
+        <Image src={src} alt={model} onError={() => setSrc(plain)} fill sizes="100%" />
       </div>
 
       <div className="text-gray-medium font-roboto desktop:flex contents w-full flex-col">
@@ -58,7 +53,9 @@ export const SuggestionCard = ({
             </div>
             <div className="flex">
               <span className="text-[18px] leading-[30px] font-bold text-nowrap">DOM</span>
-              <span className="w-full text-right text-[16px] leading-[30px]">{dom}</span>
+              <span className="w-full text-right text-[16px] leading-[30px]">
+                {new Date(dom).toLocaleDateString('en-US')}
+              </span>
             </div>
             <div className="flex">
               <span className="text-[18px] leading-[30px] font-bold text-nowrap">Layout:</span>

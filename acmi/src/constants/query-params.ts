@@ -1,7 +1,7 @@
 export const queryParams = {
   act: 'act',
   minPax: 'min_pax',
-  opsFrom: 'ops_from',
+  opsFrom: 'airport_code',
   isWide: 'is_wide',
   dates: 'date_from,date_to',
   iosa: 'iosa',

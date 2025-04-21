@@ -1,44 +1,34 @@
 'use client';
 
-import { useState } from 'react';
-
-import { AircraftProps, Button, SuggestionCard } from '@/components';
-import { fetchMockAircrafts } from '../pages/cards/fetch';
+import { useOffers } from '@/hooks';
+import { SuggestionCard } from '@/components';
+import { FindOffersNormalizedProps } from '@/types';
+import { cn } from '@/utils';
 
 export interface PaginatedSuggestionListProps {
-  isHasMore: boolean;
-  initialData: AircraftProps[];
+  // isHasMore: boolean;
+  initialData: FindOffersNormalizedProps[];
 }
 
-const LIMIT = 5;
-
 export const PaginatedSuggestionList = ({
-  isHasMore,
+  // isHasMore,
   initialData,
 }: PaginatedSuggestionListProps) => {
   // TODO LOGIC WITH SEARCH PARAMS
-  const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<AircraftProps[]>(initialData);
+
+  const { data, isLoading, isDateFilled } = useOffers({ initialData });
 
   const isEmpty = data.length === 0;
 
-  const onFetchMore = async () => {
-    setIsLoading(true);
-    try {
-      const newData = await fetchMockAircrafts(data.length, LIMIT);
-      setData((prev) => [...prev, ...newData]);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
-    <div className="flex w-full flex-col items-center gap-10">
+    <div
+      className={cn(
+        'relative flex h-full w-full flex-col items-center gap-10',
+        isEmpty && 'pt-[160px]'
+      )}
+    >
       {!isEmpty && data.map((item) => <SuggestionCard key={item.id} {...item} />)}
-
-      {isHasMore && (
+      {/* {isHasMore && (
         <Button
           onClick={onFetchMore}
           loading={isLoading}
@@ -47,9 +37,20 @@ export const PaginatedSuggestionList = ({
         >
           Load more
         </Button>
+      )} */}
+      {isLoading && (
+        <h1 className="text-blue-dark w-full text-center text-3xl font-bold">Loading...</h1>
       )}
 
-      {isEmpty && <h2 className="w-full text-center text-2xl font-bold">No results found</h2>}
+      {isEmpty && isDateFilled && !isLoading && (
+        <h2 className="text-blue-dark w-full text-center text-2xl font-bold">No results found</h2>
+      )}
+
+      {isEmpty && !isDateFilled && !isLoading && (
+        <h2 className="text-blue-dark w-full text-center text-2xl font-bold">
+          Please select a date range
+        </h2>
+      )}
     </div>
   );
 };

@@ -11,9 +11,8 @@ export { Modal } from './modal';
 export { PaginatedSuggestionList } from './paginated-suggestion-list';
 export { SearchCheckbox } from './checkbox/search-checkbox';
 export { SearchParamsInput } from './input/search-params-input';
+export { showMessage } from './toast';
 export { SuggestionCard } from './suggestion-card';
-
-export type { AircraftProps } from './suggestion-card';
 
 export * from './date-pickers';
 export * from './filters';

@@ -1,24 +1,29 @@
 'use client';
 
+import { usePathname, useSearchParams } from 'next/navigation';
+
 import { useFind } from '@/hooks';
 
 import { bannerText } from './config';
+import { showMessage } from '../toast';
 import { HeroFilter } from '../filters';
-import { usePathname } from 'next/navigation';
 
 export const HeroBanner = () => {
   const path = usePathname();
+  const params = useSearchParams();
 
   const isMainPage = path === '/';
 
   const { handleFind } = useFind();
 
   const onFind = () => {
-    if (isMainPage) {
-      handleFind({ path: '/search' });
-    } else {
-      handleFind({ path: '' });
+    const paramsObj = Object.fromEntries(params.entries());
+    if (!paramsObj.date_from || !paramsObj.date_to) {
+      showMessage.error('Please select a date range');
+      return;
     }
+
+    handleFind({ path: '/search' });
   };
 
   return (

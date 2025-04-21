@@ -8,7 +8,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         <HeroFilterScrolled />
 
-        <div className="w-full">{children}</div>
+        <div className="laptop:min-h-[calc(100dvh-240px)] min-h-[calc(100dvh-396px)] w-full min-[1240px]:min-h-[calc(100dvh-260px)]">
+          {children}
+        </div>
       </div>
     </>
   );
