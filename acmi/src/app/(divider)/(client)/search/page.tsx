@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { FindOffersResponse, SearchParams } from '@/types';
 import { PaginatedSuggestionList } from '@/components';
 import { apiFetch, normalizeFindOffers, serializeQuery } from '@/fetch-request';
