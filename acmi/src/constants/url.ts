@@ -1,1 +1,1 @@
-export const baseApiUrl = 'https://acmi.direct:8443';
+export const baseApiUrl = 'https://acmi.direct';
