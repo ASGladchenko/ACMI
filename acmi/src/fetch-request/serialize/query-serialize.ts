@@ -9,13 +9,15 @@ export function serializeQuery(params: Record<string, string>) {
     ? new Date(Number(params.date_to)).toISOString().split('T')[0]
     : null;
 
+  const airportCode = params[queryParams.opsFrom]
+    ? params[queryParams.opsFrom].split(',')[0]
+    : null;
+
   return {
     act: params.act === 'true' || null,
     aircraft_body: params.is_wide === 'true' || null,
     aircraft_types: params.aircraft_types || null,
-    airport_code: params[queryParams.opsFrom]
-      ? params[queryParams.opsFrom].split(',')[0].toLocaleLowerCase()
-      : null,
+    airport_code: airportCode,
     all_male_crew: params.all_male_crew === 'true' || params.all_male_crew === 'false' || null,
     certifications: params.certifications || null,
     dangerous_goods_certification: params.dangerous === 'true' || null,
