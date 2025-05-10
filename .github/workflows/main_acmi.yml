@@ -30,6 +30,7 @@ jobs:
 
       - name: Zip artifact for deployment
         run: |
+          cd acmi
           zip -r release.zip .next public package*.json
 
       - name: Upload artifact for deployment job
