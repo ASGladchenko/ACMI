@@ -1,20 +1,23 @@
 'use client';
 
-import { redirect } from 'next/navigation';
-import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const token = localStorage.getItem('token');
+  const router = useRouter();
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    if (!token) {
-      redirect('/auth');
-    }
-  }, [token]);
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
-  if (!token) {
-    return null;
-  }
+    if (!token) {
+      router.push('/auth');
+    } else {
+      setChecked(true);
+    }
+  }, [router]);
+
+  if (!checked) return null;
 
   return <>{children}</>;
 }
