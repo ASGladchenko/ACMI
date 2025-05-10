@@ -31,7 +31,7 @@ jobs:
       - name: Zip artifact for deployment
         run: |
           cd acmi
-          zip -r release.zip public package*.json src next-env.d.ts next.config.ts postcss.config.mjs
+          zip -r release.zip public package*.json src next-env.d.ts next.config.ts postcss.config.mjs tsconfig.json
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
