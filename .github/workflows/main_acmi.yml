@@ -23,7 +23,7 @@ jobs:
 
       - name: Install, build and test
         run: |
-          cd acmi/
+          cd acmi
           npm install
           npm run build --if-present
           npm run test --if-present
@@ -31,7 +31,7 @@ jobs:
       - name: Zip artifact for deployment
         run: |
           cd acmi
-          zip -r release.zip .next public package*.json
+          zip -r release.zip public package*.json src next-env.d.ts next.config.ts postcss.config.mjs
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
