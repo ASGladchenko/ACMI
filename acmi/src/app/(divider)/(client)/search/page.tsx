@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic';
 
 import { FindOffersResponse, SearchParams } from '@/types';
 import { PaginatedSuggestionList } from '@/components';
-import { apiFetch, normalizeFindOffers, serializeQuery } from '@/fetch-request';
+import { apiServer, normalizeFindOffers, serializeQuery } from '@/fetch-request';
 
 export default async function Home({ searchParams }: SearchParams) {
   const params = await searchParams;
@@ -13,9 +13,8 @@ export default async function Home({ searchParams }: SearchParams) {
 
   if (body.date_from && body.date_to) {
     try {
-      const data = await apiFetch<FindOffersResponse>('/find_offers', {
-        method: 'POST',
-        body: JSON.stringify(body),
+      const { data } = await apiServer.post<FindOffersResponse>('/find_offers', {
+        ...body,
       });
 
       const raw = data?.search_results || [];
