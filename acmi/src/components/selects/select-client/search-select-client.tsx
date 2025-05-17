@@ -13,18 +13,18 @@ interface SearchSelectClientProps {
   className?: string;
   placeholder?: string;
   options: ISelectOption[];
+  keyName?: 'value' | 'text';
 }
 
 export const SearchSelectClient = React.memo(
-  ({ options, queryName, ...props }: SearchSelectClientProps) => {
-
+  ({ options, queryName, keyName = 'text', ...props }: SearchSelectClientProps) => {
     const opsFrom = useQueryStore((s) => s.getQuery(queryName));
     const setQuery = useQueryStore((s) => s.setQuery);
-
-    const selected = options.find((option) => option.text === opsFrom) || null;
+    const selected = options.find((option) => option[keyName] == opsFrom) || null;
 
     const onChange = (options: ISelectOption | null) => {
-      setQuery(queryName, options?.text ?? null);
+      const newValue = options ? `${options[keyName]}` : null;
+      setQuery(queryName, newValue);
     };
 
     return <SelectClient {...props} selected={selected} options={options} onChange={onChange} />;

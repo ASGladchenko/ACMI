@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { apiFetch } from '@/fetch-request';
+import { apiClient } from '@/fetch-request';
 import { useDebouncedValue } from '@/hooks';
 import { ISelectOption } from '@/components';
 
@@ -20,14 +20,16 @@ export function useAirportOptions(filter: string, delay = 500) {
   const fetchOptions = async (filter: string) => {
     try {
       setLoading(true);
-      const data = await apiFetch<{ airports: Airport[] }>(`/airports/search?q=${filter}`);
+      const response = await apiClient<{ airports: Airport[] }>(`/airports/search?q=${filter}`);
 
-      if (!data || !data.airports) return;
+      if (!response || !response.data.airports) return;
 
-      const prepareAirports = data.airports.map((airport: { code: string; name: string }) => ({
-        value: airport.code,
-        text: `${airport.code}, ${airport.name}`,
-      }));
+      const prepareAirports = response.data.airports.map(
+        (airport: { code: string; name: string }) => ({
+          value: airport.code,
+          text: `${airport.code}, ${airport.name}`,
+        })
+      );
 
       setOptions(prepareAirports);
     } catch (e) {

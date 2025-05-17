@@ -23,7 +23,7 @@ export function serializeQuery(params: Record<string, string>) {
     dangerous_goods_certification: params.dangerous === 'true' || null,
     date_from: dateFromISO,
     date_to: dateToISO,
-    etops: params.etops || null,
+    etops: (params.etops && Number(params.etops)) || null,
     galley_ovens: params.galley === 'true' || null,
     ife: params.ife === 'true' || params.ife === 'false' || null,
     iosa: params.iosa === 'true' || null,

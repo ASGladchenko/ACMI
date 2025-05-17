@@ -1,9 +1,9 @@
 'use client';
 
+import { cn } from '@/utils';
 import { useOffers } from '@/hooks';
 import { SuggestionCard } from '@/components';
 import { FindOffersNormalizedProps } from '@/types';
-import { cn } from '@/utils';
 
 export interface PaginatedSuggestionListProps {
   // isHasMore: boolean;
