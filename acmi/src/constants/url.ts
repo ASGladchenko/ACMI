@@ -9,9 +9,3 @@ export const authUrl =
   `scope=openid&` +
   `state=12345&` +
   `nonce=test123`;
-
-console.log({
-  authUrl,
-  baseApiUrl,
-  redirectUri,
-});
