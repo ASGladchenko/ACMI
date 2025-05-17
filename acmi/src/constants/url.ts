@@ -11,7 +11,7 @@ export const authUrl =
   `nonce=test123`;
 
 console.log({
+  authUrl,
   baseApiUrl,
   redirectUri,
-  authUrl,
 });
