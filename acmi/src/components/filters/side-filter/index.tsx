@@ -2,14 +2,16 @@
 
 import { queryParams } from '@/constants';
 import { useScrollThreshold } from '@/hooks';
-import { airCraftTypes, certifications, etopsRaiting, ilsCategory, noiseStage } from '@/config';
 import {
   Button,
+  SelectETOPS,
   FilterLayout,
   SearchCheckbox,
-  SearchMultiSelect,
+  SelectNoiseStage,
   SearchParamsInput,
-  SearchSelectClient,
+  SelectILSCategory,
+  SelectAircraftTypes,
+  SelectCertification,
 } from '@/components';
 
 import { getStyles } from './styles';
@@ -28,48 +30,23 @@ export const SideFilter = ({ className, onFind, type = 'standard' }: SideFilterP
   return (
     <>
       <div className={styles[type] || ''}>
-        <SearchMultiSelect
-          options={airCraftTypes}
-          placeholder="enter"
-          label="Aircraft types"
-          queryName={queryParams.aircraftTypes}
-        />
+        <SelectAircraftTypes />
 
         <FilterLayout />
 
-        <SearchSelectClient
-          options={certifications}
-          placeholder="enter"
-          label="Certifications"
-          queryName={queryParams.certifications}
-        />
+        <SelectCertification />
 
-        <SearchSelectClient
-          label="ETOPS"
-          options={etopsRaiting}
-          placeholder="enter"
-          queryName={queryParams.etops}
-        />
+        <SelectETOPS />
+
         <SearchParamsInput
           type="number"
           placeholder="enter"
           label="Max age, years"
           queryName={queryParams.maxAge}
         />
+        <SelectNoiseStage />
 
-        <SearchSelectClient
-          options={noiseStage}
-          placeholder="enter"
-          label="Max noise level"
-          queryName={queryParams.maxNoiseLevel}
-        />
-
-        <SearchSelectClient
-          placeholder="enter"
-          label="ILS Category"
-          options={ilsCategory}
-          queryName={queryParams.ilsCategory}
-        />
+        <SelectILSCategory />
 
         <SearchCheckbox
           label="IOSA"

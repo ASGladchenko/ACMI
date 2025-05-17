@@ -1,7 +1,8 @@
 export const dynamic = 'force-dynamic';
 
-import { FindOffersResponse, SearchParams } from '@/types';
+import { apiRedirect } from '@/utils';
 import { PaginatedSuggestionList } from '@/components';
+import { FindOffersResponse, SearchParams } from '@/types';
 import { apiServer, normalizeFindOffers, serializeQuery } from '@/fetch-request';
 
 export default async function Home({ searchParams }: SearchParams) {
@@ -13,14 +14,13 @@ export default async function Home({ searchParams }: SearchParams) {
 
   if (body.date_from && body.date_to) {
     try {
-      const { data } = await apiServer.post<FindOffersResponse>('/find_offers', {
-        ...body,
-      });
+      const data = await apiServer.post<FindOffersResponse>('/find_offers', body);
 
-      const raw = data?.search_results || [];
+      const raw = data?.data?.search_results || [];
       initialData = normalizeFindOffers(raw);
     } catch (error) {
-      console.error(error);
+      apiRedirect(error);
+      console.log({ error });
     }
   }
 
