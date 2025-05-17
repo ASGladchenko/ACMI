@@ -1,13 +1,14 @@
 'use client';
 
-import { useETOPSStore } from '@/store';
-import { queryParams } from '@/constants';
-
-import { SearchSelectClient } from '../select-client/search-select-client';
-import { apiClient } from '@/fetch-request';
 import { useEffect } from 'react';
 
-export const SelectETOPS = ({}) => {
+import { useETOPSStore } from '@/store';
+import { queryParams } from '@/constants';
+import { apiClient } from '@/fetch-request';
+
+import { SearchSelectClient } from '../select-client/search-select-client';
+
+export const SelectETOPS = () => {
   const raw = useETOPSStore((s) => s.etops);
   const setQuery = useETOPSStore((s) => s.setEtops);
 

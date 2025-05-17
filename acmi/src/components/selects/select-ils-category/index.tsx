@@ -7,7 +7,7 @@ import { useILSCategoryStore } from '@/store';
 
 import { SearchSelectClient } from '../select-client/search-select-client';
 
-export const SelectILSCategory = ({}) => {
+export const SelectILSCategory = () => {
   const raw = useILSCategoryStore((s) => s.ilsCategory);
   const setQuery = useILSCategoryStore((s) => s.setILSCategory);
 

@@ -8,7 +8,7 @@ import { useNoiseStageStore } from '@/store';
 
 import { SearchSelectClient } from '../select-client/search-select-client';
 
-export const SelectNoiseStage = ({}) => {
+export const SelectNoiseStage = () => {
   const raw = useNoiseStageStore((s) => s.noiseStage);
   const setQuery = useNoiseStageStore((s) => s.setNoiseStage);
 
