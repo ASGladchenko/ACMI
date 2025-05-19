@@ -30,6 +30,7 @@ export const SelectETOPS = () => {
   return (
     <SearchSelectClient
       label="ETOPS"
+      keyName="value"
       options={raw.map((item) => ({
         value: item.id,
         text: item.etops_rating,

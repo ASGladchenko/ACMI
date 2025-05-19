@@ -30,6 +30,7 @@ export const SelectAircraftTypes = () => {
 
   return (
     <SearchMultiSelect
+      keyName="value"
       options={raw.map((item) => ({
         value: item.id,
         text: item.model,

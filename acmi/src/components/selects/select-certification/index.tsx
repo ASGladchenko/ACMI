@@ -30,6 +30,7 @@ export const SelectCertification = () => {
 
   return (
     <SearchSelectClient
+      keyName="value"
       options={raw.map((item) => ({
         value: item.id,
         text: item.certification,
