@@ -23,10 +23,10 @@ export function serializeQuery(params: Record<string, string>) {
 
   return {
     act: params.act === 'true' || null,
-    aircraft_body: params.is_wide === 'true' || null,
+    aircraft_body: params.is_wide === 'true' ? true : false,
     aircraft_types_id: aircraftTypesId(params.aircraft_types),
     airport_code: airportCode,
-    all_male_crew: params.all_male_crew === 'true' || params.all_male_crew === 'false' || null,
+    all_male_crew: params.all_male_crew === 'true' ? true : null,
     certifications_id: numberNullable(params.certifications),
     dangerous_goods_certification: params.dangerous === 'true' || null,
     date_from: dateFromISO,
