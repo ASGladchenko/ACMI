@@ -27,7 +27,8 @@ export const PaginatedSuggestionList = ({
         isEmpty && 'pt-[160px]'
       )}
     >
-      {!isEmpty && data.map((item) => <SuggestionCard key={item.id} {...item} />)}
+      {!isEmpty &&
+        data.map((item, index) => <SuggestionCard key={`${item.id}-${index}`} {...item} />)}
       {/* {isHasMore && (
         <Button
           onClick={onFetchMore}
