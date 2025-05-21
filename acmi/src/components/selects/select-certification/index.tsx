@@ -6,7 +6,7 @@ import { queryParams } from '@/constants';
 import { apiClient } from '@/fetch-request';
 import { useCertificationsStore } from '@/store';
 
-import { SearchSelectClient } from '../select-client/search-select-client';
+import { SearchMultiSelect } from '../multi-select-client/search-multi-select';
 
 export const SelectCertification = () => {
   const raw = useCertificationsStore((s) => s.certifications);
@@ -29,7 +29,7 @@ export const SelectCertification = () => {
   }, [raw]);
 
   return (
-    <SearchSelectClient
+    <SearchMultiSelect
       keyName="value"
       options={raw.map((item) => ({
         value: item.id,

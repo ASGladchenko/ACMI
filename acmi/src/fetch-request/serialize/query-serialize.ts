@@ -13,10 +13,10 @@ export function serializeQuery(params: Record<string, string>) {
     ? params[queryParams.opsFrom].split(',')[0]
     : null;
 
-  const aircraftTypesId = (aircraft_types: string) => {
-    const airCraft = aircraft_types ? aircraft_types.split(',').map((id) => Number(id)) : null;
+  const multiSelectParams = (param: string) => {
+    const options = param ? param.split(',').map((id) => Number(id)) : null;
 
-    return airCraft;
+    return options;
   };
 
   const numberNullable = (value: string) => (value && Number(value)) || null;
@@ -24,10 +24,10 @@ export function serializeQuery(params: Record<string, string>) {
   return {
     act: params.act === 'true' || null,
     aircraft_body: params.is_wide === 'true' ? true : false,
-    aircraft_types_id: aircraftTypesId(params.aircraft_types),
+    aircraft_types_id: multiSelectParams(params.aircraft_types),
     airport_code: airportCode,
     all_male_crew: params.all_male_crew === 'true' ? true : null,
-    certifications_id: numberNullable(params.certifications),
+    certifications_id: multiSelectParams(params.certifications),
     dangerous_goods_certification: params.dangerous === 'true' || null,
     date_from: dateFromISO,
     date_to: dateToISO,
