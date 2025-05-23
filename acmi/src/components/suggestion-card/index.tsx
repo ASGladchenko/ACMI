@@ -1,8 +1,10 @@
 'use client';
+
 import { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 
 import { plain } from '@/assets/webp';
+import { useRouter } from 'next/navigation';
 import { getIntlNumberFormat } from '@/utils';
 import { FindOffersNormalizedProps } from '@/types';
 
@@ -11,6 +13,7 @@ import { Button } from '../button';
 import './styles.css';
 
 export const SuggestionCard = ({
+  id,
   msn,
   dom,
   model,
@@ -21,6 +24,7 @@ export const SuggestionCard = ({
   registration,
   indicativePrice,
 }: FindOffersNormalizedProps) => {
+  const router = useRouter();
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
 
   return (
@@ -80,7 +84,12 @@ export const SuggestionCard = ({
               })}
             </span>
 
-            <Button className="desktop:ml-0 ml-auto w-[150px]">Proceed to offer</Button>
+            <Button
+              onClick={() => router.push(`/offer/${id}`)}
+              className="desktop:ml-0 ml-auto w-[150px]"
+            >
+              Proceed to offer
+            </Button>
           </div>
         </div>
       </div>
