@@ -11,9 +11,9 @@ import { getIntlNumberFormat } from '@/utils';
 import { FindOffersNormalizedProps } from '@/types';
 
 import { Button } from '../button';
+import { prepareQueryParams } from './helpers';
 
 import './styles.css';
-import { prepareQueryParams } from './helpers';
 
 export const SuggestionCard = ({
   id,

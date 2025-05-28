@@ -9,7 +9,7 @@ import { Cross } from '@/assets/svg';
 import { routes } from './config';
 import { getStyles } from './style';
 
-export const ProviderSideMenu = ({}) => {
+export const ProviderSideMenu = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(true);
 
@@ -17,11 +17,11 @@ export const ProviderSideMenu = ({}) => {
 
   return (
     <div className={wrapper(isOpen)}>
-      <button className={btnClose} onClick={() => setIsOpen(!isOpen)}>
+      <button className={btnClose} onClick={() => setIsOpen(false)}>
         <Cross className="text-gray-dark hover:text-blue-deep h-4 w-4 cursor-pointer duration-200" />
       </button>
 
-      <button className={btnOpen(isOpen)} onClick={() => setIsOpen(!isOpen)}>
+      <button className={btnOpen(isOpen)} onClick={() => setIsOpen(true)}>
         Navigation
       </button>
 
