@@ -20,7 +20,6 @@ export default async function Home({ searchParams }: SearchParams) {
       initialData = normalizeFindOffers(raw);
     } catch (error) {
       apiRedirect(error);
-      console.log({ error });
     }
   }
 

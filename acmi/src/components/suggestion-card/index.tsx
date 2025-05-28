@@ -25,12 +25,20 @@ export const SuggestionCard = ({
   indicativePrice,
 }: FindOffersNormalizedProps) => {
   const router = useRouter();
+
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
 
   return (
     <div className="border-gray-light desktop:flex grid-card-layout desktop:pl-1 w-full items-center gap-[30px] rounded-[15px] border py-5 pr-4 pl-4 shadow-[0_4px_4px_0_#DDE7EE]">
-      <div className="card-img cover desktop:max-w-[340px] desktop:h-auto relative aspect-[340/210] max-h-40 w-full overflow-hidden rounded-[12px_0_0_12px] blur-[2px]">
-        <Image src={src} alt={model} onError={() => setSrc(plain)} fill sizes="100%" />
+      <div className="card-img contain desktop:h-[210px] relative aspect-square h-[150px] w-full max-w-max overflow-hidden rounded-[12px_0_0_12px]">
+        <Image
+          fill
+          src={src}
+          alt={model}
+          sizes="100%"
+          className="object-contain"
+          onError={() => setSrc(plain)}
+        />
       </div>
 
       <div className="text-gray-medium font-roboto desktop:flex contents w-full flex-col">

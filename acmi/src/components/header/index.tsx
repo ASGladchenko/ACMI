@@ -6,7 +6,7 @@ import { Button, ClientLink, Logo } from '@/components';
 
 import { BurgerMenu } from './burger-menu';
 
-export const Header = ({}) => {
+export const Header = ({ isProvider }: { isProvider?: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -18,11 +18,11 @@ export const Header = ({}) => {
           <nav className="laptop:flex hidden items-center gap-10">
             <ClientLink href={useUrlWithParams({ url: '/' })}>Home</ClientLink>
 
-            <ClientLink isDisabled href="/">
+            <ClientLink isDisabled={!isProvider} href="/dashboard-provider">
               Provider Dashboard
             </ClientLink>
 
-            <ClientLink isDisabled href="/">
+            <ClientLink isDisabled href="/dashboard-customer">
               Customer Dashboard
             </ClientLink>
 
@@ -31,7 +31,7 @@ export const Header = ({}) => {
             </Button>
           </nav>
 
-          <BurgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
+          <BurgerMenu isOpen={isOpen} setIsOpen={setIsOpen} isProvider={isProvider} />
         </div>
       </header>
     </>

@@ -3,6 +3,7 @@ export interface FindOffersArray {
   bh_price: string;
   dom: string;
   image: string;
+  icao_type: string;
   indicative_price: string;
   layout: string;
   msn: string;

@@ -5,7 +5,7 @@
     grid-template-areas:
       'card-model card-model card-model card-model '
       'card-provider card-provider card-provider card-provider'
-      'card-img card-img card-info card-info'
+      'card-img card-info card-info card-info'
       'card-price card-price card-price card-price';
     gap: 4px 10px;
   }

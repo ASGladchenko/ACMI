@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get('session_id')?.value;
+  const provider = request.cookies.get('provider')?.value;
 
   const { pathname } = request.nextUrl;
 
@@ -11,6 +12,10 @@ export function middleware(request: NextRequest) {
   }
 
   if (token && pathname.startsWith('/auth')) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
+  if (!provider && pathname.startsWith('/dashboard-provider')) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
