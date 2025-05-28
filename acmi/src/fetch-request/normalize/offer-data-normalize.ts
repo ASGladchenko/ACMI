@@ -45,12 +45,12 @@ export function normalizeOfferData(data: OfferData) {
       reg: data.reg,
       manufactured: formatDate(data.manufactured),
       age: `${data.age} year(s)`,
-      pax: data.pax.toString(),
+      pax: data.pax ? data.pax.toString() : 'N/A',
       layout: data.layout,
       base_airport: data.base_airport,
-      mtow: `${data.mtow.toLocaleString()} kg`,
-      thrust: `${data.thrust} kN`,
-      etops: data.etops.toString(),
+      mtow: data.mtow ? `${data.mtow.toLocaleString()} kg` : 'N/A',
+      thrust: data.thrust ? `${data.thrust} kN` : 'N/A',
+      etops: data.etops ? data.etops.toString() : 'N/A',
       act: data.act ? 'yes' : 'no',
       noise: data.noise,
       ils: data.ils,
@@ -72,13 +72,17 @@ export function normalizeOfferData(data: OfferData) {
     commercial: {
       dates: `${formatDate(data.date_from)} - ${formatDate(data.date_to)}`,
       period: `${data.period} day(s)`,
-      bhPrice: `$${data.bh_price.toLocaleString()}`,
-      minGBH: data.min_guaranteed_bh.toLocaleString(),
-      indicativePrice: `$${data.indicative_price.toLocaleString()}`,
+      bhPrice: data.bh_price ? `$${data.bh_price.toLocaleString()}` : 'N/A',
+      minGBH: data.min_guaranteed_bh ? data.min_guaranteed_bh.toLocaleString() : 'N/A',
+      indicativePrice: data.indicative_price ? `$${data.indicative_price.toLocaleString()}` : 'N/A',
       offeredPositioning: data.offered_positioning,
-      positioningPrice: `$${data.positioning_price.toLocaleString()}`,
+      positioningPrice: data.positioning_price
+        ? `$${data.positioning_price.toLocaleString()}`
+        : 'N/A',
       perDiem: data.per_diem,
-      totalIndicativePrice: `$${data.total_indicative_price.toLocaleString()}`,
+      totalIndicativePrice: data.total_indicative_price
+        ? `$${data.total_indicative_price.toLocaleString()}`
+        : 'N/A',
     },
   };
 }
