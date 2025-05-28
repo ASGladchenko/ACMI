@@ -7,12 +7,12 @@ import { validateOfferIdParams } from './helpers';
 import { OfferItem, OfferTitle } from '../components';
 
 export interface OfferPageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
   searchParams: Record<string, string>;
 }
 
 export default async function OfferPage({ params, searchParams }: OfferPageProps) {
-  const { id } = await params;
+  const { id } = params;
   const queries = await searchParams;
 
   const offerParams = serializeOfferId(id, queries);
