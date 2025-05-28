@@ -7,8 +7,8 @@ import { validateOfferIdParams } from './helpers';
 import { OfferItem, OfferTitle } from '../components';
 
 export interface OfferPageProps {
-  params: { id: string };
-  searchParams: Record<string, string | string[] | undefined>;
+  params: Promise<{ id: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export default async function OfferPage({ params, searchParams }: OfferPageProps) {
