@@ -13,7 +13,7 @@ export interface OfferPageProps {
 
 export default async function OfferPage({ params, searchParams }: OfferPageProps) {
   const { id } = params;
-  const queries = await searchParams;
+  const queries = searchParams;
 
   const offerParams = serializeOfferId(id, queries);
 
