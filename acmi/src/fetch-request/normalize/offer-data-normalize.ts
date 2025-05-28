@@ -1,40 +1,40 @@
 import { formatDate } from '@/utils';
 
 export interface OfferData {
-  type: string;
-  manufactured: string;
   msn: string;
   age: number;
   reg: string;
   pax: number;
-  layout: string;
-  base_airport: string;
-  mtow: number;
-  thrust: number;
-  etops: number;
-  act: boolean;
-  noise: string;
   ils: string;
-  galley_ovens: boolean;
+  type: string;
+  mtow: number;
+  act: boolean;
   ife: boolean;
+  etops: number;
+  noise: string;
   isps: boolean;
   wifi: boolean;
+  layout: string;
+  thrust: number;
+  period: number;
+  date_to: string;
+  bh_price: number;
+  per_diem: string;
   wingtips: boolean;
-  provider_name: string;
+  date_from: string;
+  manufactured: string;
+  base_airport: string;
   provider_aoc: string;
+  galley_ovens: boolean;
+  provider_name: string;
+  indicative_price: number;
   provider_callsign: string;
+  min_guaranteed_bh: number;
+  positioning_price: number;
+  offered_positioning: string;
+  total_indicative_price: number;
   provider_certifications: string;
   provider_additional_data: boolean;
-  date_from: string;
-  date_to: string;
-  period: number;
-  bh_price: number;
-  min_guaranteed_bh: number;
-  indicative_price: number;
-  offered_positioning: string;
-  positioning_price: number;
-  per_diem: string;
-  total_indicative_price: number;
 }
 
 export function normalizeOfferData(data: OfferData) {
