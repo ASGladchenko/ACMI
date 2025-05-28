@@ -12,8 +12,10 @@ export function useOffers({ initialData }: { initialData: FindOffersNormalizedPr
 
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
-  const [isDateFilled, setIsDateFilled] = useState(
-    !!searchParams.get('date_from') && !!searchParams.get('date_to')
+  const [isRequiresFilled, setIsRequiresFilled] = useState(
+    !!searchParams.get('date_from') &&
+      !!searchParams.get('date_to') &&
+      !!searchParams.get('airport_code')
   );
   const [data, setData] = useState<FindOffersNormalizedProps[]>(initialData);
 
@@ -21,15 +23,15 @@ export function useOffers({ initialData }: { initialData: FindOffersNormalizedPr
     const paramsObj = Object.fromEntries(searchParams.entries());
     const body = serializeQuery(paramsObj);
 
-    if (!body.date_from || !body.date_to) {
-      setIsDateFilled(false);
-      showMessage.info('Please select a date range');
+    if (!body.date_from || !body.date_to || !body.airport_code) {
+      setIsRequiresFilled(false);
+      showMessage.info('Please select a date range and an airport');
 
       setData([]);
       return;
     }
 
-    setIsDateFilled(true);
+    setIsRequiresFilled(true);
     setIsLoading(true);
     try {
       const response = await apiClient.post<FindOffersResponse>('/find_offers', body);
@@ -54,5 +56,5 @@ export function useOffers({ initialData }: { initialData: FindOffersNormalizedPr
     fetchOffers();
   }, [searchParams]);
 
-  return { data, isLoading, isDateFilled };
+  return { data, isLoading, isRequiresFilled };
 }

@@ -12,7 +12,7 @@ export default async function Home({ searchParams }: SearchParams) {
 
   let initialData;
 
-  if (body.date_from && body.date_to) {
+  if (body.date_from && body.date_to && body.airport_code) {
     try {
       const response = await apiServer.post<FindOffersResponse>('/find_offers', body);
 
@@ -20,7 +20,6 @@ export default async function Home({ searchParams }: SearchParams) {
       initialData = normalizeFindOffers(raw);
     } catch (error) {
       apiRedirect(error);
-      console.log({ error });
     }
   }
 

@@ -22,6 +22,10 @@ export const HeroBanner = () => {
       showMessage.error('Please select a date range');
       return;
     }
+    if (!paramsObj.airport_code) {
+      showMessage.error('Please select an airport');
+      return;
+    }
 
     handleFind({ path: '/search' });
   };

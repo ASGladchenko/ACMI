@@ -14,9 +14,7 @@ export const PaginatedSuggestionList = ({
   // isHasMore,
   initialData,
 }: PaginatedSuggestionListProps) => {
-  // TODO LOGIC WITH SEARCH PARAMS
-
-  const { data, isLoading, isDateFilled } = useOffers({ initialData });
+  const { data, isLoading, isRequiresFilled } = useOffers({ initialData });
 
   const isEmpty = data.length === 0;
 
@@ -29,6 +27,7 @@ export const PaginatedSuggestionList = ({
     >
       {!isEmpty &&
         data.map((item, index) => <SuggestionCard key={`${item.id}-${index}`} {...item} />)}
+
       {/* {isHasMore && (
         <Button
           onClick={onFetchMore}
@@ -39,17 +38,18 @@ export const PaginatedSuggestionList = ({
           Load more
         </Button>
       )} */}
+
       {isLoading && (
         <h1 className="text-blue-dark w-full text-center text-3xl font-bold">Loading...</h1>
       )}
 
-      {isEmpty && isDateFilled && !isLoading && (
+      {isEmpty && isRequiresFilled && !isLoading && (
         <h2 className="text-blue-dark w-full text-center text-2xl font-bold">No results found</h2>
       )}
 
-      {isEmpty && !isDateFilled && !isLoading && (
+      {isEmpty && !isRequiresFilled && !isLoading && (
         <h2 className="text-blue-dark w-full text-center text-2xl font-bold">
-          Please select a date range
+          Please select a date range, an airport
         </h2>
       )}
     </div>

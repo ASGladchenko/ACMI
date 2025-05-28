@@ -7,10 +7,11 @@ import { getStyles } from './style';
 
 export interface BurgerMenuProps {
   isOpen: boolean;
+  isProvider?: boolean;
   setIsOpen: (value: boolean) => void;
 }
 
-export const BurgerMenu = ({ isOpen, setIsOpen }: BurgerMenuProps) => {
+export const BurgerMenu = ({ isOpen, isProvider, setIsOpen }: BurgerMenuProps) => {
   const { menu } = getStyles(isOpen);
 
   return (
@@ -25,11 +26,15 @@ export const BurgerMenu = ({ isOpen, setIsOpen }: BurgerMenuProps) => {
             Home
           </ClientLink>
 
-          <ClientLink isDisabled href="/" onClick={() => setIsOpen(!isOpen)}>
+          <ClientLink
+            isDisabled={!isProvider}
+            href="/dashboard-provider"
+            onClick={() => setIsOpen(!isOpen)}
+          >
             Provider Dashboard
           </ClientLink>
 
-          <ClientLink isDisabled href="/" onClick={() => setIsOpen(!isOpen)}>
+          <ClientLink isDisabled href="/dashboard-customer" onClick={() => setIsOpen(!isOpen)}>
             Customer Dashboard
           </ClientLink>
 
