@@ -8,12 +8,12 @@ import { OfferItem, OfferTitle } from '../components';
 
 export interface OfferPageProps {
   params: { id: string };
-  searchParams: Record<string, string>;
+  searchParams: Record<string, string | string[] | undefined>;
 }
 
 export default async function OfferPage({ params, searchParams }: OfferPageProps) {
-  const { id } = params;
-  const queries = searchParams;
+  const { id } = await params;
+  const queries = await searchParams;
 
   const offerParams = serializeOfferId(id, queries);
 

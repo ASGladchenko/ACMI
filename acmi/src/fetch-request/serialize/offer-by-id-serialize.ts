@@ -9,7 +9,7 @@ export interface SerializeOfferIdParams {
 
 export const serializeOfferId = (
   id: string,
-  params: Record<string, string>
+  params: Record<string, string | string[] | undefined>
 ): SerializeOfferIdParams => {
   const dateFromISO = params.date_from
     ? new Date(Number(params.date_from)).toISOString().split('T')[0]
@@ -20,7 +20,7 @@ export const serializeOfferId = (
     : null;
 
   const airportCode = params[queryParams.opsFrom]
-    ? params[queryParams.opsFrom].split(',')[0]
+    ? (params[queryParams.opsFrom] as string).split(',')[0]
     : null;
 
   const offerId = Number.isNaN(Number(id)) ? null : Number(id);
