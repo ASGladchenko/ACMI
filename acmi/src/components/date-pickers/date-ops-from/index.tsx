@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { RemoveScroll } from 'react-remove-scroll';
 
-import { cn } from '@/utils';
+import { cn, toUTCDate, fixUTCDateForDatePicker } from '@/utils';
 
 import { CustomInput } from './custom-input';
 import { CustomHeaderDatePiker } from './custom-header';
@@ -41,7 +41,7 @@ export const DateOpsFrom = ({
   const onCloseCalendar = () => {
     setIsOpen(false);
 
-    onChange([startDate, endDate || startDate]);
+    onChange([toUTCDate(startDate), toUTCDate(endDate || startDate)]);
   };
 
   const onClear = () => {
@@ -49,8 +49,8 @@ export const DateOpsFrom = ({
   };
 
   useEffect(() => {
-    setStartDate(initialStart);
-    setEndDate(initialEnd);
+    setStartDate(fixUTCDateForDatePicker(initialStart));
+    setEndDate(fixUTCDateForDatePicker(initialEnd));
   }, [initialStart, initialEnd]);
 
   return (
