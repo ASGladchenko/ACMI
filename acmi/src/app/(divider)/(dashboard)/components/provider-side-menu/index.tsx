@@ -18,7 +18,7 @@ export const ProviderSideMenu = ({}) => {
   return (
     <div className={wrapper(isOpen)}>
       <button className={btnClose} onClick={() => setIsOpen(!isOpen)}>
-        <Cross className="hover:text-blue-deep h-4 w-4 cursor-pointer duration-200" />
+        <Cross className="text-gray-dark hover:text-blue-deep h-4 w-4 cursor-pointer duration-200" />
       </button>
 
       <button className={btnOpen(isOpen)} onClick={() => setIsOpen(!isOpen)}>

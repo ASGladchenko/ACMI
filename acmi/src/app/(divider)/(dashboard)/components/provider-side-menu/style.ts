@@ -2,7 +2,7 @@ import { cn } from '@/utils';
 
 const text = 'font-montserrat text-[25px] font-bold';
 const btnClass =
-  'font-montserrat text-md hover:text-blue-deep duration-200 cursor-pointer font-bold';
+  'font-montserrat text-md text-gray-dark hover:text-blue-deep duration-200 cursor-pointer font-bold';
 
 export const getStyles = () => ({
   wrapper: (isOpen: boolean) =>
@@ -20,7 +20,7 @@ export const getStyles = () => ({
   btnClose: 'min-[1280px]:hidden absolute duration-200 right-4 top-4',
   link: (isActive: boolean) =>
     cn(
-      'text-dark-gray hover:text-blue-deep pl-2 duration-200 capitalize w-full text-center min-[1280px]:text-left min-[1280px]:w-[unset]',
+      'text-gray-dark hover:text-blue-deep pl-2 duration-200 capitalize w-full text-center min-[1280px]:text-left min-[1280px]:w-[unset]',
       text,
       isActive && 'text-blue-deep'
     ),

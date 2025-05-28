@@ -1,16 +1,19 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image, { StaticImageData } from 'next/image';
 
 import { plain } from '@/assets/webp';
-import { useRouter } from 'next/navigation';
+import { useQueryStore } from '@/store';
+import { queryParams } from '@/constants';
 import { getIntlNumberFormat } from '@/utils';
 import { FindOffersNormalizedProps } from '@/types';
 
 import { Button } from '../button';
 
 import './styles.css';
+import { prepareQueryParams } from './helpers';
 
 export const SuggestionCard = ({
   id,
@@ -25,6 +28,11 @@ export const SuggestionCard = ({
   indicativePrice,
 }: FindOffersNormalizedProps) => {
   const router = useRouter();
+
+  const [from, to] = queryParams.dates.split(',');
+  const dateTo = useQueryStore((s) => s.getQuery(to));
+  const dateFrom = useQueryStore((s) => s.getQuery(from));
+  const opsFrom = useQueryStore((s) => s.getQuery(queryParams.opsFrom));
 
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
 
@@ -93,7 +101,15 @@ export const SuggestionCard = ({
             </span>
 
             <Button
-              onClick={() => router.push(`/offer/${id}`)}
+              onClick={() =>
+                router.push(
+                  `/offer/${id}${prepareQueryParams([
+                    { key: 'airport_code', value: opsFrom },
+                    { key: 'date_from', value: dateFrom },
+                    { key: 'date_to', value: dateTo },
+                  ])}`
+                )
+              }
               className="desktop:ml-0 ml-auto w-[150px]"
             >
               Proceed to offer
