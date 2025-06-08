@@ -10,6 +10,7 @@ export { PaginatedSuggestionList } from './paginated-suggestion-list';
 export { showMessage } from './toast';
 export { SuggestionCard } from './suggestion-card';
 
+export * from './badges';
 export * from './checkboxes';
 export * from './date-pickers';
 export * from './filters';
