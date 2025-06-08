@@ -1,0 +1,16 @@
+export const initialValues = {
+  msn: '',
+  reg: '',
+  mtow: '',
+  thrust: '',
+  isActive: false,
+  aircraftType: null,
+  etops: null,
+  ilsCategory: null,
+  noiseStage: null,
+  act: false,
+  ife: false,
+  isps: false,
+  galleys: false,
+  sharklets: false,
+};

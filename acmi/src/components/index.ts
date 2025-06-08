@@ -17,6 +17,7 @@ export * from './filters';
 export * from './inputs';
 export * from './links';
 export * from './modal';
+export * from './fields';
 export * from './pages';
 export * from './selects';
 export * from './switchers';

@@ -15,14 +15,6 @@ export default function ProviderPage() {
   const { isLoading: isLoadingNoise } = useNoiseStageDictionary();
   const { isLoading: isLoadingAirType } = useAircraftTypesDictionary();
 
-  const onSave = () => {
-    console.log('save');
-  };
-
-  const onDecline = () => {
-    console.log('decline');
-  };
-
   return (
     <section>
       <h1 className="font-montserrat text-blue-deep mb-9 text-center text-[25px] font-bold max-[768px]:text-[20px] max-[768px]:leading-[24px]">
@@ -33,9 +25,7 @@ export default function ProviderPage() {
         {Array.from({ length: 10 }).map((_, index) => (
           <FleetCard
             key={index}
-            onSave={onSave}
             id={index.toString()}
-            onDecline={onDecline}
             isLoading={isLoadingAirType || isLoadingETOPS || isLoadingILS || isLoadingNoise}
           />
         ))}
