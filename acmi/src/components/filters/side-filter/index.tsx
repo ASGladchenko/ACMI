@@ -15,6 +15,7 @@ import {
 } from '@/components';
 
 import { getStyles } from './styles';
+import { cn } from '@/utils';
 
 export interface SideFilterProps {
   className?: string;
@@ -23,13 +24,19 @@ export interface SideFilterProps {
 }
 
 export const SideFilter = ({ className, onFind, type = 'standard' }: SideFilterProps) => {
-  const isFixed = useScrollThreshold(300);
+  const isScrolled = useScrollThreshold(256);
 
-  const styles = getStyles({ isFixed, className, type });
+  const styles = getStyles({ className, type });
 
   return (
-    <>
-      <div className={styles[type] || ''}>
+    <div className={styles[type] || ''}>
+      <div
+        className={cn(
+          'flex w-full flex-wrap items-start gap-2',
+          isScrolled &&
+            'scroll-bar-mini sticky top-[76px] max-h-[calc(100dvh-100px)] shrink-0 overflow-y-auto'
+        )}
+      >
         <SelectAircraftTypes />
 
         <FilterLayout />
@@ -96,6 +103,6 @@ export const SideFilter = ({ className, onFind, type = 'standard' }: SideFilterP
 
         {type === 'portal' && <Button onClick={() => onFind && onFind()}>Find</Button>}
       </div>
-    </>
+    </div>
   );
 };

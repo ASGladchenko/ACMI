@@ -1,4 +1,4 @@
 export const regExp = {
-    digitsAndEmpty:/^\d*$/
-    
-}
+  digitsAndEmpty: /^\d*$/,
+  decimalOrEmpty: /^\d*[.,]?\d*$/,
+};

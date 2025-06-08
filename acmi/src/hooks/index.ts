@@ -1,12 +1,15 @@
 export { debounce } from './debounce';
+export { useAircraftTypesDictionary } from './useAircraftTypesDictionary';
 export { useAirportOptions } from './useAirPortsOptions';
 export { useDebouncedValue } from './useDebouncedValue';
 export { useDelay } from './useDelay';
+export { useETOPSDictionary } from './useETOPSDictionary';
 export { useFind } from './useFind';
+export { useILSCategoryDictionary } from './useILSCategoryDictionary';
+export { useNoiseStageDictionary } from './useNoiseStageDictionary';
 export { useOffers } from './useOffers';
 export { useOutsideClick } from './useOutsideClick';
 export { useScrollDirection } from './useScrollDirection';
 export { useScrollThreshold } from './useScrollThreshold';
 export { useUrlWithParams } from './useUrlWithParams';
 export { useWindowWidth } from './useWindowWidth';
-

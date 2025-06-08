@@ -9,8 +9,8 @@ import { Checkbox } from '.';
 interface SearchCheckboxProps {
   label: string;
   subLabel?: string;
-  className?: string;
   queryName: string;
+  className?: string;
 }
 
 export const SearchCheckbox = React.memo(({ queryName, ...props }: SearchCheckboxProps) => {

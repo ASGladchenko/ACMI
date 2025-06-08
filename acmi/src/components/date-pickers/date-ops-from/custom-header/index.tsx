@@ -4,7 +4,7 @@ import { getMonth, getYear, setMonth, format } from 'date-fns';
 import { ArrowDown } from '@/assets/svg';
 import { PickerSelect } from '@/components';
 
-import { month } from '../../mock';
+import { month, years } from '../../mock';
 
 export interface CustomHeaderDatePickerProps {
   date: Date;
@@ -16,10 +16,7 @@ export interface CustomHeaderDatePickerProps {
   changeMonth: (month: number) => void;
 }
 
-const years = Array.from({ length: 11 }, (_, i) => ({
-  text: String(getYear(new Date()) + i),
-  value: getYear(new Date()) + i,
-}));
+
 
 export const CustomHeaderDatePiker = ({
   date,

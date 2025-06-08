@@ -17,6 +17,7 @@ export default async function Home({ searchParams }: SearchParams) {
       const response = await apiServer.post<FindOffersResponse>('/find_offers', body);
 
       const raw = response?.data?.search_results || [];
+
       initialData = normalizeFindOffers(raw);
     } catch (error) {
       apiRedirect(error);

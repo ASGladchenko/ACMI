@@ -5,7 +5,7 @@ export interface OfferItemProps {
   value: string;
   className?: string;
 }
-const clText = 'font-montserrat text-md min-[968px]:text-[25px] font-bold';
+const clText = 'font-montserrat text-md min-[968px]:text-[18px] font-bold';
 
 export const OfferItem = ({ text, value, className }: OfferItemProps) => {
   const clWrapper = cn('flex justify-between gap-2 flex-wrap', className);

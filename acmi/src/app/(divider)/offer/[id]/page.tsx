@@ -34,17 +34,17 @@ export default async function OfferPage({ params, searchParams }: OfferPageProps
   const normalizedOffer = normalizeOfferData(offer);
 
   return (
-    <section className="min-h-[calc(100vh-360px)] min-[568px]:min-h-[calc(100dvh-312px)] min-[568px]:px-5 min-[568px]:py-8 min-[1024px]:min-h-[calc(100dvh-257px)] min-[1440px]:px-0">
+    <section className="desktop:px-10 min-h-[calc(100vh-360px)] min-[568px]:min-h-[calc(100dvh-312px)] min-[568px]:px-5 min-[568px]:py-4 min-[1024px]:min-h-[calc(100dvh-257px)]">
       {offer?.error_code && (
         <h3 className="text-blue-dark text-center text-3xl font-bold">{offer?.description}</h3>
       )}
 
       {offer && !offer.error_code && (
-        <div className="border-gray-light mx-auto flex max-w-[1360px] flex-col gap-9 px-2.5 py-5 shadow-xl min-[428px]:px-[30px] min-[568px]:rounded-[15px] min-[568px]:border">
-          <div className="flex flex-col gap-4 min-[968px]:gap-9">
+        <div className="border-gray-light mx-auto flex max-w-[1360px] flex-col gap-4 px-2.5 py-5 shadow-xl min-[428px]:px-[30px] min-[568px]:rounded-[15px] min-[568px]:border min-[1024px]:px-24">
+          <div className="flex flex-col gap-4 min-[968px]:gap-2">
             <OfferTitle title="Aircraft Specification:" />
 
-            <div className="grid grid-cols-1 gap-[10px_60px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-3 min-[1320px]:gap-[10px_40px]">
+            <div className="grid grid-cols-1 gap-[10px_60px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-3 min-[1320px]:gap-[0_100px]">
               <OfferItem text="Type:" value={normalizedOffer.aircraft.type} />
               <OfferItem text="MSN:" value={normalizedOffer.aircraft.msn} />
               <OfferItem text="Reg:" value={normalizedOffer.aircraft.reg} />
@@ -52,10 +52,14 @@ export default async function OfferPage({ params, searchParams }: OfferPageProps
               <OfferItem text="Age:" value={normalizedOffer.aircraft.age} />
             </div>
 
-            <div className="grid grid-cols-1 gap-[10px_60px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-3 min-[1320px]:gap-[10px_40px]">
+            <OfferItem
+              text="Base airport:"
+              className="justify-start"
+              value={normalizedOffer.aircraft.base_airport}
+            />
+            <div className="grid grid-cols-1 gap-[0_60px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-3 min-[1320px]:gap-[0_100px]">
               <OfferItem text="PAX:" value={normalizedOffer.aircraft.pax} />
               <OfferItem text="Layout:" value={normalizedOffer.aircraft.layout} />
-              <OfferItem text="Base airport:" value={normalizedOffer.aircraft.base_airport} />
               <OfferItem text="MTOW:" value={normalizedOffer.aircraft.mtow} />
               <OfferItem text="Thrust:" value={normalizedOffer.aircraft.thrust} />
               <OfferItem text="ETOPS:" value={normalizedOffer.aircraft.etops} />
@@ -70,10 +74,10 @@ export default async function OfferPage({ params, searchParams }: OfferPageProps
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 min-[968px]:gap-9">
+          <div className="flex flex-col gap-4 min-[968px]:gap-2">
             <OfferTitle title="Operator:" />
 
-            <div className="grid grid-cols-1 gap-[10px_60px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-3 min-[1320px]:gap-[10px_40px]">
+            <div className="grid grid-cols-1 gap-[10px_60px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-3 min-[1320px]:gap-[10px_100px]">
               <OfferItem text="Name:" value={normalizedOffer.operator.name} />
               <OfferItem text="AOC:" value={normalizedOffer.operator.aoc} />
               <OfferItem text="Callsign:" value={normalizedOffer.operator.callsign} />
@@ -92,22 +96,22 @@ export default async function OfferPage({ params, searchParams }: OfferPageProps
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 min-[968px]:gap-9">
+          <div className="flex flex-col gap-4 min-[968px]:gap-2">
             <OfferTitle title="Commercial terms:" />
 
-            <div className="grid grid-cols-1 gap-[10px_60px] min-[968px]:grid-cols-2 min-[1320px]:gap-[10px_40px]">
+            <div className="grid grid-cols-1 gap-[10px_60px] min-[968px]:grid-cols-2 min-[1320px]:gap-[10px_120px]">
               <OfferItem text="Dates:" value={normalizedOffer.commercial.dates} />
               <OfferItem text="Period:" value={normalizedOffer.commercial.period} />
             </div>
-            <div className="grid grid-cols-1 gap-[10px_60px] min-[968px]:grid-cols-2 min-[1320px]:gap-[10px_40px]">
+            <div className="grid grid-cols-1 gap-[10px_60px] min-[968px]:grid-cols-2 min-[1320px]:gap-[10px_120px]">
               <OfferItem text="GBH price:" value={normalizedOffer.commercial.bhPrice} />
               <OfferItem text="Minimum GBH:" value={normalizedOffer.commercial.minGBH} />
             </div>
 
-            <div className="grid grid-cols-1 gap-[10px_60px] min-[1320px]:grid-cols-2 min-[1320px]:gap-[10px_40px]">
+            <div className="grid grid-cols-1 gap-[10px_60px] min-[1320px]:grid-cols-2 min-[1320px]:gap-[10px_120px]">
               <div className="flex flex-col gap-2.5">
                 <OfferItem
-                  className="mb-2.5 min-[968px]:mb-[26px]"
+                  className="mb-2.5 min-[968px]:mb-3"
                   text="INDICATIVE ACMI PRICE:"
                   value={normalizedOffer.commercial.indicativePrice}
                 />
@@ -131,7 +135,7 @@ export default async function OfferPage({ params, searchParams }: OfferPageProps
               </div>
             </div>
 
-            <div className="flex flex-col justify-center gap-2.5 min-[568px]:flex-row min-[968px]:gap-30">
+            <div className="flex flex-col justify-center gap-2.5 pt-3 min-[568px]:flex-row min-[968px]:gap-30">
               <Button className="min-[568px]:max-w-max">Ask a question</Button>
               <Button className="min-[568px]:max-w-max">View the contract draft</Button>
             </div>

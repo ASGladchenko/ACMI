@@ -1,21 +1,19 @@
 export { Button } from './button';
-export { Checkbox } from './checkbox';
 export { Footer } from './footer';
 export { GeneralInfo } from './general-info';
 export { Header } from './header';
 export { HeroBanner } from './hero-banner';
 export { InfiniteScrollList } from './infinite-scroll-list';
-export { Input } from './input';
 export { Logo } from './logo';
 export { Modal } from './modal';
 export { PaginatedSuggestionList } from './paginated-suggestion-list';
-export { SearchCheckbox } from './checkbox/search-checkbox';
-export { SearchParamsInput } from './input/search-params-input';
 export { showMessage } from './toast';
 export { SuggestionCard } from './suggestion-card';
 
+export * from './checkboxes';
 export * from './date-pickers';
 export * from './filters';
+export * from './inputs';
 export * from './links';
 export * from './modal';
 export * from './pages';

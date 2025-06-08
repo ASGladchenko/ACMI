@@ -73,7 +73,9 @@ export function normalizeOfferData(data: OfferData) {
       dates: `${formatDate(data.date_from)} - ${formatDate(data.date_to)}`,
       period: `${data.period} day(s)`,
       bhPrice: data.bh_price ? `$${data.bh_price.toLocaleString()}` : 'N/A',
-      minGBH: data.min_guaranteed_bh ? data.min_guaranteed_bh.toLocaleString() : 'N/A',
+      minGBH: data.min_guaranteed_bh
+        ? (data.min_guaranteed_bh * data.period).toLocaleString()
+        : 'N/A',
       indicativePrice: data.indicative_price ? `$${data.indicative_price.toLocaleString()}` : 'N/A',
       offeredPositioning: data.offered_positioning,
       positioningPrice: data.positioning_price

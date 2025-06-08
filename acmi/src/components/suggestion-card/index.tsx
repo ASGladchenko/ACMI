@@ -17,14 +17,14 @@ import './styles.css';
 
 export const SuggestionCard = ({
   id,
-  msn,
+  // msn,
   dom,
   model,
   layout,
   bhPrice,
   provider,
   imageUrl,
-  registration,
+  // registration,
   indicativePrice,
 }: FindOffersNormalizedProps) => {
   const router = useRouter();
@@ -36,9 +36,14 @@ export const SuggestionCard = ({
 
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
 
+  const classLabel =
+    'text-[18px] leading-[30px] font-bold text-nowrap max-[768px]:text-[16px] max-[768px]:leading-[20px]';
+  const classValue =
+    'w-full text-right text-[16px] leading-[30px] max-[768px]:text-[14px] max-[768px]:leading-[20px]';
+
   return (
-    <div className="border-gray-light desktop:flex grid-card-layout desktop:pl-1 w-full items-center gap-[30px] rounded-[15px] border py-5 pr-4 pl-4 shadow-[0_4px_4px_0_#DDE7EE]">
-      <div className="card-img contain desktop:h-[210px] relative aspect-square h-[150px] w-full max-w-max overflow-hidden rounded-[12px_0_0_12px]">
+    <div className="border-gray-light flex w-full items-center rounded-[15px] border shadow-[0_4px_4px_0_#DDE7EE]">
+      <div className="card-img contain relative aspect-square h-[210px] w-full max-w-max overflow-hidden rounded-[12px_0_0_12px] max-[1024px]:h-40 max-[768px]:hidden">
         <Image
           fill
           src={src}
@@ -49,51 +54,58 @@ export const SuggestionCard = ({
         />
       </div>
 
-      <div className="text-gray-medium font-roboto desktop:flex contents w-full flex-col">
-        <span className="card-model text-blue-deep font-montserrat desktop:text-[25px] desktop:leading-[30px] text-xl font-bold">
-          {model}
-        </span>
-
-        <div className="card-provider desktop:flex-nowrap desktop:mb-5 flex flex-wrap items-center gap-1">
-          <span className="text-md desktop:text-[16px] desktop:leading-[30px]">provided by</span>
-          <span className="text-blue-deep font-montserrat desktop:text-[25px] desktop:leading-[30px] text-xl font-bold">
-            {provider}
+      <div className="text-gray-medium flex w-full flex-col flex-wrap p-5 max-[768px]:p-3">
+        <div className="mb-2 flex w-full flex-col">
+          <span className="card-model text-blue-deep font-montserrat desktop:text-[25px] desktop:leading-[30px] text-xl font-bold max-[768px]:text-[18px] max-[768px]:leading-[24px]">
+            {model}
           </span>
+
+          <div className="card-provider desktop:flex-nowrap desktop:mb-5 flex flex-wrap items-center gap-1">
+            <span className="text-md desktop:text-[16px] desktop:leading-[30px] max-[768px]:text-[14px] max-[768px]:leading-[20px]">
+              provided by
+            </span>
+            <span className="text-blue-deep font-montserrat desktop:text-[25px] desktop:leading-[30px] text-xl font-bold max-[768px]:text-[18px] max-[768px]:leading-[24px]">
+              {provider}
+            </span>
+          </div>
         </div>
 
-        <div className="desktop:flex contents">
-          <div className="card-info desktop:w-1/2 desktop:mr-[100px] flex w-full flex-col">
+        <div className="flex w-full justify-between gap-2.5 max-[768px]:flex-col">
+          <div className="flex w-full max-w-[320px] flex-col max-[1024px]:max-w-[300px] max-[768px]:max-w-full">
+            {/* <div className="flex">
+                <span className={classLabel}>MSN:</span>
+                <span className={classValue}>{msn}</span>
+              </div> */}
+            {/* <div className="flex">
+                <span className={classLabel}>Reg# :</span>
+                <span className={classValue}>{registration}</span>
+              </div> */}
             <div className="flex">
-              <span className="text-[18px] leading-[30px] font-bold text-nowrap">MSN:</span>
-              <span className="w-full text-right text-[16px] leading-[30px]">{msn}</span>
+              <span className={classLabel}>DOM</span>
+              <span className={classValue}>{new Date(dom).toLocaleDateString('en-US')}</span>
             </div>
             <div className="flex">
-              <span className="text-[18px] leading-[30px] font-bold text-nowrap">Reg# :</span>
-              <span className="w-full text-right text-[16px] leading-[30px]">{registration}</span>
+              <span className={classLabel}>Layout:</span>
+              <span className={classValue}>{layout}</span>
             </div>
+
             <div className="flex">
-              <span className="text-[18px] leading-[30px] font-bold text-nowrap">DOM</span>
-              <span className="w-full text-right text-[16px] leading-[30px]">
-                {new Date(dom).toLocaleDateString('en-US')}
-              </span>
-            </div>
-            <div className="flex">
-              <span className="text-[18px] leading-[30px] font-bold text-nowrap">Layout:</span>
-              <span className="w-full text-right text-[16px] leading-[30px]">{layout}</span>
-            </div>
-            <div className="flex">
-              <span className="text-[18px] leading-[30px] font-bold text-nowrap">BH Price:</span>
-              <span className="w-full text-right text-[18px] leading-[30px] font-bold text-nowrap">
+              <span className={classLabel}>BH Price:</span>
+              <span className={classValue}>
                 $ {getIntlNumberFormat({ value: Number(bhPrice) })}
               </span>
             </div>
-          </div>
 
-          <div className="card-price desktop:pt-0 desktop:w-1/2 desktop:gap-0 desktop:flex-col desktop:items-center flex w-full flex-wrap items-baseline gap-2 pt-[20px]">
-            <span className="text-blue-deep font-montserrat desktop:text-[25px] desktop:leading-[30px] text-xl font-bold">
+            <div className="flex">
+              <span className={classLabel}>MGBH:</span>
+              <span className={classValue}>??????????</span>
+            </div>
+          </div>
+          <div className="flex w-[280px] flex-col items-center justify-center gap-2 pr-10 max-[1024px]:pr-0 max-[768px]:w-full max-[768px]:flex-row max-[768px]:flex-wrap">
+            <span className="text-blue-deep font-montserrat desktop:text-[25px] desktop:leading-[30px] text-xl font-bold max-[768px]:text-[16px] max-[768px]:leading-[20px]">
               Indicative Price:
             </span>
-            <span className="text-blue-deep font-montserrat desktop:mb-2.5 desktop:text-[25px] desktop:leading-[30px] ml-auto text-xl font-bold text-nowrap min-[520px]:ml-0">
+            <span className="text-blue-deep font-montserrat desktop:mb-2.5 desktop:text-[25px] desktop:leading-[30px] ml-auto text-xl font-bold text-nowrap max-[768px]:text-[18px] max-[768px]:leading-[20px] min-[520px]:ml-0">
               $
               {getIntlNumberFormat({
                 value: Number(indicativePrice),
@@ -110,7 +122,7 @@ export const SuggestionCard = ({
                   ])}`
                 )
               }
-              className="desktop:ml-0 ml-auto w-[150px]"
+              className="w-[150px] max-[768px]:ml-auto"
             >
               Proceed to offer
             </Button>
