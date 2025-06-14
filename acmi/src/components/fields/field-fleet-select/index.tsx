@@ -53,8 +53,8 @@ export const FieldFleetSelect = ({
           <FleetSelect
             {...props}
             label={label}
-            error={error}
             filter={filter}
+            error={error}
             setFilter={setFilter}
             selectedOption={selectedOption}
             onChange={(option) => onChange(option.value as number)}

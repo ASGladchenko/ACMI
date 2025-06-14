@@ -13,8 +13,8 @@ interface FieldFleetLayoutBlockProps extends Omit<LayoutBlockProps, 'layout' | '
 export const FieldFleetLayoutBlock = (props: FieldFleetLayoutBlockProps) => {
   return (
     <Field name={props.name}>
-      {({ field: { value: values, ...fieldProps }, meta, form }: FieldProps) => {
-        const error = controlFormikError(meta, 'layout');
+      {({ field: { value: values, ...fieldProps }, form }: FieldProps) => {
+        const error = controlFormikError(form.getFieldMeta('layout'), 'layout');
 
         const setLayout = async ({ key, type, value }: SetLayOutProps) => {
           if (props.name) {

@@ -17,7 +17,7 @@ import {
   FieldFleetLayoutBlock,
 } from '@/components';
 
-import { getInitialValues, initialValuesMock } from './config';
+import { getInitialValues, validationSchema, initialValuesMock } from './config';
 
 interface FleetCardProps {
   id: string;
@@ -52,7 +52,6 @@ export const FleetCard = ({ isLoading, id }: FleetCardProps) => {
   };
 
   function onDecline(resetForm: () => void) {
-    console.log('Changes declined, resetting to initial state...');
     resetForm();
   }
 
@@ -61,7 +60,12 @@ export const FleetCard = ({ isLoading, id }: FleetCardProps) => {
   const miniBlockClass = cn('flex flex-col w-[calc((100%-16px)/3)]');
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit} validateOnMount>
+    <Formik
+      enableReinitialize
+      onSubmit={onSubmit}
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+    >
       {({ resetForm }) => {
         refResetForm.current = resetForm;
 

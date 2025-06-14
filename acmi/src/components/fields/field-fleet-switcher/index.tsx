@@ -4,6 +4,7 @@ import { Field, FieldProps } from 'formik';
 
 import { Switcher } from '@/components';
 import { SwitcherProps } from '@/components/switchers/switcher';
+import { controlFormikError } from '@/utils';
 
 interface FieldFleetSwitcherProps extends Omit<SwitcherProps, 'isActive' | 'onClick'> {
   name: string;
@@ -13,7 +14,9 @@ interface FieldFleetSwitcherProps extends Omit<SwitcherProps, 'isActive' | 'onCl
 export const FieldFleetSwitcher = (props: FieldFleetSwitcherProps) => {
   return (
     <Field name={props.name}>
-      {({ field: { value, ...fieldProps }, form }: FieldProps) => {
+      {({ field: { value, ...fieldProps }, meta, form }: FieldProps) => {
+        const error = controlFormikError(meta, props.name);
+
         const onClick = async (isActive: boolean) => {
           if (props.name) {
             await form.setFieldValue(props.name, isActive);
@@ -24,6 +27,7 @@ export const FieldFleetSwitcher = (props: FieldFleetSwitcherProps) => {
           <Switcher
             {...fieldProps}
             {...props}
+            error={error}
             isActive={value}
             onClick={props.disabled ? undefined : onClick}
           />
