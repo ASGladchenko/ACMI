@@ -4,6 +4,7 @@ export { GeneralInfo } from './general-info';
 export { Header } from './header';
 export { HeroBanner } from './hero-banner';
 export { InfiniteScrollList } from './infinite-scroll-list';
+export { LayoutBlock } from './layout-block';
 export { Logo } from './logo';
 export { Modal } from './modal';
 export { PaginatedSuggestionList } from './paginated-suggestion-list';

@@ -3,7 +3,7 @@ import { cn } from '@/utils';
 export interface SwitcherProps {
   isActive: boolean;
   disabled?: boolean;
-  onClick: (isActive: boolean) => void;
+  onClick?: (isActive: boolean) => void;
 }
 
 export const Switcher = ({ isActive, disabled, onClick }: SwitcherProps) => {
@@ -24,7 +24,7 @@ export const Switcher = ({ isActive, disabled, onClick }: SwitcherProps) => {
   const handleClick = () => {
     if (disabled) return;
 
-    onClick(!isActive);
+    onClick?.(!isActive);
   };
   return (
     <div onClick={handleClick} className={switcherClass}>

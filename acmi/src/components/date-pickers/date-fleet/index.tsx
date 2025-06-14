@@ -10,6 +10,7 @@ import { FleetDateInput } from './input-fleet';
 import { FleetDatePickerHeader } from './fleet-date-picker-header';
 
 export interface FleetDatePickerProps {
+  label: string;
   maxDate?: Date;
   minDate?: Date;
   error?: string;
@@ -22,6 +23,7 @@ export interface FleetDatePickerProps {
 
 export const FleetDatePicker = ({
   error,
+  label,
   portalId,
   onChange,
   className,
@@ -60,10 +62,8 @@ export const FleetDatePicker = ({
           onChange={handleChange}
           onCalendarClose={onCloseCalendar}
           onCalendarOpen={() => setIsOpen(true)}
-          customInput={
-            <FleetDateInput error={error} label="Manufactured:" isDisabled={isDisabled} />
-          }
-          renderCustomHeader={({ ...props }) => (
+          customInput={<FleetDateInput error={error} label={label} isDisabled={isDisabled} />}
+          renderCustomHeader={(props) => (
             <FleetDatePickerHeader minDate={minDate} maxDate={maxDate} {...props} />
           )}
         />

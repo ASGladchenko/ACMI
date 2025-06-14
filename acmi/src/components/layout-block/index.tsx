@@ -1,13 +1,10 @@
+'use client';
+
 import { cn } from '@/utils';
 import { regExp } from '@/constants';
+import { LayOutItem } from '@/types';
 
 import { layoutBlockMock } from './mock';
-import { getSummarySeats } from './helpers';
-
-export interface LayOutItem {
-  seats: string;
-  pitch: string;
-}
 
 export interface SetLayOutProps {
   key: string;
@@ -17,12 +14,21 @@ export interface SetLayOutProps {
 
 export interface LayoutBlockProps {
   id: string;
+  error?: string;
   isDisabled?: boolean;
+  layoutSummary?: number;
   layout?: Record<string, LayOutItem>;
   setLayout: ({ key, type, value }: SetLayOutProps) => void;
 }
 
-export const LayoutBlock = ({ id, setLayout, layout = {}, isDisabled }: LayoutBlockProps) => {
+export const LayoutBlock = ({
+  id,
+  error,
+  setLayout,
+  isDisabled,
+  layout = {},
+  layoutSummary,
+}: LayoutBlockProps) => {
   const inputLabelClass = cn(
     'flex items-baseline gap-2 max-w-30 max-[568px]:w-full max-[568px]:max-w-[calc((100%-16px)/2)]',
     isDisabled && 'cursor-default',
@@ -44,9 +50,12 @@ export const LayoutBlock = ({ id, setLayout, layout = {}, isDisabled }: LayoutBl
 
   return (
     <div>
-      <p className="font-roboto text-gray-dark text-[18px] font-bold">
-        Layout: {getSummarySeats(layout)}
+      <p
+        className={cn('font-roboto text-gray-dark text-[18px] font-bold', error && 'text-rose-500')}
+      >
+        Layout: {layoutSummary}
       </p>
+
       <div className="flex flex-col gap-2 px-2 py-2">
         {layoutBlockMock.map((item, idx) => (
           <div

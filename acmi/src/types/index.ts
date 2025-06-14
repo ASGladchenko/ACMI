@@ -9,3 +9,8 @@ export type SearchParams<T = unknown> = {
 export * from './find-offers';
 
 export type TypeFleet = 'aircraftTypes' | 'etops' | 'ilsCategory' | 'noiseStage';
+
+export interface LayOutItem {
+  seats: string;
+  pitch: string;
+}
