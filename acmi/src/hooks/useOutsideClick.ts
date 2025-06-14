@@ -5,21 +5,19 @@ type OutsideClickRef = RefObject<HTMLElement | null> | RefObject<HTMLElement | n
 export const useOutsideClick = (callback: () => void, refs: OutsideClickRef) => {
   const refArray = Array.isArray(refs) ? refs : [refs];
 
-  const handleClick = (e: MouseEvent) => {
-    const isOutside =
-      refs &&
-      refArray.every((ref) => ref && ref.current && !ref.current.contains(e.target as Node));
-
-    if (isOutside) {
-      callback();
-    }
-  };
-
   useEffect(() => {
-    document.addEventListener('click', handleClick);
-
-    return () => {
-      document.removeEventListener('click', handleClick);
+    const handler = (e: MouseEvent) => {
+      const target = e.target as Node;
+      const activeRefs = refArray.filter((ref) => ref?.current);
+      const isClickInside = activeRefs.some((ref) => ref.current!.contains(target));
+      if (!isClickInside) {
+        callback();
+      }
     };
-  });
+
+    document.addEventListener('mousedown', handler);
+    return () => {
+      document.removeEventListener('mousedown', handler);
+    };
+  }, [callback, ...refArray.map((r) => r?.current)]);
 };

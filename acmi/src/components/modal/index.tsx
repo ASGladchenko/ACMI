@@ -7,14 +7,20 @@ import { RemoveScroll } from 'react-remove-scroll';
 import { ChildrenProps } from '@/types';
 
 import { ModalProps } from './types';
+import { cn } from '@/utils';
 
-export const Modal = ({ isOpen, onClose, children }: ChildrenProps<ModalProps>) => {
+export const Modal = ({ isOpen, onClose, children, className }: ChildrenProps<ModalProps>) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
     ReactModal.setAppElement('body');
   }, []);
+
+  const modalClass = cn(
+    'absolute top-1/2 left-1/2 max-h-[calc(100dvh-40px)] max-w-[calc(100dvw-20px)] -translate-x-1/2 -translate-y-1/2 overflow-auto outline-none',
+    className
+  );
 
   if (!isClient) return null;
 
@@ -23,8 +29,8 @@ export const Modal = ({ isOpen, onClose, children }: ChildrenProps<ModalProps>) 
       <ReactModal
         isOpen={isOpen}
         ariaHideApp={false}
+        className={modalClass}
         onRequestClose={onClose}
-        className="absolute top-1/2 left-1/2 max-h-[calc(100dvh-40px)] max-w-[calc(100dvw-20px)] -translate-x-1/2 -translate-y-1/2 overflow-auto outline-none"
         overlayClassName="fixed inset-0 bg-black-10 z-[1000] cursor-pointer"
       >
         {children}

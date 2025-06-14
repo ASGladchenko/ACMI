@@ -1,4 +1,5 @@
 import { forwardRef, InputHTMLAttributes } from 'react';
+import { format } from 'date-fns';
 
 import { cn } from '@/utils';
 import { Cross } from '@/assets/svg';
@@ -6,14 +7,15 @@ import { Cross } from '@/assets/svg';
 export interface CustomInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   label: string;
   type?: string;
-  value?: string;
   className?: string;
   onClear: () => void;
+  endDate?: Date | null;
+  startDate?: Date | null;
   onChange?: (value: string) => void;
 }
 
 export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
-  ({ label, value = '', className, onChange, onClear, ...props }, ref) => {
+  ({ label, startDate, endDate, className, onChange, onClear, ...props }, ref) => {
     const wrapper = cn(
       'bg-white flex items-center gap-2 text-[16px] rounded-xl border-[1px] border-blue-dark leading-[19px] w-full px-3 py-2.5 cursor-pointer',
       className
@@ -29,8 +31,9 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
         onChange(value);
       }
     };
-
-    const [start, end] = value.split('-');
+    const start = startDate ? format(startDate, 'dd/MM/yyyy') : '';
+    const end = endDate ? format(endDate, 'dd/MM/yyyy') : '';
+    const value = `${start} - ${end}`;
 
     const handleClear = (e: React.MouseEvent) => {
       if (onChange) {

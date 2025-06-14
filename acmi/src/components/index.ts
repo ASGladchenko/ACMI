@@ -10,6 +10,7 @@ export { Modal } from './modal';
 export { PaginatedSuggestionList } from './paginated-suggestion-list';
 export { showMessage } from './toast';
 export { SuggestionCard } from './suggestion-card';
+export { TextArea } from './text-area';
 
 export * from './badges';
 export * from './checkboxes';
@@ -21,4 +22,5 @@ export * from './modal';
 export * from './fields';
 export * from './pages';
 export * from './selects';
+export * from './specification';
 export * from './switchers';
