@@ -4,6 +4,7 @@ import { cn } from '@/utils';
 import { useOffers } from '@/hooks';
 import { SuggestionCard } from '@/components';
 import { FindOffersNormalizedProps } from '@/types';
+// import { normalizeFindOffers } from '@/fetch-request';
 
 export interface PaginatedSuggestionListProps {
   // isHasMore: boolean;
@@ -18,6 +19,22 @@ export const PaginatedSuggestionList = ({
 
   const isEmpty = data.length === 0;
 
+  // const r = {
+  //   offer_id: 15,
+  //   aircraft_type_long: 'Airbus A320',
+  //   icao_type: 'A320',
+  //   provider_name: 'Go2Sky',
+  //   msn: '4247',
+  //   reg: 'LZ-FSA',
+  //   dom: '2010-06-06T00:00:00Z',
+  //   layout: '138Y+12J',
+  //   bh_price: 1950,
+  //   indicative_price: 109200,
+  //   mgbh: 56,
+  // };
+
+  // const c = normalizeFindOffers([r]);
+
   return (
     <div
       className={cn(
@@ -25,6 +42,7 @@ export const PaginatedSuggestionList = ({
         isEmpty && 'pt-[160px]'
       )}
     >
+      {/* <SuggestionCard {...c[0]} /> */}
 
       {!isEmpty &&
         data.map((item, index) => {

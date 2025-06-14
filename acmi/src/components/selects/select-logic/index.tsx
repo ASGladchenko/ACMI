@@ -22,7 +22,9 @@ export const SelectLogic = ({
 
   const [isOpen, setIsOpen] = useState(false);
 
-  useOutsideClick(() => setIsOpen(false), [wrapperRef, containerRef]);
+  useOutsideClick(() => {
+    setIsOpen(false);
+  }, [wrapperRef, containerRef]);
 
   const wrapperClass = cn('w-full relative', className);
 

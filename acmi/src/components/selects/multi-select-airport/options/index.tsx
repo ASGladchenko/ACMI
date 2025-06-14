@@ -22,8 +22,6 @@ export const Options = ({
   selectedOption,
   debouncedFilter,
 }: OptionsProps) => {
-  console.log({ options });
-
   const onHandleChange = (option: ISelectOption) => {
     onChange(option);
   };
@@ -34,7 +32,6 @@ export const Options = ({
   );
 
   const filteredOptions = options.filter((option) => {
-    console.log({ option });
     return !selectedOption.some((selected) => selected.text === option.text);
   });
 

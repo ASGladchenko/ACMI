@@ -33,9 +33,7 @@ export const RFQBlock = ({
   estimatedBH,
   airportFrom,
   additionalRequest,
-  ...props
 }: RFQBlockProps) => {
-  console.log({ isEditing, props });
   const [airportTo1, setAirportTo1] = useState<string[]>([]);
 
   const [date, setDate] = useState<[Date | null, Date | null]>([
@@ -108,10 +106,10 @@ export const RFQBlock = ({
         {isEditing && (
           <>
             <DateOpsFrom
+              onChange={setDate}
               initialEnd={date[1]}
               initialStart={date[0]}
               label="Dates (inclusive):"
-              onChange={(dates) => setDate(dates)}
             />
 
             <OfferItem

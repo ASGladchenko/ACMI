@@ -1,4 +1,8 @@
-import { NormalizedOfferDataProvider, NormalizedOfferDataRFQ } from '@/types';
+import {
+  NormalizedOfferDataRFQ,
+  NormalizedOfferDataAircraft,
+  NormalizedOfferDataProvider,
+} from '@/types';
 
 export const mockProviderData: NormalizedOfferDataProvider = {
   name: 'SkyWings Aviation',
@@ -40,4 +44,26 @@ export const mockOfferTermsData = {
   totalPrice: 100,
   responseAdditionalRequest:
     'a sdfjh asdj asdjf asdjf lkasdj faksdjf asdf asdklf asdf asdklf asdjf kasdjf sdfj sadlfk sasdlfk asdfas flasjdf lkas jdkfj asdfj asldfj aslkdfklasdjfaskld',
+};
+
+export const mockAircraft: NormalizedOfferDataAircraft = {
+  msn: '', // не указано в таблице
+  reg: '', // не указано в таблице
+  age: '10 years',
+  pax: '186',
+  act: 'yes',
+  ils: 'Cat III',
+  ife: 'yes',
+  type: 'Boeing 737-800',
+  mtow: '70,530 kg',
+  isps: 'yes',
+  wifi: 'yes',
+  etops: '120',
+  noise: 'Stage 4',
+  layout: '174 Y + 8 J',
+  thrust: '110 kn',
+  wingtips: 'yes',
+  manufactured: '', // не указано
+  base_airport: 'European region',
+  galley_ovens: 'yes',
 };

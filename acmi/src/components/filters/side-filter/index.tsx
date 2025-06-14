@@ -24,7 +24,7 @@ export interface SideFilterProps {
 }
 
 export const SideFilter = ({ className, onFind, type = 'standard' }: SideFilterProps) => {
-  const isScrolled = useScrollThreshold(286);
+  const isScrolled = useScrollThreshold(320);
 
   const styles = getStyles({ className, type });
 

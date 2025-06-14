@@ -8,7 +8,6 @@ export { Logo } from './logo';
 export { Modal } from './modal';
 export { PaginatedSuggestionList } from './paginated-suggestion-list';
 export { showMessage } from './toast';
-export { Specification } from './specification';
 export { SuggestionCard } from './suggestion-card';
 export { TextArea } from './text-area';
 
@@ -21,4 +20,5 @@ export * from './links';
 export * from './modal';
 export * from './pages';
 export * from './selects';
+export * from './specification';
 export * from './switchers';
