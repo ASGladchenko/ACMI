@@ -100,3 +100,12 @@ body {
 .scroll-bar-mini.blue::-webkit-scrollbar-thumb {
   background-color: var(--blue-dark);
 }
+
+.scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}

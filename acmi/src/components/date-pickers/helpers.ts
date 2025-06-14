@@ -1,4 +1,12 @@
 import { getYear } from 'date-fns';
+interface GetVisibleMonthsProps {
+  minYear: number;
+  maxYear: number;
+  minMonth: number;
+  maxMonth: number;
+  currentYear: number;
+  months: { text: string; value: number }[];
+}
 
 export const getYearOptionsFromRange = (
   minDate: Date,
@@ -15,4 +23,26 @@ export const getYearOptionsFromRange = (
       value: year,
     };
   });
+};
+
+export const getVisibleMonths = ({
+  months,
+  minYear,
+  maxYear,
+  minMonth,
+  maxMonth,
+  currentYear,
+}: GetVisibleMonthsProps) => {
+  let start = 0;
+  let end = months.length;
+
+  if (currentYear === minYear) {
+    start = minMonth;
+  }
+
+  if (currentYear === maxYear) {
+    end = maxMonth + 1;
+  }
+
+  return months.slice(start, end);
 };

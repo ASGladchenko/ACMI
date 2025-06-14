@@ -3,8 +3,8 @@ import { getYear, getMonth } from 'date-fns';
 import { ArrowDown } from '@/assets/svg';
 import { PickerSelect } from '@/components/selects';
 
-import { month } from '../../mock';
-import { getYearOptionsFromRange } from '../../helpers';
+import { months } from '../../mock';
+import { getVisibleMonths, getYearOptionsFromRange } from '../../helpers';
 
 interface FleetDatePickerHeaderProps {
   date: Date;
@@ -39,6 +39,7 @@ export const FleetDatePickerHeader = ({
   const years = getYearOptionsFromRange(minDate, maxDate);
 
   const isPrevDisabled = currentMonth === minMonth && currentYear === minYear;
+
   const isNextDisabled = currentMonth === maxMonth && currentYear === maxYear;
 
   return (
@@ -52,9 +53,16 @@ export const FleetDatePickerHeader = ({
       </button>
 
       <PickerSelect
-        options={month}
+        options={getVisibleMonths({
+          months,
+          minYear,
+          maxYear,
+          minMonth,
+          maxMonth,
+          currentYear,
+        })}
         className="mr-auto"
-        selected={month.find((m) => m.value === currentMonth)!}
+        selected={months.find((m) => m.value === currentMonth)!}
         onChange={(option) => changeMonth(option!.value as number)}
       />
 

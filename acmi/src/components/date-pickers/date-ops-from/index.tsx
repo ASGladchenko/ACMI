@@ -13,6 +13,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './style.css';
 
 export interface DateOpsFromProps {
+  label?: string;
+  minDate?: Date;
+  maxDate?: Date;
   portalId?: string;
   className?: string;
   initialEnd: Date | null;
@@ -20,12 +23,18 @@ export interface DateOpsFromProps {
   onChange: (dates: [Date | null, Date | null]) => void;
 }
 
+const initialMaxDate = new Date();
+initialMaxDate.setFullYear(initialMaxDate.getFullYear() + 10);
+
 export const DateOpsFrom = ({
   portalId,
   onChange,
   className,
+  label = 'Date',
   initialEnd = null,
   initialStart = null,
+  minDate = new Date(),
+  maxDate = initialMaxDate,
 }: DateOpsFromProps) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
@@ -61,16 +70,19 @@ export const DateOpsFrom = ({
           selectsRange
           monthsShown={2}
           endDate={endDate}
-          startDate={startDate}
+          minDate={minDate}
+          maxDate={maxDate}
           portalId={portalId}
-          minDate={new Date()}
-          calendarStartDay={1}
+          startDate={startDate}
+          calendarStartDay={0}
           dateFormat="dd/MM/yyyy"
           onChange={onHandleChange}
           onCalendarClose={onCloseCalendar}
           onCalendarOpen={() => setIsOpen(true)}
-          renderCustomHeader={({ ...props }) => <CustomHeaderDatePiker {...props} />}
-          customInput={<CustomInput label="Date" placeholder="from - to " onClear={onClear} />}
+          renderCustomHeader={({ ...props }) => (
+            <CustomHeaderDatePiker minDate={minDate} maxDate={maxDate} {...props} />
+          )}
+          customInput={<CustomInput label={label} placeholder="from - to " onClear={onClear} />}
         />
       </RemoveScroll>
     </div>

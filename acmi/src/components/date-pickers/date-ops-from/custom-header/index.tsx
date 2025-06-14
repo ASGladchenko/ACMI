@@ -1,13 +1,16 @@
 import { enGB } from 'date-fns/locale';
-import { getMonth, getYear, setMonth, format } from 'date-fns';
+import { format, getYear, getMonth, setMonth } from 'date-fns';
 
 import { ArrowDown } from '@/assets/svg';
 import { PickerSelect } from '@/components';
 
-import { month, years } from '../../mock';
+import { months } from '../../mock';
+import { getVisibleMonths, getYearOptionsFromRange } from '../../helpers';
 
 export interface CustomHeaderDatePickerProps {
   date: Date;
+  minDate: Date;
+  maxDate: Date;
   monthDate: Date;
   customHeaderCount: number;
   decreaseMonth: () => void;
@@ -16,24 +19,30 @@ export interface CustomHeaderDatePickerProps {
   changeMonth: (month: number) => void;
 }
 
-
-
 export const CustomHeaderDatePiker = ({
   date,
   monthDate,
+  minDate,
+  maxDate,
   changeYear,
   changeMonth,
   decreaseMonth,
   increaseMonth,
   customHeaderCount,
 }: CustomHeaderDatePickerProps) => {
-  const currentMonth = getMonth(monthDate);
+  const minMonth = getMonth(minDate);
+  const maxMonth = getMonth(maxDate);
+
+  const minYear = getYear(minDate);
+  const maxYear = getYear(maxDate);
 
   const currentYear = getYear(date);
-  const monthNow = getMonth(new Date());
+  const currentMonth = getMonth(monthDate);
 
-  const isPrevDisabled = currentMonth === monthNow && currentYear === getYear(new Date());
-  const isNextDisabled = currentMonth === 11 && years.at(-1)!.value === currentYear;
+  const years = getYearOptionsFromRange(minDate, maxDate, true);
+
+  const isPrevDisabled = currentMonth <= minMonth && currentYear <= minYear;
+  const isNextDisabled = currentMonth >= maxMonth && currentYear >= maxYear;
 
   const monthName = format(setMonth(new Date(), currentMonth), 'MMMM', { locale: enGB });
 
@@ -51,9 +60,16 @@ export const CustomHeaderDatePiker = ({
 
       {!Boolean(customHeaderCount) && (
         <PickerSelect
-          options={month}
+          options={getVisibleMonths({
+            months,
+            minYear,
+            maxYear,
+            minMonth,
+            maxMonth,
+            currentYear,
+          })}
           className="mr-auto"
-          selected={month.find((m) => m.value === currentMonth)!}
+          selected={months.find((m) => m.value === currentMonth)!}
           onChange={(option) => changeMonth(option!.value as number)}
         />
       )}

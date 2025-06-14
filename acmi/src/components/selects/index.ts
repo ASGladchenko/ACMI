@@ -4,6 +4,7 @@ export { FleetETOPSSelect } from './fleet-etops-select';
 export { FleetIlsSelect } from './fleet-ils-select';
 export { FleetNoiseSelect } from './fleet-noise-select';
 export { FleetSelect } from './fleet-select';
+export { MultiSelectAirport } from './multi-select-airport';
 export { MultiSelectClient } from './multi-select-client';
 export { PickerSelect } from './picker-select';
 export { SearchMultiSelect } from './multi-select-client/search-multi-select';

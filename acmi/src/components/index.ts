@@ -8,7 +8,9 @@ export { Logo } from './logo';
 export { Modal } from './modal';
 export { PaginatedSuggestionList } from './paginated-suggestion-list';
 export { showMessage } from './toast';
+export { Specification } from './specification';
 export { SuggestionCard } from './suggestion-card';
+export { TextArea } from './text-area';
 
 export * from './badges';
 export * from './checkboxes';

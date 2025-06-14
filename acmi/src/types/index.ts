@@ -7,3 +7,4 @@ export type SearchParams<T = unknown> = {
 } & T;
 
 export * from './find-offers';
+export * from './specification';
