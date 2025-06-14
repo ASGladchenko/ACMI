@@ -4,8 +4,8 @@ import { useRef, useState } from 'react';
 import { Form, Formik } from 'formik';
 
 import { cn } from '@/utils';
-import { useOutsideClick } from '@/hooks';
 import { Edit, Save, Cross } from '@/assets/svg';
+import { useOutsideDatePickerClick } from '@/hooks';
 import {
   Button,
   FieldFleetInput,
@@ -32,7 +32,7 @@ export const FleetCard = ({ isLoading, id }: FleetCardProps) => {
 
   const [isEdited, setIsEdited] = useState(false);
 
-  useOutsideClick(() => {
+  useOutsideDatePickerClick(() => {
     if (refResetForm.current && isEdited) {
       onDecline(refResetForm.current);
       setIsEdited(false);

@@ -8,7 +8,7 @@ export { useFind } from './useFind';
 export { useILSCategoryDictionary } from './useILSCategoryDictionary';
 export { useNoiseStageDictionary } from './useNoiseStageDictionary';
 export { useOffers } from './useOffers';
-export { useOutsideClick } from './useOutsideClick';
+export { useOutsideClick, useOutsideDatePickerClick } from './useOutsideClick';
 export { useScrollDirection } from './useScrollDirection';
 export { useScrollThreshold } from './useScrollThreshold';
 export { useUrlWithParams } from './useUrlWithParams';
