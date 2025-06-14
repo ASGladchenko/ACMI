@@ -14,3 +14,6 @@ export interface LayOutItem {
   seats: string;
   pitch: string;
 }
+
+export * from './find-offers';
+export * from './specification';
