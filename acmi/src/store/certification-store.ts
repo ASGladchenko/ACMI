@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface CertificationType {
+export interface CertificationType {
   id: number;
   certification: string;
 }

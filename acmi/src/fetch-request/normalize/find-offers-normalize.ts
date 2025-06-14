@@ -3,15 +3,13 @@ const baseImgUrl = process.env.NEXT_PUBLIC_IMG_URL;
 
 export const normalizeFindOffers = (data: FindOffersArray[]): FindOffersNormalizedProps[] => {
   return data.map((offer) => ({
-    msn: offer.msn,
-    dom: offer.dom,
     id: offer.offer_id,
+    engine: offer.engine,
     layout: offer.layout,
-    bhPrice: offer.bh_price,
-    registration: offer.reg,
-    provider: offer.provider_name,
+    region: offer.region,
     model: offer.aircraft_type_long,
-    indicativePrice: offer.indicative_price,
+    age: offer.age ? Number(offer.age) : 0,
+    mtow: offer.mtow ? Number(offer.mtow) : 0,
     imageUrl: `${baseImgUrl}${offer.icao_type}.svg`,
   }));
 };

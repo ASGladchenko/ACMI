@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface AirCraftTypes {
+export interface AirCraftTypes {
   aircraft_family: string;
   engine_count: string;
   engine_type: string;

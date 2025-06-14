@@ -36,7 +36,6 @@ apiServer.interceptors.response.use(
     if (error.response?.status === 401) {
       return Promise.reject(new Error('Unauthorized'));
     }
-
     return Promise.reject(error);
   }
 );

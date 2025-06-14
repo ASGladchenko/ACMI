@@ -1,15 +1,15 @@
 export interface FindOffersArray {
   aircraft_type_long: string;
-  bh_price: string;
-  dom: string;
   image: string;
-  icao_type: string;
-  indicative_price: string;
   layout: string;
-  msn: string;
   offer_id: string;
-  provider_name: string;
-  reg: string;
+  icao_type: string;
+
+  //TODO CHECK When api will be ready
+  age: number;
+  mtow: number;
+  engine: string;
+  region: string;
 }
 
 export interface FindOffersResponse {
@@ -18,13 +18,11 @@ export interface FindOffersResponse {
 
 export interface FindOffersNormalizedProps {
   id: string;
-  msn: string;
-  dom: string;
+  age: number;
+  mtow: number;
   model: string;
+  engine: string;
   layout: string;
-  bhPrice: string;
-  provider: string;
+  region: string;
   imageUrl: string;
-  registration: string;
-  indicativePrice: string;
 }

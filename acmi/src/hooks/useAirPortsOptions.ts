@@ -48,7 +48,7 @@ export function useAirportOptions(filter: string, delay = 500) {
     if (debouncedFilter.length < 3) return;
 
     fetchOptions(debouncedFilter);
-  }, [debouncedFilter, filter]);
+  }, [debouncedFilter]);
 
   return { options, loading, debouncedFilter };
 }

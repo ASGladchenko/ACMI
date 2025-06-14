@@ -5,21 +5,44 @@ type OutsideClickRef = RefObject<HTMLElement | null> | RefObject<HTMLElement | n
 export const useOutsideClick = (callback: () => void, refs: OutsideClickRef) => {
   const refArray = Array.isArray(refs) ? refs : [refs];
 
-  const handleClick = (e: MouseEvent) => {
-    const isOutside =
-      refs &&
-      refArray.every((ref) => ref && ref.current && !ref.current.contains(e.target as Node));
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      const target = e.target as Node;
+      const activeRefs = refArray.filter((ref) => ref?.current);
+      const isClickInside = activeRefs.some((ref) => ref.current!.contains(target));
+      if (!isClickInside) {
+        callback();
+      }
+    };
 
-    if (isOutside) {
-      callback();
-    }
-  };
+    document.addEventListener('mousedown', handler);
+    return () => {
+      document.removeEventListener('mousedown', handler);
+    };
+  }, [callback, ...refArray.map((r) => r?.current)]);
+};
+
+export const useOutsideDatePickerClick = (callback: () => void, refs: OutsideClickRef) => {
+  const refArray = Array.isArray(refs) ? refs : [refs];
 
   useEffect(() => {
-    document.addEventListener('click', handleClick);
+    const handler = (e: MouseEvent) => {
+      const target = e.target as Element;
+      const activeRefs = refArray.filter((ref) => ref?.current);
+      const isClickInside = activeRefs.some((ref) => ref.current!.contains(target));
 
-    return () => {
-      document.removeEventListener('click', handleClick);
+      if (target.closest('.react-datepicker') || target.closest('.react-datepicker__portal')) {
+        return;
+      }
+
+      if (!isClickInside) {
+        callback();
+      }
     };
-  });
+
+    document.addEventListener('mousedown', handler);
+    return () => {
+      document.removeEventListener('mousedown', handler);
+    };
+  }, [callback, ...refArray.map((r) => r?.current)]);
 };

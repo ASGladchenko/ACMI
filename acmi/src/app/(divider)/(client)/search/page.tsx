@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
 
-import { apiRedirect } from '@/utils';
+// import { apiRedirect } from '@/utils';
 import { PaginatedSuggestionList } from '@/components';
 import { FindOffersResponse, SearchParams } from '@/types';
 import { apiServer, normalizeFindOffers, serializeQuery } from '@/fetch-request';
@@ -17,9 +17,10 @@ export default async function Home({ searchParams }: SearchParams) {
       const response = await apiServer.post<FindOffersResponse>('/find_offers', body);
 
       const raw = response?.data?.search_results || [];
+
       initialData = normalizeFindOffers(raw);
-    } catch (error) {
-      apiRedirect(error);
+    } catch {
+      // apiRedirect(error);
     }
   }
 

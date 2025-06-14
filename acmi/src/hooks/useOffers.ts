@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 
 import { showMessage } from '@/components';
 import type { FindOffersResponse, FindOffersNormalizedProps } from '@/types';
-import { apiClient, normalizeFindOffers, serializeQuery } from '@/fetch-request';
+import { apiClient, serializeQuery, normalizeFindOffers } from '@/fetch-request';
 
 export function useOffers({ initialData }: { initialData: FindOffersNormalizedProps[] }) {
   const searchParams = useSearchParams();
@@ -37,6 +37,7 @@ export function useOffers({ initialData }: { initialData: FindOffersNormalizedPr
       const response = await apiClient.post<FindOffersResponse>('/find_offers', body);
 
       const raw = response.data.search_results || [];
+
       const normalized = normalizeFindOffers(raw);
       setData(normalized);
     } catch (error) {

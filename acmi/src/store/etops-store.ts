@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface EtopsType {
+export interface EtopsType {
   id: number;
   etops_rating: string;
 }

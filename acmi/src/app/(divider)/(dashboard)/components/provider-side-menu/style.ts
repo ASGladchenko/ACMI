@@ -7,13 +7,13 @@ const btnClass =
 export const getStyles = () => ({
   wrapper: (isOpen: boolean) =>
     cn(
-      'fixed w-full min-[1280px]:max-w-[360px] pt-10 pl-7 min-[1280px]:relative left-0 transition-all duration-300 max-[1280px]:-translate-x-full  min-h-[calc(100vh-322px)] min-[568px]:min-h-[calc(100dvh-312px)] min-[1024px]:min-h-[calc(100dvh-257px)] min-[1280px]:min-h-[unset] bg-white-dark min-[1280px]:bg-transparent',
-      isOpen && 'max-[1280px]:translate-x-0'
+      'fixed w-full min-[1280px]:max-w-[360px] min-h-dvh pt-10 pl-7 min-[1280px]:relative left-0 transition-all duration-300 max-[1280px]:-translate-x-full min-[1280px]:min-h-[unset] bg-white-dark min-[1280px]:bg-transparent top-0 z-[990]',
+      isOpen && 'max-[1280px]:translate-x-0 '
     ),
   title: cn('mb-10 text-center min-[1280px]:text-left text-blue-deep', text),
   btnOpen: (isOpen: boolean) =>
     cn(
-      'min-[1280px]:hidden absolute duration-200 right-0 top-4 translate-x-full',
+      'min-[1280px]:hidden absolute duration-200 right-0 top-16 translate-x-full bg-white-dark p-2',
       btnClass,
       isOpen && 'hidden'
     ),
