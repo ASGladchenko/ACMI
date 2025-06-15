@@ -24,7 +24,7 @@ export default function ProviderPage() {
       <div className="flex flex-col gap-3 px-2">
         {Array.from({ length: 10 }).map((_, index) => (
           <FleetCard
-            key={index}
+            key={`fleet-${index}`}
             id={index.toString()}
             isLoading={isLoadingAirType || isLoadingETOPS || isLoadingILS || isLoadingNoise}
           />

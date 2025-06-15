@@ -8,9 +8,10 @@ import { SwitcherProps } from '@/components/switchers/switcher';
 import { validationSchema } from '@/app/(divider)/(dashboard)/dashboard-provider/components/fleet-card/config';
 
 interface FieldFleetSwitcherProps extends Omit<SwitcherProps, 'isActive' | 'onClick'> {
+  id: string;
   name: string;
   disabled?: boolean;
-  onSendActive: () => void;
+  onSendActive: (id: string, value: boolean) => void;
 }
 
 export const FieldFleetSwitcher = (props: FieldFleetSwitcherProps) => {
@@ -39,7 +40,7 @@ export const FieldFleetSwitcher = (props: FieldFleetSwitcherProps) => {
         const onClick = async (isActive: boolean) => {
           if (props.name && !isDisabled) {
             await form.setFieldValue(props.name, isActive);
-            await props.onSendActive();
+            await props.onSendActive(props.id, isActive);
           }
         };
 

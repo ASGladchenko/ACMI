@@ -39,9 +39,9 @@ export const FleetCard = ({ isLoading, id }: FleetCardProps) => {
     }
   }, [ref]);
 
-  const onSendActive = async (id: string) => {
+  const onSendActive = async (id: string, value: boolean) => {
     setTimeout(() => {
-      console.log({ id });
+      console.log({ id, value });
     }, 1000);
   };
 
@@ -92,7 +92,7 @@ export const FleetCard = ({ isLoading, id }: FleetCardProps) => {
                 <div className="ml-auto flex gap-7 max-[968px]:max-w-max">
                   <p className="font-inter text-blue-deep text-[16px] font-bold">Active</p>
 
-                  <FieldFleetSwitcher name="isActive" onSendActive={() => onSendActive(id)} />
+                  <FieldFleetSwitcher id={id} name="isActive" onSendActive={onSendActive} />
                 </div>
               </div>
 
