@@ -15,7 +15,7 @@ export const ProviderBlock = ({
 }: ProviderBlockProps) => {
   return (
     <div className="flex flex-col gap-4 min-[968px]:gap-2">
-      <OfferTitle title="Provider:" />
+      <OfferTitle title="Provider details:" />
 
       {withProviderContacts && (
         <div className="grid grid-cols-1 gap-[0_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-3 min-[1320px]:gap-[10px_40px]">

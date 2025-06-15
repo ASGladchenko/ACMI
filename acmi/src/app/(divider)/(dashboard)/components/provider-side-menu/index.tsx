@@ -3,18 +3,19 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { RemoveScroll } from 'react-remove-scroll';
 
 import { Cross } from '@/assets/svg';
 
-import { routes } from './config';
 import { getStyles } from './style';
-import { RemoveScroll } from 'react-remove-scroll';
+import { routes, titles } from '../../config';
 
 export const ProviderSideMenu = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const type = pathname.split('/')[1];
 
-  const { link, title, wrapper, btnOpen, btnClose } = getStyles();
+  const { link, title: titleStyle, wrapper, btnOpen, btnClose } = getStyles();
 
   return (
     <RemoveScroll enabled={isOpen} className={wrapper(isOpen)}>
@@ -27,14 +28,18 @@ export const ProviderSideMenu = () => {
           Navigation
         </button>
 
-        <h3 className={title}>Provider dashboard</h3>
+        <h3 className={titleStyle}>{titles[type as keyof typeof titles]}</h3>
 
         <div className="flex flex-col gap-2">
-          {Object.entries(routes).map(([key, value]) => (
-            <Link href={value} key={key + value} className={link(pathname === value)}>
-              {key}
-            </Link>
-          ))}
+          {Object.entries(routes[type as keyof typeof routes]).map(([key, value], idx) => {
+            const isActive = idx === 0 ? pathname === value : pathname.includes(value);
+
+            return (
+              <Link href={value} key={key + value} className={link(isActive)}>
+                {key.split('_').join(' ')}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </RemoveScroll>
