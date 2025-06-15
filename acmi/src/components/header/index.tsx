@@ -1,13 +1,17 @@
 'use client';
+
 import { useState } from 'react';
 
+import { Role } from '@/types';
 import { useUrlWithParams } from '@/hooks';
-import { Button, ClientLink, Logo } from '@/components';
+import { Logo, Button, ClientLink } from '@/components';
 
 import { BurgerMenu } from './burger-menu';
 
-export const Header = ({ isProvider }: { isProvider?: boolean }) => {
+export const Header = ({ role }: { role?: Role }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const isNotCustomer = role === Role.ADMIN || role === Role.GUEST;
 
   return (
     <>
@@ -18,11 +22,11 @@ export const Header = ({ isProvider }: { isProvider?: boolean }) => {
           <nav className="laptop:flex hidden items-center gap-10">
             <ClientLink href={useUrlWithParams({ url: '/' })}>Home</ClientLink>
 
-            <ClientLink isDisabled={!isProvider} href="/dashboard-provider">
+            <ClientLink isDisabled={role !== Role.PROVIDER} href="/dashboard-provider">
               Provider Dashboard
             </ClientLink>
 
-            <ClientLink isDisabled href="/dashboard-customer">
+            <ClientLink isDisabled={isNotCustomer} href="/dashboard-customer">
               Customer Dashboard
             </ClientLink>
 
@@ -31,7 +35,12 @@ export const Header = ({ isProvider }: { isProvider?: boolean }) => {
             </Button>
           </nav>
 
-          <BurgerMenu isOpen={isOpen} setIsOpen={setIsOpen} isProvider={isProvider} />
+          <BurgerMenu
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            isProvider={role === Role.PROVIDER}
+            isNotCustomer={isNotCustomer}
+          />
         </div>
       </header>
     </>
