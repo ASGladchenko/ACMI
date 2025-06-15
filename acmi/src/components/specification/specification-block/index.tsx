@@ -16,9 +16,9 @@ export const SpecificationBlock = ({
   noise,
   layout,
   thrust,
+  engines,
   wingtips,
   galley_ovens,
-  engines,
   base_airport,
 }: NormalizedOfferDataAircraft) => {
   return (

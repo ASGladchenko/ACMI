@@ -1,9 +1,9 @@
-import { Button, OfferTermsBlock, ProviderBlock, RFQBlock, SpecificationBlock } from '@/components';
+import { Button, RFQBlock, ProviderBlock, OfferTermsBlock, SpecificationBlock } from '@/components';
 import {
-  mockAircraft,
-  mockOfferTermsData,
-  mockProviderData,
   mockRFQData,
+  mockAircraft,
+  mockProviderData,
+  mockOfferTermsData,
 } from '@/components/specification/mock';
 
 export default function OfferByIdPage() {

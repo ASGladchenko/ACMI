@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { TitleDB } from '../../components';
+
 import { mockOffers } from './mock';
+import { TitleDB } from '../../components';
 
 export default function OffersPage() {
   return (
