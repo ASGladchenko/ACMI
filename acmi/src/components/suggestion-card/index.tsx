@@ -22,12 +22,12 @@ interface SuggestionCardProps extends FindOffersNormalizedProps {
 export const SuggestionCard = ({
   age,
   mtow,
-  role,
   model,
   layout,
   region,
   engine,
   imageUrl,
+  role = Role.GUEST,
 }: SuggestionCardProps) => {
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
@@ -117,7 +117,9 @@ export const SuggestionCard = ({
             onClick={() => setIsOfferModalOpen(false)}
           />
 
-          <div className="scroll-bar-mini flex h-full flex-col gap-6 overflow-x-hidden overflow-y-auto px-20 max-[1024px]:px-0">
+          <AvailabilityBadge className="ml-auto max-w-max" />
+
+          <div className="scroll-bar-mini flex h-[calc(100%-100px)] flex-col gap-6 overflow-x-hidden overflow-y-auto px-20 max-[1024px]:px-0">
             <SpecificationBlock {...mockAircraft} />
 
             <ProviderBlock {...mockProviderData} />
@@ -130,6 +132,12 @@ export const SuggestionCard = ({
                   Send RFQ
                 </Button>
               </>
+            )}
+
+            {role === 'guest' && (
+              <p className="text-blue-dark text-center text-[40px] font-bold">
+                You must be verified to send RFQ
+              </p>
             )}
           </div>
         </div>

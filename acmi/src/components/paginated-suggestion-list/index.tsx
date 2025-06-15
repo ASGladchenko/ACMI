@@ -1,24 +1,23 @@
 'use client';
 
-import Cookies from 'js-cookie';
-
 import { cn } from '@/utils';
-
-export interface PaginatedSuggestionListProps {
-  // isHasMore: boolean;
-  initialData: FindOffersNormalizedProps[];
-  dates: { date_from: string | null; date_to: string | null };
-}
 import { useOffers } from '@/hooks';
 import { SuggestionCard } from '@/components';
 import { Role, FindOffersNormalizedProps } from '@/types';
 
+export interface PaginatedSuggestionListProps {
+  role?: Role;
+  // isHasMore: boolean;
+  initialData: FindOffersNormalizedProps[];
+  dates: { date_from: string | null; date_to: string | null };
+}
+
 export const PaginatedSuggestionList = ({
+  role,
   initialData,
   // isHasMore,
 }: PaginatedSuggestionListProps) => {
   const { data, isLoading, isRequiresFilled } = useOffers({ initialData });
-  const role = (Cookies.get('role') as undefined | Role) || Role.GUEST;
 
   const isEmpty = data.length === 0;
 

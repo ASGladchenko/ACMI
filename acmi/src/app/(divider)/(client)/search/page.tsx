@@ -1,12 +1,15 @@
 export const dynamic = 'force-dynamic';
+import { cookies } from 'next/headers';
 
 import { apiRedirect } from '@/utils';
 import { PaginatedSuggestionList } from '@/components';
-import { FindOffersResponse, SearchParams } from '@/types';
-import { apiServer, normalizeFindOffers, serializeQuery } from '@/fetch-request';
+import { Role, SearchParams, FindOffersResponse } from '@/types';
+import { apiServer, serializeQuery, normalizeFindOffers } from '@/fetch-request';
 
 export default async function Home({ searchParams }: SearchParams) {
   const params = await searchParams;
+  const cookieStore = await cookies();
+  const role = cookieStore.get('role')?.value as Role | undefined;
 
   const body = serializeQuery(params as Record<string, string>);
 
@@ -28,7 +31,7 @@ export default async function Home({ searchParams }: SearchParams) {
 
   return (
     <div className="laptop:block block h-full py-5 min-[1240px]:pl-6">
-      <PaginatedSuggestionList dates={dates} initialData={initialData || []} />
+      <PaginatedSuggestionList role={role} dates={dates} initialData={initialData || []} />
     </div>
   );
 }
