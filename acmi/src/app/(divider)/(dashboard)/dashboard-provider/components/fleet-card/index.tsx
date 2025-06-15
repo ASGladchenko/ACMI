@@ -39,6 +39,12 @@ export const FleetCard = ({ isLoading, id }: FleetCardProps) => {
     }
   }, [ref]);
 
+  const onSendActive = async (id: string) => {
+    setTimeout(() => {
+      console.log({ id });
+    }, 1000);
+  };
+
   const onSubmit = (values: typeof initialValues) => {
     console.log({ isLoading });
 
@@ -86,7 +92,7 @@ export const FleetCard = ({ isLoading, id }: FleetCardProps) => {
                 <div className="ml-auto flex gap-7 max-[968px]:max-w-max">
                   <p className="font-inter text-blue-deep text-[16px] font-bold">Active</p>
 
-                  <FieldFleetSwitcher name="isActive" disabled={!isEdited} />
+                  <FieldFleetSwitcher name="isActive" onSendActive={() => onSendActive(id)} />
                 </div>
               </div>
 
