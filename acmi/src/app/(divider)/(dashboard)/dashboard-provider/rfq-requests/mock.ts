@@ -9,9 +9,9 @@ export const mockRfqRequests = [
   },
   {
     id: 'asDfqW1d2',
-    airplane: 'Boeing 737-800',
+    airplane: 'Boeing 737-800 Boeing 737-800 Boeing 737-800',
     msn: 'OH-ABC',
-    company: 'Fly2Sky',
+    company: 'Fly2SkyFly2Sky Fly2SkyFly2SkyFly2SkyFly2SkyFly2Sky',
     date: '12/12/2025 15:44:21',
     status: 'Pending',
   },
