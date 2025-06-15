@@ -5,7 +5,7 @@ import Image, { StaticImageData } from 'next/image';
 
 import { Cross } from '@/assets/svg';
 import { plain } from '@/assets/webp';
-import { FindOffersNormalizedProps } from '@/types';
+import { FindOffersNormalizedProps, Role } from '@/types';
 
 import { Modal } from '../modal';
 import { Button } from '../button';
@@ -15,26 +15,20 @@ import { mockRFQData, mockAircraft, mockProviderData } from '../specification/mo
 
 import './styles.css';
 
-interface SGDatesProps {
-  date_from: string | null;
-  date_to: string | null;
-}
 interface SuggestionCardProps extends FindOffersNormalizedProps {
-  dates: SGDatesProps;
+  role?: Role;
 }
 
 export const SuggestionCard = ({
   age,
   mtow,
+  role,
   model,
-  dates,
   layout,
   region,
   engine,
   imageUrl,
 }: SuggestionCardProps) => {
-  const isAuth = true;
-  console.log({ dates });
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
 
@@ -128,11 +122,14 @@ export const SuggestionCard = ({
 
             <ProviderBlock {...mockProviderData} />
 
-            <RFQBlock {...mockRFQData} isEditing />
-            {isAuth && (
-              <Button className="mx-auto max-w-max" onClick={onSendRFQ}>
-                Send RFQ
-              </Button>
+            {role !== 'guest' && (
+              <>
+                <RFQBlock {...mockRFQData} isEditing />
+
+                <Button className="mx-auto max-w-max" onClick={onSendRFQ}>
+                  Send RFQ
+                </Button>
+              </>
             )}
           </div>
         </div>

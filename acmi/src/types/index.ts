@@ -15,5 +15,12 @@ export interface LayOutItem {
   pitch: string;
 }
 
+export enum Role {
+  GUEST = 'guest',
+  PROVIDER = 'provider',
+  USER = 'user',
+  ADMIN = 'admin',
+}
+
 export * from './find-offers';
 export * from './specification';
