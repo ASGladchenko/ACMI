@@ -2,7 +2,6 @@
 
 import { Input } from '@/components/inputs';
 import { TextArea } from '@/components/text-area';
-import { SelectClient } from '@/components/selects';
 import { NormalizedOfferDataOfferTerms } from '@/types';
 
 import { OfferItem, OfferTitle } from '../components';
@@ -30,12 +29,12 @@ export const OfferTermsBlock = ({
           <>
             <OfferItem
               text="GBH price:"
-              value={guaranteedBh.toString()}
+              value={guaranteedBh.toString() + ' $'}
               className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
             />
             <OfferItem
               text="Over time BH price:"
-              value={overTimeBh.toString()}
+              value={overTimeBh.toString() + ' $'}
               className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
             />
           </>
@@ -91,9 +90,7 @@ export const OfferTermsBlock = ({
           />
         )}
 
-        {isEditing && (
-          <SelectClient options={[]} selected={null} onChange={() => {}} label="Per diem:" />
-        )}
+        {isEditing && <Input onChange={() => {}} label="Per diem:" value={perDiem.toString()} />}
       </div>
 
       <OfferItem
@@ -107,8 +104,8 @@ export const OfferTermsBlock = ({
           rows={3}
           onChange={() => {}}
           disabled={!isEditing}
-          placeholder="Response to additional requests"
           value={responseAdditionalRequest}
+          placeholder="Response to additional requests"
         />
       )}
 
