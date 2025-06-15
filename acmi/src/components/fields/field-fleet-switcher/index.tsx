@@ -3,8 +3,8 @@
 import { Field, FieldProps } from 'formik';
 
 import { Switcher } from '@/components';
-import { SwitcherProps } from '@/components/switchers/switcher';
 import { controlFormikError } from '@/utils';
+import { SwitcherProps } from '@/components/switchers/switcher';
 import { validationSchema } from '@/app/(divider)/(dashboard)/dashboard-provider/components/fleet-card/config';
 
 interface FieldFleetSwitcherProps extends Omit<SwitcherProps, 'isActive' | 'onClick'> {
