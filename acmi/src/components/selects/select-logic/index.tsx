@@ -1,4 +1,6 @@
-import { useRef, useState } from 'react';
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/utils';
 import { useOutsideClick } from '@/hooks';
@@ -17,11 +19,20 @@ export const SelectLogic = ({
 }: SelectLogicWrapperProps) => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+
   const [isOpen, setIsOpen] = useState(false);
 
-  useOutsideClick(() => setIsOpen(false), [wrapperRef, containerRef]);
+  useOutsideClick(() => {
+    setIsOpen(false);
+  }, [wrapperRef, containerRef]);
 
   const wrapperClass = cn('w-full relative', className);
+
+  useEffect(() => {
+    if (isDisabled) {
+      setIsOpen(false);
+    }
+  }, [isDisabled]);
 
   return (
     <div className={wrapperClass} ref={wrapperRef}>
@@ -31,7 +42,7 @@ export const SelectLogic = ({
 
       {isOpen && (
         <div
-          className={cn('h-auto absolute top-full w-full z-10 ', listClassName)}
+          className={cn('absolute top-full z-10 h-auto w-full', listClassName)}
           ref={containerRef}
         >
           {renderOptions({ options, isOpen, setIsOpen })}

@@ -8,10 +8,11 @@ import { getStyles } from './style';
 export interface BurgerMenuProps {
   isOpen: boolean;
   isProvider?: boolean;
+  isNotCustomer?: boolean;
   setIsOpen: (value: boolean) => void;
 }
 
-export const BurgerMenu = ({ isOpen, isProvider, setIsOpen }: BurgerMenuProps) => {
+export const BurgerMenu = ({ isOpen, isProvider, isNotCustomer, setIsOpen }: BurgerMenuProps) => {
   const { menu } = getStyles(isOpen);
 
   return (
@@ -34,7 +35,11 @@ export const BurgerMenu = ({ isOpen, isProvider, setIsOpen }: BurgerMenuProps) =
             Provider Dashboard
           </ClientLink>
 
-          <ClientLink isDisabled href="/dashboard-customer" onClick={() => setIsOpen(!isOpen)}>
+          <ClientLink
+            isDisabled={isNotCustomer}
+            href="/dashboard-customer"
+            onClick={() => setIsOpen(!isOpen)}
+          >
             Customer Dashboard
           </ClientLink>
 

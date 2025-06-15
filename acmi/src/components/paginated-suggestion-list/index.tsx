@@ -3,16 +3,19 @@
 import { cn } from '@/utils';
 import { useOffers } from '@/hooks';
 import { SuggestionCard } from '@/components';
-import { FindOffersNormalizedProps } from '@/types';
+import { Role, FindOffersNormalizedProps } from '@/types';
 
 export interface PaginatedSuggestionListProps {
+  role?: Role;
   // isHasMore: boolean;
   initialData: FindOffersNormalizedProps[];
+  dates: { date_from: string | null; date_to: string | null };
 }
 
 export const PaginatedSuggestionList = ({
-  // isHasMore,
+  role,
   initialData,
+  // isHasMore,
 }: PaginatedSuggestionListProps) => {
   const { data, isLoading, isRequiresFilled } = useOffers({ initialData });
 
@@ -21,12 +24,14 @@ export const PaginatedSuggestionList = ({
   return (
     <div
       className={cn(
-        'relative flex h-full w-full flex-col items-center gap-10',
+        'relative flex h-full w-full flex-col items-center gap-4',
         isEmpty && 'pt-[160px]'
       )}
     >
       {!isEmpty &&
-        data.map((item, index) => <SuggestionCard key={`${item.id}-${index}`} {...item} />)}
+        data.map((item, index) => {
+          return <SuggestionCard key={`${item.id}-${index}`} role={role} {...item} />;
+        })}
 
       {/* {isHasMore && (
         <Button

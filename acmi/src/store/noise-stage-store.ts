@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface NoiseStage {
+export interface NoiseStage {
   id: number;
   noise_stage: string;
 }

@@ -22,6 +22,8 @@
 
   --white-dark: #e2e2e2;
   --white-light: #e9e9e9;
+
+  --green-main: #0b7436;
 }
 
 @theme inline {
@@ -36,6 +38,8 @@
   --color-gray-medium: #5e5e5e;
   --color-gray-light: #9e9e9e;
   --color-gray-metallic: #a6a6a6;
+
+  --color-green-main: var(--green-main);
 
   --color-white-dark: #e2e2e2;
   --color-white-light: #e9e9e9;
@@ -95,4 +99,13 @@ body {
 }
 .scroll-bar-mini.blue::-webkit-scrollbar-thumb {
   background-color: var(--blue-dark);
+}
+
+.scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
 }

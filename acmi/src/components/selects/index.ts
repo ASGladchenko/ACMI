@@ -1,3 +1,6 @@
+export { FleetAirportSelect } from './fleet-airport-select';
+export { FleetSelect } from './fleet-select';
+export { MultiSelectAirport } from './multi-select-airport';
 export { MultiSelectClient } from './multi-select-client';
 export { PickerSelect } from './picker-select';
 export { SearchMultiSelect } from './multi-select-client/search-multi-select';
@@ -10,7 +13,6 @@ export { SelectClient } from './select-client';
 export { SelectETOPS } from './select-etops';
 export { SelectILSCategory } from './select-ils-category';
 export { SelectNoiseStage } from './select-noise-stage';
-
 
 export type {
   ISelectOption,
