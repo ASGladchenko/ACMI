@@ -110,6 +110,8 @@ export const RFQBlock = ({
               initialEnd={date[1]}
               initialStart={date[0]}
               label="Dates (inclusive):"
+              minDate={new Date(date[0]!)}
+              maxDate={new Date(date[1]!)}
             />
 
             <OfferItem

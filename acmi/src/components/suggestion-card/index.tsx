@@ -15,16 +15,26 @@ import { mockRFQData, mockAircraft, mockProviderData } from '../specification/mo
 
 import './styles.css';
 
+interface SGDatesProps {
+  date_from: string | null;
+  date_to: string | null;
+}
+interface SuggestionCardProps extends FindOffersNormalizedProps {
+  dates: SGDatesProps;
+}
+
 export const SuggestionCard = ({
   age,
   mtow,
   model,
+  dates,
   layout,
   region,
   engine,
   imageUrl,
-}: FindOffersNormalizedProps) => {
+}: SuggestionCardProps) => {
   const isAuth = true;
+  console.log({ dates });
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
 
@@ -115,6 +125,7 @@ export const SuggestionCard = ({
 
           <div className="scroll-bar-mini flex h-full flex-col gap-6 overflow-x-hidden overflow-y-auto px-20 max-[1024px]:px-0">
             <SpecificationBlock {...mockAircraft} />
+
             <ProviderBlock {...mockProviderData} />
 
             <RFQBlock {...mockRFQData} isEditing />
