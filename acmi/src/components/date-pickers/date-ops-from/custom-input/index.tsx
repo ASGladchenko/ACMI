@@ -57,7 +57,7 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
         {value && (
           <Cross
             onClick={handleClear}
-            className="text-gray-dark ml-auto h-4 w-4 shrink-0 duration-200 hover:text-red-400"
+            className="text-gray-dark ml-auto h-4 w-4 shrink-0 transition-colors duration-75 hover:text-red-400"
           />
         )}
 

@@ -107,13 +107,13 @@ export const SuggestionCard = ({
         onClose={() => setIsOfferModalOpen(false)}
         className="max-[568px]:max-h-dvh max-[568px]:max-w-dvw"
       >
-        <div className="h-[95dvh] w-[90dvw] rounded-2xl bg-white px-10 py-5 max-[1024px]:px-1 max-[1024px]:py-10 max-[568px]:h-dvh max-[568px]:w-dvw">
+        <div className="h-[95dvh] w-[90dvw] max-w-[1386px] rounded-2xl bg-white px-10 py-5 max-[768px]:px-3 max-[768px]:py-10 max-[568px]:h-dvh max-[568px]:w-dvw max-[568px]:px-1">
           <Cross
             className="text-blue-dark absolute top-1 right-1 h-6 w-6 cursor-pointer transition duration-200 hover:text-red-400"
             onClick={() => setIsOfferModalOpen(false)}
           />
 
-          <div className="scroll-bar-mini flex h-full flex-col gap-6 overflow-x-hidden overflow-y-auto">
+          <div className="scroll-bar-mini flex h-full flex-col gap-6 overflow-x-hidden overflow-y-auto px-20 max-[1024px]:px-0">
             <SpecificationBlock {...mockAircraft} />
             <ProviderBlock {...mockProviderData} />
 
