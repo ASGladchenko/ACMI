@@ -7,4 +7,13 @@ export type SearchParams<T = unknown> = {
 } & T;
 
 export * from './find-offers';
+
+export type TypeFleet = 'aircraftTypes' | 'etops' | 'ilsCategory' | 'noiseStage';
+
+export interface LayOutItem {
+  seats: string;
+  pitch: string;
+}
+
+export * from './find-offers';
 export * from './specification';

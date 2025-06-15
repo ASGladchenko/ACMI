@@ -1,8 +1,4 @@
-export { FleetAircraftTypeSelect } from './fleet-aircraft-type-select';
 export { FleetAirportSelect } from './fleet-airport-select';
-export { FleetETOPSSelect } from './fleet-etops-select';
-export { FleetIlsSelect } from './fleet-ils-select';
-export { FleetNoiseSelect } from './fleet-noise-select';
 export { FleetSelect } from './fleet-select';
 export { MultiSelectAirport } from './multi-select-airport';
 export { MultiSelectClient } from './multi-select-client';

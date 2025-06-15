@@ -7,16 +7,20 @@ import { useAirportOptions } from '@/hooks';
 import { FleetSelect } from '../fleet-select';
 import { ISelectOption } from '../select-logic/types';
 
-interface FleetAirportSelectProps {
+export interface FleetAirportSelectProps {
+  label: string;
   error?: string;
   className?: string;
   isDisabled?: boolean;
+  placeholderEmpty?: string;
+  placeholderFilter?: string;
   selectedOption: ISelectOption | null;
   onChange: (option: ISelectOption) => void;
 }
 
 export const FleetAirportSelect = ({
   error,
+  label,
   onChange,
   className,
   isDisabled,
@@ -28,7 +32,7 @@ export const FleetAirportSelect = ({
   return (
     <FleetSelect
       error={error}
-      label="Base :"
+      label={label}
       filter={filter}
       options={options}
       onChange={onChange}

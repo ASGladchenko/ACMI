@@ -3,14 +3,16 @@ import { cn } from '@/utils';
 export interface SwitcherProps {
   isActive: boolean;
   disabled?: boolean;
-  onClick: (isActive: boolean) => void;
+  error?: string;
+  onClick?: (isActive: boolean) => void;
 }
 
-export const Switcher = ({ isActive, disabled, onClick }: SwitcherProps) => {
+export const Switcher = ({ isActive, disabled, onClick, error }: SwitcherProps) => {
   const switcherClass = cn('p-1 relative cursor-pointer rounded-full w-16 h-[30px] ', {
     'bg-gray-metallic': !isActive,
     'bg-blue-dark cursor-pointer': isActive,
     'cursor-not-allowed opacity-50': disabled,
+    'border border-red-500': error,
   });
 
   const switcherButtonClass = cn(
@@ -18,13 +20,14 @@ export const Switcher = ({ isActive, disabled, onClick }: SwitcherProps) => {
     {
       'bg-gray-metallic left-[calc(100%-4px)] -translate-x-full': isActive,
       'cursor-not-allowed': disabled,
+      'bg-red-500': error,
     }
   );
 
   const handleClick = () => {
     if (disabled) return;
 
-    onClick(!isActive);
+    onClick?.(!isActive);
   };
   return (
     <div onClick={handleClick} className={switcherClass}>
