@@ -36,8 +36,6 @@ export interface OfferData {
 }
 
 export interface NormalizedOfferDataAircraft {
-  msn: string;
-  reg: string;
   age: string;
   pax: string;
   act: string;
@@ -51,8 +49,8 @@ export interface NormalizedOfferDataAircraft {
   noise: string;
   layout: string;
   thrust: string;
+  engines: string;
   wingtips: string;
-  manufactured: string;
   base_airport: string;
   galley_ovens: string;
 }

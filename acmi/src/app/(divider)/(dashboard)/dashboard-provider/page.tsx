@@ -7,6 +7,7 @@ import {
   useAircraftTypesDictionary,
 } from '@/hooks';
 
+import { TitleDB } from '../components';
 import { FleetCard } from './components';
 
 export default function ProviderPage() {
@@ -17,9 +18,7 @@ export default function ProviderPage() {
 
   return (
     <section>
-      <h1 className="font-montserrat text-blue-deep mb-9 text-center text-[25px] font-bold max-[768px]:text-[20px] max-[768px]:leading-[24px]">
-        Fleet
-      </h1>
+      <TitleDB title="Fleet" />
 
       <div className="flex flex-col gap-3 px-2">
         {Array.from({ length: 10 }).map((_, index) => (

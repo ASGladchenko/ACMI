@@ -49,6 +49,7 @@ export const mockOfferTermsData = {
 export const mockAircraft: NormalizedOfferDataAircraft = {
   msn: '', // не указано в таблице
   reg: '', // не указано в таблице
+  engines: 'CFM56-7B26',
   age: '10 years',
   pax: '186',
   act: 'yes',
