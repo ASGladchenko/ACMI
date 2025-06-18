@@ -4,11 +4,9 @@ export interface FindOffersArray {
   layout: string;
   offer_id: string;
   icao_type: string;
-
-  //TODO CHECK When api will be ready
   age: number;
   mtow: number;
-  engine: string;
+  engines: string;
   region: string;
 }
 
@@ -21,7 +19,7 @@ export interface FindOffersNormalizedProps {
   age: number;
   mtow: number;
   model: string;
-  engine: string;
+  engines: string;
   layout: string;
   region: string;
   imageUrl: string;

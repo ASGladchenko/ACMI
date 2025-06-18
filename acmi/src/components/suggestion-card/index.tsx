@@ -25,7 +25,7 @@ export const SuggestionCard = ({
   model,
   layout,
   region,
-  engine,
+  engines,
   imageUrl,
   role = Role.GUEST,
 }: SuggestionCardProps) => {
@@ -70,7 +70,7 @@ export const SuggestionCard = ({
             <div className="flex w-full max-w-[300px] flex-col justify-center max-[1024px]:max-w-[280px] max-[768px]:max-w-full">
               <div className={classItem}>
                 <span className={classLabel}>Engines:</span>
-                <span className={classValue}>{engine ? engine : 'N/A'}</span>
+                <span className={classValue}>{engines ? engines : 'N/A'}</span>
               </div>
               <div className={classItem}>
                 <span className={classLabel}>MTOW:</span>
@@ -92,7 +92,7 @@ export const SuggestionCard = ({
                 Based in
               </span>
               <span className="text-gray-dark font-montserrat desktop:mb-2.5 desktop:text-[25px] desktop:leading-[30px] text-xl font-bold text-nowrap max-[768px]:text-[18px] max-[768px]:leading-[20px]">
-                {region} region
+                {region}
               </span>
 
               <Button
