@@ -11,9 +11,7 @@ import {
   TextArea,
   DateOpsFrom,
   SelectClient,
-  // SelectAirport,
-  FieldFleetAirport,
-  MultiSelectAirport,
+  FieldMultiSelectAirport,
 } from '@/components';
 
 import { getDaysBetweenDates } from '../helpers';
@@ -38,10 +36,9 @@ export const RFQBlock = ({
   estimatedBH,
   airportFrom,
   additionalRequest,
+
   initialValues,
 }: RFQBlockProps) => {
-  const [airportTo1, setAirportTo1] = useState<string[]>([]);
-
   const [date, setDate] = useState<[Date | null, Date | null]>([
     new Date(datesFrom),
     new Date(datesTo),
@@ -72,45 +69,27 @@ export const RFQBlock = ({
         </div>
 
         <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
+          <OfferItem
+            text="Ops Base airport:"
+            value={airportFrom}
+            className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+          />
           {!isEditing && (
-            <>
-              <OfferItem
-                text="Ops Base airport:"
-                value={airportFrom}
-                className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-              />
-              <OfferItem
-                value={airportTo}
-                text="Outstations:"
-                className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-              />
-            </>
+            <OfferItem
+              value={airportTo}
+              text="Outstations:"
+              className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+            />
           )}
 
           {isEditing && (
-            <>
-              {/* <SelectAirport
-                onChange={(op) => {
-                  console.log({ op });
-                }}
-                label="Ops Base airport:"
-                // selected={airportFrom}
-              /> */}
+            <FieldMultiSelectAirport name="airportFrom" label="Ops Base airport: " />
 
-              <FieldFleetAirport
-                name="airportFrom"
-                variant="standard"
-                label="Ops Base airport:"
-                placeholderEmpty="No available options"
-                placeholderFilter="Enter to start search"
-              />
-
-              <MultiSelectAirport
-                label="Outstations: "
-                selected={airportTo1}
-                onChange={(option) => setAirportTo1(option as string[])}
-              />
-            </>
+            // <MultiSelectAirport
+            //   label="Outstations: "
+            //   selected={airportTo1}
+            //   onChange={(option) => setAirportTo1(option as string[])}
+            // />
           )}
         </div>
 
