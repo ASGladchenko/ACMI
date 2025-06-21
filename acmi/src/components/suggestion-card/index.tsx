@@ -12,8 +12,8 @@ import { Modal } from '../modal';
 import { Button } from '../button';
 import { getInitialValues } from './config';
 import { AvailabilityBadge } from '../badges';
+import { mockAircraft, mockProviderData } from '../specification/mock';
 import { RFQBlock, ProviderBlock, SpecificationBlock } from '../specification';
-import { mockRFQData, mockAircraft, mockProviderData } from '../specification/mock';
 
 import './styles.css';
 
@@ -131,7 +131,7 @@ export const SuggestionCard = ({
 
             {role !== 'guest' && (
               <>
-                <RFQBlock {...mockRFQData} initialValues={initialValues} isEditing />
+                <RFQBlock initialValues={initialValues} isEditing />
               </>
             )}
 
