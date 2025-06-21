@@ -5,7 +5,8 @@ import Image, { StaticImageData } from 'next/image';
 
 import { Cross } from '@/assets/svg';
 import { plain } from '@/assets/webp';
-import { FindOffersNormalizedProps, Role } from '@/types';
+import { useQueryStore } from '@/store/query-store';
+import { Role, FindOffersNormalizedProps } from '@/types';
 
 import { Modal } from '../modal';
 import { Button } from '../button';
@@ -14,6 +15,7 @@ import { ProviderBlock, RFQBlock, SpecificationBlock } from '../specification';
 import { mockRFQData, mockAircraft, mockProviderData } from '../specification/mock';
 
 import './styles.css';
+import { getInitialValues } from './config';
 
 interface SuggestionCardProps extends FindOffersNormalizedProps {
   role?: Role;
@@ -29,19 +31,21 @@ export const SuggestionCard = ({
   imageUrl,
   role = Role.GUEST,
 }: SuggestionCardProps) => {
+  const { queries } = useQueryStore();
+
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
 
+  const initialValues = getInitialValues({
+    airports: queries.airport_code,
+    dates: [queries.date_from, queries.date_to],
+  });
   const classLabel =
     'font-montserrat text-[22px] min-w-[92px] leading-[26px] text-nowrap max-[768px]:text-[16px] max-[768px]:leading-[20px]';
   const classValue =
     'w-full font-montserrat text-[22px] font-bold leading-[26px] max-[768px]:text-[14px] max-[768px]:leading-[20px]';
 
   const classItem = 'flex gap-4 ';
-
-  const onSendRFQ = () => {
-    console.log('send rfq');
-  };
 
   return (
     <>
@@ -126,11 +130,7 @@ export const SuggestionCard = ({
 
             {role !== 'guest' && (
               <>
-                <RFQBlock {...mockRFQData} isEditing />
-
-                <Button className="mx-auto max-w-max" onClick={onSendRFQ}>
-                  Send RFQ
-                </Button>
+                <RFQBlock {...mockRFQData} initialValues={initialValues} isEditing />
               </>
             )}
 

@@ -25,6 +25,8 @@ export const FleetAirportSelect = ({
   className,
   isDisabled,
   selectedOption,
+  placeholderEmpty,
+  placeholderFilter,
 }: FleetAirportSelectProps) => {
   const [filter, setFilter] = useState('');
   const { options, loading } = useAirportOptions(filter);
@@ -41,8 +43,8 @@ export const FleetAirportSelect = ({
       setFilter={setFilter}
       isDisabled={isDisabled}
       selectedOption={selectedOption}
-      placeholderEmpty="No available options"
-      placeholderFilter="Enter to start search"
+      placeholderEmpty={placeholderEmpty}
+      placeholderFilter={placeholderFilter}
     />
   );
 };
