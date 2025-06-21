@@ -1,54 +1,55 @@
 'use client';
 
-import { useState } from 'react';
 import { Formik } from 'formik';
 
 import { NormalizedOfferDataRFQ } from '@/types';
 
 import {
-  Input,
   Button,
-  TextArea,
-  DateOpsFrom,
-  SelectClient,
+  FieldTextArea,
+  FieldFleetInput,
+  FieldDateOpsFrom,
+  FieldClientSelect,
   FieldMultiSelectAirport,
 } from '@/components';
 
 import { getDaysBetweenDates } from '../helpers';
 import { OfferItem, OfferTitle } from '../components';
 
+const mockSelects = [
+  { text: 'Option 1', value: 1 },
+  { text: 'Option 2', value: 2 },
+  { text: 'Option 3', value: 3 },
+  { text: 'Option 4', value: 4 },
+  { text: 'Option 5', value: 5 },
+];
+
 export interface RFQBlockProps extends NormalizedOfferDataRFQ {
   isEditing?: boolean;
   initialValues: {
-    [key: string]: string | number | Date | string[] | null;
+    fhFc: string;
+    minGBH: string;
+    operator: string;
+    position: string;
     airportFrom: string;
     airportTo: string[];
+    estimatedBH: string;
+    additionalRequest: string;
+    positioning: { text: string; value: number } | null;
+    perDiem: { text: string; value: number } | null;
+    dates: {
+      from: Date;
+      to: Date;
+    };
   };
 }
 
 export const RFQBlock = ({
-  fhFc,
-  minGBH,
-  datesTo,
-  perDiem,
-  operator,
-  position,
-  datesFrom,
   isEditing,
-  airportTo,
-  positioning,
-  estimatedBH,
-  airportFrom,
-  additionalRequest,
 
   initialValues,
 }: RFQBlockProps) => {
-  const [date, setDate] = useState<[Date | null, Date | null]>([
-    new Date(datesFrom),
-    new Date(datesTo),
-  ]);
-
-  console.log({ initialValues, airportFrom });
+  console.log({ initialValues });
 
   const onSubmit = () => {
     console.log('send rfq');
@@ -64,11 +65,11 @@ export const RFQBlock = ({
             <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
               <OfferItem
                 text="Operator:"
-                value={operator}
+                value={values.operator}
                 className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
               />
               <OfferItem
-                value={position}
+                value={values.position}
                 text="Requester position:"
                 className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
               />
@@ -80,59 +81,43 @@ export const RFQBlock = ({
                 value={values.airportFrom}
                 className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
               />
+
               {!isEditing && (
                 <OfferItem
-                  value={airportTo}
                   text="Outstations:"
+                  value={values.airportTo.join(', ')}
                   className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
                 />
               )}
 
-              {isEditing && (
-                <FieldMultiSelectAirport name="airportTo" label="Ops Base airport: " />
-
-                // <MultiSelectAirport
-                //   label="Outstations: "
-                //   selected={airportTo1}
-                //   onChange={(option) => setAirportTo1(option as string[])}
-                // />
-              )}
+              {isEditing && <FieldMultiSelectAirport name="airportTo" label="Ops Base airport: " />}
             </div>
 
             <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
-              {!isEditing && (
-                <>
+              <>
+                {!isEditing && (
                   <OfferItem
                     text="Dates (inclusive):"
-                    value={`${datesFrom} - ${datesTo}`}
+                    value={`${values.dates.from} - ${values.dates.to}`}
                     className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
                   />
-                  <OfferItem
-                    text="Period:"
-                    value={`${getDaysBetweenDates(date[0]!, date[1]!)} day(s)`}
-                    className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-                  />
-                </>
-              )}
+                )}
 
-              {isEditing && (
-                <>
-                  <DateOpsFrom
-                    onChange={setDate}
-                    initialEnd={date[1]}
-                    initialStart={date[0]}
+                {isEditing && (
+                  <FieldDateOpsFrom
+                    name="dates"
                     label="Dates (inclusive):"
-                    minDate={new Date(date[0]!)}
-                    maxDate={new Date(date[1]!)}
+                    minDate={new Date(initialValues.dates.from)}
+                    maxDate={new Date(initialValues.dates.to)}
                   />
+                )}
 
-                  <OfferItem
-                    text="Period:"
-                    value={`${getDaysBetweenDates(date[0]!, date[1]!)} day(s)`}
-                    className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-                  />
-                </>
-              )}
+                <OfferItem
+                  text="Period:"
+                  value={`${getDaysBetweenDates(values.dates.from, values.dates.to)} day(s)`}
+                  className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                />
+              </>
             </div>
 
             <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
@@ -140,12 +125,12 @@ export const RFQBlock = ({
                 <>
                   <OfferItem
                     text="Minimum GBH:"
-                    value={minGBH.toString()}
+                    value={values.minGBH.toString()}
                     className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
                   />
                   <OfferItem
                     text="FH/FC:"
-                    value={fhFc.toString()}
+                    value={values.fhFc.toString()}
                     className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
                   />
                 </>
@@ -153,9 +138,9 @@ export const RFQBlock = ({
 
               {isEditing && (
                 <>
-                  <Input onChange={() => {}} label="Minimum GBH:" value={minGBH.toString()} />
+                  <FieldFleetInput variant="client" name="minGBH" label="Minimum GBH:" />
 
-                  <Input onChange={() => {}} label="FH/FC:" value={fhFc.toString()} />
+                  <FieldFleetInput variant="client" name="fhFc" label="FH/FC:" />
                 </>
               )}
             </div>
@@ -166,17 +151,17 @@ export const RFQBlock = ({
                   <>
                     <OfferItem
                       text="Estimated BH:"
-                      value={estimatedBH.toString()}
+                      value={values.estimatedBH.toString()}
                       className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
                     />
                     <OfferItem
                       text="Positioning:"
-                      value={positioning}
+                      value={values.positioning?.text || ''}
                       className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
                     />
                     <OfferItem
                       text="Per diem:"
-                      value={perDiem}
+                      value={values.perDiem?.text || ''}
                       className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
                     />
                   </>
@@ -184,21 +169,15 @@ export const RFQBlock = ({
 
                 {isEditing && (
                   <>
-                    <Input onChange={() => {}} label="Estimated BH:" value={estimatedBH} />
+                    <FieldFleetInput variant="client" name="estimatedBH" label="Estimated BH:" />
 
-                    <SelectClient
-                      options={[]}
-                      selected={null}
-                      onChange={() => {}}
+                    <FieldClientSelect
+                      name="positioning"
                       label="Positioning:"
+                      options={mockSelects}
                     />
 
-                    <SelectClient
-                      options={[]}
-                      selected={null}
-                      onChange={() => {}}
-                      label="Per diem:"
-                    />
+                    <FieldClientSelect name="perDiem" options={mockSelects} label="Per diem:" />
                   </>
                 )}
               </div>
@@ -206,17 +185,16 @@ export const RFQBlock = ({
             <>
               <OfferItem
                 text="Additional request:"
-                value={isEditing ? '' : additionalRequest}
+                value={isEditing ? '' : values.additionalRequest}
                 className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
               />
 
               {isEditing && (
                 <>
-                  <TextArea
+                  <FieldTextArea
                     rows={3}
-                    onChange={() => {}}
                     disabled={!isEditing}
-                    value={additionalRequest}
+                    name="additionalRequest"
                     placeholder={isEditing ? 'Additional request' : ''}
                   />
 

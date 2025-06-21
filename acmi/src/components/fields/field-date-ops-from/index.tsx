@@ -5,7 +5,8 @@ import { Field, FieldProps } from 'formik';
 import { controlFormikError } from '@/utils';
 import { DateOpsFrom, DateOpsFromProps } from '@/components/date-pickers/date-ops-from';
 
-interface FieldDateOpsFromProps extends Omit<DateOpsFromProps, 'error' | 'onChange' | 'selected'> {
+interface FieldDateOpsFromProps
+  extends Omit<DateOpsFromProps, 'error' | 'onChange' | 'initialEnd' | 'initialStart'> {
   name: string;
 }
 
@@ -17,7 +18,7 @@ export const FieldDateOpsFrom = ({ name, ...props }: FieldDateOpsFromProps) => {
 
         const change = async (dates: [Date | null, Date | null]) => {
           if (name) {
-            await form.setFieldValue(name, { datesFrom: dates[0], datesTo: dates[1] });
+            await form.setFieldValue(name, { from: dates[0], to: dates[1] });
           }
         };
 
@@ -27,8 +28,8 @@ export const FieldDateOpsFrom = ({ name, ...props }: FieldDateOpsFromProps) => {
             {...props}
             error={error}
             onChange={change}
-            initialEnd={value.datesTo}
-            initialStart={value.datesFrom}
+            initialEnd={value.to}
+            initialStart={value.from}
           />
         );
       }}

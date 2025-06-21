@@ -10,12 +10,12 @@ import { Role, FindOffersNormalizedProps } from '@/types';
 
 import { Modal } from '../modal';
 import { Button } from '../button';
+import { getInitialValues } from './config';
 import { AvailabilityBadge } from '../badges';
-import { ProviderBlock, RFQBlock, SpecificationBlock } from '../specification';
+import { RFQBlock, ProviderBlock, SpecificationBlock } from '../specification';
 import { mockRFQData, mockAircraft, mockProviderData } from '../specification/mock';
 
 import './styles.css';
-import { getInitialValues } from './config';
 
 interface SuggestionCardProps extends FindOffersNormalizedProps {
   role?: Role;
@@ -34,6 +34,7 @@ export const SuggestionCard = ({
   const { queries } = useQueryStore();
 
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
+
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
 
   const initialValues = getInitialValues({

@@ -15,14 +15,11 @@ export const getInitialValues = ({
     airportTo: [],
     additionalRequest: '',
     positioning: '',
-    datesFrom: dates[0] ? new Date(Number(dates[0])).toLocaleDateString() : null,
-    datesTo: dates[1]
-      ? new Date(Number(dates[1])).toLocaleDateString('en-GB', {
-          day: '2-digit',
-          month: 'short',
-          year: 'numeric',
-        })
-      : null,
+
+    dates: {
+      from: dates[0] ? new Date(Number(dates[0])) : null,
+      to: dates[1] ? new Date(Number(dates[1])) : null,
+    },
     airportFrom: airport,
   };
 };

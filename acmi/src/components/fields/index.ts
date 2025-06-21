@@ -9,3 +9,4 @@ export { FieldFleetSelect } from './field-fleet-select';
 export { FieldFleetSwitcher } from './field-fleet-switcher';
 export { FieldMultiSelectAirport } from './field-multi-select-airport';
 export { FieldMultiSelectClient } from './field-multi-select-client';
+export { FieldTextArea } from './field-text-area';
