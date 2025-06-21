@@ -124,7 +124,7 @@ export const SuggestionCard = ({
 
           <AvailabilityBadge className="ml-auto max-w-max" />
 
-          <div className="scroll-bar-mini flex h-[calc(100%-100px)] flex-col gap-6 overflow-x-hidden overflow-y-auto px-20 max-[1024px]:px-0">
+          <div className="scroll-bar-mini flex h-[calc(100%-100px)] flex-col gap-6 overflow-x-hidden overflow-y-auto px-20 max-[1200px]:px-0">
             <SpecificationBlock {...mockAircraft} />
 
             <ProviderBlock {...mockProviderData} />

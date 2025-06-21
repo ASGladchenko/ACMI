@@ -1,5 +1,6 @@
 'use client';
 
+import { format } from 'date-fns';
 import { Form, Formik } from 'formik';
 
 import {
@@ -38,12 +39,12 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
               <OfferItem
                 text="Operator:"
                 value={values.operator}
-                className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
               />
               <OfferItem
                 value={values.position}
                 text="Requester position:"
-                className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
               />
             </div>
 
@@ -51,18 +52,18 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
               <OfferItem
                 text="Ops Base airport:"
                 value={values.airportFrom}
-                className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
               />
 
               {!isEditing && (
                 <OfferItem
                   text="Outstations:"
                   value={values.airportTo.join(', ')}
-                  className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                  className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
                 />
               )}
 
-              {isEditing && <FieldMultiSelectAirport name="airportTo" label="Ops Base airport: " />}
+              {isEditing && <FieldMultiSelectAirport name="airportTo" label="Outstations :" />}
             </div>
 
             <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
@@ -70,8 +71,8 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
                 {!isEditing && (
                   <OfferItem
                     text="Dates (inclusive):"
-                    value={`${values.dates.from} - ${values.dates.to}`}
-                    className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                    className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                    value={`${format(values.dates.from, 'dd MMM yyyy')} - ${format(values.dates.to, 'dd MMM yyyy')}`}
                   />
                 )}
 
@@ -87,7 +88,7 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
                 <OfferItem
                   text="Period:"
                   value={`${getDaysBetweenDates(values.dates.from, values.dates.to)} day(s)`}
-                  className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                  className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
                 />
               </>
             </div>
@@ -98,12 +99,12 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
                   <OfferItem
                     text="Minimum GBH,$ :"
                     value={values.minGBH.toString()}
-                    className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                    className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
                   />
                   <OfferItem
                     text="FH/FC,$:"
                     value={values.fhFc.toString()}
-                    className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                    className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
                   />
                 </>
               )}
@@ -124,17 +125,17 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
                     <OfferItem
                       text="Estimated BH,$ :"
                       value={values.estimatedBH.toString()}
-                      className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                      className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
                     />
                     <OfferItem
                       text="Positioning:"
                       value={values.positioning?.text || ''}
-                      className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                      className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
                     />
                     <OfferItem
                       text="Per diem:"
                       value={values.perDiem?.text || ''}
-                      className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                      className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
                     />
                   </>
                 )}
@@ -158,7 +159,7 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
               <OfferItem
                 text="Additional request:"
                 value={isEditing ? '' : values.additionalRequest}
-                className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
               />
 
               {isEditing && (
