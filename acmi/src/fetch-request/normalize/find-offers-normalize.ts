@@ -4,7 +4,7 @@ const baseImgUrl = process.env.NEXT_PUBLIC_IMG_URL;
 export const normalizeFindOffers = (data: FindOffersArray[]): FindOffersNormalizedProps[] => {
   return data.map((offer) => ({
     id: offer.offer_id,
-    engine: offer.engine,
+    engines: offer.engines,
     layout: offer.layout,
     region: offer.region,
     model: offer.aircraft_type_long,

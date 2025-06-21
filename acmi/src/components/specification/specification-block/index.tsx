@@ -7,8 +7,6 @@ export const SpecificationBlock = ({
   act,
   ils,
   ife,
-  msn,
-  reg,
   age,
   mtow,
   isps,
@@ -18,9 +16,9 @@ export const SpecificationBlock = ({
   noise,
   layout,
   thrust,
+  engines,
   wingtips,
   galley_ovens,
-  manufactured,
   base_airport,
 }: NormalizedOfferDataAircraft) => {
   return (
@@ -29,13 +27,14 @@ export const SpecificationBlock = ({
 
       <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-3 min-[1320px]:gap-[0_40px]">
         <OfferItem text="Type:" value={type} />
-        <OfferItem text="MSN:" value={msn} />
-        <OfferItem text="Reg:" value={reg} />
-        <OfferItem text="Manufactured:" value={manufactured} />
+        <OfferItem text="Engines:" value={engines} />
+      </div>
+
+      <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-3 min-[1320px]:gap-[0_40px]">
         <OfferItem text="Age:" value={age} />
       </div>
 
-      <OfferItem text="Base airport:" className="justify-start" value={base_airport} />
+      <OfferItem text="Base:" className="justify-start" value={base_airport} />
       <div className="grid grid-cols-1 gap-[0_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-3 min-[1320px]:gap-[0_40px]">
         <OfferItem text="PAX:" value={pax} />
         <OfferItem text="Layout:" value={layout} />
