@@ -1,8 +1,6 @@
 'use client';
 
-import { Formik } from 'formik';
-
-import { NormalizedOfferDataRFQ } from '@/types';
+import { Form, Formik } from 'formik';
 
 import {
   Button,
@@ -13,53 +11,27 @@ import {
   FieldMultiSelectAirport,
 } from '@/components';
 
+import { mockSelects } from './mock';
+import { RFQBlockProps } from './types';
 import { getDaysBetweenDates } from '../helpers';
 import { OfferItem, OfferTitle } from '../components';
+import { rfqValidationSchema } from './validationSchema';
 
-const mockSelects = [
-  { text: 'Option 1', value: 1 },
-  { text: 'Option 2', value: 2 },
-  { text: 'Option 3', value: 3 },
-  { text: 'Option 4', value: 4 },
-  { text: 'Option 5', value: 5 },
-];
-
-export interface RFQBlockProps extends NormalizedOfferDataRFQ {
-  isEditing?: boolean;
-  initialValues: {
-    fhFc: string;
-    minGBH: string;
-    operator: string;
-    position: string;
-    airportFrom: string;
-    airportTo: string[];
-    estimatedBH: string;
-    additionalRequest: string;
-    positioning: { text: string; value: number } | null;
-    perDiem: { text: string; value: number } | null;
-    dates: {
-      from: Date;
-      to: Date;
-    };
-  };
-}
-
-export const RFQBlock = ({
-  isEditing,
-
-  initialValues,
-}: RFQBlockProps) => {
-  console.log({ initialValues });
-
-  const onSubmit = () => {
-    console.log('send rfq');
+export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
+  const onSubmit = (values: RFQBlockProps['initialValues']) => {
+    console.log('send rfq', values);
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit} enableReinitialize>
+    <Formik
+      enableReinitialize
+      onSubmit={onSubmit}
+      initialValues={initialValues}
+      validationSchema={isEditing ? rfqValidationSchema : null}
+    >
       {({ values }) => {
         return (
-          <div className="flex flex-col gap-4 min-[968px]:gap-2">
+          <Form className="flex flex-col gap-4 min-[968px]:gap-2">
             <OfferTitle title="RFQ parameters:" />
 
             <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
@@ -124,12 +96,12 @@ export const RFQBlock = ({
               {!isEditing && (
                 <>
                   <OfferItem
-                    text="Minimum GBH:"
+                    text="Minimum GBH,$ :"
                     value={values.minGBH.toString()}
                     className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
                   />
                   <OfferItem
-                    text="FH/FC:"
+                    text="FH/FC,$:"
                     value={values.fhFc.toString()}
                     className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
                   />
@@ -138,9 +110,9 @@ export const RFQBlock = ({
 
               {isEditing && (
                 <>
-                  <FieldFleetInput variant="client" name="minGBH" label="Minimum GBH:" />
+                  <FieldFleetInput variant="client" name="minGBH" label="Minimum GBH,$ :" />
 
-                  <FieldFleetInput variant="client" name="fhFc" label="FH/FC:" />
+                  <FieldFleetInput variant="client" name="fhFc" label="FH/FC,$ :" />
                 </>
               )}
             </div>
@@ -150,7 +122,7 @@ export const RFQBlock = ({
                 {!isEditing && (
                   <>
                     <OfferItem
-                      text="Estimated BH:"
+                      text="Estimated BH,$ :"
                       value={values.estimatedBH.toString()}
                       className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
                     />
@@ -169,7 +141,7 @@ export const RFQBlock = ({
 
                 {isEditing && (
                   <>
-                    <FieldFleetInput variant="client" name="estimatedBH" label="Estimated BH:" />
+                    <FieldFleetInput variant="client" name="estimatedBH" label="Estimated BH,$ :" />
 
                     <FieldClientSelect
                       name="positioning"
@@ -204,7 +176,7 @@ export const RFQBlock = ({
                 </>
               )}
             </>
-          </div>
+          </Form>
         );
       }}
     </Formik>

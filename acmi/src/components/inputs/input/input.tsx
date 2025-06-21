@@ -21,9 +21,10 @@ export const Input = ({
   onChange,
   ...props
 }: InputProps) => {
-  const wrapper = cn(
-    'bg-white flex gap-2 has-[input:focus]:border-[3px] has-[input:focus]:px-[10px] has-[input:focus]:py-[7px] text-[16px] rounded-xl border-[1px] border-blue-dark leading-[20px] w-full px-3 py-[9px] font-inter',
-    className,
+  const wrapperClass = cn('w-full', className);
+
+  const inputClass = cn(
+    'bg-transparent flex gap-2 has-[input:focus]:border-[3px] has-[input:focus]:px-[10px] has-[input:focus]:py-[7px] text-[16px] rounded-xl border-[1px] border-blue-dark leading-[20px] w-full px-3 py-[9px] font-inter',
     error && 'border-red-400'
   );
 
@@ -40,14 +41,19 @@ export const Input = ({
   };
 
   return (
-    <label className={wrapper}>
-      <span className="text-blue-dark w-max max-w-1/2 shrink-0 font-bold text-nowrap">{label}</span>
+    <label className={wrapperClass}>
+      <div className={inputClass}>
+        <span className="text-blue-dark w-max max-w-1/2 shrink-0 font-bold text-nowrap">
+          {label}
+        </span>
 
-      <input
-        {...props}
-        className="text-gray-dark w-full min-w-1/2 font-bold outline-none"
-        onChange={onHandleChange}
-      />
+        <input
+          {...props}
+          className="text-gray-dark w-full min-w-1/2 font-bold outline-none"
+          onChange={onHandleChange}
+        />
+      </div>
+      {error && <p className="text-[12px] text-red-400">{error}</p>}
     </label>
   );
 };
