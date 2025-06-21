@@ -1,8 +1,8 @@
 export const getInitialValues = ({
-  airports,
+  airport,
   dates,
 }: {
-  airports: string;
+  airport: string;
   dates: [string | null, string | null];
 }) => {
   return {
@@ -12,7 +12,7 @@ export const getInitialValues = ({
     minGBH: '',
     perDiem: '',
     estimatedBH: '',
-    airportTo: '',
+    airportTo: [],
     additionalRequest: '',
     positioning: '',
     datesFrom: dates[0] ? new Date(Number(dates[0])).toLocaleDateString() : null,
@@ -23,6 +23,6 @@ export const getInitialValues = ({
           year: 'numeric',
         })
       : null,
-    airportFrom: airports,
+    airportFrom: airport,
   };
 };

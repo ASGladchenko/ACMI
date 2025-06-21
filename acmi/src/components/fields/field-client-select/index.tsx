@@ -3,30 +3,28 @@
 import { Field, FieldProps } from 'formik';
 
 import { controlFormikError } from '@/utils';
-import {
-  MultiSelectAirport,
-  MultiSelectAirportProps,
-} from '@/components/selects/multi-select-airport';
+import { SelectClient, ISelectOption } from '@/components';
+import { SelectClientProps } from '@/components/selects/select-client';
 
-interface FieldMultiSelectAirportProps
-  extends Omit<MultiSelectAirportProps, 'error' | 'onChange' | 'selected'> {
+interface FieldClientSelectProps
+  extends Omit<SelectClientProps, 'error' | 'onChange' | 'selected'> {
   name: string;
 }
 
-export const FieldMultiSelectAirport = ({ name, ...props }: FieldMultiSelectAirportProps) => {
+export const FieldClientSelect = ({ name, ...props }: FieldClientSelectProps) => {
   return (
     <Field name={name}>
       {({ field: { value, ...fieldProps }, meta, form }: FieldProps) => {
         const error = controlFormikError(meta, name, props.label);
 
-        const change = async (options: (string | number)[]) => {
+        const change = async (options: ISelectOption | null) => {
           if (name) {
             await form.setFieldValue(name, options);
           }
         };
 
         return (
-          <MultiSelectAirport
+          <SelectClient
             {...fieldProps}
             {...props}
             error={error}

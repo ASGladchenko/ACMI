@@ -37,7 +37,7 @@ export const SuggestionCard = ({
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
 
   const initialValues = getInitialValues({
-    airports: queries.airport_code,
+    airport: queries.airport_code,
     dates: [queries.date_from, queries.date_to],
   });
   const classLabel =

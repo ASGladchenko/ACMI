@@ -10,12 +10,13 @@ import { cn, toUTCDate, fixUTCDateForDatePicker } from '@/utils';
 import { CustomInput } from './custom-input';
 import { CustomHeaderDatePiker } from './custom-header';
 
-import './style.css';
 import 'react-datepicker/dist/react-datepicker.css';
+import './style.css';
 
 export interface DateOpsFromProps {
   label?: string;
   minDate?: Date;
+  error?: string;
   maxDate?: Date;
   portalId?: string;
   className?: string;
@@ -28,6 +29,7 @@ const initialMaxDate = new Date();
 initialMaxDate.setFullYear(initialMaxDate.getFullYear() + 10);
 
 export const DateOpsFrom = ({
+  error,
   portalId,
   onChange,
   className,
@@ -70,6 +72,7 @@ export const DateOpsFrom = ({
     <div className={cn('date-search w-full [&>div]:w-full', className)}>
       <CustomInput
         label={label}
+        error={error}
         endDate={endDate}
         onClear={onClear}
         startDate={startDate}
@@ -77,30 +80,32 @@ export const DateOpsFrom = ({
         onClick={() => setIsOpen(true)}
       />
 
-      <RemoveScroll enabled={isOpen}>
-        <Modal isOpen={isOpen} onClose={() => onCloseCalendar([startDate, endDate])}>
-          <div className="picker-modal flex h-[300px] w-[600px] max-[768px]:h-[600px] max-[768px]:w-[290px]">
-            <DatePicker
-              inline
-              selectsRange
-              monthsShown={2}
-              endDate={endDate}
-              minDate={minDate}
-              maxDate={maxDate}
-              portalId={portalId}
-              startDate={startDate}
-              calendarStartDay={0}
-              dateFormat="dd/MM/yyyy"
-              onChange={onHandleChange}
-              onCalendarClose={() => onCloseCalendar([startDate, endDate])}
-              onCalendarOpen={() => setIsOpen(true)}
-              renderCustomHeader={({ ...props }) => (
-                <CustomHeaderDatePiker minDate={minDate} maxDate={maxDate} {...props} />
-              )}
-            />
-          </div>
-        </Modal>
-      </RemoveScroll>
+      {isOpen && (
+        <RemoveScroll enabled={isOpen}>
+          <Modal isOpen={isOpen} onClose={() => onCloseCalendar([startDate, endDate])}>
+            <div className="picker-modal flex h-[300px] w-[600px] max-[768px]:h-[600px] max-[768px]:w-[290px]">
+              <DatePicker
+                inline
+                selectsRange
+                monthsShown={2}
+                endDate={endDate}
+                minDate={minDate}
+                maxDate={maxDate}
+                portalId={portalId}
+                startDate={startDate}
+                calendarStartDay={0}
+                dateFormat="dd/MM/yyyy"
+                onChange={onHandleChange}
+                onCalendarClose={() => onCloseCalendar([startDate, endDate])}
+                onCalendarOpen={() => setIsOpen(true)}
+                renderCustomHeader={({ ...props }) => (
+                  <CustomHeaderDatePiker minDate={minDate} maxDate={maxDate} {...props} />
+                )}
+              />
+            </div>
+          </Modal>
+        </RemoveScroll>
+      )}
     </div>
   );
 };
