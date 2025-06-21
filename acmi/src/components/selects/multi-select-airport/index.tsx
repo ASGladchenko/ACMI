@@ -15,12 +15,14 @@ export interface MultiSelectAirportProps
     'selectedOption' | 'renderOptions' | 'renderSelected' | 'onChange' | 'options'
   > {
   label: string;
+  error?: string;
   selected: string[];
   onChange: (option: (string | number)[]) => void;
 }
 
 export const MultiSelectAirport = ({
   label,
+  error,
   selected,
   onChange,
   className,
@@ -56,6 +58,7 @@ export const MultiSelectAirport = ({
       renderOptions={({ ...props }) => (
         <Options
           {...props}
+          error={error}
           filter={filter}
           isLoading={loading}
           setFilter={setFilter}
@@ -67,6 +70,7 @@ export const MultiSelectAirport = ({
       renderSelected={({ option, ...props }) => (
         <Selected
           label={label}
+          error={error}
           isDisabled={isDisabled}
           onChange={handleDeleteSelected}
           option={option as ISelectOption[]}

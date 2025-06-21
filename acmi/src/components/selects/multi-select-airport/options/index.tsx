@@ -5,6 +5,7 @@ import { ISelectOption, IRenderOptionsProps } from '../../select-logic/types';
 
 export interface OptionsProps extends IRenderOptionsProps {
   filter: string;
+  error?: string;
   isLoading?: boolean;
   debouncedFilter: string;
   selectedOption: ISelectOption[];
@@ -13,8 +14,9 @@ export interface OptionsProps extends IRenderOptionsProps {
 }
 
 export const Options = ({
-  isOpen,
+  error,
   filter,
+  isOpen,
   options,
   onChange,
   isLoading,
@@ -28,7 +30,8 @@ export const Options = ({
 
   const cl = cn(
     'border-blue-dark text-blue-dark w-full rounded-[0_0_12px_12px] border border-t-0 bg-white px-3 pb-2.5',
-    isOpen && 'border-[3px] border-t-0'
+    isOpen && 'border-[3px] border-t-0',
+    error && 'border-red-400'
   );
 
   const filteredOptions = options.filter((option) => {

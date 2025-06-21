@@ -12,9 +12,7 @@ export const validationSchema = Yup.object().shape({
   }),
   thrust: Yup.string().required('Thrust is required'),
   date: Yup.date().nullable().required('Manufactured date is required'),
-  isActive: Yup.boolean()
-    .oneOf([true], 'Aircraft must be active to be saved')
-    .required('Active status is required'),
+  isActive: Yup.boolean(),
   aircraftType: Yup.string().nullable(),
   etops: Yup.string().nullable().required('ETOPS is required'),
   ilsCategory: Yup.string().nullable().required('ILS Category is required'),
@@ -28,28 +26,7 @@ export const validationSchema = Yup.object().shape({
 });
 
 export const getInitialValues = (values: typeof initialValuesMock) => {
-  const layoutValues = {
-    economy: {
-      seats: values?.layoutValues?.economy?.seats || '',
-      pitch: values?.layoutValues?.economy?.pitch || '',
-    },
-    transformer: {
-      seats: values?.layoutValues?.transformer?.seats || '',
-      pitch: values?.layoutValues?.transformer?.pitch || '',
-    },
-    premium: {
-      seats: values?.layoutValues?.premium?.seats || '',
-      pitch: values?.layoutValues?.premium?.pitch || '',
-    },
-    business: {
-      seats: values?.layoutValues?.business?.seats || '',
-      pitch: values?.layoutValues?.business?.pitch || '',
-    },
-    first: {
-      seats: values?.layoutValues?.first?.seats || '',
-      pitch: values?.layoutValues?.first?.pitch || '',
-    },
-  };
+  const layoutValues = createLayoutValues(values);
 
   const layout = getSummarySeats(layoutValues);
 
@@ -76,28 +53,43 @@ export const getInitialValues = (values: typeof initialValuesMock) => {
 };
 
 export const initialValuesMock = {
-  msn: '',
-  reg: '',
-  mtow: '',
-  ops: { value: '', text: '' },
-  thrust: '',
-  date: null,
+  msn: '12345',
+  reg: 'A-TEST',
+  mtow: '75000',
+  ops: { value: 'LED', text: 'St. Petersburg' },
+  thrust: '24500',
+  date: new Date('2020-01-15'),
   isActive: false,
-  aircraftType: null,
-  etops: null,
-  ilsCategory: null,
-  noiseStage: null,
+  aircraftType: 'A320',
+  etops: 2,
+  ilsCategory: 4,
+  noiseStage: 3,
   act: true,
   ife: true,
   isps: false,
   galleys: false,
   sharklets: false,
-  layout: 12,
+  layout: 150,
   layoutValues: {
-    economy: { seats: '', pitch: '' },
-    transformer: { seats: '', pitch: '' },
+    economy: { seats: '144', pitch: '30' },
+    transformer: { seats: '6', pitch: '32' },
     premium: { seats: '', pitch: '' },
     business: { seats: '', pitch: '' },
     first: { seats: '', pitch: '' },
   },
 };
+
+function createLayoutValues(values: typeof initialValuesMock) {
+  const sectionTypes = ['economy', 'transformer', 'premium', 'business', 'first'] as const;
+
+  return sectionTypes.reduce(
+    (acc, sectionType) => {
+      acc[sectionType] = {
+        seats: values?.layoutValues?.[sectionType]?.seats || '',
+        pitch: values?.layoutValues?.[sectionType]?.pitch || '',
+      };
+      return acc;
+    },
+    {} as Record<(typeof sectionTypes)[number], { seats: string; pitch: string }>
+  );
+}

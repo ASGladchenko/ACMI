@@ -7,6 +7,7 @@ import { IRenderSelectedProps, ISelectOption } from '../../select-logic/types';
 
 export interface SelectedProps extends Omit<IRenderSelectedProps, 'option'> {
   label: string;
+  error?: string;
   filter: string;
   isDisabled?: boolean;
   option: ISelectOption[];
@@ -16,6 +17,7 @@ export interface SelectedProps extends Omit<IRenderSelectedProps, 'option'> {
 
 export const Selected = ({
   label,
+  error,
   filter,
   isOpen,
   option,
@@ -35,7 +37,8 @@ export const Selected = ({
 
   const wrapper = cn(
     'flex w-full items-center gap-2 bg-white border-[1px] rounded-xl border-blue-dark px-3 py-[7px]',
-    isOpen && 'rounded-[12px_12px_0_0] border-[3px] border-b-0 pt-[5px] px-[10px] pb-[8px]'
+    isOpen && 'rounded-[12px_12px_0_0] border-[3px] border-b-0 pt-[5px] px-[10px] pb-[8px]',
+    error && 'border-red-400'
   );
 
   const isNotEmpty = option && option.length > 0;

@@ -13,18 +13,20 @@ export interface SelectClientProps
     'selectedOption' | 'renderOptions' | 'renderSelected' | 'onChange'
   > {
   label: string;
+  error?: string;
   selected: ISelectOption | null;
   onChange: (option: ISelectOption | null) => void;
 }
 
 export const SelectClient = ({
   label,
+  error,
+  options,
   selected,
   onChange,
   className,
   isLoading,
   isDisabled,
-  options,
   ...restProps
 }: SelectClientProps) => {
   const [filter, setFilter] = useState('');
@@ -42,11 +44,18 @@ export const SelectClient = ({
       options={filteredOptions}
       selectedOption={selected}
       renderOptions={({ ...props }) => (
-        <Options {...props} isLoading={isLoading} onChange={onChange} setFilter={setFilter} />
+        <Options
+          {...props}
+          error={error}
+          isLoading={isLoading}
+          onChange={onChange}
+          setFilter={setFilter}
+        />
       )}
       renderSelected={({ ...props }) => (
         <Selected
           label={label}
+          error={error}
           filter={filter}
           onChange={onChange}
           setFilter={setFilter}

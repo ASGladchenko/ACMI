@@ -1,10 +1,10 @@
 import { NormalizedOfferData } from '@/types';
 import { SpecificationBlock } from '../specification-block';
 import { ProviderBlock } from '../provider-block';
-import { RFQBlock } from '../rfq-block';
+// import { RFQBlock } from '../rfq-block';
 import { OfferTermsBlock } from '../offer-terms-block';
 import { Button } from '@/components/button';
-import { mockOfferTermsData, mockProviderData, mockRFQData } from '../mock';
+import { mockOfferTermsData, mockProviderData } from '../mock';
 
 export const Specification = ({ aircraft }: NormalizedOfferData) => {
   return (
@@ -16,9 +16,9 @@ export const Specification = ({ aircraft }: NormalizedOfferData) => {
 
         <ProviderBlock {...mockProviderData} withProviderContacts />
 
-        <RFQBlock {...mockRFQData} />
+        {/* <RFQBlock {...mockRFQData} />
 
-        <RFQBlock {...mockRFQData} isEditing />
+        <RFQBlock {...mockRFQData} isEditing /> */}
 
         <OfferTermsBlock {...mockOfferTermsData} />
 

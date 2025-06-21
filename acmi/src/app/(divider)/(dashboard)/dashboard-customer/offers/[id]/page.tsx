@@ -1,10 +1,12 @@
 import { Button, RFQBlock, ProviderBlock, OfferTermsBlock, SpecificationBlock } from '@/components';
 import {
-  mockRFQData,
   mockAircraft,
+  // mockRFQData,
   mockProviderData,
   mockOfferTermsData,
 } from '@/components/specification/mock';
+
+import { getInitialValues } from './config';
 
 export default function OfferByIdPage() {
   return (
@@ -13,7 +15,7 @@ export default function OfferByIdPage() {
 
       <ProviderBlock withProviderContacts {...mockProviderData} />
 
-      <RFQBlock {...mockRFQData} />
+      <RFQBlock initialValues={getInitialValues()} />
 
       <OfferTermsBlock {...mockOfferTermsData} />
 

@@ -5,13 +5,15 @@ import Image, { StaticImageData } from 'next/image';
 
 import { Cross } from '@/assets/svg';
 import { plain } from '@/assets/webp';
-import { FindOffersNormalizedProps, Role } from '@/types';
+import { useQueryStore } from '@/store/query-store';
+import { Role, FindOffersNormalizedProps } from '@/types';
 
 import { Modal } from '../modal';
 import { Button } from '../button';
+import { getInitialValues } from './config';
 import { AvailabilityBadge } from '../badges';
-import { ProviderBlock, RFQBlock, SpecificationBlock } from '../specification';
-import { mockRFQData, mockAircraft, mockProviderData } from '../specification/mock';
+import { mockAircraft, mockProviderData } from '../specification/mock';
+import { RFQBlock, ProviderBlock, SpecificationBlock } from '../specification';
 
 import './styles.css';
 
@@ -29,19 +31,22 @@ export const SuggestionCard = ({
   imageUrl,
   role = Role.GUEST,
 }: SuggestionCardProps) => {
+  const { queries } = useQueryStore();
+
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
+
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
 
+  const initialValues = getInitialValues({
+    airport: queries.airport_code,
+    dates: [queries.date_from, queries.date_to],
+  });
   const classLabel =
     'font-montserrat text-[22px] min-w-[92px] leading-[26px] text-nowrap max-[768px]:text-[16px] max-[768px]:leading-[20px]';
   const classValue =
     'w-full font-montserrat text-[22px] font-bold leading-[26px] max-[768px]:text-[14px] max-[768px]:leading-[20px]';
 
   const classItem = 'flex gap-4 ';
-
-  const onSendRFQ = () => {
-    console.log('send rfq');
-  };
 
   return (
     <>
@@ -119,18 +124,14 @@ export const SuggestionCard = ({
 
           <AvailabilityBadge className="ml-auto max-w-max" />
 
-          <div className="scroll-bar-mini flex h-[calc(100%-100px)] flex-col gap-6 overflow-x-hidden overflow-y-auto px-20 max-[1024px]:px-0">
+          <div className="scroll-bar-mini flex h-[calc(100%-100px)] flex-col gap-6 overflow-x-hidden overflow-y-auto px-20 max-[1200px]:px-0">
             <SpecificationBlock {...mockAircraft} />
 
             <ProviderBlock {...mockProviderData} />
 
             {role !== 'guest' && (
               <>
-                <RFQBlock {...mockRFQData} isEditing />
-
-                <Button className="mx-auto max-w-max" onClick={onSendRFQ}>
-                  Send RFQ
-                </Button>
+                <RFQBlock initialValues={initialValues} isEditing />
               </>
             )}
 

@@ -7,6 +7,7 @@ import { Cross } from '@/assets/svg';
 export interface CustomInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   label: string;
   type?: string;
+  error?: string;
   className?: string;
   onClear: () => void;
   endDate?: Date | null;
@@ -15,10 +16,11 @@ export interface CustomInputProps extends Omit<InputHTMLAttributes<HTMLInputElem
 }
 
 export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
-  ({ label, startDate, endDate, className, onChange, onClear, ...props }, ref) => {
+  ({ label, error, startDate, endDate, className, onChange, onClear, ...props }, ref) => {
     const wrapper = cn(
       'bg-white flex items-center gap-2 text-[16px] rounded-xl border-[1px] border-blue-dark leading-[19px] w-full px-3 py-2.5 cursor-pointer',
-      className
+      className,
+      error && 'border-red-400'
     );
 
     const spanClass =

@@ -10,12 +10,14 @@ import { IRenderSelectedProps } from '../../select-logic/types';
 
 export interface SelectedProps extends Omit<IRenderSelectedProps, 'option'> {
   label: string;
-  option: ISelectOption[];
+  error?: string;
   isDisabled?: boolean;
+  option: ISelectOption[];
   onChange: (option: string[]) => void;
 }
 
 export const Selected = ({
+  error,
   label,
   isOpen,
   option,
@@ -35,7 +37,8 @@ export const Selected = ({
   const wrapper = cn(
     'w-full bg-white flex border-[1px] rounded-xl border-blue-dark px-3 py-[7px] items-center gap-2 overflow-hidden cursor-pointer',
     isOpen && 'rounded-[12px_12px_0_0] border-[3px] border-b-0 pt-[5px] px-[10px] pb-[8px]',
-    isDisabled && 'cursor-not-allowed'
+    isDisabled && 'cursor-not-allowed',
+    error && 'border-red-400'
   );
 
   useEffect(() => {
