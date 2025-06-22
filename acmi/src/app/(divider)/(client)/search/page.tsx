@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+import { cookies } from 'next/headers';
 
 import { apiRedirect } from '@/utils';
 import { PaginatedSuggestionList } from '@/components';
@@ -6,7 +7,6 @@ import { Role, SearchParams, FindOffersResponse } from '@/types';
 import { apiServer, serializeQuery, normalizeFindOffers } from '@/fetch-request';
 
 export const dynamic = 'force-dynamic';
-import { cookies } from 'next/headers';
 
 export default async function Home({ searchParams }: SearchParams) {
   const params = await searchParams;
