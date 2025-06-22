@@ -1,10 +1,7 @@
 import { Button, RFQBlock, ProviderBlock, OfferTermsBlock, SpecificationBlock } from '@/components';
-import {
-  mockRFQData,
-  mockAircraft,
-  mockProviderData,
-  mockOfferTermsData,
-} from '@/components/specification/mock';
+import { mockAircraft, mockProviderData } from '@/components/specification/mock';
+
+import { getOfferInitial, getInitialValues } from './config';
 
 export default function OfferByIdPage() {
   return (
@@ -13,9 +10,9 @@ export default function OfferByIdPage() {
 
       <ProviderBlock withProviderContacts {...mockProviderData} />
 
-      <RFQBlock {...mockRFQData} />
+      <RFQBlock initialValues={getInitialValues()} />
 
-      <OfferTermsBlock {...mockOfferTermsData} />
+      <OfferTermsBlock initialValues={getOfferInitial()} />
 
       <div className="flex items-center justify-center gap-6 max-[568px]:flex-col max-[568px]:gap-4">
         <Button className="max-w-max max-[568px]:max-w-full">Negotiate contract draft</Button>

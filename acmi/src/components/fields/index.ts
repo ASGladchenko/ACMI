@@ -1,3 +1,5 @@
+export { FieldClientSelect } from './field-client-select';
+export { FieldDateOpsFrom } from './field-date-ops-from';
 export { FieldFleetAirport } from './field-fleet-airport';
 export { FieldFleetCheckbox } from './field-fleet-checkbox';
 export { FieldFleetDatePicker } from './field-fleet-date-picker';
@@ -5,3 +7,6 @@ export { FieldFleetInput } from './field-fleet-input';
 export { FieldFleetLayoutBlock } from './field-fleet-layout-block';
 export { FieldFleetSelect } from './field-fleet-select';
 export { FieldFleetSwitcher } from './field-fleet-switcher';
+export { FieldMultiSelectAirport } from './field-multi-select-airport';
+export { FieldMultiSelectClient } from './field-multi-select-client';
+export { FieldTextArea } from './field-text-area';

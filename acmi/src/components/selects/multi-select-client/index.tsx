@@ -11,6 +11,7 @@ export interface MultiSelectClientProps
     SelectLogicWrapperProps,
     'selectedOption' | 'renderOptions' | 'renderSelected' | 'onChange'
   > {
+  error?: string;
   label: string;
   selected: ISelectOption[];
   onChange: (option: ISelectOption[]) => void;
@@ -18,6 +19,7 @@ export interface MultiSelectClientProps
 
 export const MultiSelectClient = ({
   label,
+  error,
   options,
   onChange,
   isLoading,
@@ -55,6 +57,7 @@ export const MultiSelectClient = ({
       renderOptions={({ ...props }) => (
         <Options
           {...props}
+          error={error}
           selected={selected}
           isLoading={isLoading}
           onChange={handleOptionChange}
@@ -64,6 +67,7 @@ export const MultiSelectClient = ({
         <Selected
           {...props}
           label={label}
+          error={error}
           filter={filter}
           setFilter={setFilter}
           isDisabled={isDisabled}

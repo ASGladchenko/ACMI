@@ -1,10 +1,7 @@
-import { RFQBlock, ProviderBlock, SpecificationBlock, OfferTermsBlock, Button } from '@/components';
-import {
-  mockRFQData,
-  mockAircraft,
-  mockProviderData,
-  mockOfferTermsData,
-} from '@/components/specification/mock';
+import { mockAircraft, mockProviderData } from '@/components/specification/mock';
+import { RFQBlock, ProviderBlock, OfferTermsBlock, SpecificationBlock } from '@/components';
+
+import { getOfferInitial, getInitialValues } from './config';
 
 export default function RFQRequestsId() {
   return (
@@ -13,11 +10,9 @@ export default function RFQRequestsId() {
 
       <ProviderBlock withProviderContacts {...mockProviderData} />
 
-      <RFQBlock {...mockRFQData} />
+      <RFQBlock initialValues={getInitialValues()} />
 
-      <OfferTermsBlock {...mockOfferTermsData} isEditing />
-
-      <Button className="mx-auto mt-4 max-w-max">Send offer and share contact details</Button>
+      <OfferTermsBlock initialValues={getOfferInitial()} isEditing />
     </section>
   );
 }

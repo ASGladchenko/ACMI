@@ -33,10 +33,10 @@ export const SelectAirport = ({
   return (
     <SelectLogic
       {...restProps}
+      options={options}
       className={className}
       isLoading={isLoading}
       isDisabled={isDisabled}
-      options={options}
       selectedOption={selected ? ({ value: selected, text: selected } as ISelectOption) : null}
       renderOptions={({ ...props }) => (
         <Options {...props} filter={debouncedFilter} isLoading={loading} onChange={onChange} />

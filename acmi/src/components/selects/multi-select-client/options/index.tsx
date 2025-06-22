@@ -5,17 +5,26 @@ import { Cross } from '@/assets/svg';
 import { IRenderOptionsProps, ISelectOption } from '../../select-logic/types';
 
 export interface OptionsProps extends IRenderOptionsProps {
+  error?: string;
   isLoading?: boolean;
   selected: ISelectOption[];
   onChange: (option: ISelectOption) => void;
 }
 
-export const Options = ({ options, isLoading, selected, onChange, isOpen }: OptionsProps) => {
+export const Options = ({
+  error,
+  isOpen,
+  options,
+  selected,
+  onChange,
+  isLoading,
+}: OptionsProps) => {
   const isEmpty = options.length === 0;
 
   const cl = cn(
     'border-blue-dark text-blue-dark w-full rounded-[0_0_12px_12px] border border-t-0 bg-white px-3 pb-2.5',
-    isOpen && 'border-[3px] border-t-0'
+    isOpen && 'border-[3px] border-t-0',
+    error && 'border-red-400'
   );
 
   return (

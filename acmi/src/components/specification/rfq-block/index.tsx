@@ -1,203 +1,185 @@
 'use client';
 
-import { useState } from 'react';
+import { format } from 'date-fns';
+import { Form, Formik } from 'formik';
 
-import { NormalizedOfferDataRFQ } from '@/types';
 import {
-  Input,
-  TextArea,
-  DateOpsFrom,
-  SelectClient,
-  SelectAirport,
-  MultiSelectAirport,
+  Button,
+  FieldTextArea,
+  FieldFleetInput,
+  FieldDateOpsFrom,
+  FieldClientSelect,
+  FieldMultiSelectAirport,
 } from '@/components';
 
+import { mockSelects } from './mock';
+import { RFQBlockProps } from './types';
 import { getDaysBetweenDates } from '../helpers';
 import { OfferItem, OfferTitle } from '../components';
+import { rfqValidationSchema } from './validationSchema';
 
-export interface RFQBlockProps extends NormalizedOfferDataRFQ {
-  isEditing?: boolean;
-}
-
-export const RFQBlock = ({
-  fhFc,
-  minGBH,
-  datesTo,
-  perDiem,
-  operator,
-  position,
-  datesFrom,
-  isEditing,
-  airportTo,
-  positioning,
-  estimatedBH,
-  airportFrom,
-  additionalRequest,
-}: RFQBlockProps) => {
-  const [airportTo1, setAirportTo1] = useState<string[]>([]);
-
-  const [date, setDate] = useState<[Date | null, Date | null]>([
-    new Date(datesFrom),
-    new Date(datesTo),
-  ]);
+export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
+  const onSubmit = (values: RFQBlockProps['initialValues']) => {
+    console.log('send rfq', values);
+  };
 
   return (
-    <div className="flex flex-col gap-4 min-[968px]:gap-2">
-      <OfferTitle title="RFQ parameters:" />
+    <Formik
+      enableReinitialize
+      onSubmit={onSubmit}
+      initialValues={initialValues}
+      validationSchema={isEditing ? rfqValidationSchema : null}
+    >
+      {({ values }) => {
+        return (
+          <Form className="flex flex-col gap-4 min-[968px]:gap-2">
+            <OfferTitle title="RFQ parameters:" />
 
-      <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
-        <OfferItem
-          text="Operator:"
-          value={operator}
-          className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-        />
-        <OfferItem
-          value={position}
-          text="Requester position:"
-          className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-        />
-      </div>
+            <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
+              <OfferItem
+                text="Operator:"
+                value={values.operator}
+                className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+              />
+              <OfferItem
+                value={values.position}
+                text="Requester position:"
+                className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+              />
+            </div>
 
-      <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
-        {!isEditing && (
-          <>
-            <OfferItem
-              text="Ops Base airport:"
-              value={airportFrom}
-              className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-            />
-            <OfferItem
-              value={airportTo}
-              text="Outstations:"
-              className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-            />
-          </>
-        )}
+            <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
+              <OfferItem
+                text="Ops Base airport:"
+                value={values.airportFrom}
+                className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+              />
 
-        {isEditing && (
-          <>
-            <SelectAirport onChange={() => {}} label="Ops Base airport:" selected={airportFrom} />
+              {!isEditing && (
+                <OfferItem
+                  text="Outstations:"
+                  value={values.airportTo.join(', ')}
+                  className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                />
+              )}
 
-            <MultiSelectAirport
-              label="Outstations: "
-              selected={airportTo1}
-              onChange={(option) => setAirportTo1(option as string[])}
-            />
-          </>
-        )}
-      </div>
+              {isEditing && <FieldMultiSelectAirport name="airportTo" label="Outstations :" />}
+            </div>
 
-      <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
-        {!isEditing && (
-          <>
-            <OfferItem
-              text="Dates (inclusive):"
-              value={`${datesFrom} - ${datesTo}`}
-              className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-            />
-            <OfferItem
-              text="Period:"
-              value={`${getDaysBetweenDates(date[0]!, date[1]!)} day(s)`}
-              className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-            />
-          </>
-        )}
+            <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
+              <>
+                {!isEditing && (
+                  <OfferItem
+                    text="Dates (inclusive):"
+                    className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                    value={`${format(values.dates.from, 'dd MMM yyyy')} - ${format(values.dates.to, 'dd MMM yyyy')}`}
+                  />
+                )}
 
-        {isEditing && (
-          <>
-            <DateOpsFrom
-              onChange={setDate}
-              initialEnd={date[1]}
-              initialStart={date[0]}
-              label="Dates (inclusive):"
-              minDate={new Date(date[0]!)}
-              maxDate={new Date(date[1]!)}
-            />
+                {isEditing && (
+                  <FieldDateOpsFrom
+                    name="dates"
+                    label="Dates (inclusive):"
+                    minDate={new Date(initialValues.dates.from)}
+                    maxDate={new Date(initialValues.dates.to)}
+                  />
+                )}
 
-            <OfferItem
-              text="Period:"
-              value={`${getDaysBetweenDates(date[0]!, date[1]!)} day(s)`}
-              className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-            />
-          </>
-        )}
-      </div>
+                <OfferItem
+                  text="Period:"
+                  value={`${getDaysBetweenDates(values.dates.from, values.dates.to)} day(s)`}
+                  className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                />
+              </>
+            </div>
 
-      <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
-        {!isEditing && (
-          <>
-            <OfferItem
-              text="Minimum GBH:"
-              value={minGBH.toString()}
-              className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-            />
-            <OfferItem
-              text="FH/FC:"
-              value={fhFc.toString()}
-              className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-            />
-          </>
-        )}
+            <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
+              {!isEditing && (
+                <>
+                  <OfferItem
+                    text="Minimum GBH:"
+                    value={values.minGBH.toString()}
+                    className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                  />
+                  <OfferItem
+                    text="FH/FC:"
+                    value={values.fhFc.toString()}
+                    className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                  />
+                </>
+              )}
 
-        {isEditing && (
-          <>
-            <Input onChange={() => {}} label="Minimum GBH:" value={minGBH.toString()} />
+              {isEditing && (
+                <>
+                  <FieldFleetInput variant="client" name="minGBH" label="Minimum GBH:" />
 
-            <Input onChange={() => {}} label="FH/FC:" value={fhFc.toString()} />
-          </>
-        )}
-      </div>
+                  <FieldFleetInput variant="client" name="fhFc" label="FH/FC:" />
+                </>
+              )}
+            </div>
 
-      <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
-        <div className="flex flex-col gap-2.5">
-          {!isEditing && (
+            <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
+              <div className="flex flex-col gap-2.5">
+                {!isEditing && (
+                  <>
+                    <OfferItem
+                      text="Estimated BH:"
+                      value={values.estimatedBH.toString()}
+                      className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                    />
+                    <OfferItem
+                      text="Positioning:"
+                      value={values.positioning?.text || ''}
+                      className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                    />
+                    <OfferItem
+                      text="Per diem:"
+                      value={values.perDiem?.text || ''}
+                      className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                    />
+                  </>
+                )}
+
+                {isEditing && (
+                  <>
+                    <FieldFleetInput variant="client" name="estimatedBH" label="Estimated BH:" />
+
+                    <FieldClientSelect
+                      name="positioning"
+                      label="Positioning:"
+                      options={mockSelects}
+                    />
+
+                    <FieldClientSelect name="perDiem" options={mockSelects} label="Per diem:" />
+                  </>
+                )}
+              </div>
+            </div>
             <>
               <OfferItem
-                text="Estimated BH:"
-                value={estimatedBH.toString()}
-                className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
+                text="Additional request:"
+                value={isEditing ? '' : values.additionalRequest}
+                className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
               />
-              <OfferItem
-                text="Positioning:"
-                value={positioning}
-                className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-              />
-              <OfferItem
-                text="Per diem:"
-                value={perDiem}
-                className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-              />
+
+              {isEditing && (
+                <>
+                  <FieldTextArea
+                    rows={3}
+                    disabled={!isEditing}
+                    name="additionalRequest"
+                    placeholder={isEditing ? 'Additional request' : ''}
+                  />
+
+                  <Button className="mx-auto max-w-max" type="submit">
+                    Send RFQ
+                  </Button>
+                </>
+              )}
             </>
-          )}
-
-          {isEditing && (
-            <>
-              <Input onChange={() => {}} label="Estimated BH:" value={estimatedBH} />
-
-              <SelectClient options={[]} selected={null} onChange={() => {}} label="Positioning:" />
-
-              <SelectClient options={[]} selected={null} onChange={() => {}} label="Per diem:" />
-            </>
-          )}
-        </div>
-      </div>
-      <>
-        <OfferItem
-          text="Additional request:"
-          value={isEditing ? '' : additionalRequest}
-          className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
-        />
-
-        {isEditing && (
-          <TextArea
-            rows={3}
-            onChange={() => {}}
-            disabled={!isEditing}
-            value={additionalRequest}
-            placeholder={isEditing ? 'Additional request' : ''}
-          />
-        )}
-      </>
-    </div>
+          </Form>
+        );
+      }}
+    </Formik>
   );
 };

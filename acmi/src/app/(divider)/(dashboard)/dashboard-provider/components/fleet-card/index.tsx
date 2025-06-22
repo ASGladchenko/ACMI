@@ -39,6 +39,12 @@ export const FleetCard = ({ isLoading, id }: FleetCardProps) => {
     }
   }, [ref]);
 
+  const onSendActive = async (id: string, value: boolean) => {
+    setTimeout(() => {
+      console.log({ id, value });
+    }, 1000);
+  };
+
   const onSubmit = (values: typeof initialValues) => {
     console.log({ isLoading });
 
@@ -86,7 +92,7 @@ export const FleetCard = ({ isLoading, id }: FleetCardProps) => {
                 <div className="ml-auto flex gap-7 max-[968px]:max-w-max">
                   <p className="font-inter text-blue-deep text-[16px] font-bold">Active</p>
 
-                  <FieldFleetSwitcher name="isActive" disabled={!isEdited} />
+                  <FieldFleetSwitcher id={id} name="isActive" onSendActive={onSendActive} />
                 </div>
               </div>
 
@@ -166,11 +172,8 @@ export const FleetCard = ({ isLoading, id }: FleetCardProps) => {
                     isDisabled={!isEdited}
                     typeFleet="ilsCategory"
                   />
-                  <FieldFleetCheckbox
-                    name="galleyOvens"
-                    label="Galley ovens: "
-                    isDisabled={!isEdited}
-                  />
+
+                  <FieldFleetCheckbox name="galleys" label="Galley ovens:" isDisabled={!isEdited} />
                 </div>
 
                 <div className={cn(miniBlockClass, 'gap-2 max-[768px]:w-full')}>
@@ -178,12 +181,13 @@ export const FleetCard = ({ isLoading, id }: FleetCardProps) => {
 
                   <FieldFleetCheckbox name="isps" label="ISPS:" isDisabled={!isEdited} />
 
+                  <FieldFleetCheckbox name="wifi" label="WiFi:" isDisabled={!isEdited} />
+
                   <FieldFleetCheckbox
                     name="sharklets"
                     isDisabled={!isEdited}
                     label="Winglets/Sharklets:"
                   />
-                  <FieldFleetCheckbox name="galleys" label="Galleys:" isDisabled={!isEdited} />
                 </div>
               </div>
 
