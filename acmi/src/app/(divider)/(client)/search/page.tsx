@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic';
 import { cookies } from 'next/headers';
+import { AxiosError } from 'axios';
 
 import { apiRedirect } from '@/utils';
 import { PaginatedSuggestionList } from '@/components';
@@ -14,6 +15,7 @@ export default async function Home({ searchParams }: SearchParams) {
   const body = serializeQuery(params as Record<string, string>);
 
   let initialData;
+  let errorText;
 
   if (body.date_from && body.date_to && body.airport_code) {
     try {
@@ -23,6 +25,10 @@ export default async function Home({ searchParams }: SearchParams) {
 
       initialData = normalizeFindOffers(raw);
     } catch (error) {
+      if (error instanceof AxiosError && error.response?.status === 403) {
+        errorText = 'You have reached the request limit';
+      }
+
       apiRedirect(error);
     }
   }
@@ -31,7 +37,12 @@ export default async function Home({ searchParams }: SearchParams) {
 
   return (
     <div className="laptop:block block h-full py-5 min-[1240px]:pl-6">
-      <PaginatedSuggestionList role={role} dates={dates} initialData={initialData || []} />
+      <PaginatedSuggestionList
+        role={role}
+        dates={dates}
+        errorText={errorText}
+        initialData={initialData || []}
+      />
     </div>
   );
 }
