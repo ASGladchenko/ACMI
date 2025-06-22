@@ -16,3 +16,15 @@ export const getInitialValues = () => {
     },
   };
 };
+
+export const getOfferInitial = () => {
+  return {
+    guaranteedBh: 0,
+    overTimeBh: 0,
+    estimatedPrice: 0,
+    positioningPrice: 0,
+    perDiem: 0,
+    responseAdditionalRequest: '',
+    totalPrice: 0,
+  };
+};

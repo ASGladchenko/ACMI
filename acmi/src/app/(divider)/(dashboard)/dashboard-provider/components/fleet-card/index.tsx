@@ -172,11 +172,8 @@ export const FleetCard = ({ isLoading, id }: FleetCardProps) => {
                     isDisabled={!isEdited}
                     typeFleet="ilsCategory"
                   />
-                  <FieldFleetCheckbox
-                    name="galleyOvens"
-                    label="Galley ovens: "
-                    isDisabled={!isEdited}
-                  />
+
+                  <FieldFleetCheckbox name="galleys" label="Galley ovens:" isDisabled={!isEdited} />
                 </div>
 
                 <div className={cn(miniBlockClass, 'gap-2 max-[768px]:w-full')}>
@@ -184,12 +181,13 @@ export const FleetCard = ({ isLoading, id }: FleetCardProps) => {
 
                   <FieldFleetCheckbox name="isps" label="ISPS:" isDisabled={!isEdited} />
 
+                  <FieldFleetCheckbox name="wifi" label="WiFi:" isDisabled={!isEdited} />
+
                   <FieldFleetCheckbox
                     name="sharklets"
                     isDisabled={!isEdited}
                     label="Winglets/Sharklets:"
                   />
-                  <FieldFleetCheckbox name="galleys" label="Galleys:" isDisabled={!isEdited} />
                 </div>
               </div>
 

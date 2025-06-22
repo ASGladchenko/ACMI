@@ -97,12 +97,12 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
               {!isEditing && (
                 <>
                   <OfferItem
-                    text="Minimum GBH,$ :"
+                    text="Minimum GBH:"
                     value={values.minGBH.toString()}
                     className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
                   />
                   <OfferItem
-                    text="FH/FC,$:"
+                    text="FH/FC:"
                     value={values.fhFc.toString()}
                     className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
                   />
@@ -111,9 +111,9 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
 
               {isEditing && (
                 <>
-                  <FieldFleetInput variant="client" name="minGBH" label="Minimum GBH,$ :" />
+                  <FieldFleetInput variant="client" name="minGBH" label="Minimum GBH:" />
 
-                  <FieldFleetInput variant="client" name="fhFc" label="FH/FC,$ :" />
+                  <FieldFleetInput variant="client" name="fhFc" label="FH/FC:" />
                 </>
               )}
             </div>
@@ -123,7 +123,7 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
                 {!isEditing && (
                   <>
                     <OfferItem
-                      text="Estimated BH,$ :"
+                      text="Estimated BH:"
                       value={values.estimatedBH.toString()}
                       className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
                     />
@@ -142,7 +142,7 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
 
                 {isEditing && (
                   <>
-                    <FieldFleetInput variant="client" name="estimatedBH" label="Estimated BH,$ :" />
+                    <FieldFleetInput variant="client" name="estimatedBH" label="Estimated BH:" />
 
                     <FieldClientSelect
                       name="positioning"
