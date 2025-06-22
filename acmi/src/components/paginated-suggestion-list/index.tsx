@@ -34,8 +34,7 @@ export const PaginatedSuggestionList = ({
       {errorText && (
         <div
           className={cn(
-            'flex w-full items-center justify-center rounded-2xl border border-red-500 p-4 text-center text-lg text-red-500',
-            isEmpty && 'mb-[100px]'
+            'mb-10 flex w-full items-center justify-center rounded-2xl border border-red-500 p-4 text-center text-lg text-red-500'
           )}
         >
           {errorText}
