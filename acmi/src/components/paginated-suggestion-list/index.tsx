@@ -40,6 +40,7 @@ export const PaginatedSuggestionList = ({
           {errorText}
         </div>
       )}
+
       {!isEmpty &&
         data.map((item, index) => {
           return <SuggestionCard key={`${item.id}-${index}`} role={role} {...item} />;
