@@ -7,6 +7,7 @@ import { Role, FindOffersNormalizedProps } from '@/types';
 
 export interface PaginatedSuggestionListProps {
   role?: Role;
+  errorText?: string;
   // isHasMore: boolean;
   initialData: FindOffersNormalizedProps[];
   dates: { date_from: string | null; date_to: string | null };
@@ -14,21 +15,34 @@ export interface PaginatedSuggestionListProps {
 
 export const PaginatedSuggestionList = ({
   role,
+  errorText,
   initialData,
   // isHasMore,
 }: PaginatedSuggestionListProps) => {
-  const { data, isLoading, isRequiresFilled } = useOffers({ initialData });
+  const { data, isLoading, isRequiresFilled, error: offerError } = useOffers({ initialData });
 
   const isEmpty = data.length === 0;
+  const error = errorText || offerError;
 
   return (
     <div
       className={cn(
         'relative flex h-full w-full flex-col items-center gap-4',
-        isEmpty && 'pt-[160px]'
+        isEmpty && !error && 'pt-[160px]'
       )}
     >
+      {errorText && (
+        <div
+          className={cn(
+            'mb-10 flex w-full items-center justify-center rounded-2xl border border-red-500 p-4 text-center text-lg text-red-500'
+          )}
+        >
+          {error}
+        </div>
+      )}
+
       {!isEmpty &&
+        !error &&
         data.map((item, index) => {
           return <SuggestionCard key={`${item.id}-${index}`} role={role} {...item} />;
         })}
@@ -45,15 +59,19 @@ export const PaginatedSuggestionList = ({
       )} */}
 
       {isLoading && (
-        <h1 className="text-blue-dark w-full text-center text-3xl font-bold">Loading...</h1>
+        <h1 className="text-blue-dark w-full text-center text-3xl leading-relaxed font-bold">
+          Loading...
+        </h1>
       )}
 
-      {isEmpty && isRequiresFilled && !isLoading && (
-        <h2 className="text-blue-dark w-full text-center text-2xl font-bold">No results found</h2>
+      {isEmpty && !error && isRequiresFilled && !isLoading && (
+        <h2 className="text-blue-dark w-full text-center text-2xl leading-relaxed font-bold">
+          No results found
+        </h2>
       )}
 
       {isEmpty && !isRequiresFilled && !isLoading && (
-        <h2 className="text-blue-dark w-full text-center text-2xl font-bold">
+        <h2 className="text-blue-dark mx-auto w-full max-w-md text-center text-2xl leading-relaxed font-bold">
           Please select a date range, an airport
         </h2>
       )}
