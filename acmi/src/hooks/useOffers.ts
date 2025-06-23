@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+
+import { AxiosError } from 'axios';
 import { useSearchParams } from 'next/navigation';
 
 import { showMessage } from '@/components';
@@ -18,6 +20,7 @@ export function useOffers({ initialData }: { initialData: FindOffersNormalizedPr
       !!searchParams.get('airport_code')
   );
   const [data, setData] = useState<FindOffersNormalizedProps[]>(initialData);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchOffers = async () => {
     const paramsObj = Object.fromEntries(searchParams.entries());
@@ -42,7 +45,11 @@ export function useOffers({ initialData }: { initialData: FindOffersNormalizedPr
       setData(normalized);
     } catch (error) {
       showMessage.error(error as string);
-      console.error(error);
+      if (error instanceof AxiosError && error.response?.status === 403) {
+        setError('You have reached the request limit');
+      }
+      setError('An error occurred while fetching offers');
+      setData([]);
     } finally {
       setIsLoading(false);
     }
@@ -57,5 +64,5 @@ export function useOffers({ initialData }: { initialData: FindOffersNormalizedPr
     fetchOffers();
   }, [searchParams]);
 
-  return { data, isLoading, isRequiresFilled };
+  return { data, isLoading, isRequiresFilled, error };
 }

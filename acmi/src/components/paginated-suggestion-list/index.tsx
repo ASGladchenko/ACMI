@@ -19,16 +19,16 @@ export const PaginatedSuggestionList = ({
   initialData,
   // isHasMore,
 }: PaginatedSuggestionListProps) => {
-  const { data, isLoading, isRequiresFilled } = useOffers({ initialData });
+  const { data, isLoading, isRequiresFilled, error: offerError } = useOffers({ initialData });
 
   const isEmpty = data.length === 0;
-  const isError = true;
+  const error = errorText || offerError;
 
   return (
     <div
       className={cn(
         'relative flex h-full w-full flex-col items-center gap-4',
-        isEmpty && !isError && 'pt-[160px]'
+        isEmpty && !error && 'pt-[160px]'
       )}
     >
       {errorText && (
@@ -37,11 +37,12 @@ export const PaginatedSuggestionList = ({
             'mb-10 flex w-full items-center justify-center rounded-2xl border border-red-500 p-4 text-center text-lg text-red-500'
           )}
         >
-          {errorText}
+          {error}
         </div>
       )}
 
       {!isEmpty &&
+        !error &&
         data.map((item, index) => {
           return <SuggestionCard key={`${item.id}-${index}`} role={role} {...item} />;
         })}
@@ -63,7 +64,7 @@ export const PaginatedSuggestionList = ({
         </h1>
       )}
 
-      {isEmpty && isRequiresFilled && !isLoading && (
+      {isEmpty && !error && isRequiresFilled && !isLoading && (
         <h2 className="text-blue-dark w-full text-center text-2xl leading-relaxed font-bold">
           No results found
         </h2>
