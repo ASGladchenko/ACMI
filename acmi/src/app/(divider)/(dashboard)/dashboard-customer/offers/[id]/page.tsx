@@ -1,14 +1,16 @@
-import { Button, RFQBlock, ProviderBlock, OfferTermsBlock, SpecificationBlock } from '@/components';
-import { mockAircraft, mockProviderData } from '@/components/specification/mock';
+// import { Button, RFQBlock, ProviderBlock, OfferTermsBlock, SpecificationBlock } from '@/components';
+// import { mockAircraft, mockProviderData } from '@/components/specification/mock';
+
+import { Button, RFQBlock, OfferTermsBlock } from '@/components';
 
 import { getOfferInitial, getInitialValues } from './config';
 
 export default function OfferByIdPage() {
   return (
     <section className="flex flex-col gap-4 py-5 pr-10 max-[1280px]:px-10 max-[768px]:px-7 max-[768px]:py-4">
-      <SpecificationBlock {...mockAircraft} />
+      {/* <SpecificationBlock {...mockAircraft} /> */}
 
-      <ProviderBlock withProviderContacts {...mockProviderData} />
+      {/* <ProviderBlock withProviderContacts {...mockProviderData} /> */}
 
       <RFQBlock initialValues={getInitialValues()} />
 
