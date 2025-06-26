@@ -6,10 +6,11 @@ import { AxiosError } from 'axios';
 import { useSearchParams } from 'next/navigation';
 
 import { showMessage } from '@/components';
-import type { FindOffersResponse, FindOffersNormalizedProps } from '@/types';
-import { apiClient, serializeQuery, normalizeFindOffers } from '@/fetch-request';
+import { apiClient, serializeQuery } from '@/fetch-request';
+import type { AircraftResponse, NormalizedDetailedOffer } from '@/types';
+import { normalizeDetailedFindOffers } from '@/fetch-request/normalize/find-offers-normalize';
 
-export function useOffers({ initialData }: { initialData: FindOffersNormalizedProps[] }) {
+export function useOffers({ initialData }: { initialData: NormalizedDetailedOffer[] }) {
   const searchParams = useSearchParams();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +20,7 @@ export function useOffers({ initialData }: { initialData: FindOffersNormalizedPr
       !!searchParams.get('date_to') &&
       !!searchParams.get('airport_code')
   );
-  const [data, setData] = useState<FindOffersNormalizedProps[]>(initialData);
+  const [data, setData] = useState<NormalizedDetailedOffer[]>(initialData);
   const [error, setError] = useState<string | null>(null);
 
   const fetchOffers = async () => {
@@ -37,11 +38,14 @@ export function useOffers({ initialData }: { initialData: FindOffersNormalizedPr
     setIsRequiresFilled(true);
     setIsLoading(true);
     try {
-      const response = await apiClient.post<FindOffersResponse>('/find_offers', body);
+      const response = await apiClient
+        .post<AircraftResponse>('/find_offers', body)
+        .then(({ data }) => data);
 
-      const raw = response.data.search_results || [];
+      const raw = response.search_results || [];
 
-      const normalized = normalizeFindOffers(raw);
+      const normalized = normalizeDetailedFindOffers(raw);
+
       setData(normalized);
     } catch (error) {
       showMessage.error(error as string);

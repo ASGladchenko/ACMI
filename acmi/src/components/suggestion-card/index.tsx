@@ -1,37 +1,31 @@
 'use client';
 
 import { useState } from 'react';
+
 import Image, { StaticImageData } from 'next/image';
 
 import { Cross } from '@/assets/svg';
 import { plain } from '@/assets/webp';
 import { useQueryStore } from '@/store/query-store';
-import { Role, FindOffersNormalizedProps } from '@/types';
+import { Role, NormalizedDetailedOffer } from '@/types';
 
 import { Modal } from '../modal';
 import { Button } from '../button';
 import { getInitialValues } from './config';
 import { AvailabilityBadge } from '../badges';
-import { mockAircraft, mockProviderData } from '../specification/mock';
 import { RFQBlock, ProviderBlock, SpecificationBlock } from '../specification';
 
 import './styles.css';
 
-interface SuggestionCardProps extends FindOffersNormalizedProps {
+interface SuggestionCardProps {
   role?: Role;
+  offer: NormalizedDetailedOffer;
 }
 
-export const SuggestionCard = ({
-  age,
-  mtow,
-  model,
-  layout,
-  region,
-  engines,
-  imageUrl,
-  role = Role.GUEST,
-}: SuggestionCardProps) => {
+export const SuggestionCard = ({ offer, role = Role.GUEST }: SuggestionCardProps) => {
   const { queries } = useQueryStore();
+
+  const { type, engines, mtow, age, layout, region, imageUrl = '' } = offer.aircraftDetails;
 
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
 
@@ -55,7 +49,7 @@ export const SuggestionCard = ({
           <Image
             fill
             src={src}
-            alt={model}
+            alt={type}
             sizes="100%"
             className="object-contain p-2"
             onError={() => setSrc(plain)}
@@ -65,7 +59,7 @@ export const SuggestionCard = ({
         <div className="text-gray-medium flex w-full flex-col flex-wrap p-5 max-[768px]:p-3">
           <div className="mb-2 flex min-h-14 w-full items-start justify-between gap-4">
             <span className="card-model text-blue-deep font-montserrat desktop:text-[34px] desktop:leading-[40px] float-right text-[26px] font-bold max-[768px]:text-[18px] max-[768px]:leading-[24px]">
-              {model}
+              {type}
             </span>
 
             <AvailabilityBadge />
@@ -125,9 +119,9 @@ export const SuggestionCard = ({
           <AvailabilityBadge className="ml-auto max-w-max" />
 
           <div className="scroll-bar-mini flex h-[calc(100%-100px)] flex-col gap-6 overflow-x-hidden overflow-y-auto px-20 max-[1200px]:px-0">
-            <SpecificationBlock {...mockAircraft} />
+            <SpecificationBlock {...offer.aircraftDetails} />
 
-            <ProviderBlock {...mockProviderData} />
+            <ProviderBlock {...offer.providerDetails} />
 
             {role !== 'guest' && (
               <>

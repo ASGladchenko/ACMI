@@ -24,3 +24,4 @@ export enum Role {
 
 export * from './find-offers';
 export * from './specification';
+export * from './aircraft-details';

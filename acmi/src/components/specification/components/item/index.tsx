@@ -1,9 +1,9 @@
 import { cn } from '@/utils';
 
 export interface OfferItemProps {
-  text: string;
-  value: string;
   className?: string;
+  text: string | number;
+  value: string | number;
 }
 const clText = 'font-montserrat text-md min-[968px]:text-[18px] font-bold';
 

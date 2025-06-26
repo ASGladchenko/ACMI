@@ -1,8 +1,8 @@
-import { NormalizedOfferDataProvider } from '@/types';
+import { NormalizedOfferDataProviderDetails } from '@/types';
 
 import { OfferItem, OfferTitle } from '../components';
 
-export interface ProviderBlockProps extends NormalizedOfferDataProvider {
+export interface ProviderBlockProps extends NormalizedOfferDataProviderDetails {
   withProviderContacts?: boolean;
 }
 
@@ -19,8 +19,8 @@ export const ProviderBlock = ({
 
       {withProviderContacts && (
         <div className="grid grid-cols-1 gap-[0_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-3 min-[1320px]:gap-[10px_40px]">
-          <OfferItem text="Name:" value={name} />
-          <OfferItem text="Registration:" value={registration} />
+          <OfferItem text="Name:" value={name || 'N/A'} />
+          <OfferItem text="Registration:" value={registration || 'N/A'} />
         </div>
       )}
       <div className="flex flex-col">
@@ -32,7 +32,7 @@ export const ProviderBlock = ({
         <OfferItem
           className="flex-col justify-start min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
           text="IOSA:"
-          value={iosa}
+          value={iosa ? 'Yes' : 'No'}
         />
       </div>
     </div>
