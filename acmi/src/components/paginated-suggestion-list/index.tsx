@@ -1,15 +1,20 @@
 'use client';
 
 import { cn } from '@/utils';
-import { useOffers } from '@/hooks';
 import { SuggestionCard } from '@/components';
-import { Role, FindOffersNormalizedProps } from '@/types';
+import { Role, NormalizedDetailedOffer } from '@/types';
+import {
+  useOffers,
+  useETOPSDictionary,
+  useNoiseStageDictionary,
+  useILSCategoryDictionary,
+} from '@/hooks';
 
 export interface PaginatedSuggestionListProps {
   role?: Role;
   errorText?: string;
   // isHasMore: boolean;
-  initialData: FindOffersNormalizedProps[];
+  initialData: NormalizedDetailedOffer[];
   dates: { date_from: string | null; date_to: string | null };
 }
 
@@ -20,6 +25,9 @@ export const PaginatedSuggestionList = ({
   // isHasMore,
 }: PaginatedSuggestionListProps) => {
   const { data, isLoading, isRequiresFilled, error: offerError } = useOffers({ initialData });
+  useETOPSDictionary();
+  useILSCategoryDictionary();
+  useNoiseStageDictionary();
 
   const isEmpty = data.length === 0;
   const error = errorText || offerError;
@@ -44,7 +52,7 @@ export const PaginatedSuggestionList = ({
       {!isEmpty &&
         !error &&
         data.map((item, index) => {
-          return <SuggestionCard key={`${item.id}-${index}`} role={role} {...item} />;
+          return <SuggestionCard key={`${item.id}-${index}`} role={role} offer={item} />;
         })}
 
       {/* {isHasMore && (

@@ -3,8 +3,9 @@ import { cookies } from 'next/headers';
 
 import { apiRedirect } from '@/utils';
 import { PaginatedSuggestionList } from '@/components';
-import { Role, SearchParams, FindOffersResponse } from '@/types';
-import { apiServer, serializeQuery, normalizeFindOffers } from '@/fetch-request';
+import { apiServer, serializeQuery } from '@/fetch-request';
+import { Role, SearchParams, AircraftResponse } from '@/types';
+import { normalizeDetailedFindOffers } from '@/fetch-request/normalize/find-offers-normalize';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,11 +21,13 @@ export default async function Home({ searchParams }: SearchParams) {
 
   if (body.date_from && body.date_to && body.airport_code) {
     try {
-      const response = await apiServer.post<FindOffersResponse>('/find_offers', body);
+      const response = await apiServer
+        .post<AircraftResponse>('/find_offers', body)
+        .then(({ data }) => data);
 
-      const raw = response?.data?.search_results || [];
+      const raw = response?.search_results || [];
 
-      initialData = normalizeFindOffers(raw);
+      initialData = normalizeDetailedFindOffers(raw);
     } catch (error) {
       if (error instanceof AxiosError && error.response?.status === 403) {
         errorText = 'You have reached the request limit';

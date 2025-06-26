@@ -10,10 +10,6 @@ export interface FindOffersArray {
   region: string;
 }
 
-export interface FindOffersResponse {
-  search_results: FindOffersArray[];
-}
-
 export interface FindOffersNormalizedProps {
   id: string;
   age: number;
