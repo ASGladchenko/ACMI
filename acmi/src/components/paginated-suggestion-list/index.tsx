@@ -26,8 +26,8 @@ export const PaginatedSuggestionList = ({
 }: PaginatedSuggestionListProps) => {
   const { data, isLoading, isRequiresFilled, error: offerError } = useOffers({ initialData });
   useETOPSDictionary();
-  useILSCategoryDictionary();
   useNoiseStageDictionary();
+  useILSCategoryDictionary();
 
   const isEmpty = data.length === 0;
   const error = errorText || offerError;
