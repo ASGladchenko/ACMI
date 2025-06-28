@@ -1,37 +1,43 @@
-import Link from 'next/link';
+import { RfqOfferRow } from '@/components';
+import { apiServer } from '@/fetch-request';
 
-import { mockOffers } from './mock';
+import { RFQCustomerRaw } from './types';
 import { TitleDB } from '../../components';
+import { normalizeRFQCustomerList } from './normalize';
 
-export default function OffersPage() {
+export default async function OffersPage() {
+  let data;
+  let errors;
+
+  try {
+    const response = await apiServer.get<RFQCustomerRaw[]>('/rfq/list').then(({ data }) => data);
+
+    data = normalizeRFQCustomerList(response);
+  } catch (error) {
+    if (error instanceof Error) {
+      errors = error.message;
+    } else if (typeof error === 'string') {
+      errors = error;
+    } else {
+      errors = 'Unknown error';
+    }
+  }
+
+  console.log({ data });
+
   return (
     <section>
       <TitleDB title="Offers" />
 
-      <div className="flex flex-col gap-2 px-2">
-        {mockOffers.map((item, index) => (
-          <Link
-            key={item.id + index}
-            href={`offers/${item.id}`}
-            className="text-blue-dark border-blue-dark hover:bg-white-dark flex cursor-pointer items-center gap-2 rounded-[15px] border-2 px-4 py-2 duration-200 max-[1024px]:flex-wrap"
-          >
-            <p className="max-[1024px]:hidden">{index + 1}.</p>
-            <p className="flex w-[350px] shrink-0 gap-2 max-[1024px]:w-full">
-              <span className="shrink-0">Company:</span>
-              <span className="shrink-1 overflow-hidden font-bold text-ellipsis whitespace-nowrap">
-                {item.company}
-              </span>
-            </p>
-            <p className="w-[200px] overflow-hidden font-bold break-words text-ellipsis whitespace-nowrap max-[1024px]:w-full">
-              {item.airplane}
-            </p>
-            <p className="max-[1024px] shrink-0 break-words">
-              MSN: <span className="font-bold">{item.msn}</span>
-            </p>
-            <p className="ml-auto shrink-0">{item.date}</p>
-          </Link>
-        ))}
-      </div>
+      {errors && <h2 className="text-center text-3xl text-red-400">{errors}</h2>}
+
+      {!errors && data && data.length && (
+        <div className="flex flex-col gap-2 px-2 pb-4">
+          {data.map((item, idx) => (
+            <RfqOfferRow key={item.id} basePath="offers/" idx={idx} {...item} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

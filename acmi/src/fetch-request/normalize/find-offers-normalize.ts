@@ -25,10 +25,9 @@ export const normalizeDetailedFindOffers = (
         region: aircraft_details.region_name,
         galleryOvens: aircraft_details.galley_ovens,
         wingtips: aircraft_details.winglets_sharklets,
-
         thrust: aircraft_details.thrust_rating,
         approachCatId: aircraft_details.approach_cat_id,
-        imageUrl: `${baseImgUrl}${aircraft_details.model}.svg`,
+        imageUrl: `${baseImgUrl}${aircraft_details.icao_type}.svg`,
       },
       providerDetails: {
         certifications: provider_details.certification,

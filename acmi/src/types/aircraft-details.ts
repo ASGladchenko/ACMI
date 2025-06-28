@@ -10,6 +10,7 @@ export interface AircraftDetails {
   engines: string;
   noise_id: number;
   etops_id: number;
+  icao_type: string;
   region_name: string;
   max_capacity: number;
   thrust_rating: number;

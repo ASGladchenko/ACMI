@@ -23,8 +23,6 @@ export const SpecificationBlock = ({
   wingtips,
   approachCatId,
   galleryOvens,
-
-  // ils,
 }: NormalizedDetailedOfferAircraft) => {
   const { etops: etopsList } = useETOPSDictionary();
   const { noiseStage: noiseList } = useNoiseStageDictionary();

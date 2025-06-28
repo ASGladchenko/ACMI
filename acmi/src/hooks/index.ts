@@ -9,6 +9,8 @@ export { useILSCategoryDictionary } from './useILSCategoryDictionary';
 export { useNoiseStageDictionary } from './useNoiseStageDictionary';
 export { useOffers } from './useOffers';
 export { useOutsideClick, useOutsideDatePickerClick } from './useOutsideClick';
+export { usePerDiemDictionary } from './usePerDiemDictionary';
+export { usePositioningDictionary } from './usePositioningDictionary';
 export { useScrollDirection } from './useScrollDirection';
 export { useScrollThreshold } from './useScrollThreshold';
 export { useUrlWithParams } from './useUrlWithParams';

@@ -16,27 +16,40 @@ import { AvailabilityBadge } from '../badges';
 import { RFQBlock, ProviderBlock, SpecificationBlock } from '../specification';
 
 import './styles.css';
+import { useUserStore } from '@/store';
 
 interface SuggestionCardProps {
   role?: Role;
+  fetchOffers: () => Promise<void>;
   offer: NormalizedDetailedOffer;
 }
 
-export const SuggestionCard = ({ offer, role = Role.GUEST }: SuggestionCardProps) => {
-  const { queries } = useQueryStore();
-
+export const SuggestionCard = ({ offer, role = Role.GUEST, fetchOffers }: SuggestionCardProps) => {
   const { type, engines, mtow, age, layout, region, imageUrl = '' } = offer.aircraftDetails;
-
-  const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
 
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
 
+  const { user } = useUserStore();
+  const { queries } = useQueryStore();
+
+  const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
+
+  const onSuccessRFQSend = async () => {
+    setIsOfferModalOpen(false);
+
+    await fetchOffers();
+  };
+
   const initialValues = getInitialValues({
+    position: user.role,
+    operator: user.company,
     airport: queries.airport_code,
     dates: [queries.date_from, queries.date_to],
   });
+
   const classLabel =
     'font-montserrat text-[22px] min-w-[92px] leading-[26px] text-nowrap max-[768px]:text-[16px] max-[768px]:leading-[20px]';
+
   const classValue =
     'w-full font-montserrat text-[22px] font-bold leading-[26px] max-[768px]:text-[14px] max-[768px]:leading-[20px]';
 
@@ -125,7 +138,12 @@ export const SuggestionCard = ({ offer, role = Role.GUEST }: SuggestionCardProps
 
             {role !== 'guest' && (
               <>
-                <RFQBlock initialValues={initialValues} isEditing />
+                <RFQBlock
+                  isEditing
+                  id={offer.id}
+                  initialValues={initialValues}
+                  onSuccessRequest={onSuccessRFQSend}
+                />
               </>
             )}
 

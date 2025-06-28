@@ -1,9 +1,15 @@
-export const getInitialValues = ({ airport, dates }: { airport: string; dates: [string, string] }) => {
+interface GetInitialValuesRFQ {
+  airport: string;
+  dates: [string, string];
+  position?: string;
+  operator?: string;
+}
+export const getInitialValues = ({ airport, dates, position, operator }: GetInitialValuesRFQ) => {
   return {
     fhFc: '',
     minGBH: '',
-    operator: '',
-    position: '',
+    operator: operator ? operator : 'N/A',
+    position: position ? position : 'N/A',
     perDiem: null,
     airportTo: [],
     estimatedBH: '',

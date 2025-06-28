@@ -23,9 +23,8 @@ export default async function Home({ searchParams }: SearchParams) {
     try {
       const response = await apiServer
         .post<AircraftResponse>('/find_offers', body)
-        .then(({ data }) => data);
 
-      const raw = response?.search_results || [];
+      const raw = response.data?.search_results || [];
 
       initialData = normalizeDetailedFindOffers(raw);
     } catch (error) {
