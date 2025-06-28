@@ -20,18 +20,25 @@ import { useUserStore } from '@/store';
 
 interface SuggestionCardProps {
   role?: Role;
+  fetchOffers: () => Promise<void>;
   offer: NormalizedDetailedOffer;
 }
 
-export const SuggestionCard = ({ offer, role = Role.GUEST }: SuggestionCardProps) => {
-  const { queries } = useQueryStore();
-  const { user } = useUserStore();
-
+export const SuggestionCard = ({ offer, role = Role.GUEST, fetchOffers }: SuggestionCardProps) => {
   const { type, engines, mtow, age, layout, region, imageUrl = '' } = offer.aircraftDetails;
+
+  const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
+
+  const { user } = useUserStore();
+  const { queries } = useQueryStore();
 
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
 
-  const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
+  const onSuccessRFQSend = async () => {
+    setIsOfferModalOpen(false);
+
+    await fetchOffers();
+  };
 
   const initialValues = getInitialValues({
     position: user.role,
@@ -135,7 +142,7 @@ export const SuggestionCard = ({ offer, role = Role.GUEST }: SuggestionCardProps
                   isEditing
                   id={offer.id}
                   initialValues={initialValues}
-                  onSuccessRequest={() => setIsOfferModalOpen(false)}
+                  onSuccessRequest={onSuccessRFQSend}
                 />
               </>
             )}

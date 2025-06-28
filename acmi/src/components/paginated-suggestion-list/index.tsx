@@ -24,7 +24,13 @@ export const PaginatedSuggestionList = ({
   initialData,
   // isHasMore,
 }: PaginatedSuggestionListProps) => {
-  const { data, isLoading, isRequiresFilled, error: offerError } = useOffers({ initialData });
+  const {
+    data,
+    isLoading,
+    isRequiresFilled,
+    error: offerError,
+    fetchOffers,
+  } = useOffers({ initialData });
   useETOPSDictionary();
   useNoiseStageDictionary();
   useILSCategoryDictionary();
@@ -52,7 +58,14 @@ export const PaginatedSuggestionList = ({
       {!isEmpty &&
         !error &&
         data.map((item, index) => {
-          return <SuggestionCard key={`${item.id}-${index}`} role={role} offer={item} />;
+          return (
+            <SuggestionCard
+              role={role}
+              offer={item}
+              fetchOffers={fetchOffers}
+              key={`${item.id}-${index}`}
+            />
+          );
         })}
 
       {/* {isHasMore && (
