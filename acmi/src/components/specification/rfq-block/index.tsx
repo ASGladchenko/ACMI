@@ -39,7 +39,7 @@ export const RFQBlock = ({ isEditing, initialValues, id, onSuccessRequest }: RFQ
     const serializedRfq = serializeRFQData({ values, id });
     setIsLoadingRequest(true);
 
-    await apiClient
+    apiClient
       .post('/rfq/create', serializedRfq)
       .then(() => {
         showMessage.success('RFQ send successfully');
