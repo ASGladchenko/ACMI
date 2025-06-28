@@ -9,7 +9,7 @@ interface OfferByIdPageProps {
 }
 
 export default async function OfferByIdPage({ params }: OfferByIdPageProps) {
-  const { id } = await params;
+  const { id } = params;
 
   let data;
   let errors;
