@@ -41,9 +41,8 @@ export function useOffers({ initialData }: { initialData: NormalizedDetailedOffe
     try {
       const response = await apiClient
         .post<AircraftResponse>('/find_offers', body)
-        .then(({ data }) => data);
 
-      const raw = response.search_results || [];
+      const raw = response.data.search_results || [];
 
       const normalized = normalizeDetailedFindOffers(raw);
 

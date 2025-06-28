@@ -10,9 +10,9 @@ export default async function RFQRequests() {
   let errors;
 
   try {
-    const response = await apiServer<RFQProviderRaw[]>('/rfq/list').then(({ data }) => data);
+    const response = await apiServer<RFQProviderRaw[]>('/rfq/list');
 
-    data = normalizeRFQProviderList(response);
+    data = normalizeRFQProviderList(response.data);
   } catch (error) {
     if (error instanceof Error) {
       errors = error.message;

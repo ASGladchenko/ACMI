@@ -11,11 +11,9 @@ export default async function RFQRequestsId({ params }: { params: Promise<{ id: 
   let errors;
 
   try {
-    const response = await apiServer
-      .post<RFQRequest>('/rfq', { id: Number(id) })
-      .then(({ data }) => data);
+    const response = await apiServer.post<RFQRequest>('/rfq', { id: Number(id) });
 
-    data = normalizeRFQDashboard(response);
+    data = normalizeRFQDashboard(response.data);
   } catch (error) {
     if (error instanceof Error) {
       errors = error.message;
