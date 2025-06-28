@@ -16,6 +16,7 @@ import { AvailabilityBadge } from '../badges';
 import { RFQBlock, ProviderBlock, SpecificationBlock } from '../specification';
 
 import './styles.css';
+import { useUserStore } from '@/store';
 
 interface SuggestionCardProps {
   role?: Role;
@@ -24,6 +25,7 @@ interface SuggestionCardProps {
 
 export const SuggestionCard = ({ offer, role = Role.GUEST }: SuggestionCardProps) => {
   const { queries } = useQueryStore();
+  const { user } = useUserStore();
 
   const { type, engines, mtow, age, layout, region, imageUrl = '' } = offer.aircraftDetails;
 
@@ -32,11 +34,15 @@ export const SuggestionCard = ({ offer, role = Role.GUEST }: SuggestionCardProps
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
 
   const initialValues = getInitialValues({
+    position: user.role,
+    operator: user.company,
     airport: queries.airport_code,
     dates: [queries.date_from, queries.date_to],
   });
+
   const classLabel =
     'font-montserrat text-[22px] min-w-[92px] leading-[26px] text-nowrap max-[768px]:text-[16px] max-[768px]:leading-[20px]';
+
   const classValue =
     'w-full font-montserrat text-[22px] font-bold leading-[26px] max-[768px]:text-[14px] max-[768px]:leading-[20px]';
 

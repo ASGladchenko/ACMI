@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify';
 
 import { Role } from '@/types';
 import { Header } from '@/components';
+import { UserStoreLoader } from './user-store-loader';
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();
@@ -11,6 +12,9 @@ export default async function Layout({ children }: { children: React.ReactNode }
   return (
     <>
       <Header role={role} />
+
+      <UserStoreLoader />
+
       <div className="min-h-[calc(100dvh-257px)]">{children}</div>
       <ToastContainer />
     </>
