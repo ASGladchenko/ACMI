@@ -4,11 +4,7 @@ import { RFQBlock, ProviderBlock, OfferTermsBlock, SpecificationBlock } from '@/
 
 import { getOfferInitial } from './config';
 
-interface RFQByIdPageProps {
-  params: { id: string };
-}
-
-export default async function RFQRequestsId({ params }: RFQByIdPageProps) {
+export default async function RFQRequestsId({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
   let data;

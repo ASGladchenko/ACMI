@@ -4,11 +4,7 @@ import { RFQBlock, ProviderBlock, OfferTermsBlock, SpecificationBlock } from '@/
 
 import { Controls } from './btn-confirm-offer';
 
-interface OfferByIdPageProps {
-  params: { id: string };
-}
-
-export default async function OfferByIdPage({ params }: OfferByIdPageProps) {
+export default async function OfferByIdPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
   let data;
