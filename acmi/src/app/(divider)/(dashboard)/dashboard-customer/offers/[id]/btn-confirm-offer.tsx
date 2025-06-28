@@ -19,8 +19,7 @@ export const Controls = ({ id }: { id: number }) => {
       .post('/rfq/confirm', { id })
       .then(() => {
         showMessage.success('Offer confirmed successfully');
-        // router.push('/dashboard-customer/offers');
-        router.back();
+        router.push('/dashboard-customer/offers');
       })
       .catch((error) => {
         showMessage.error(error);
