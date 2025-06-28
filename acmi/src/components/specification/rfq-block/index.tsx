@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { Form, Formik } from 'formik';
 
 import { apiClient } from '@/fetch-request';
+import { usePerDiemDictionary, usePositioningDictionary } from '@/hooks';
 import {
   Button,
   showMessage,
@@ -17,7 +18,6 @@ import {
   FieldMultiSelectAirport,
 } from '@/components';
 
-import { mockSelects } from './mock';
 import { RFQBlockProps } from './types';
 import { getDaysBetweenDates } from '../helpers';
 import { OfferItem, OfferTitle } from '../components';
@@ -25,6 +25,15 @@ import { rfqValidationSchema } from './validationSchema';
 
 export const RFQBlock = ({ isEditing, initialValues, id, onSuccessRequest }: RFQBlockProps) => {
   const [isLoadingRequest, setIsLoadingRequest] = useState(false);
+
+  const { perDiem, isLoading: isPerDiemLoading } = usePerDiemDictionary();
+  const { positioning, isLoading: isPositioningLoading } = usePositioningDictionary();
+
+  const perDiemOptions = perDiem.map(({ per_diem, id }) => ({ text: per_diem, value: id }));
+  const positioningOptions = positioning.map(({ positioning, id }) => ({
+    text: positioning,
+    value: id,
+  }));
 
   const onSubmit = async (values: RFQBlockProps['initialValues']) => {
     const serializedRfq = serializeRFQData({ values, id });
@@ -168,10 +177,16 @@ export const RFQBlock = ({ isEditing, initialValues, id, onSuccessRequest }: RFQ
                     <FieldClientSelect
                       name="positioning"
                       label="Positioning:"
-                      options={mockSelects}
+                      options={positioningOptions}
+                      isLoading={isPositioningLoading}
                     />
 
-                    <FieldClientSelect name="perDiem" options={mockSelects} label="Per diem:" />
+                    <FieldClientSelect
+                      name="perDiem"
+                      label="Per diem:"
+                      options={perDiemOptions}
+                      isLoading={isPerDiemLoading}
+                    />
                   </>
                 )}
               </div>
