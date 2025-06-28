@@ -9,7 +9,7 @@ interface RFQByIdPageProps {
 }
 
 export default async function RFQRequestsId({ params }: RFQByIdPageProps) {
-  const { id } = params;
+  const { id } = await params;
 
   let data;
   let errors;
