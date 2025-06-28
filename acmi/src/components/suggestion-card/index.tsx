@@ -125,7 +125,12 @@ export const SuggestionCard = ({ offer, role = Role.GUEST }: SuggestionCardProps
 
             {role !== 'guest' && (
               <>
-                <RFQBlock initialValues={initialValues} isEditing />
+                <RFQBlock
+                  isEditing
+                  id={offer.id}
+                  initialValues={initialValues}
+                  onSuccessRequest={() => setIsOfferModalOpen(false)}
+                />
               </>
             )}
 

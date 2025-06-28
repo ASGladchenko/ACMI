@@ -1,13 +1,19 @@
 'use client';
 
+import { useState } from 'react';
+
 import { Form, Formik } from 'formik';
+import { useRouter } from 'next/navigation';
 
-import { Button, FieldTextArea, FieldFleetInput } from '@/components';
+import { apiClient } from '@/fetch-request';
+import { Button, showMessage, FieldTextArea, FieldFleetInput } from '@/components';
 
+import { serializeOfferData } from './serialize';
 import { OfferItem, OfferTitle } from '../components';
 import { offerTermsValidationSchema } from './config';
 
 export interface OfferTermsBlockProps {
+  id: number;
   isEditing?: boolean;
   initialValues: OfferTermsFormValues;
 }
@@ -22,11 +28,28 @@ interface OfferTermsFormValues {
   responseAdditionalRequest: string;
 }
 
-export const OfferTermsBlock = ({ isEditing, initialValues }: OfferTermsBlockProps) => {
-  const onSubmit = (values: OfferTermsFormValues) => {
-    console.log('submit offer terms', values);
-  };
+export const OfferTermsBlock = ({ isEditing, initialValues, id }: OfferTermsBlockProps) => {
+  const router = useRouter();
+  const [isLoadingRequest, setIsLoadingRequest] = useState(false);
 
+  const onSubmit = async (values: OfferTermsBlockProps['initialValues']) => {
+    const serializedRfq = serializeOfferData({ values, id });
+    setIsLoadingRequest(true);
+
+    await apiClient
+      .post('/rfq/submit', serializedRfq)
+      .then(() => {
+        showMessage.success('Offer send successfully');
+        router.push('/dashboard-provider/rfq-requests');
+      })
+
+      .catch((error) => {
+        showMessage.error(error);
+      })
+      .finally(() => {
+        setIsLoadingRequest(false);
+      });
+  };
   return (
     <Formik
       enableReinitialize
@@ -123,7 +146,7 @@ export const OfferTermsBlock = ({ isEditing, initialValues }: OfferTermsBlockPro
             </p>
 
             {isEditing && (
-              <Button className="mx-auto mt-4 max-w-max" type="submit">
+              <Button loading={isLoadingRequest} className="mx-auto mt-4 max-w-max" type="submit">
                 Send offer and share contact details
               </Button>
             )}

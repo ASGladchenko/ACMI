@@ -1,20 +1,50 @@
-// import { mockAircraft, mockProviderData } from '@/components/specification/mock';
-// import { RFQBlock, ProviderBlock, OfferTermsBlock, SpecificationBlock } from '@/components';
+import { RFQRequest } from '@/types';
+import { apiServer, normalizeRFQDashboard } from '@/fetch-request';
+import { RFQBlock, ProviderBlock, OfferTermsBlock, SpecificationBlock } from '@/components';
 
-import { RFQBlock, OfferTermsBlock } from '@/components';
+import { getOfferInitial } from './config';
 
-import { getOfferInitial, getInitialValues } from './config';
+interface RFQByIdPageProps {
+  params: { id: string };
+}
 
-export default function RFQRequestsId() {
+export default async function RFQRequestsId({ params }: RFQByIdPageProps) {
+  const { id } = await params;
+
+  let data;
+  let errors;
+
+  try {
+    const response = await apiServer
+      .post<RFQRequest>('/rfq', { id: Number(id) })
+      .then(({ data }) => data);
+
+    data = normalizeRFQDashboard(response);
+  } catch (error) {
+    if (error instanceof Error) {
+      errors = error.message;
+    } else if (typeof error === 'string') {
+      errors = error;
+    } else {
+      errors = 'Unknown error';
+    }
+  }
+
   return (
     <section className="flex flex-col gap-4 py-5 pr-10 max-[1280px]:px-10 max-[768px]:px-7 max-[768px]:py-4">
-      {/* <SpecificationBlock {...mockAircraft} />
+      {errors && <h2 className="text-center text-3xl text-red-400">{errors}</h2>}
 
-      <ProviderBlock withProviderContacts {...mockProviderData} /> */}
+      {data && !errors && (
+        <>
+          <SpecificationBlock {...data.aircraftDetails} />
 
-      <RFQBlock initialValues={getInitialValues()} />
+          <ProviderBlock withProviderContacts {...data.providerDetails} />
 
-      <OfferTermsBlock initialValues={getOfferInitial()} isEditing />
+          <RFQBlock id={Number(id)} initialValues={data.rfqData} />
+
+          <OfferTermsBlock id={Number(id)} initialValues={getOfferInitial()} isEditing />
+        </>
+      )}
     </section>
   );
 }

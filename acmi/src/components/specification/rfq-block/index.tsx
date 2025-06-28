@@ -1,13 +1,18 @@
 'use client';
 
+import { useState } from 'react';
+
 import { format } from 'date-fns';
 import { Form, Formik } from 'formik';
 
+import { apiClient } from '@/fetch-request';
 import {
   Button,
+  showMessage,
   FieldTextArea,
   FieldFleetInput,
   FieldDateOpsFrom,
+  serializeRFQData,
   FieldClientSelect,
   FieldMultiSelectAirport,
 } from '@/components';
@@ -18,16 +23,32 @@ import { getDaysBetweenDates } from '../helpers';
 import { OfferItem, OfferTitle } from '../components';
 import { rfqValidationSchema } from './validationSchema';
 
-export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
-  const onSubmit = (values: RFQBlockProps['initialValues']) => {
-    console.log('send rfq', values);
+export const RFQBlock = ({ isEditing, initialValues, id, onSuccessRequest }: RFQBlockProps) => {
+  const [isLoadingRequest, setIsLoadingRequest] = useState(false);
+
+  const onSubmit = async (values: RFQBlockProps['initialValues']) => {
+    const serializedRfq = serializeRFQData({ values, id });
+    setIsLoadingRequest(true);
+
+    await apiClient
+      .post('/rfq/create', serializedRfq)
+      .then(() => {
+        showMessage.success('RFQ send successfully');
+        if (onSuccessRequest) onSuccessRequest();
+      })
+      .catch((error) => {
+        showMessage.error(error);
+      })
+      .finally(() => {
+        setIsLoadingRequest(false);
+      });
   };
 
   return (
     <Formik
       enableReinitialize
-      onSubmit={onSubmit}
       initialValues={initialValues}
+      onSubmit={onSubmit || (() => {})}
       validationSchema={isEditing ? rfqValidationSchema : null}
     >
       {({ values }) => {
@@ -35,31 +56,31 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
           <Form className="flex flex-col gap-4 min-[968px]:gap-2">
             <OfferTitle title="RFQ parameters:" />
 
-            <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
+            <div className="grid grid-cols-1 items-baseline gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
               <OfferItem
                 text="Operator:"
                 value={values.operator}
-                className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                className="flex-col items-baseline justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
               />
               <OfferItem
                 value={values.position}
                 text="Requester position:"
-                className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                className="flex-col items-baseline justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
               />
             </div>
 
-            <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
+            <div className="grid grid-cols-1 items-baseline gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
               <OfferItem
                 text="Ops Base airport:"
                 value={values.airportFrom}
-                className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                className="flex-col items-baseline justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
               />
 
               {!isEditing && (
                 <OfferItem
                   text="Outstations:"
                   value={values.airportTo.join(', ')}
-                  className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                  className="flex-col items-baseline justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
                 />
               )}
 
@@ -159,7 +180,7 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
               <OfferItem
                 text="Additional request:"
                 value={isEditing ? '' : values.additionalRequest}
-                className="flex-col justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
+                className="flex-col justify-between [&>span:first-child]:min-w-[220px]"
               />
 
               {isEditing && (
@@ -171,7 +192,7 @@ export const RFQBlock = ({ isEditing, initialValues }: RFQBlockProps) => {
                     placeholder={isEditing ? 'Additional request' : ''}
                   />
 
-                  <Button className="mx-auto max-w-max" type="submit">
+                  <Button loading={isLoadingRequest} className="mx-auto max-w-max" type="submit">
                     Send RFQ
                   </Button>
                 </>

@@ -8,6 +8,7 @@ export { LayoutBlock } from './layout-block';
 export { Logo } from './logo';
 export { Modal } from './modal';
 export { PaginatedSuggestionList } from './paginated-suggestion-list';
+export { RfqOfferRow } from './rfq-offer-row';
 export { showMessage } from './toast';
 export { SuggestionCard } from './suggestion-card';
 export { TextArea } from './text-area';
