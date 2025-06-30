@@ -1,13 +1,15 @@
-export type Status = 'idle' | 'loading' | 'success' | 'error';
+export type Status = 'idle' | 'loading' | 'loading_update' | 'success' | 'error';
 
 export interface State {
   data: AircraftFleetNormalized[] | null;
   status: Status;
   error: string | null;
+  updatingId?: number | null;
 }
 
 export type Action =
   | { type: 'FETCH_START' }
+  | { type: 'UPDATE_START'; id: number }
   | { type: 'FETCH_SUCCESS'; payload: AircraftFleetNormalized[] }
   | { type: 'FETCH_ERROR'; payload: string }
   | { type: 'UPDATE_SUCCESS'; payload: AircraftFleetNormalized }

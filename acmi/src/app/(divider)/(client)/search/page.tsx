@@ -21,8 +21,7 @@ export default async function Home({ searchParams }: SearchParams) {
 
   if (body.date_from && body.date_to && body.airport_code) {
     try {
-      const response = await apiServer
-        .post<AircraftResponse>('/find_offers', body)
+      const response = await apiServer.post<AircraftResponse>('/find_offers', body);
 
       const raw = response.data?.search_results || [];
 
