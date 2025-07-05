@@ -1,42 +1,22 @@
 'use client';
 
-import { cn } from '@/utils';
-import { Cross } from '@/assets/svg';
+import { useRef, useEffect } from 'react';
 
-import { IRenderSelectedProps, ISelectOption } from '../../select-logic/types';
-import { useEffect, useRef } from 'react';
+import { cn } from '@/utils';
+import { Plain } from '@/assets/svg';
+
+import { ISelectOption, IRenderSelectedProps } from '../../select-logic/types';
 
 export interface SelectedProps extends Omit<IRenderSelectedProps, 'option'> {
   label: string;
   error?: string;
-  filter: string;
   isDisabled?: boolean;
   option: ISelectOption[];
-  setFilter: (filter: string) => void;
   onChange: (option: ISelectOption) => void;
 }
 
-export const Selected = ({
-  label,
-  error,
-  filter,
-  isOpen,
-  option,
-  onChange,
-  setFilter,
-  setIsOpen,
-  isDisabled,
-  placeholder,
-}: SelectedProps) => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  const onInputClick = (e: React.MouseEvent) => {
-    if (isOpen) {
-      e.stopPropagation();
-      e.preventDefault();
-      return;
-    }
-  };
+export const Selected = ({ label, error, isOpen, option, setIsOpen }: SelectedProps) => {
+  const ref = useRef<HTMLDivElement>(null);
 
   const wrapper = cn(
     'flex w-full items-center gap-2 bg-white border-[1px] rounded-xl border-blue-dark px-3 py-[7px]',
@@ -46,53 +26,39 @@ export const Selected = ({
 
   const isNotEmpty = option && option.length > 0;
 
-  const handleChange = (
-    event: React.MouseEvent<HTMLParagraphElement, MouseEvent>,
-    item: ISelectOption
-  ) => {
-    event.stopPropagation();
-    event.preventDefault();
-
-    onChange(item);
-  };
-
   useEffect(() => {
-    if (isOpen) {
-      inputRef.current?.focus();
+    if (ref.current) {
+      ref.current.scrollTo({
+        left: ref.current.scrollWidth,
+        behavior: 'smooth',
+      });
     }
-  }, [isOpen]);
+  }, [option]);
 
   return (
     <div className={wrapper} onClick={() => setIsOpen(!isOpen)}>
       <span className="text-blue-dark shrink-0 font-bold whitespace-nowrap">{label}</span>
 
-      <div className="flex min-w-0 flex-1 items-center gap-1 overflow-hidden">
-        {isNotEmpty && (
-          <div className="flex min-w-0 flex-shrink justify-end gap-1 overflow-hidden">
-            {option.map((item) => (
-              <p
-                key={item.value}
-                onClick={(e) => handleChange(e, item)}
-                className="bg-blue-dark flex flex-shrink-0 cursor-pointer items-center justify-center gap-1 rounded-sm px-2 py-[2px] text-sm text-white hover:text-red-400"
-              >
-                {item.text}
-                <Cross className="h-2.5 w-2.5 shrink-0" />
-              </p>
-            ))}
-          </div>
-        )}
+      {isNotEmpty && (
+        <div
+          ref={ref}
+          className="scroll-bar-mini scrollbar-hidden flex max-w-full min-w-0 flex-1 gap-2 overflow-x-auto whitespace-nowrap"
+        >
+          {option.map((item) => {
+            return (
+              <div key={item.value} className="flex max-w-max shrink-0">
+                <div className="bg-blue-dark flex w-full cursor-pointer items-center gap-2 rounded-sm px-2 py-[2px] text-[14px] leading-[17px] font-medium text-white duration-200">
+                  <Plain className="h-2 w-4 shrink-0" />
 
-        <input
-          type="text"
-          value={filter}
-          ref={inputRef}
-          disabled={isDisabled}
-          onClick={onInputClick}
-          placeholder={placeholder}
-          onChange={(e) => setFilter(e.target.value)}
-          className="text-gray-dark min-w-[40px] flex-1 truncate bg-transparent text-ellipsis outline-none"
-        />
-      </div>
+                  <span className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
+                    {item.text}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

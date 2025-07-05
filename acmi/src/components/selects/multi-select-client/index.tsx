@@ -58,8 +58,10 @@ export const MultiSelectClient = ({
         <Options
           {...props}
           error={error}
+          filter={filter}
           selected={selected}
           isLoading={isLoading}
+          setFilter={setFilter}
           onChange={handleOptionChange}
         />
       )}
@@ -68,8 +70,6 @@ export const MultiSelectClient = ({
           {...props}
           label={label}
           error={error}
-          filter={filter}
-          setFilter={setFilter}
           isDisabled={isDisabled}
           placeholder={placeholder}
           onChange={handleOptionChange}

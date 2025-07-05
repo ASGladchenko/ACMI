@@ -2,6 +2,7 @@ import { cn } from '@/utils';
 import { Cross, Plain } from '@/assets/svg';
 
 import { ISelectOption, IRenderOptionsProps } from '../../select-logic/types';
+import { useEffect, useRef } from 'react';
 
 export interface OptionsProps extends IRenderOptionsProps {
   filter: string;
@@ -24,6 +25,7 @@ export const Options = ({
   selectedOption,
   debouncedFilter,
 }: OptionsProps) => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const onHandleChange = (option: ISelectOption) => {
     onChange(option);
   };
@@ -40,10 +42,17 @@ export const Options = ({
 
   const isEmpty = filteredOptions.length === 0;
 
+  useEffect(() => {
+    if (isOpen) {
+      inputRef?.current?.focus();
+    }
+  }, [isOpen]);
+
   return (
     <div className={cl}>
       <input
         type="text"
+        ref={inputRef}
         value={filter}
         placeholder="Search airports..."
         onChange={(e) => setFilter(e.target.value)}
@@ -64,12 +73,12 @@ export const Options = ({
         <div className="border-blue-dark mb-2 flex flex-col gap-2 border p-1">
           <span className="text-gray-dark">Selected:</span>
 
-          <div className="scroll-bar-mini max-h-[160px] overflow-y-auto">
+          <div className="scroll-bar-mini flex max-h-[160px] flex-col gap-1 overflow-y-auto">
             {selectedOption.map((option) => (
               <div
                 key={option.value}
                 onClick={() => onHandleChange(option)}
-                className="group text-blue-dark flex cursor-pointer items-center gap-4 px-1 py-1 text-[16px] leading-[19px] duration-200 hover:bg-slate-300"
+                className="group bg-blue-dark flex cursor-pointer items-center gap-4 rounded-[4px] px-2 py-1 text-[16px] leading-[19px] text-white duration-200 hover:text-rose-400"
               >
                 <Plain className="h-3 w-6 shrink-0" />
 
