@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react';
 
 import { cn } from '@/utils';
-import { Cross, Plain } from '@/assets/svg';
+import { Plain } from '@/assets/svg';
 
 import { ISelectOption } from '../../select-logic/types';
 import { IRenderSelectedProps } from '../../select-logic/types';
@@ -21,19 +21,11 @@ export const Selected = ({
   label,
   isOpen,
   option,
-  onChange,
   setIsOpen,
   isDisabled,
   placeholder,
 }: SelectedProps) => {
   const ref = useRef<HTMLDivElement>(null);
-
-  const handleDeleteSelected = (item: ISelectOption) => {
-    if (isDisabled) return;
-
-    onChange(option.filter((o) => o.value !== item.value).map((o) => o.value as string));
-  };
-
   const wrapper = cn(
     'w-full bg-white flex border-[1px] rounded-xl border-blue-dark px-3 py-[7px] items-center gap-2 overflow-hidden cursor-pointer',
     isOpen && 'rounded-[12px_12px_0_0] border-[3px] border-b-0 pt-[5px] px-[10px] pb-[8px]',
@@ -48,7 +40,7 @@ export const Selected = ({
         behavior: 'smooth',
       });
     }
-  }, [option]);
+  }, [option, ref]);
 
   return (
     <div className={wrapper} onClick={() => !isDisabled && setIsOpen(true)}>
@@ -62,17 +54,12 @@ export const Selected = ({
           {option.map((item) => {
             return (
               <div key={item.value} className="flex max-w-max shrink-0">
-                <div
-                  onClick={() => handleDeleteSelected(item)}
-                  className="bg-blue-dark flex w-full cursor-pointer items-center gap-2 rounded-sm px-2 py-[2px] text-[14px] leading-[17px] font-medium text-white duration-200 hover:text-red-400"
-                >
+                <div className="bg-blue-dark flex w-full cursor-pointer items-center gap-2 rounded-sm px-2 py-[2px] text-[14px] leading-[17px] font-medium text-white duration-200">
                   <Plain className="h-2 w-4 shrink-0" />
 
                   <span className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
                     {item.text}
                   </span>
-
-                  <Cross className="h-2.5 w-2.5 shrink-0" />
                 </div>
               </div>
             );

@@ -17,14 +17,22 @@ export const getInitialValues = () => {
   };
 };
 
-export const getOfferInitial = () => {
+export const getOfferInitial = ({
+  minGBH,
+  estimatedBH,
+}: {
+  minGBH: string | number;
+  estimatedBH: string | number;
+}) => {
   return {
-    guaranteedBh: 0,
-    overTimeBh: 0,
-    estimatedPrice: 0,
-    positioningPrice: 0,
-    perDiem: 0,
+    perDiem: '',
+    overTimeBh: '',
+    totalPrice: '',
+    guaranteedBh: '',
+    estimatedPrice: '',
+    positioningPrice: '',
     responseAdditionalRequest: '',
-    totalPrice: 0,
+    minGBH: !Number.isNaN(minGBH) ? Number(minGBH) : 0,
+    estimatedBH: !Number.isNaN(estimatedBH) ? Number(estimatedBH) : 0,
   };
 };

@@ -36,7 +36,14 @@ export default async function RFQRequestsId({ params }: { params: Promise<{ id: 
 
           <RFQBlock id={Number(id)} initialValues={data.rfqData} />
 
-          <OfferTermsBlock id={Number(id)} initialValues={getOfferInitial()} isEditing />
+          <OfferTermsBlock
+            isEditing
+            id={Number(id)}
+            initialValues={getOfferInitial({
+              minGBH: data?.rfqData?.minGBH || 0,
+              estimatedBH: data?.rfqData?.estimatedBH || 0,
+            })}
+          />
         </>
       )}
     </section>

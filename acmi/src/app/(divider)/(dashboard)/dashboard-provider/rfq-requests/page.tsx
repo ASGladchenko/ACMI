@@ -28,7 +28,13 @@ export default async function RFQRequests() {
 
       {errors && <h2 className="text-center text-3xl text-red-400">{errors}</h2>}
 
-      {!errors && data && data.length && (
+      {!errors && data && data.length === 0 && (
+        <h2 className="text-blue-dark font-inter text-center text-3xl font-semibold">
+          There are no new RFQs
+        </h2>
+      )}
+
+      {!errors && data && data.length > 0 && (
         <div className="flex flex-col gap-2 px-2 pb-4">
           {data.map((item, idx) => (
             <RfqOfferRow

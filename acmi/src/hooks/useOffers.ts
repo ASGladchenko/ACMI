@@ -24,7 +24,6 @@ export function useOffers({ initialData }: { initialData: NormalizedDetailedOffe
   const [error, setError] = useState<string | null>(null);
 
   const fetchOffers = async () => {
-    console.log('Refetch');
     const paramsObj = Object.fromEntries(searchParams.entries());
     const body = serializeQuery(paramsObj);
 
@@ -39,8 +38,7 @@ export function useOffers({ initialData }: { initialData: NormalizedDetailedOffe
     setIsRequiresFilled(true);
     setIsLoading(true);
     try {
-      const response = await apiClient
-        .post<AircraftResponse>('/find_offers', body)
+      const response = await apiClient.post<AircraftResponse>('/find_offers', body);
 
       const raw = response.data.search_results || [];
 

@@ -1,3 +1,14 @@
+export enum NormalizedOfferStatus {
+  //When customer send rfq
+  NEW = 'NEW',
+  //When provide send customer offer
+  SUBMITTED = 'SUBMITTED',
+  //When customer confirm offer
+  CONFIRMED = 'CONFIRMED',
+  //When customer decline offer
+  DECLINE = 'DECLINE',
+}
+
 export interface AircraftDetails {
   age: number;
   mtow: number;
@@ -28,6 +39,7 @@ export interface AircraftResponseOffer {
   offer_id: number;
   aircraft_details: AircraftDetails;
   provider_details: ProviderDetails;
+  transaction_status: null | NormalizedOfferStatus;
 }
 
 export interface AircraftResponse {
@@ -64,6 +76,7 @@ export interface NormalizedOfferDataProviderDetails {
 
 export interface NormalizedDetailedOffer {
   id: number;
+  status: null | NormalizedOfferStatus;
   aircraftDetails: NormalizedDetailedOfferAircraft;
   providerDetails: NormalizedOfferDataProviderDetails;
 }

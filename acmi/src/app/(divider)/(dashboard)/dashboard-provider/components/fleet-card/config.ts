@@ -57,7 +57,7 @@ export const initialValuesMock = {
   msn: '12345',
   reg: 'A-TEST',
   mtow: '75000',
-  ops: { value: 'LED', text: 'St. Petersburg' },
+  ops: { value: 'LCA', text: 'LCA, Larnaca' },
   thrust: '24500',
   date: new Date('2020-01-15'),
   isActive: false,

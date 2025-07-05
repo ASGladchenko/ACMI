@@ -6,17 +6,17 @@ import Image, { StaticImageData } from 'next/image';
 
 import { Cross } from '@/assets/svg';
 import { plain } from '@/assets/webp';
+import { useUserStore } from '@/store';
 import { useQueryStore } from '@/store/query-store';
 import { Role, NormalizedDetailedOffer } from '@/types';
 
 import { Modal } from '../modal';
-import { Button } from '../button';
 import { getInitialValues } from './config';
 import { AvailabilityBadge } from '../badges';
+import { RFQStatusAction } from './suggestion-status-action';
 import { RFQBlock, ProviderBlock, SpecificationBlock } from '../specification';
 
 import './styles.css';
-import { useUserStore } from '@/store';
 
 interface SuggestionCardProps {
   role?: Role;
@@ -99,6 +99,7 @@ export const SuggestionCard = ({ offer, role = Role.GUEST, fetchOffers }: Sugges
                 <span className={classValue}>{layout}</span>
               </div>
             </div>
+
             <div className="flex w-[280px] flex-col items-center justify-center pr-10 max-[1024px]:pr-0 max-[768px]:w-full max-[768px]:flex-row max-[768px]:flex-wrap max-[768px]:justify-start max-[768px]:gap-[10px_12px]">
               <span className="text-gray-medium font-montserrat desktop:text-[22px] desktop:leading-[26px] text-xl max-[768px]:text-[16px] max-[768px]:leading-[20px]">
                 Based in
@@ -107,12 +108,7 @@ export const SuggestionCard = ({ offer, role = Role.GUEST, fetchOffers }: Sugges
                 {region}
               </span>
 
-              <Button
-                onClick={() => setIsOfferModalOpen(true)}
-                className="w-[150px] font-bold max-[768px]:ml-auto"
-              >
-                Proceed to RFQ
-              </Button>
+              <RFQStatusAction onClick={() => setIsOfferModalOpen(true)} status={offer.status} />
             </div>
           </div>
         </div>

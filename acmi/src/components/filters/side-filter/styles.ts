@@ -7,7 +7,7 @@ export interface getStyles {
 
 export const getStyles = ({ className, type }: getStyles) => ({
   standard: cn(
-    'bg-white-dark hidden min-[1240px]:flex hidden w-[325px] flex-col gap-1.5 px-2.5 py-4.5 min-[1240px]:sticky min-[1240px]:top-[76px]',
+    'bg-white-dark hidden min-[1240px]:flex hidden w-full max-w-[325px] flex-col gap-1.5 px-2.5 py-4.5 min-[1240px]:sticky min-[1240px]:top-[76px]',
     className
   ),
   portal: cn(
