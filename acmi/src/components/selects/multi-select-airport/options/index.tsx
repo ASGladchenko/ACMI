@@ -1,8 +1,9 @@
+import { useRef, useEffect } from 'react';
+
 import { cn } from '@/utils';
 import { Cross, Plain } from '@/assets/svg';
 
 import { ISelectOption, IRenderOptionsProps } from '../../select-logic/types';
-import { useEffect, useRef } from 'react';
 
 export interface OptionsProps extends IRenderOptionsProps {
   filter: string;
@@ -46,7 +47,7 @@ export const Options = ({
     if (isOpen) {
       inputRef?.current?.focus();
     }
-  }, [isOpen]);
+  }, [isOpen, inputRef]);
 
   return (
     <div className={cl}>
@@ -74,9 +75,9 @@ export const Options = ({
           <span className="text-gray-dark">Selected:</span>
 
           <div className="scroll-bar-mini flex max-h-[160px] flex-col gap-1 overflow-y-auto">
-            {selectedOption.map((option) => (
+            {selectedOption.map((option, idx) => (
               <div
-                key={option.value}
+                key={`selected-${option.value}-${idx}`}
                 onClick={() => onHandleChange(option)}
                 className="group bg-blue-dark flex cursor-pointer items-center gap-4 rounded-[4px] px-2 py-1 text-[16px] leading-[19px] text-white duration-200 hover:text-rose-400"
               >
@@ -96,9 +97,9 @@ export const Options = ({
           <span className="text-gray-dark">Available:</span>
 
           <div className="scroll-bar-mini max-h-[160px] overflow-y-auto">
-            {filteredOptions.map((option) => (
+            {filteredOptions.map((option, idx) => (
               <div
-                key={option.value}
+                key={`option-${option.value}-${idx}`}
                 onClick={() => onHandleChange(option)}
                 className="text-blue-dark flex cursor-pointer items-center gap-4 px-1 py-1 text-[16px] leading-[19px] duration-200 hover:bg-slate-300"
               >

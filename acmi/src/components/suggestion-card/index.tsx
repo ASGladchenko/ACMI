@@ -107,12 +107,7 @@ export const SuggestionCard = ({ offer, role = Role.GUEST, fetchOffers }: Sugges
               <span className="text-gray-dark font-montserrat desktop:mb-2.5 desktop:text-[25px] desktop:leading-[30px] text-xl font-bold text-nowrap max-[768px]:text-[18px] max-[768px]:leading-[20px]">
                 {region}
               </span>
-              {/* <Button
-                onClick={() => setIsOfferModalOpen(true)}
-                className="w-[150px] font-bold max-[768px]:ml-auto"
-              >
-                Proceed to RFQ
-              </Button> */}
+
               <RFQStatusAction onClick={() => setIsOfferModalOpen(true)} status={offer.status} />
             </div>
           </div>

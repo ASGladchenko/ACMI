@@ -1,6 +1,6 @@
+import { cn } from '@/utils';
 import { Button } from '@/components';
 import { NormalizedOfferStatus } from '@/types';
-import { cn } from '@/utils';
 
 interface RFQStatusActionProps {
   onClick?: () => void;
@@ -10,15 +10,15 @@ interface RFQStatusActionProps {
 const statusTextMap = {
   [NormalizedOfferStatus.NEW]: 'RFQ sent',
   [NormalizedOfferStatus.SUBMITTED]: 'Get Offer',
-  [NormalizedOfferStatus.CONFIRMED]: 'Offer confirmed',
   [NormalizedOfferStatus.DECLINE]: 'Offer declined',
+  [NormalizedOfferStatus.CONFIRMED]: 'Offer confirmed',
 };
 
 const colorsClass = {
   [NormalizedOfferStatus.NEW]: ' bg-blue-500',
-  [NormalizedOfferStatus.SUBMITTED]: 'bg-amber-500 text-black',
-  [NormalizedOfferStatus.CONFIRMED]: 'bg-green-600',
   [NormalizedOfferStatus.DECLINE]: 'bg-red-600',
+  [NormalizedOfferStatus.CONFIRMED]: 'bg-green-600',
+  [NormalizedOfferStatus.SUBMITTED]: 'bg-amber-500 text-black',
 };
 
 export function RFQStatusAction({ status, onClick }: RFQStatusActionProps) {

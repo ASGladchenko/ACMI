@@ -40,7 +40,7 @@ export const Selected = ({
         behavior: 'smooth',
       });
     }
-  }, [option]);
+  }, [option, ref]);
 
   return (
     <div className={wrapper} onClick={() => !isDisabled && setIsOpen(true)}>

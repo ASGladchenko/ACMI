@@ -33,7 +33,7 @@ export const Selected = ({ label, error, isOpen, option, setIsOpen }: SelectedPr
         behavior: 'smooth',
       });
     }
-  }, [option]);
+  }, [option, ref]);
 
   return (
     <div className={wrapper} onClick={() => setIsOpen(!isOpen)}>

@@ -45,7 +45,7 @@ export const Options = ({
     if (isOpen) {
       inputRef?.current?.focus();
     }
-  }, [isOpen]);
+  }, [isOpen, inputRef]);
 
   return (
     <div className={cl}>
