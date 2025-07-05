@@ -11,6 +11,8 @@ import { Button, showMessage, FieldTextArea, FieldFleetInput } from '@/component
 import { serializeOfferData } from './serialize';
 import { OfferItem, OfferTitle } from '../components';
 import { offerTermsValidationSchema } from './config';
+import { getErrorMessage } from '@/utils';
+import { getEstimatedPrice, getTotalPrice } from './helpers';
 
 export interface OfferTermsBlockProps {
   id: number;
@@ -18,14 +20,17 @@ export interface OfferTermsBlockProps {
   initialValues: OfferTermsFormValues;
 }
 
-interface OfferTermsFormValues {
-  perDiem: number;
-  overTimeBh: number;
-  totalPrice: number;
-  guaranteedBh: number;
-  estimatedPrice: number;
-  positioningPrice: number;
+export interface OfferTermsFormValues {
+  perDiem: number | string;
+  overTimeBh: number | string;
+  totalPrice: number | string;
+  guaranteedBh: number | string;
+  estimatedPrice: number | string;
+  positioningPrice: number | string;
   responseAdditionalRequest: string;
+
+  minGBH: number | string;
+  estimatedBH: number | string;
 }
 
 export const OfferTermsBlock = ({ isEditing, initialValues, id }: OfferTermsBlockProps) => {
@@ -36,24 +41,25 @@ export const OfferTermsBlock = ({ isEditing, initialValues, id }: OfferTermsBloc
     const serializedRfq = serializeOfferData({ values, id });
     setIsLoadingRequest(true);
 
-    await apiClient
-      .post('/rfq/submit', serializedRfq)
-      .then(() => {
-        showMessage.success('Offer send successfully');
-        router.push('/dashboard-provider/rfq-requests');
-      })
+    try {
+      await apiClient.post('/rfq/submit', serializedRfq);
 
-      .catch((error) => {
-        showMessage.error(error);
-      })
-      .finally(() => {
-        setIsLoadingRequest(false);
-      });
+      showMessage.success('Offer send successfully');
+      router.push('/dashboard-provider/rfq-requests');
+    } catch (error) {
+      const msg = getErrorMessage(error, 'An error occurred while sending the offer');
+
+      showMessage.error(msg);
+    } finally {
+      setIsLoadingRequest(false);
+    }
   };
+
   return (
     <Formik
       enableReinitialize
       onSubmit={onSubmit}
+      validateOnChange={isEditing}
       initialValues={initialValues}
       validationSchema={isEditing ? offerTermsValidationSchema : null}
     >
@@ -94,7 +100,7 @@ export const OfferTermsBlock = ({ isEditing, initialValues, id }: OfferTermsBloc
             <div className="grid grid-cols-1 gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">
               <OfferItem
                 text="ESTIMATED ACMI PRICE:"
-                value={values.estimatedPrice.toString() + ' $'}
+                value={getEstimatedPrice(values).toFixed(2) + ' $'}
                 className="flex-col justify-between min-[968px]:flex-row [&>span:first-child]:min-w-[220px]"
               />
             </div>
@@ -142,7 +148,7 @@ export const OfferTermsBlock = ({ isEditing, initialValues, id }: OfferTermsBloc
             )}
 
             <p className="text-blue-deep font-montserrat flex flex-wrap items-center gap-[0_32px] text-[20px] font-extrabold min-[968px]:text-[26px]">
-              <span>TOTAL ESTIMATED PRICE:</span> <span>{values.totalPrice}$</span>
+              <span>TOTAL ESTIMATED PRICE:</span> <span>{getTotalPrice(values)} $</span>
             </p>
 
             {isEditing && (

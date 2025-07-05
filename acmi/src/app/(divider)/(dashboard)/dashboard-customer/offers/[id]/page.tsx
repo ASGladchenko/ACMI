@@ -36,7 +36,14 @@ export default async function OfferByIdPage({ params }: { params: Promise<{ id: 
 
           <RFQBlock id={Number(id)} initialValues={data.rfqData} />
 
-          <OfferTermsBlock id={Number(id)} initialValues={data.rfqTerms} />
+          <OfferTermsBlock
+            id={Number(id)}
+            initialValues={{
+              ...data.rfqTerms,
+              minGBH: data?.rfqData?.minGBH || 0,
+              estimatedBH: data?.rfqData?.estimatedBH || 0,
+            }}
+          />
 
           <Controls id={Number(id)} />
         </>

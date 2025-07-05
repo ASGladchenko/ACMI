@@ -4,6 +4,7 @@ import { cn } from '@/utils';
 import { Cross } from '@/assets/svg';
 
 import { IRenderSelectedProps, ISelectOption } from '../../select-logic/types';
+import { useEffect, useRef } from 'react';
 
 export interface SelectedProps extends Omit<IRenderSelectedProps, 'option'> {
   label: string;
@@ -27,6 +28,8 @@ export const Selected = ({
   isDisabled,
   placeholder,
 }: SelectedProps) => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
   const onInputClick = (e: React.MouseEvent) => {
     if (isOpen) {
       e.stopPropagation();
@@ -53,6 +56,12 @@ export const Selected = ({
     onChange(item);
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      inputRef.current?.focus();
+    }
+  }, [isOpen]);
+
   return (
     <div className={wrapper} onClick={() => setIsOpen(!isOpen)}>
       <span className="text-blue-dark shrink-0 font-bold whitespace-nowrap">{label}</span>
@@ -76,6 +85,7 @@ export const Selected = ({
         <input
           type="text"
           value={filter}
+          ref={inputRef}
           disabled={isDisabled}
           onClick={onInputClick}
           placeholder={placeholder}

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/utils';
 import { Cross, Plain } from '@/assets/svg';
@@ -47,6 +47,12 @@ export const Selected = ({
       inputRef.current?.focus();
     }, 1);
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      inputRef.current?.focus();
+    }
+  }, [isOpen]);
 
   const wrapper = cn(
     'w-full bg-white flex border-[1px] rounded-xl border-blue-dark px-3 py-[7px] items-center gap-2 overflow-hidden',
