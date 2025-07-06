@@ -1,2 +1,2 @@
-export { ProviderSideMenu } from './provider-side-menu';
+export { DashBoardSideMenu } from './dashboard-side-menu';
 export { TitleDB } from './title-db';

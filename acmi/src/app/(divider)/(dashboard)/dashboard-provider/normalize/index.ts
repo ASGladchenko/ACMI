@@ -1,4 +1,4 @@
-import { AircraftFleet } from '../types';
+import { AircraftFleet, RFQProviderRaw } from '../types';
 
 export const normalizeAircraftFleet = (aircraft: AircraftFleet) => {
   const setValueOrEmpty = (value: number | string | undefined) => {
@@ -36,4 +36,18 @@ export const normalizeAircraftFleet = (aircraft: AircraftFleet) => {
       first: { seats: setValueOrEmpty(aircraft.f_seats), pitch: '' },
     },
   };
+};
+
+export const normalizeRFQProviderList = (rfqs: RFQProviderRaw[]) => {
+  return rfqs.map((rfq) => {
+    const { id, customer, aircraft, rfq_data } = rfq;
+    return {
+      id,
+      airplane: aircraft?.type || 'N/A',
+      company: customer,
+      msn: aircraft?.msn || 'N/A',
+      dateFrom: rfq_data.date_from,
+      dateTo: rfq_data.date_to,
+    };
+  });
 };

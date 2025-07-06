@@ -10,7 +10,7 @@ import { Cross } from '@/assets/svg';
 import { getStyles } from './style';
 import { routes, titles } from '../../config';
 
-export const ProviderSideMenu = () => {
+export const DashBoardSideMenu = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const type = pathname.split('/')[1];
