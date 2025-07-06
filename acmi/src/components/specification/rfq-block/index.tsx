@@ -71,11 +71,11 @@ export const RFQBlock = ({ isEditing, initialValues, id, onSuccessRequest }: RFQ
                 value={values.operator}
                 className="flex-col items-baseline justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
               />
-              <OfferItem
+              {/* <OfferItem
                 value={values.position}
                 text="Requester position:"
                 className="flex-col items-baseline justify-between min-[968px]:flex-row min-[968px]:items-center [&>span:first-child]:min-w-[220px]"
-              />
+              /> */}
             </div>
 
             <div className="grid grid-cols-1 items-baseline gap-[10px_20px] min-[968px]:grid-cols-2 min-[1320px]:grid-cols-2 min-[1320px]:gap-[0_40px]">

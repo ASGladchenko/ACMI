@@ -5,7 +5,7 @@ import { RFQProviderRaw } from '../types';
 import { TitleDB } from '../../components';
 import { normalizeRFQProviderList } from '../normalize';
 
-export default async function RFQRequests() {
+export default async function SentOffers() {
   let data;
   let errors;
 
@@ -24,7 +24,7 @@ export default async function RFQRequests() {
   }
   return (
     <section>
-      <TitleDB title="RFQ requests" />
+      <TitleDB title="Sent Offers" />
 
       {errors && <h2 className="text-center text-3xl text-red-400">{errors}</h2>}
 
@@ -37,7 +37,7 @@ export default async function RFQRequests() {
       {!errors && data && data.length > 0 && (
         <div className="flex flex-col gap-2 px-2 pb-4">
           {data.map((item, idx) => (
-            <RfqOfferRow {...item} idx={idx} key={item.id} basePath="rfq-requests/" />
+            <RfqOfferRow {...item} idx={idx} key={item.id} basePath="sent-offers/" />
           ))}
         </div>
       )}

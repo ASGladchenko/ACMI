@@ -1,18 +1,18 @@
 import { RfqOfferRow } from '@/components';
 import { apiServer } from '@/fetch-request';
 
-import { RFQProviderRaw } from '../types';
 import { TitleDB } from '../../components';
-import { normalizeRFQProviderList } from '../normalize';
+import { RFQCustomerRaw } from '../types';
+import { normalizeRFQCustomerList } from '../normalize';
 
-export default async function RFQRequests() {
+export default async function RFQs() {
   let data;
   let errors;
 
   try {
-    const response = await apiServer<RFQProviderRaw[]>('/rfq/list');
+    const response = await apiServer.get<RFQCustomerRaw[]>('/rfq/list').then(({ data }) => data);
 
-    data = normalizeRFQProviderList(response.data);
+    data = normalizeRFQCustomerList(response);
   } catch (error) {
     if (error instanceof Error) {
       errors = error.message;
@@ -22,22 +22,20 @@ export default async function RFQRequests() {
       errors = 'Unknown error';
     }
   }
+
   return (
     <section>
-      <TitleDB title="RFQ requests" />
+      <TitleDB title="Sent Rfqs" />
 
       {errors && <h2 className="text-center text-3xl text-red-400">{errors}</h2>}
-
       {!errors && data && data.length === 0 && (
-        <h2 className="text-blue-dark font-inter text-center text-3xl font-semibold">
-          There are no new RFQs
-        </h2>
+        <h2 className="text-blue-dark text-center text-3xl">There are no new offers</h2>
       )}
 
       {!errors && data && data.length > 0 && (
         <div className="flex flex-col gap-2 px-2 pb-4">
           {data.map((item, idx) => (
-            <RfqOfferRow {...item} idx={idx} key={item.id} basePath="rfq-requests/" />
+            <RfqOfferRow key={item.id} basePath="rfqs/" idx={idx} {...item} />
           ))}
         </div>
       )}

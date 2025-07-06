@@ -1,31 +1,27 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { useUserStore } from '@/store';
 import { apiClient } from '@/fetch-request';
 import { showMessage } from '@/components';
+import { getErrorMessage } from '@/utils';
 
 export const UserStoreLoader = ({}) => {
-  const [isLoad, setIsLoad] = useState(false);
   const setUser = useUserStore((s) => s.setUser);
 
   useEffect(() => {
-    if (isLoad) {
-      return;
-    }
-
-    setIsLoad(true);
-
     apiClient
       .get('/me')
       .then((res) => {
         setUser(res.data);
       })
       .catch((error) => {
-        showMessage.error(error);
+        const msg = getErrorMessage(error, 'Error load user, reload or contact with us');
+
+        showMessage.error(msg);
       });
-  }, [isLoad]);
+  }, []);
 
   return null;
 };

@@ -1,9 +1,9 @@
 import { RfqOfferRow } from '@/components';
 import { apiServer } from '@/fetch-request';
 
-import { RFQCustomerRaw } from './types';
+import { RFQCustomerRaw } from '../types';
 import { TitleDB } from '../../components';
-import { normalizeRFQCustomerList } from './normalize';
+import { normalizeRFQCustomerList } from '../normalize';
 
 export default async function OffersPage() {
   let data;
