@@ -108,7 +108,10 @@ export const SuggestionCard = ({ offer, role = Role.GUEST, fetchOffers }: Sugges
                 {region}
               </span>
 
-              <RFQStatusAction onClick={() => setIsOfferModalOpen(true)} status={offer.status} />
+              <RFQStatusAction
+                onClick={() => setIsOfferModalOpen(true)}
+                status={offer.status.status}
+              />
             </div>
           </div>
         </div>

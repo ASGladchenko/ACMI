@@ -4,13 +4,18 @@ import { apiServer } from '@/fetch-request';
 import { TitleDB } from '../../components';
 import { RFQCustomerRaw } from '../types';
 import { normalizeRFQCustomerList } from '../normalize';
+import { NormalizedOfferStatus } from '@/types';
 
 export default async function RFQs() {
   let data;
   let errors;
 
   try {
-    const response = await apiServer.get<RFQCustomerRaw[]>('/rfq/list').then(({ data }) => data);
+    const response = await apiServer
+      .get<RFQCustomerRaw[]>('/rfq/list', {
+        params: { status: NormalizedOfferStatus.NEW },
+      })
+      .then(({ data }) => data);
 
     data = normalizeRFQCustomerList(response);
   } catch (error) {

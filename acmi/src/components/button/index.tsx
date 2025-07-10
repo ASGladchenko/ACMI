@@ -2,11 +2,12 @@ import { ButtonHTMLAttributes } from 'react';
 
 import { cn } from '@/utils';
 
-import { configButton, configLoader } from './config';
+import { BtnColorType, configButton, configLoader } from './config';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   className?: string;
+  colorType?: BtnColorType;
   buttonType?: 'standard' | 'outline' | 'ghost';
 }
 
@@ -16,11 +17,12 @@ export const Button = ({
   children,
   className,
   buttonType = 'standard',
+  colorType = BtnColorType.DARK_BLUE,
   ...props
 }: ButtonProps) => {
   const styles = cn(
     'flex items-center justify-center gap-2 w-full text-[14px] font-medium rounded-xl leading-[18px] px-4.5 py-2.5 cursor-pointer font-inter',
-    configButton[buttonType],
+    configButton(colorType)[buttonType],
     className
   );
 

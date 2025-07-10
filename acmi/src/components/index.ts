@@ -25,3 +25,5 @@ export * from './pages';
 export * from './selects';
 export * from './specification';
 export * from './switchers';
+
+export { BtnColorType } from './button/config';
