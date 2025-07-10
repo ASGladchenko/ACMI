@@ -8,6 +8,7 @@
 }
 
 :root {
+  --blue-05: rgba(59, 130, 246, 0.5);
   --blue-dark: #1a436b;
   --blue-dark-08: rgba(26, 67, 107, 0.8);
   --blue-dark-05: rgba(26, 67, 107, 0.5);
@@ -24,6 +25,11 @@
   --white-light: #e9e9e9;
 
   --green-main: #0b7436;
+  --green-05: rgba(34, 197, 94, 0.5);
+
+  --orange-05: rgba(245, 158, 11, 0.5);
+
+  --red-05: rgba(220, 38, 38, 0.5);
 }
 
 @theme inline {
@@ -51,6 +57,19 @@
   /* shadow */
   --shadow-inner-glow: inset 0px 0px 4px 2px var(--blue-dark-05);
   --shadow-inner-glow-active: inset 0px 0px 4px 4px var(--blue-dark-05);
+
+  --shadow-inner-glow-blue: inset 0px 0px 4px 2px var(--blue-05);
+  --shadow-inner-glow-active-blue: inset 0px 0px 4px 4px var(--blue-05);
+
+  --shadow-inner-glow-red: inset 0px 0px 4px 2px var(--red-05);
+  --shadow-inner-glow-active-red: inset 0px 0px 4px 4px var(--red-05);
+
+  --shadow-inner-glow-orange: inset 0px 0px 4px 2px var(--orange-05);
+  --shadow-inner-glow-active-orange: inset 0px 0px 4px 4px var(--orange-05);
+
+  --shadow-inner-glow-green: inset 0px 0px 4px 2px var(--green-05);
+  --shadow-inner-glow-active-green: inset 0px 0px 4px 4px var(--green-05);
+
   --shadow-sm-black: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
   --drop-shadow-link: 0px 0px 2px var(--blue-dark-08);

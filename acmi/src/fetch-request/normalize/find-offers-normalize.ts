@@ -9,7 +9,10 @@ export const normalizeDetailedFindOffers = (
     const { aircraft_details, provider_details } = offer;
     return {
       id: offer.offer_id,
-      status: offer.transaction_status,
+      status: {
+        id: offer?.transaction.transaction_id,
+        status: offer?.transaction.transaction_status,
+      },
       aircraftDetails: {
         pax: aircraft_details.max_capacity,
         act: aircraft_details.act,

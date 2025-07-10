@@ -35,11 +35,15 @@ export interface ProviderDetails {
   iosa: boolean;
 }
 
+export type AircraftResponseTransactionType = {
+  transaction_id: number | null;
+  transaction_status: NormalizedOfferStatus | null;
+};
 export interface AircraftResponseOffer {
   offer_id: number;
   aircraft_details: AircraftDetails;
   provider_details: ProviderDetails;
-  transaction_status: null | NormalizedOfferStatus;
+  transaction: AircraftResponseTransactionType;
 }
 
 export interface AircraftResponse {
@@ -76,7 +80,10 @@ export interface NormalizedOfferDataProviderDetails {
 
 export interface NormalizedDetailedOffer {
   id: number;
-  status: null | NormalizedOfferStatus;
+  status: {
+    id: number | null;
+    status: NormalizedOfferStatus | null;
+  };
   aircraftDetails: NormalizedDetailedOfferAircraft;
   providerDetails: NormalizedOfferDataProviderDetails;
 }

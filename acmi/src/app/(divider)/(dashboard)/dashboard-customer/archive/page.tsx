@@ -1,5 +1,6 @@
 import { RfqOfferRow } from '@/components';
 import { apiServer } from '@/fetch-request';
+import { NormalizedOfferStatus } from '@/types';
 
 import { RFQCustomerRaw } from '../types';
 import { TitleDB } from '../../components';
@@ -10,7 +11,11 @@ export default async function OffersArchive() {
   let errors;
 
   try {
-    const response = await apiServer.get<RFQCustomerRaw[]>('/rfq/list').then(({ data }) => data);
+    const response = await apiServer
+      .get<RFQCustomerRaw[]>('/rfq/list', {
+        params: { status: NormalizedOfferStatus.CONFIRMED },
+      })
+      .then(({ data }) => data);
 
     data = normalizeRFQCustomerList(response);
   } catch (error) {
