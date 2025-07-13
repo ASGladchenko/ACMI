@@ -2,6 +2,9 @@ import * as Yup from 'yup';
 
 import { getSummarySeats } from '@/utils';
 
+import { FleetCardFormValues } from '../types';
+import { NormalizedAircraftFleet } from '../../../types';
+
 export const validationSchema = Yup.object().shape({
   msn: Yup.string().required('MSN is required'),
   reg: Yup.string().required('Registration is required'),
@@ -25,7 +28,7 @@ export const validationSchema = Yup.object().shape({
   layout: Yup.number().required('Layout is required').moreThan(0, 'Layout must be greater than 0'),
 });
 
-export const getInitialValues = (values: typeof initialValuesMock) => {
+export const getInitialValues = (values: NormalizedAircraftFleet): FleetCardFormValues => {
   const layoutValues = createLayoutValues(values);
 
   const layout = getSummarySeats(layoutValues);
@@ -34,7 +37,7 @@ export const getInitialValues = (values: typeof initialValuesMock) => {
     msn: values?.msn || '',
     reg: values?.reg || '',
     mtow: values?.mtow || '',
-    ops: { value: values?.ops?.value || '', text: values?.ops?.text || '' },
+    ops: values?.ops || { value: '', text: '' },
     thrust: values?.thrust || '',
     date: values?.date || null,
     isActive: values?.isActive || false,
@@ -53,35 +56,7 @@ export const getInitialValues = (values: typeof initialValuesMock) => {
   };
 };
 
-export const initialValuesMock = {
-  msn: '12345',
-  reg: 'A-TEST',
-  mtow: '75000',
-  ops: { value: 'LCA', text: 'LCA, Larnaca' },
-  thrust: '24500',
-  date: new Date('2020-01-15'),
-  isActive: false,
-  aircraftType: 'A320',
-  etops: 2,
-  ilsCategory: 4,
-  noiseStage: 3,
-  act: true,
-  ife: true,
-  wifi: false,
-  isps: false,
-  galleys: false,
-  sharklets: false,
-  layout: 150,
-  layoutValues: {
-    economy: { seats: '144', pitch: '30' },
-    transformer: { seats: '6', pitch: '32' },
-    premium: { seats: '', pitch: '' },
-    business: { seats: '', pitch: '' },
-    first: { seats: '', pitch: '' },
-  },
-};
-
-function createLayoutValues(values: typeof initialValuesMock) {
+function createLayoutValues(values: NormalizedAircraftFleet) {
   const sectionTypes = ['economy', 'transformer', 'premium', 'business', 'first'] as const;
 
   return sectionTypes.reduce(
@@ -95,3 +70,51 @@ function createLayoutValues(values: typeof initialValuesMock) {
     {} as Record<(typeof sectionTypes)[number], { seats: string; pitch: string }>
   );
 }
+
+export const t = {
+  // isActive: false, Пока нет в сваггере
+
+  act: false,
+  msn: '3055',
+  reg: 'LZ-FSB',
+  mtow: '78000',
+  ops: {
+    value: 'AEP',
+    text: 'AEP, Aeroparque Jorge Newbery',
+  },
+  thrust: 120,
+  aircraftType: 305,
+  etops: 4,
+  ilsCategory: 4,
+  noiseStage: 1,
+  date: '2007-03-03T00:00:00Z',
+  ife: false,
+  isps: false,
+  wifi: false,
+  galleys: true,
+  sharklets: false,
+
+  layout: 180,
+  layoutValues: {
+    economy: {
+      seats: '180',
+      pitch: '',
+    },
+    transformer: {
+      seats: '',
+      pitch: '',
+    },
+    premium: {
+      seats: '',
+      pitch: '',
+    },
+    business: {
+      seats: '',
+      pitch: '',
+    },
+    first: {
+      seats: '',
+      pitch: '',
+    },
+  },
+};

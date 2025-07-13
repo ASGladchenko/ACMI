@@ -24,6 +24,8 @@ export const Modal = ({ isOpen, onClose, children, className }: ChildrenProps<Mo
 
   if (!isClient) return null;
 
+  if (!isOpen) return null;
+
   return (
     <RemoveScroll enabled={isOpen}>
       <ReactModal

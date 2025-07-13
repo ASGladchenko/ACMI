@@ -1,35 +1,15 @@
-export type Status = 'idle' | 'loading' | 'loading_update' | 'success' | 'error';
-
-export interface State {
-  data: AircraftFleetNormalized[] | null;
-  status: Status;
-  error: string | null;
-  updatingId?: number | null;
-}
-
-export type Action =
-  | { type: 'FETCH_START' }
-  | { type: 'UPDATE_START'; id: number }
-  | { type: 'FETCH_SUCCESS'; payload: AircraftFleetNormalized[] }
-  | { type: 'FETCH_ERROR'; payload: string }
-  | { type: 'UPDATE_SUCCESS'; payload: AircraftFleetNormalized }
-  | { type: 'RESET_ERROR' };
-
-export interface NormalizedAircraftFleet {
-  asd: string;
-}
-
 export interface AircraftFleet {
-  id: number;
+  id: string;
   aircraft_id: string;
+
   msn: string;
   reg_number: string;
-  approach_cat: string;
+  approach_cat_id: string;
   mtow: number;
   base_location: string;
-  noise: string;
-  type: string;
-  etops: number;
+  noise_id: string;
+  type_id: number;
+  etops_id: number;
   thrust_rating: number;
 
   act: boolean;
@@ -51,40 +31,46 @@ export interface AircraftFleet {
   f_seats: number;
   y_seats: number;
   yj_seats: number;
+
+  j_pitch: number;
+  w_pitch: number;
+  f_pitch: number;
+  y_pitch: number;
+  yj_pitch: number;
+}
+export interface LayoutValue {
+  seats: string;
+  pitch: string;
 }
 
-export interface AircraftFleetNormalized {
-  id: number;
+export interface LayoutValues {
+  economy: LayoutValue;
+  transformer: LayoutValue;
+  premium: LayoutValue;
+  business: LayoutValue;
+  first: LayoutValue;
+}
 
+export interface NormalizedAircraftFleet {
   isActive: boolean;
-
-  msn: string;
-  reg: string;
-  mtow: string;
-  ops: string;
-  thrust: number;
-  date: string;
-  aircraftType: string;
-  etops: string;
+  id: string;
   ilsCategory: string;
+  etops: number;
+  ops: { value: string; text: string };
+  date: string;
+  msn: string;
+  mtow: string;
+  reg: string;
   noiseStage: string;
-  act: boolean;
+  aircraftType: number;
+  thrust: number;
+  galleys: boolean;
   ife: boolean;
+  act: boolean;
   isps: boolean;
   wifi: boolean;
-  galleys: boolean;
   sharklets: boolean;
-  layoutValues: {
-    economy: { seats: string; pitch: string };
-    transformer: { seats: string; pitch: string };
-    premium: { seats: string; pitch: string };
-    business: { seats: string; pitch: string };
-    first: { seats: string; pitch: string };
-  };
-}
-
-export interface UseProviderFleetProps {
-  onError?: (error: string) => void;
+  layoutValues: LayoutValues;
 }
 
 export interface RFQProviderRaw {
@@ -106,4 +92,34 @@ export interface RFQProviderRaw {
     date_from: string;
     date_to: string;
   };
+}
+
+export interface SerializedAirCraftFleet {
+  act: boolean;
+  msn: string;
+  reg_number: string;
+  mtow: number;
+  base_location: string;
+  thrust_rating: number;
+  type_id: number | null;
+  etops_id: number | null;
+  approach_cat_id: string | null;
+  noise_id: string | null;
+  dom: string | null;
+  ife: boolean;
+  isps: boolean;
+  wifi: boolean;
+  galley_ovens: boolean;
+  winglets_sharklets: boolean;
+  layout: string;
+  y_pitch: number;
+  yj_pitch: number;
+  w_pitch: number;
+  j_pitch: number;
+  f_pitch: number;
+  y_seats: number;
+  yj_seats: number;
+  w_seats: number;
+  j_seats: number;
+  f_seats: number;
 }

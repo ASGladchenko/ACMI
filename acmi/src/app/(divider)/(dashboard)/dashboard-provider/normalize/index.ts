@@ -2,9 +2,9 @@ import { differenceInYears } from 'date-fns';
 
 import { getLayoutFromObj } from '@/utils';
 
-import { AircraftFleet, RFQProviderRaw } from '../types';
+import { AircraftFleet, NormalizedAircraftFleet, RFQProviderRaw } from '../types';
 
-export const normalizeAircraftFleet = (aircraft: AircraftFleet) => {
+export const normalizeAircraftFleet = (aircraft: AircraftFleet): NormalizedAircraftFleet => {
   const setValueOrEmpty = (value: number | string | undefined) => {
     return value ? value.toString() : '';
   };
@@ -14,30 +14,40 @@ export const normalizeAircraftFleet = (aircraft: AircraftFleet) => {
 
     id: aircraft.id,
     msn: aircraft.msn,
-    mtow: setValueOrEmpty(aircraft.mtow),
+    etops: aircraft.etops_id,
     reg: aircraft.reg_number,
-    noiseStage: aircraft.noise,
-    ops: aircraft.base_location,
-    ilsCategory: aircraft.approach_cat,
-    aircraftType: aircraft.type,
-    etops: setValueOrEmpty(aircraft.etops),
+    noiseStage: aircraft.noise_id,
+    aircraftType: aircraft.type_id,
     thrust: aircraft.thrust_rating,
+    date: setValueOrEmpty(aircraft.dom),
+    mtow: setValueOrEmpty(aircraft.mtow),
+    ilsCategory: aircraft.approach_cat_id,
+    ops: { value: aircraft?.base_location ?? '', text: aircraft?.base_location ?? '' },
 
-    act: aircraft.act,
-    ife: aircraft.ife,
     galleys: aircraft.galley_ovens,
+    ife: aircraft.ife,
+    act: aircraft.act,
     isps: aircraft.isps,
     wifi: aircraft.wifi,
     sharklets: aircraft.winglets_sharklets,
-
-    date: '',
-
     layoutValues: {
-      economy: { seats: setValueOrEmpty(aircraft.y_seats), pitch: '' },
-      transformer: { seats: setValueOrEmpty(aircraft.yj_seats), pitch: '' },
-      premium: { seats: setValueOrEmpty(aircraft.w_seats), pitch: '' },
-      business: { seats: setValueOrEmpty(aircraft.j_seats), pitch: '' },
-      first: { seats: setValueOrEmpty(aircraft.f_seats), pitch: '' },
+      economy: {
+        seats: setValueOrEmpty(aircraft.y_seats),
+        pitch: setValueOrEmpty(aircraft.y_pitch),
+      },
+      transformer: {
+        seats: setValueOrEmpty(aircraft.yj_seats),
+        pitch: setValueOrEmpty(aircraft.yj_pitch),
+      },
+      premium: {
+        seats: setValueOrEmpty(aircraft.w_seats),
+        pitch: setValueOrEmpty(aircraft.w_pitch),
+      },
+      business: {
+        seats: setValueOrEmpty(aircraft.j_seats),
+        pitch: setValueOrEmpty(aircraft.j_pitch),
+      },
+      first: { seats: setValueOrEmpty(aircraft.f_seats), pitch: setValueOrEmpty(aircraft.f_pitch) },
     },
   };
 };
