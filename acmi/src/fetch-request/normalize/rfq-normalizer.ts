@@ -61,12 +61,12 @@ export const normalizeRFQDashboard = (rfq: RFQRequest) => {
       },
     },
     rfqTerms: {
-      perDiem: rfq_terms?.per_diem_price || 999999,
-      overTimeBh: rfq_terms.overtime_bh_price || 999999,
-      totalPrice: 99999999,
-      guaranteedBh: rfq_terms?.gbh_price || 999999,
-      estimatedPrice: 99999999,
-      positioningPrice: rfq_terms.per_diem_price || 999999,
+      totalPrice: '',
+      estimatedPrice: '',
+      guaranteedBh: rfq_terms?.gbh_price,
+      perDiem: rfq_terms?.per_diem_price,
+      overTimeBh: rfq_terms.overtime_bh_price,
+      positioningPrice: rfq_terms.positioning_price,
       responseAdditionalRequest: rfq_terms.additional_requests_answer,
     },
   };

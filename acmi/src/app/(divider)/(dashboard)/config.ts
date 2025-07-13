@@ -8,8 +8,8 @@ export const routes = {
   },
   'dashboard-customer': {
     info: '/dashboard-customer',
-    offers: '/dashboard-customer/offers',
     RFQs: '/dashboard-customer/rfqs',
+    offers: '/dashboard-customer/offers',
     offers_archive: '/dashboard-customer/archive',
   },
 };
