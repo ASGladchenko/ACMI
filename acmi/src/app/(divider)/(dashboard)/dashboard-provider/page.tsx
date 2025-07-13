@@ -1,45 +1,28 @@
-'use client';
-
-import { showMessage } from '@/components';
-import {
-  useETOPSDictionary,
-  useNoiseStageDictionary,
-  useILSCategoryDictionary,
-  useAircraftTypesDictionary,
-} from '@/hooks';
-
+import { getErrorMessage } from '@/utils';
 import { TitleDB } from '../components';
-import { FleetCard } from './components';
-import { useProviderFleet } from './useProviderFleet';
+import { Fleets } from './components';
+import { apiServer } from '@/fetch-request';
+import { AircraftFleet } from './types';
+import { normalizeAircraftFleet } from './normalize';
 
-export default function ProviderPage() {
-  const { isLoading: isLoadingETOPS } = useETOPSDictionary();
-  const { isLoading: isLoadingILS } = useILSCategoryDictionary();
-  const { isLoading: isLoadingNoise } = useNoiseStageDictionary();
-  const { isLoading: isLoadingAirType } = useAircraftTypesDictionary();
+export default async function ProviderPage() {
+  let error;
+  let data;
 
-  const onError = (msg: string) => {
-    showMessage.error(msg);
-  };
-  const { data, error, isSuccess } = useProviderFleet({ onError });
+  try {
+    const res = await apiServer<AircraftFleet[]>('/aircrafts');
+
+    data = res.data.map((aircraft) => normalizeAircraftFleet(aircraft));
+
+  } catch (err) {
+    error = getErrorMessage(err, 'Fleet loading error, connect with us');
+  }
 
   return (
     <section>
       <TitleDB title="Fleet" />
 
-      <div className="flex flex-col gap-3 px-2 pb-4">
-        {error && <h2 className="text-center text-3xl text-red-400">{error}</h2>}
-
-        {isSuccess &&
-          data &&
-          Array.from({ length: 10 }).map((_, index) => (
-            <FleetCard
-              key={`fleet-${index}`}
-              id={index.toString()}
-              isLoading={isLoadingAirType || isLoadingETOPS || isLoadingILS || isLoadingNoise}
-            />
-          ))}
-      </div>
+      <Fleets error={error} data={data} />
     </section>
   );
 }

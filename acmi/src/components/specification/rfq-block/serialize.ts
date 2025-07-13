@@ -5,7 +5,7 @@ export interface SerializeRFQData {
   id: number;
 }
 
-export const serializeRFQData = ({values, id}: SerializeRFQData) => {
+export const serializeRFQData = ({ values, id }: SerializeRFQData) => {
   return {
     offer_id: id,
     rfq_create: {

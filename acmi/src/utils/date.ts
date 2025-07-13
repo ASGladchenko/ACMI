@@ -9,10 +9,16 @@ export const formatDate = (dateStr: string): string => {
 
 export const fixUTCDateForDatePicker = (utcDate: Date | null): Date | null => {
   if (!utcDate) return null;
-  return new Date(utcDate.getUTCFullYear(), utcDate.getUTCMonth(), utcDate.getUTCDate());
+
+  const dateObj = typeof utcDate === 'string' ? new Date(utcDate) : utcDate;
+
+  return new Date(dateObj.getUTCFullYear(), dateObj.getUTCMonth(), dateObj.getUTCDate());
 };
 
 export const toUTCDate = (localDate: Date | null): Date | null => {
   if (!localDate) return null;
-  return new Date(Date.UTC(localDate.getFullYear(), localDate.getMonth(), localDate.getDate()));
+
+  const dateObj = typeof localDate === 'string' ? new Date(localDate) : localDate;
+
+  return new Date(Date.UTC(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate()));
 };
