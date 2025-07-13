@@ -50,8 +50,8 @@ export const normalizeRFQDashboard = (rfq: RFQRequest) => {
       },
     },
     rfqTerms: {
-      totalPrice: '',
-      estimatedPrice: '',
+      totalPrice: 0,
+      estimatedPrice: 0,
       guaranteedBh: rfq_terms?.gbh_price,
       perDiem: rfq_terms?.per_diem_price,
       overTimeBh: rfq_terms.overtime_bh_price,
