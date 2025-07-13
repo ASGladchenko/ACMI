@@ -5,22 +5,28 @@ interface RfqOfferRowProps {
   id: number;
   idx: number;
   msn: string;
+  age: string;
   dateTo: string;
   company: string;
+  layout: string;
   airplane: string;
   dateFrom: string;
   basePath: string;
+  isProviderHidden?: boolean;
 }
 
 export const RfqOfferRow = ({
   id,
   idx,
   msn,
+  age,
   dateTo,
+  layout,
   company,
   airplane,
   dateFrom,
   basePath,
+  isProviderHidden = false,
 }: RfqOfferRowProps) => {
   return (
     <Link
@@ -36,14 +42,37 @@ export const RfqOfferRow = ({
         </p>
 
         <p className="max-[1024px] ml-auto shrink-0 break-words">
-          MSN: <span className="font-bold">{msn}</span>
+          {!isProviderHidden && (
+            <span>
+              MSN: <span className="font-bold">{msn}</span>
+            </span>
+          )}
+
+          {isProviderHidden && (
+            <span>
+              Age: <span className="font-bold">{age} year(s)</span>
+            </span>
+          )}
         </p>
       </div>
       <p className="flex w-full shrink-0 flex-wrap">
-        <span className="shrink-0">Company:</span>
-        <span className="shrink-1 overflow-hidden font-bold text-ellipsis whitespace-nowrap">
-          {company}
-        </span>
+        {!isProviderHidden && (
+          <>
+            <span className="shrink-0">Company:</span>
+            <span className="ml-2 shrink-1 overflow-hidden font-bold text-ellipsis whitespace-nowrap">
+              {company}
+            </span>
+          </>
+        )}
+
+        {isProviderHidden && (
+          <>
+            <span className="shrink-0">Layout:</span>
+            <span className="ml-2 shrink-1 overflow-hidden font-bold text-ellipsis whitespace-nowrap">
+              {layout}
+            </span>
+          </>
+        )}
       </p>
 
       <p className="flex w-full items-center justify-end gap-1">

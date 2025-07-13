@@ -1,21 +1,10 @@
 import { RFQRequest } from '@/types/rfq';
+import { getLayoutFromObj } from '@/utils';
 
 const baseImgUrl = process.env.NEXT_PUBLIC_IMG_URL;
 
 export const normalizeRFQDashboard = (rfq: RFQRequest) => {
   const { aircraft, provider, rfq_data, requester_position, customer, rfq_terms } = rfq;
-
-  const layout = Object.entries(aircraft.layout).reduce((acc, [key, value], idx, arr) => {
-    if (value && value > 0) {
-      acc += `${value}${key.replace('_seats', '').toUpperCase()}`;
-
-      if (idx < arr.length - 1) {
-        acc += ' + ';
-      }
-    }
-
-    return acc;
-  }, '');
 
   return {
     aircraftDetails: {
@@ -27,7 +16,7 @@ export const normalizeRFQDashboard = (rfq: RFQRequest) => {
       isps: aircraft.isps,
       wifi: aircraft.wifi,
       type: aircraft.type,
-      layout: layout,
+      layout: getLayoutFromObj(aircraft.layout),
       etops: aircraft.etops_id,
       noise: aircraft.noise_id,
       engines: aircraft.engines,

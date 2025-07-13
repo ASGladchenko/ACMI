@@ -3,6 +3,7 @@ export const routes = {
     fleet: '/dashboard-provider',
     rfq_requests: '/dashboard-provider/rfq-requests',
     sent_offers: '/dashboard-provider/sent-offers',
+    offers_archive: '/dashboard-provider/archive',
     company: '/dashboard-provider/company',
     settings: '/dashboard-provider/settings',
   },
