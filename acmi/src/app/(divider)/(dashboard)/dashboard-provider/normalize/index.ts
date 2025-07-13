@@ -1,3 +1,7 @@
+import { differenceInYears } from 'date-fns';
+
+import { getLayoutFromObj } from '@/utils';
+
 import { AircraftFleet, RFQProviderRaw } from '../types';
 
 export const normalizeAircraftFleet = (aircraft: AircraftFleet) => {
@@ -41,6 +45,7 @@ export const normalizeAircraftFleet = (aircraft: AircraftFleet) => {
 export const normalizeRFQProviderList = (rfqs: RFQProviderRaw[]) => {
   return rfqs.map((rfq) => {
     const { id, customer, aircraft, rfq_data } = rfq;
+
     return {
       id,
       airplane: aircraft?.type || 'N/A',
@@ -48,6 +53,8 @@ export const normalizeRFQProviderList = (rfqs: RFQProviderRaw[]) => {
       msn: aircraft?.msn || 'N/A',
       dateFrom: rfq_data.date_from,
       dateTo: rfq_data.date_to,
+      layout: getLayoutFromObj(aircraft.layout),
+      age: (differenceInYears(new Date(), new Date(aircraft.dom)) || 'N/A').toString(),
     };
   });
 };

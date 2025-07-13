@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useAirCraftTypesStore } from '@/store';
+import { useState, useEffect } from 'react';
+
 import { apiClient } from '@/fetch-request';
+import { useAirCraftTypesStore } from '@/store';
 
 export function useAircraftTypesDictionary() {
   const aircraftTypes = useAirCraftTypesStore((s) => s.aircraftTypes);
@@ -14,7 +15,10 @@ export function useAircraftTypesDictionary() {
       setIsLoading(true);
       apiClient
         .get('/aircraft-types')
-        .then((res) => setAircraftTypes(res.data))
+        .then((res) => {
+          const sorted = [...res.data].sort((a, b) => (a.model || '').localeCompare(b.model || ''));
+          setAircraftTypes(sorted);
+        })
         .catch(() => {
           setAircraftTypes([]);
           setIsError(true);

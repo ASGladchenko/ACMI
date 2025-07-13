@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react';
 import { useETOPSStore } from '@/store';
 import { apiClient } from '@/fetch-request';
 
+type ETOPS = {
+  etops_rating: string;
+  id: number;
+};
+
 export function useETOPSDictionary() {
   const etops = useETOPSStore((s) => s.etops);
   const setETOPS = useETOPSStore((s) => s.setEtops);
@@ -14,7 +19,13 @@ export function useETOPSDictionary() {
       setIsLoading(true);
       apiClient
         .get('/etops-ratings')
-        .then((res) => setETOPS(res.data))
+        .then((res) => {
+          const sorted = res.data.sort(
+            (a: ETOPS, b: ETOPS) => Number(a.etops_rating) - Number(b.etops_rating)
+          );
+
+          setETOPS(sorted);
+        })
         .catch(() => {
           setETOPS([]);
           setIsError(true);

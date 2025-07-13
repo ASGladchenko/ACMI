@@ -3,13 +3,14 @@ export const routes = {
     fleet: '/dashboard-provider',
     rfq_requests: '/dashboard-provider/rfq-requests',
     sent_offers: '/dashboard-provider/sent-offers',
+    offers_archive: '/dashboard-provider/archive',
     company: '/dashboard-provider/company',
     settings: '/dashboard-provider/settings',
   },
   'dashboard-customer': {
     info: '/dashboard-customer',
-    offers: '/dashboard-customer/offers',
     RFQs: '/dashboard-customer/rfqs',
+    offers: '/dashboard-customer/offers',
     offers_archive: '/dashboard-customer/archive',
   },
 };

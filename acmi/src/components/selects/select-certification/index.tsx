@@ -15,7 +15,10 @@ export const SelectCertification = () => {
   const getCertifications = async () => {
     try {
       const res = await apiClient.get('/certifications');
-      setQuery(res.data);
+      const sorted = [...res.data].sort((a, b) =>
+        (a.certification || '').localeCompare(b.certification || '')
+      );
+      setQuery(sorted);
     } catch (error) {
       console.log({ error });
       setQuery([]);
