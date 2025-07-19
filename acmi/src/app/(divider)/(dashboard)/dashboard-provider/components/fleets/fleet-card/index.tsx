@@ -6,6 +6,7 @@ import { Form, Formik } from 'formik';
 
 import { cn } from '@/utils';
 import { Edit, Save, Cross } from '@/assets/svg';
+import { useCertificationsStore } from '@/store';
 import { useOutsideDatePickerClick } from '@/hooks';
 import {
   Modal,
@@ -18,13 +19,15 @@ import {
   FieldFleetSwitcher,
   FieldFleetDatePicker,
   FieldFleetLayoutBlock,
+  FieldFleetMultiSelect,
 } from '@/components';
 
 import { FleetCardFormValues } from '../types';
+import { adaptCertifications } from './helpers';
+import { useUpdateAircraft } from './useUpdateAircraft';
 import { NormalizedAircraftFleet } from '../../../types';
 import { serializeAirCraftFleet } from '../../../serialize';
 import { getInitialValues, validationSchema } from './config';
-import { useUpdateAircraft } from './useUpdateAircraft';
 
 interface FleetCardProps {
   id: string;
@@ -32,8 +35,9 @@ interface FleetCardProps {
 }
 
 export const FleetCard = ({ id, initialState }: FleetCardProps) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLFormElement>(null);
   const refResetForm = useRef<() => void>(null);
+  const certifications = useCertificationsStore((s) => s.certifications);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -55,12 +59,7 @@ export const FleetCard = ({ id, initialState }: FleetCardProps) => {
   const onDeclineChanges = () => {
     refResetForm.current?.();
     setIsOpen(false);
-  };
-
-  const onSendActive = async (id: string, value: boolean) => {
-    setTimeout(() => {
-      console.log({ id, value });
-    }, 1000);
+    setIsEdited(false);
   };
 
   const onSubmit = async (values: FleetCardFormValues) => {
@@ -75,7 +74,7 @@ export const FleetCard = ({ id, initialState }: FleetCardProps) => {
 
   const initialValues = getInitialValues(initialState);
 
-  const miniBlockClass = cn('flex flex-col w-[calc((100%-16px)/3)]');
+  const miniBlockClass = 'flex flex-col w-[calc((100%-16px)/3)]';
 
   return (
     <Formik
@@ -84,163 +83,173 @@ export const FleetCard = ({ id, initialState }: FleetCardProps) => {
       initialValues={initialValues}
       validationSchema={validationSchema}
     >
-      {({ resetForm }) => {
+      {({ resetForm, values }) => {
         refResetForm.current = resetForm;
 
         return (
           <>
-            <Form>
-              <div
-                ref={ref}
-                className="border-gray-light shadow-sm-black flex w-full flex-col gap-4 rounded-[15px] border px-8 py-5 max-[968px]:px-4 max-[768px]:gap-2"
-              >
-                <div className="flex justify-between gap-7 max-[968px]:flex-col-reverse max-[968px]:gap-2">
-                  <FieldFleetSelect
-                    isDisabled
-                    label="Type :"
-                    name="aircraftType"
-                    typeFleet="aircraftTypes"
+            <Form
+              ref={ref}
+              className="border-gray-light shadow-sm-black flex w-full flex-col gap-4 rounded-[15px] border px-8 py-5 max-[968px]:px-4 max-[768px]:gap-2"
+            >
+              <div className="flex justify-between gap-7 max-[968px]:flex-col-reverse max-[968px]:gap-2">
+                <FieldFleetSelect
+                  isDisabled
+                  label="Type :"
+                  name="aircraftType"
+                  typeFleet="aircraftTypes"
+                  className="min-w-0 shrink-1"
+                />
+
+                <div className="ml-auto flex gap-7 max-[968px]:max-w-max">
+                  <p className="font-inter text-blue-deep text-[16px] font-bold">Active</p>
+
+                  <FieldFleetSwitcher id={id} name="isActive" disabled={!isEdited} />
+                </div>
+              </div>
+
+              <div className="flex justify-between max-[768px]:flex-col">
+                <FieldFleetInput
+                  head
+                  disabled
+                  name="msn"
+                  label="MSN :"
+                  type="number"
+                  className="w-[calc((100%-16px)/3)] max-[768px]:w-full"
+                />
+
+                <FieldFleetInput
+                  head
+                  disabled
+                  name="reg"
+                  label="Reg #:"
+                  className="w-[calc((100%-16px)/3)] max-[768px]:w-full"
+                />
+
+                <FieldFleetDatePicker
+                  name="date"
+                  isDisabled
+                  label="Manufactured:"
+                  portalId="fleet-datepicker"
+                  className="w-[calc((100%-16px)/3)] max-[768px]:w-full"
+                />
+              </div>
+
+              <div className="flex justify-between max-[968px]:flex-wrap">
+                <div className={cn(miniBlockClass, 'gap-2 max-[968px]:w-full')}>
+                  <FieldFleetAirport
+                    name="ops"
+                    label="Base :"
+                    isDisabled={!isEdited}
+                    placeholderEmpty="No available options"
+                    placeholderFilter="Enter to start search"
                   />
 
-                  <div className="ml-auto flex gap-7 max-[968px]:max-w-max">
-                    <p className="font-inter text-blue-deep text-[16px] font-bold">Active</p>
-
-                    <FieldFleetSwitcher id={id} name="isActive" onSendActive={onSendActive} />
-                  </div>
-                </div>
-
-                <div className="flex justify-between max-[768px]:flex-col">
                   <FieldFleetInput
-                    head
-                    disabled
-                    name="msn"
-                    label="MSN :"
+                    decimal
+                    name="mtow"
                     type="number"
-                    className="w-[calc((100%-16px)/3)] max-[768px]:w-full"
+                    label="MTOW, kg:"
+                    disabled={!isEdited}
                   />
 
                   <FieldFleetInput
-                    head
-                    disabled
-                    name="reg"
-                    label="Reg #:"
-                    className="w-[calc((100%-16px)/3)] max-[768px]:w-full"
+                    name="thrust"
+                    type="number"
+                    label="Thrust, kn:"
+                    disabled={!isEdited}
                   />
 
-                  <FieldFleetDatePicker
-                    name="date"
-                    isDisabled
-                    label="Manufactured:"
-                    portalId="fleet-datepicker"
-                    className="w-[calc((100%-16px)/3)] max-[768px]:w-full"
+                  <FieldFleetCheckbox label="ACT: " name="act" isDisabled={!isEdited} />
+                </div>
+
+                <div className={cn(miniBlockClass, 'gap-2 max-[768px]:w-full')}>
+                  <FieldFleetSelect
+                    name="etops"
+                    label="ETOPS :"
+                    typeFleet="etops"
+                    isDisabled={!isEdited}
+                  />
+
+                  <FieldFleetSelect
+                    name="noiseStage"
+                    label="Noise Stage :"
+                    isDisabled={!isEdited}
+                    typeFleet="noiseStage"
+                  />
+
+                  <FieldFleetSelect
+                    name="ilsCategory"
+                    label="ILS Category :"
+                    isDisabled={!isEdited}
+                    typeFleet="ilsCategory"
+                  />
+
+                  <FieldFleetCheckbox name="galleys" label="Galley ovens:" isDisabled={!isEdited} />
+                </div>
+
+                <div className={cn(miniBlockClass, 'gap-2 max-[768px]:w-full')}>
+                  <FieldFleetCheckbox name="ife" label="IFE:" isDisabled={!isEdited} />
+
+                  <FieldFleetCheckbox name="isps" label="ISPS:" isDisabled={!isEdited} />
+
+                  <FieldFleetCheckbox name="wifi" label="WiFi:" isDisabled={!isEdited} />
+
+                  <FieldFleetCheckbox
+                    name="sharklets"
+                    isDisabled={!isEdited}
+                    label="Winglets/Sharklets:"
                   />
                 </div>
+              </div>
 
-                <div className="flex justify-between max-[968px]:flex-wrap">
-                  <div className={cn(miniBlockClass, 'gap-2 max-[968px]:w-full')}>
-                    <FieldFleetAirport
-                      name="ops"
-                      label="Base :"
-                      isDisabled={!isEdited}
-                      placeholderEmpty="No available options"
-                      placeholderFilter="Enter to start search"
-                    />
+              <div className="flex w-full gap-2">
+                <span className="font-roboto text-gray-dark pl-1 text-[18px] font-bold">
+                  Engines:
+                </span>
+                <span className="text-gray-dark shrink-0 font-bold">{values.engines}</span>
+              </div>
 
-                    <FieldFleetInput
-                      decimal
-                      name="mtow"
-                      type="number"
-                      label="MTOW, kg:"
-                      disabled={!isEdited}
-                    />
+              <FieldFleetMultiSelect
+                label="Certifications:"
+                isDisabled={!isEdited}
+                name="certifications_id"
+                className="w-[unset] max-w-full min-w-0 shrink-1"
+                options={adaptCertifications(certifications)}
+              />
 
-                    <FieldFleetInput
-                      name="thrust"
-                      type="number"
-                      label="Thrust, kn:"
-                      disabled={!isEdited}
-                    />
+              <FieldFleetLayoutBlock name="layoutValues" id={id} isDisabled={!isEdited} />
 
-                    <FieldFleetCheckbox label="ACT: " name="act" isDisabled={!isEdited} />
-                  </div>
-
-                  <div className={cn(miniBlockClass, 'gap-2 max-[768px]:w-full')}>
-                    <FieldFleetSelect
-                      name="etops"
-                      label="ETOPS :"
-                      typeFleet="etops"
-                      isDisabled={!isEdited}
-                    />
-
-                    <FieldFleetSelect
-                      name="noiseStage"
-                      label="Noise Stage :"
-                      isDisabled={!isEdited}
-                      typeFleet="noiseStage"
-                    />
-
-                    <FieldFleetSelect
-                      name="ilsCategory"
-                      label="ILS Category :"
-                      isDisabled={!isEdited}
-                      typeFleet="ilsCategory"
-                    />
-
-                    <FieldFleetCheckbox
-                      name="galleys"
-                      label="Galley ovens:"
-                      isDisabled={!isEdited}
-                    />
-                  </div>
-
-                  <div className={cn(miniBlockClass, 'gap-2 max-[768px]:w-full')}>
-                    <FieldFleetCheckbox name="ife" label="IFE:" isDisabled={!isEdited} />
-
-                    <FieldFleetCheckbox name="isps" label="ISPS:" isDisabled={!isEdited} />
-
-                    <FieldFleetCheckbox name="wifi" label="WiFi:" isDisabled={!isEdited} />
-
-                    <FieldFleetCheckbox
-                      name="sharklets"
-                      isDisabled={!isEdited}
-                      label="Winglets/Sharklets:"
-                    />
-                  </div>
-                </div>
-
-                <FieldFleetLayoutBlock name="layoutValues" id={id} isDisabled={!isEdited} />
-
-                <div className="flex items-center justify-end gap-2">
-                  {isEdited && (
-                    <>
-                      <Button
-                        type="button"
-                        className="max-w-max"
-                        loading={isLoading}
-                        onClick={() => {
-                          onDecline(resetForm);
-                          setIsEdited(false);
-                        }}
-                      >
-                        <Cross className="h-4 w-4 text-red-400" />
-                      </Button>
-
-                      <Button className="max-w-max" type="submit" loading={isLoading}>
-                        <Save className="h-5 w-5 text-green-400" />
-                      </Button>
-                    </>
-                  )}
-
-                  {!isEdited && (
+              <div className="flex items-center justify-end gap-2">
+                {isEdited && (
+                  <>
                     <Button
-                      className="max-w-max"
-                      onClick={() => setIsEdited(!isEdited)}
                       type="button"
+                      className="max-w-max"
+                      loading={isLoading}
+                      onClick={() => {
+                        onDecline(resetForm);
+                        setIsEdited(false);
+                      }}
                     >
-                      <Edit className="h-5 w-5" />
+                      <Cross className="h-4 w-4 text-red-400" />
                     </Button>
-                  )}
-                </div>
+
+                    <Button className="max-w-max" type="submit" loading={isLoading}>
+                      <Save className="h-5 w-5 text-green-400" />
+                    </Button>
+                  </>
+                )}
+
+                {!isEdited && (
+                  <Button
+                    className="max-w-max"
+                    onClick={() => setIsEdited(!isEdited)}
+                    type="button"
+                  >
+                    <Edit className="h-5 w-5" />
+                  </Button>
+                )}
               </div>
             </Form>
 

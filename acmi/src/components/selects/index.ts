@@ -1,4 +1,5 @@
 export { FleetAirportSelect } from './fleet-airport-select';
+export { FleetMultiSelect } from './fleet-multi-select';
 export { FleetSelect } from './fleet-select';
 export { MultiSelectAirport } from './multi-select-airport';
 export { MultiSelectClient } from './multi-select-client';

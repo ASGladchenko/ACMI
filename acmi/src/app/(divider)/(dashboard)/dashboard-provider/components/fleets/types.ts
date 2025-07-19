@@ -24,4 +24,15 @@ export interface FleetCardFormValues {
       pitch: string;
     }
   >;
+
+  aircraft_id: string;
+  all_male_crew: boolean;
+  certifications_id: number[];
+  max_capacity: number;
+  provider_id: number;
+  dangerous: boolean;
+  engines: string;
+  iosa: boolean;
+
+  id: number;
 }

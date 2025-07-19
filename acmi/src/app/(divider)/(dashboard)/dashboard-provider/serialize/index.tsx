@@ -7,6 +7,9 @@ export const serializeAirCraftFleet = (values: FleetCardFormValues): SerializedA
   const { economy, transformer, premium, business, first } = values.layoutValues;
 
   return {
+    id: values.id,
+    isActive: values.isActive,
+
     act: values.act,
     msn: values.msn,
     reg_number: values.reg,
@@ -23,6 +26,8 @@ export const serializeAirCraftFleet = (values: FleetCardFormValues): SerializedA
     wifi: values.wifi,
     galley_ovens: values.galleys,
     winglets_sharklets: values.sharklets,
+
+    max_capacity: values.layout,
 
     layout: getLayoutFromObj({
       y_seats: Number(economy.seats),
@@ -44,16 +49,14 @@ export const serializeAirCraftFleet = (values: FleetCardFormValues): SerializedA
     j_seats: Number(business.seats),
     f_seats: Number(first.seats),
 
-    // Есть в запрсое но тет в макете
+    // Есть в запросе но нет в макете
 
-    // id: 0,
-    // aircraft_id: 'string',
-    // all_male_crew: true,
-    // certifications_id: [0],
-    // max_capacity: 0,
-    // provider_id: 0,
-    // dangerous: true,
-    // engines: 'string',
-    // iosa: true,
+    aircraft_id: values.aircraft_id,
+    all_male_crew: values.all_male_crew,
+    certifications_id: values.certifications_id,
+    provider_id: values.provider_id,
+    dangerous: values.dangerous,
+    engines: values.engines,
+    iosa: values.iosa,
   };
 };

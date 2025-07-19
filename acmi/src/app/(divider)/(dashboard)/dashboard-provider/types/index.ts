@@ -1,5 +1,6 @@
 export interface AircraftFleet {
   id: string;
+  isActive: boolean;
   aircraft_id: string;
 
   msn: string;
@@ -37,6 +38,14 @@ export interface AircraftFleet {
   f_pitch: number;
   y_pitch: number;
   yj_pitch: number;
+
+  // Есть в запросе но нет в макете
+
+  iosa: boolean;
+  engines: string;
+  provider_id: number;
+  all_male_crew: true;
+  certifications_id: number[];
 }
 export interface LayoutValue {
   seats: string;
@@ -71,6 +80,17 @@ export interface NormalizedAircraftFleet {
   wifi: boolean;
   sharklets: boolean;
   layoutValues: LayoutValues;
+
+  // Есть в запросе но нет в макете
+
+  aircraft_id: string;
+  all_male_crew: boolean;
+  certifications_id: number[];
+  max_capacity: number;
+  provider_id: number;
+  dangerous: boolean;
+  engines: string;
+  iosa: boolean;
 }
 
 export interface RFQProviderRaw {
@@ -122,4 +142,16 @@ export interface SerializedAirCraftFleet {
   w_seats: number;
   j_seats: number;
   f_seats: number;
+
+  aircraft_id: string;
+  all_male_crew: boolean;
+  certifications_id: number[];
+  max_capacity: number;
+  provider_id: number;
+  dangerous: boolean;
+  engines: string;
+  iosa: boolean;
+
+  isActive: boolean;
+  id: number;
 }

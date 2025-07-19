@@ -10,7 +10,7 @@ export const normalizeAircraftFleet = (aircraft: AircraftFleet): NormalizedAircr
   };
 
   return {
-    isActive: false,
+    isActive: Boolean(aircraft.isActive),
 
     id: aircraft.id,
     msn: aircraft.msn,
@@ -49,6 +49,17 @@ export const normalizeAircraftFleet = (aircraft: AircraftFleet): NormalizedAircr
       },
       first: { seats: setValueOrEmpty(aircraft.f_seats), pitch: setValueOrEmpty(aircraft.f_pitch) },
     },
+
+    // Есть в запросе но нет в макете
+
+    aircraft_id: aircraft.aircraft_id,
+    all_male_crew: aircraft.all_male_crew,
+    certifications_id: aircraft.certifications_id,
+    max_capacity: aircraft.max_capacity,
+    provider_id: aircraft.provider_id,
+    dangerous: aircraft.dangerous,
+    engines: aircraft.engines,
+    iosa: aircraft.iosa,
   };
 };
 
