@@ -1,13 +1,15 @@
 'use client';
-import { FleetCard } from './fleet-card';
-import { NormalizedAircraftFleet } from '../../types';
 
 import {
   useETOPSDictionary,
   useNoiseStageDictionary,
   useILSCategoryDictionary,
   useAircraftTypesDictionary,
+  useCertificationDictionary,
 } from '@/hooks';
+
+import { FleetCard } from './fleet-card';
+import { NormalizedAircraftFleet } from '../../types';
 
 export interface FleetWrapperProps {
   error?: string;
@@ -21,6 +23,7 @@ export const Fleets = ({ error, data }: FleetWrapperProps) => {
   useNoiseStageDictionary();
   useILSCategoryDictionary();
   useAircraftTypesDictionary();
+  useCertificationDictionary();
 
   return (
     <>

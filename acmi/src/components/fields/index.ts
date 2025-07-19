@@ -5,6 +5,7 @@ export { FieldFleetCheckbox } from './field-fleet-checkbox';
 export { FieldFleetDatePicker } from './field-fleet-date-picker';
 export { FieldFleetInput } from './field-fleet-input';
 export { FieldFleetLayoutBlock } from './field-fleet-layout-block';
+export { FieldFleetMultiSelect } from './field-fleet-multi-select';
 export { FieldFleetSelect } from './field-fleet-select';
 export { FieldFleetSwitcher } from './field-fleet-switcher';
 export { FieldMultiSelectAirport } from './field-multi-select-airport';

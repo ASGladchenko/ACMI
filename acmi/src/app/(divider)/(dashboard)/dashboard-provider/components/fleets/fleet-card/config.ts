@@ -34,6 +34,7 @@ export const getInitialValues = (values: NormalizedAircraftFleet): FleetCardForm
   const layout = getSummarySeats(layoutValues);
 
   return {
+    id: Number(values.id),
     msn: values?.msn || '',
     reg: values?.reg || '',
     mtow: values?.mtow || '',
@@ -53,6 +54,15 @@ export const getInitialValues = (values: NormalizedAircraftFleet): FleetCardForm
     sharklets: values?.sharklets || false,
     layout,
     layoutValues,
+
+    aircraft_id: values.aircraft_id,
+    all_male_crew: values.all_male_crew,
+    certifications_id: values.certifications_id,
+    max_capacity: values.max_capacity,
+    provider_id: values.provider_id,
+    dangerous: values.dangerous,
+    engines: values.engines,
+    iosa: values.iosa,
   };
 };
 
