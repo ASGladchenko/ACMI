@@ -34,7 +34,7 @@ export default async function OffersArchive() {
 
       {errors && <h2 className="text-center text-3xl text-red-400">{errors}</h2>}
       {!errors && data && data.length === 0 && (
-        <h2 className="text-blue-dark text-center text-3xl">There are no new offers</h2>
+        <h2 className="text-blue-dark text-center text-3xl">There are no archived offers</h2>
       )}
 
       {!errors && data && data.length > 0 && (

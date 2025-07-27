@@ -161,6 +161,12 @@ export const FleetCard = ({ id, initialState }: FleetCardProps) => {
                   />
 
                   <FieldFleetCheckbox label="ACT: " name="act" isDisabled={!isEdited} />
+
+                  <FieldFleetCheckbox
+                    label="All male crew: "
+                    name="all_male_crew"
+                    isDisabled={!isEdited}
+                  />
                 </div>
 
                 <div className={cn(miniBlockClass, 'gap-2 max-[768px]:w-full')}>
@@ -186,6 +192,12 @@ export const FleetCard = ({ id, initialState }: FleetCardProps) => {
                   />
 
                   <FieldFleetCheckbox name="galleys" label="Galley ovens:" isDisabled={!isEdited} />
+
+                  <FieldFleetCheckbox
+                    name="dangerous"
+                    label="Dangerous goods:"
+                    isDisabled={!isEdited}
+                  />
                 </div>
 
                 <div className={cn(miniBlockClass, 'gap-2 max-[768px]:w-full')}>
@@ -194,6 +206,8 @@ export const FleetCard = ({ id, initialState }: FleetCardProps) => {
                   <FieldFleetCheckbox name="isps" label="ISPS:" isDisabled={!isEdited} />
 
                   <FieldFleetCheckbox name="wifi" label="WiFi:" isDisabled={!isEdited} />
+
+                  <FieldFleetCheckbox name="iosa" label="IOSA:" isDisabled={!isEdited} />
 
                   <FieldFleetCheckbox
                     name="sharklets"

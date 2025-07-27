@@ -56,12 +56,13 @@ export const getInitialValues = (values: NormalizedAircraftFleet): FleetCardForm
     layoutValues,
 
     aircraft_id: values.aircraft_id,
-    all_male_crew: values.all_male_crew,
     certifications_id: values.certifications_id,
     max_capacity: values.max_capacity,
     provider_id: values.provider_id,
-    dangerous: values.dangerous,
     engines: values.engines,
+
+    all_male_crew: values.all_male_crew,
+    dangerous: values.dangerous,
     iosa: values.iosa,
   };
 };
