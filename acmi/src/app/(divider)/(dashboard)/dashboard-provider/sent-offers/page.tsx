@@ -32,9 +32,7 @@ export default async function SentOffers() {
       {errors && <h2 className="text-center text-3xl text-red-400">{errors}</h2>}
 
       {!errors && data && data.length === 0 && (
-        <h2 className="text-blue-dark font-inter text-center text-3xl font-semibold">
-          There are no new RFQs
-        </h2>
+        <h2 className="text-blue-dark font-inter text-center text-3xl">There are no sent Offers</h2>
       )}
 
       {!errors && data && data.length > 0 && (
