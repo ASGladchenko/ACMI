@@ -35,7 +35,12 @@ export const DashBoardSideMenu = () => {
             const isActive = idx === 0 ? pathname === value : pathname.includes(value);
 
             return (
-              <Link href={value} key={key + value} className={link(isActive)}>
+              <Link
+                href={value}
+                key={key + value}
+                className={link(isActive)}
+                onClick={() => setIsOpen(false)}
+              >
                 {key.split('_').join(' ')}
               </Link>
             );
