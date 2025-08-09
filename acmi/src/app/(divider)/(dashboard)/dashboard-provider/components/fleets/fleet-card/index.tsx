@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikState } from 'formik';
 
 import { cn } from '@/utils';
 import { Edit, Save, Cross } from '@/assets/svg';
@@ -36,12 +36,13 @@ interface FleetCardProps {
 
 export const FleetCard = ({ id, initialState }: FleetCardProps) => {
   const ref = useRef<HTMLFormElement>(null);
-  const refResetForm = useRef<() => void>(null);
   const certifications = useCertificationsStore((s) => s.certifications);
 
   const [isOpen, setIsOpen] = useState(false);
-
   const [isEdited, setIsEdited] = useState(false);
+  const [initialValues, setInitialValues] = useState<FleetCardFormValues>(
+    getInitialValues(initialState)
+  );
 
   const onSuccess = () => {
     setIsEdited(false);
@@ -56,8 +57,14 @@ export const FleetCard = ({ id, initialState }: FleetCardProps) => {
     }
   }, [ref]);
 
-  const onDeclineChanges = () => {
-    refResetForm.current?.();
+  const onDeclineChanges = (
+    resetForm: (nextState?: Partial<FormikState<FleetCardFormValues>> | undefined) => void,
+    values: FleetCardFormValues
+  ) => {
+    const newInitial = { ...initialValues, isActive: values.isActive };
+
+    resetForm({ values: newInitial });
+
     setIsOpen(false);
     setIsEdited(false);
   };
@@ -65,16 +72,27 @@ export const FleetCard = ({ id, initialState }: FleetCardProps) => {
   const onSubmit = async (values: FleetCardFormValues) => {
     const preparesData = serializeAirCraftFleet(values);
 
-    await updateAircraft(id, preparesData);
+    await updateAircraft(id, preparesData).then(() => {
+      setInitialValues(values);
+    });
   };
 
-  const onDecline = (resetForm: () => void) => {
-    resetForm();
-  };
+  const onDecline = (
+    resetForm: (nextState?: Partial<FormikState<FleetCardFormValues>> | undefined) => void,
+    values: FleetCardFormValues
+  ) => {
+    const newInitial = { ...initialValues, isActive: values.isActive };
 
-  const initialValues = getInitialValues(initialState);
+    resetForm({
+      values: newInitial,
+    });
+  };
 
   const miniBlockClass = 'flex flex-col w-[calc((100%-16px)/3)]';
+
+  useEffect(() => {
+    setInitialValues(getInitialValues(initialState));
+  }, [initialState]);
 
   return (
     <Formik
@@ -84,8 +102,6 @@ export const FleetCard = ({ id, initialState }: FleetCardProps) => {
       validationSchema={validationSchema}
     >
       {({ resetForm, values }) => {
-        refResetForm.current = resetForm;
-
         return (
           <>
             <Form
@@ -247,7 +263,7 @@ export const FleetCard = ({ id, initialState }: FleetCardProps) => {
                       className="max-w-max"
                       loading={isLoading}
                       onClick={() => {
-                        onDecline(resetForm);
+                        onDecline(resetForm, values);
                         setIsEdited(false);
                       }}
                     >
@@ -281,8 +297,8 @@ export const FleetCard = ({ id, initialState }: FleetCardProps) => {
                 <div className="flex w-full gap-4">
                   <Button
                     buttonType="outline"
-                    onClick={onDeclineChanges}
                     colorType={BtnColorType.RED}
+                    onClick={() => onDeclineChanges(resetForm, values)}
                   >
                     Yes
                   </Button>
