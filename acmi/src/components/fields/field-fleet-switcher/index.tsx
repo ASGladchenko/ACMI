@@ -7,7 +7,7 @@ import { controlFormikError } from '@/utils';
 import { SwitcherProps } from '@/components/switchers/switcher';
 // import { validationSchema } from '@/app/(divider)/(dashboard)/dashboard-provider/components/fleets/fleet-card/config';
 
-interface FieldFleetSwitcherProps extends Omit<SwitcherProps, 'isActive' | 'onClick'> {
+interface FieldFleetSwitcherProps extends Omit<SwitcherProps, 'isActive'> {
   id: string;
   name: string;
   disabled?: boolean;
@@ -38,7 +38,13 @@ export const FieldFleetSwitcher = (props: FieldFleetSwitcherProps) => {
 
         const onClick = async (isActive: boolean) => {
           if (props.name && !props.disabled) {
-            await form.setFieldValue(props.name, isActive);
+            try {
+              await props.onClick?.(isActive);
+
+              await form.setFieldValue(props.name, isActive);
+            } catch (error) {
+              return Promise.reject(error);
+            }
           }
         };
 

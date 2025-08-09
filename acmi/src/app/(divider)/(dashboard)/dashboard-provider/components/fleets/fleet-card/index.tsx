@@ -48,7 +48,7 @@ export const FleetCard = ({ id, initialState }: FleetCardProps) => {
     setIsOpen(false);
   };
 
-  const { isLoading, updateAircraft } = useUpdateAircraft({ onSuccess });
+  const { isLoading, updateAircraft, updateAircraftStatus } = useUpdateAircraft({ onSuccess });
 
   useOutsideDatePickerClick(() => {
     if (isEdited) {
@@ -104,7 +104,12 @@ export const FleetCard = ({ id, initialState }: FleetCardProps) => {
                 <div className="ml-auto flex gap-7 max-[968px]:max-w-max">
                   <p className="font-inter text-blue-deep text-[16px] font-bold">Active</p>
 
-                  <FieldFleetSwitcher id={id} name="isActive" disabled={!isEdited} />
+                  <FieldFleetSwitcher
+                    id={id}
+                    name="isActive"
+                    disabled={isEdited}
+                    onClick={(isActive) => updateAircraftStatus(id, isActive)}
+                  />
                 </div>
               </div>
 

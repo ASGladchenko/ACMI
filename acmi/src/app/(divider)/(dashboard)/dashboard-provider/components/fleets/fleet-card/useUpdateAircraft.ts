@@ -10,6 +10,7 @@ import { SerializedAirCraftFleet } from '../../../types';
 
 interface UseUpdateAircraftResult {
   updateAircraft: (id: string, values: SerializedAirCraftFleet) => Promise<void>;
+  updateAircraftStatus: (id: string, active: boolean) => Promise<void>;
   isLoading: boolean;
   error: string | null;
   resetError: () => void;
@@ -30,32 +31,61 @@ export const useUpdateAircraft = ({
     setError(null);
   }, []);
 
-  const updateAircraft = useCallback(async (id: string, values: SerializedAirCraftFleet) => {
-    setIsLoading(true);
-    setError(null);
+  const updateAircraft = useCallback(
+    async (id: string, values: SerializedAirCraftFleet) => {
+      setIsLoading(true);
+      setError(null);
 
-    try {
-      await apiClient.put(`/aircrafts/${id}`, values);
+      try {
+        await apiClient.put(`/aircrafts/${id}`, values);
 
-      showMessage.success('Aircraft updated successfully');
+        showMessage.success('Aircraft updated successfully');
 
-      onSuccess?.();
-    } catch (error: unknown) {
-      const errorMessage = getErrorMessage(error, 'Failed to update aircraft');
+        onSuccess?.();
+      } catch (error: unknown) {
+        const errorMessage = getErrorMessage(error, 'Failed to update aircraft');
 
-      setError(errorMessage);
-      showMessage.error(errorMessage);
-      onError?.(errorMessage);
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+        setError(errorMessage);
+        showMessage.error(errorMessage);
+        onError?.(errorMessage);
+        throw error;
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [onSuccess, onError]
+  );
+
+  const updateAircraftStatus = useCallback(
+    async (id: string, active: boolean) => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        await apiClient.post(`/aircrafts/${id}/setActive`, { active });
+
+        showMessage.success(`Aircraft ${active ? 'activated' : 'deactivated'} successfully`);
+
+        onSuccess?.();
+      } catch (error: unknown) {
+        const errorMessage = getErrorMessage(error, 'Failed to update aircraft status');
+
+        setError(errorMessage);
+        showMessage.error(errorMessage);
+        onError?.(errorMessage);
+        throw error;
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [onSuccess, onError]
+  );
 
   return {
     error,
     isLoading,
     resetError,
     updateAircraft,
+    updateAircraftStatus,
   };
 };
