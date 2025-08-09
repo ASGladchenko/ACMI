@@ -8,7 +8,7 @@ export const serializeAirCraftFleet = (values: FleetCardFormValues): SerializedA
 
   return {
     id: values.id,
-    isActive: values.isActive,
+    active: values.isActive,
 
     act: values.act,
     msn: values.msn,
