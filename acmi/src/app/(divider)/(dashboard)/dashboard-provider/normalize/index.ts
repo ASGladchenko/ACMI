@@ -10,7 +10,7 @@ export const normalizeAircraftFleet = (aircraft: AircraftFleet): NormalizedAircr
   };
 
   return {
-    isActive: Boolean(aircraft.isActive),
+    isActive: Boolean(aircraft.active),
 
     id: aircraft.id,
     msn: aircraft.msn,

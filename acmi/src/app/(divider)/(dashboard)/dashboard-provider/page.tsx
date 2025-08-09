@@ -13,7 +13,6 @@ export default async function ProviderPage() {
     const res = await apiServer<AircraftFleet[]>('/aircrafts');
 
     data = res.data.map((aircraft) => normalizeAircraftFleet(aircraft));
-
   } catch (err) {
     error = getErrorMessage(err, 'Fleet loading error, connect with us');
   }

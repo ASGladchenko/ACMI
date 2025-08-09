@@ -1,6 +1,6 @@
 export interface AircraftFleet {
   id: string;
-  isActive: boolean;
+  active: boolean;
   aircraft_id: string;
 
   msn: string;
@@ -152,6 +152,6 @@ export interface SerializedAirCraftFleet {
   engines: string;
   iosa: boolean;
 
-  isActive: boolean;
+  active: boolean;
   id: number;
 }
