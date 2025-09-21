@@ -27,6 +27,32 @@ jobs:
           rm -rf deploy && mkdir -p deploy/.next
           # runtime (включая нужные node_modules)
           cp -r .next/standalone/* deploy/
+          # убедимся, что server.js точно в корне
+          cp .next/standalone/server.js deploy/server.js
+
+          # статика
+          cp -r .next/static deploy/.next/static
+          # public (если нужен)
+          [ -d public ] && cp -r public deploy/public || true
+
+          # минимальный package.json со стартом через node server.js
+          cat > deploy/package.json << 'EOF'
+          {
+            "name": "acmi",
+            "private": true,
+            "version": "0.1.0",
+            "scripts": { "start": "node server.js" }
+          }
+          EOF
+
+          # архив
+          (cd deploy && zip -r ../app.zip .)
+
+        working-directory: acmi
+        run: |
+          rm -rf deploy && mkdir -p deploy/.next
+          # runtime (включая нужные node_modules)
+          cp -r .next/standalone/* deploy/
           # статика
           cp -r .next/static deploy/.next/static
           # public (если нужен)
@@ -64,6 +90,5 @@ jobs:
           app-name: acmi
           slot-name: Production
           package: app.zip
-          startup-command: 'node server.js'
           clean: true
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_282C29550F824997AA71828E4BE07D11 }}
