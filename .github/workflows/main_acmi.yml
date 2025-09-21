@@ -19,7 +19,7 @@ jobs:
         working-directory: acmi
         env:
           NEXT_PUBLIC_API_URL: https://api.acmi.direct/
-          NEXT_PUBLIC_CLIENT_ID: 2bfa7c1e-5771-4eb8-bb04-ff7d54806f96
+          NEXT_PUBLIC_CLIENT_ID: e99b74b5-b7e7-4311-8349-2d228678065a
           NEXT_PUBLIC_REDIRECT_URI: https://acmi.direct/auth/callback
           NEXT_PUBLIC_IMG_URL: https://api.acmi.direct/images/
         run: |
