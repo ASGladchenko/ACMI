@@ -11,8 +11,6 @@ const apiClient = axios.create({
   withCredentials: true,
 });
 
-console.log('Base API URL:', baseApiUrl);
-
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     return config;
