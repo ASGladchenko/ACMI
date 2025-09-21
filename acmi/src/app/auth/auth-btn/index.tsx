@@ -8,6 +8,8 @@ import { authUrl } from '@/constants/url';
 export default function AuthBtn() {
   const router = useRouter();
 
+  console.log({ authUrl });
+
   return (
     <Button
       className="mx-[16px] max-w-[260px] rounded-[4px]"
