@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['via.placeholder.com'],
   },
+  output: 'standalone',
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find(
