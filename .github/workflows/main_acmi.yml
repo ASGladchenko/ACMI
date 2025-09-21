@@ -31,9 +31,11 @@ jobs:
           cp -r .next/static deploy/.next/static
           # public (если нужен)
           [ -d public ] && cp -r public deploy/public || true
-          # (опционально) package.json/lock, если свой server.js
-          [ -f package.json ] && cp package.json deploy/ || true
-          [ -f package-lock.json ] && cp package-lock.json deploy/ || true
+
+          # # (опционально) package.json/lock, если свой server.js
+          # [ -f package.json ] && cp package.json deploy/ || true
+          # [ -f package-lock.json ] && cp package-lock.json deploy/ || true
+          
           # архив
           (cd deploy && zip -r ../app.zip .)
 
