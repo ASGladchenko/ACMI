@@ -26,7 +26,7 @@ jobs:
         run: |
           rm -rf deploy && mkdir -p deploy/.next
           # runtime (включая нужные node_modules)
-          cp -r .next/standalone/* deploy/
+          cp -r .next/standalone/. deploy/
           # гарантируем, что server.js в корне
           cp .next/standalone/server.js deploy/server.js
           # статика
