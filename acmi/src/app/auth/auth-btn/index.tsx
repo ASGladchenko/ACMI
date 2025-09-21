@@ -8,7 +8,7 @@ import { authUrl } from '@/constants/url';
 export default function AuthBtn() {
   const router = useRouter();
 
-  console.log({ authUrl });
+  console.log('authUrl', authUrl);
 
   return (
     <Button
