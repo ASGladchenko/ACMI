@@ -35,7 +35,7 @@ jobs:
           # # (опционально) package.json/lock, если свой server.js
           # [ -f package.json ] && cp package.json deploy/ || true
           # [ -f package-lock.json ] && cp package-lock.json deploy/ || true
-          
+
           # архив
           (cd deploy && zip -r ../app.zip .)
 
@@ -64,5 +64,6 @@ jobs:
           app-name: acmi
           slot-name: Production
           package: app.zip
-          enable-oryx-build: false
+          startup-command: 'node server.js'
+          clean: true
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_282C29550F824997AA71828E4BE07D11 }}
