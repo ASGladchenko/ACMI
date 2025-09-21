@@ -27,15 +27,13 @@ jobs:
           rm -rf deploy && mkdir -p deploy/.next
           # runtime (включая нужные node_modules)
           cp -r .next/standalone/* deploy/
-          # убедимся, что server.js точно в корне
+          # гарантируем, что server.js в корне
           cp .next/standalone/server.js deploy/server.js
-
           # статика
           cp -r .next/static deploy/.next/static
-          # public (если нужен)
+          # public (если есть)
           [ -d public ] && cp -r public deploy/public || true
-
-          # минимальный package.json со стартом через node server.js
+          # минимальный package.json со стартом node server.js
           cat > deploy/package.json << 'EOF'
           {
             "name": "acmi",
@@ -44,26 +42,11 @@ jobs:
             "scripts": { "start": "node server.js" }
           }
           EOF
-
           # архив
           (cd deploy && zip -r ../app.zip .)
 
-        working-directory: acmi
-        run: |
-          rm -rf deploy && mkdir -p deploy/.next
-          # runtime (включая нужные node_modules)
-          cp -r .next/standalone/* deploy/
-          # статика
-          cp -r .next/static deploy/.next/static
-          # public (если нужен)
-          [ -d public ] && cp -r public deploy/public || true
-
-          # # (опционально) package.json/lock, если свой server.js
-          # [ -f package.json ] && cp package.json deploy/ || true
-          # [ -f package-lock.json ] && cp package-lock.json deploy/ || true
-
-          # архив
-          (cd deploy && zip -r ../app.zip .)
+      - name: Show archive contents
+        run: unzip -l acmi/app.zip | sed -n '1,200p'
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -80,7 +63,7 @@ jobs:
           name: webapp
           path: .
 
-      - name: Sleep a bit (избежать перезапуска SCM)
+      - name: Sleep a bit (avoid SCM restart)
         run: sleep 15
 
       - name: Deploy to Azure Web App
