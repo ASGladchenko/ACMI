@@ -6,7 +6,7 @@ export default async function ContractPage({ params }: { params: Promise<{ id: s
   let errors;
   let cfi = { HostEditUrl: '' };
 
-  const defaultParams = ` &UI_defaults.TrackChanges=true
+  const defaultParams = `&UI_defaults.TrackChanges=true
        &UI_defaults.Suggestion=true
        &UI_disabled=TrackChanges,EditMode`;
 
