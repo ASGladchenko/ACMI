@@ -11,7 +11,7 @@ export default async function ContractPage({ params }: { params: Promise<{ id: s
       .get(`/rfq/contract`, { params: { rfq_id: id } })
       .then(({ data }) => (cfi = data));
   } catch (error) {
-    errors = getErrorMessage(error, 'Failed to load contract info');
+    errors = getErrorMessage(error, 'Failed to load contract info, connect support please');
   }
 
   const base = 'https://collabora.acmi.direct/browser/dist/cool.html';
@@ -20,7 +20,7 @@ export default async function ContractPage({ params }: { params: Promise<{ id: s
   console.log({ cfi, errors, iframeSrc });
 
   return (
-    <div className="h-dvh w-full">
+    <div className="laptop:px-0 laptop:pr-1 h-[calc(100vh-120px)] w-full px-2">
       <iframe
         src={iframeSrc}
         allowFullScreen
