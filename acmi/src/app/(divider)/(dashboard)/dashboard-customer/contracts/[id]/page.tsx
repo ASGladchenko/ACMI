@@ -6,6 +6,10 @@ export default async function ContractPage({ params }: { params: Promise<{ id: s
   let errors;
   let cfi = { HostEditUrl: '' };
 
+  const defaultParams = ` &UI_defaults.TrackChanges=true
+       &UI_defaults.Suggestion=true
+       &UI_disabled=TrackChanges,EditMode`;
+
   try {
     await apiServer
       .get(`/rfq/contract`, { params: { rfq_id: id } })
@@ -15,7 +19,7 @@ export default async function ContractPage({ params }: { params: Promise<{ id: s
   }
 
   const base = 'https://collabora.acmi.direct/browser/dist/cool.html';
-  const iframeSrc = base + cfi?.HostEditUrl;
+  const iframeSrc = base + cfi?.HostEditUrl + defaultParams;
 
   console.log({ cfi, errors, iframeSrc });
 
