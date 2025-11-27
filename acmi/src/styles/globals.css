@@ -30,12 +30,16 @@
   --orange-05: rgba(245, 158, 11, 0.5);
 
   --red-05: rgba(220, 38, 38, 0.5);
+
+  /* new design */
+
+  /* colors */
+  --black-dark: #090928;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
   --color-blue-dark: #1a436b;
   --color-blue-deep: #316292;
   --color-gray-dark: #474747;
@@ -51,7 +55,6 @@
   --color-white-light: #e9e9e9;
 
   --font-roboto: var(--font-roboto);
-  --font-inter: var(--font-inter);
   --font-montserrat: var(--font-montserrat);
 
   /* shadow */
@@ -81,6 +84,18 @@
   --breakpoint-tablet: 768px;
   --breakpoint-laptop: 1024px;
   --breakpoint-desktop: 1440px;
+
+  /* new design */
+
+  /* colors */
+  --color-black-dark: var(--black-dark);
+
+  /* fonts */
+  --font-manrope: var(--font-manrope);
+  --font-inter: var(--font-inter);
+
+  /* radius */
+  --radius-button: 10px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -91,9 +106,12 @@
 }
 
 body {
-  color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
+  color: var(--black-dark);
+  font-size: 17px;
+  line-height: 1.4;
+  font-family: var(--font-manrope), sans-serif;
 }
+
 .gutter {
   scrollbar-gutter: stable;
 }

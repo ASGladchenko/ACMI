@@ -1,11 +1,15 @@
 import type { Metadata } from 'next';
-import { Roboto, Montserrat, Inter } from 'next/font/google';
-
+import { Roboto, Montserrat, Inter, Manrope } from 'next/font/google';
 
 import '@/styles/globals.css';
 
 const montserrat = Montserrat({
   variable: '--font-montserrat',
+  subsets: ['latin'],
+});
+
+const manrope = Manrope({
+  variable: '--font-manrope',
   subsets: ['latin'],
 });
 
@@ -35,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${roboto.variable} ${montserrat.variable} gutter antialiased`}
+        className={`${inter.variable} ${roboto.variable} ${montserrat.variable} ${manrope.variable} gutter antialiased`}
       >
         {children}
       </body>
