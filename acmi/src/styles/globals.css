@@ -34,7 +34,34 @@
   /* new design */
 
   /* colors */
-  --black-dark: #090928;
+  --white: #ffffff;
+  --border: #d6d8db;
+  --divider: #ececee;
+
+  --blue: #105699;
+  --solitude: #e4f1ff;
+  --matisse: #246aad;
+  --regal-blue: #00387b;
+  --onahau: #d0e8ff;
+  --alice-blue: #f1f8ff;
+
+  --haiti: #090928;
+  --pale-sky: #707683;
+  --santas-gray: #989eab;
+
+  --green: #0e7436;
+  --narvik: #e6f6ec;
+
+  --red: #ea1b1b;
+  --chablis: #fff1f1;
+
+  --white-lilac: #fafbfd;
+  --athens-gray: #f6f7f9;
+  --downriver: #08294a;
+  --cello: #1c3d5e;
+
+  --fire-bush: #e89b1f;
+  --old-lace: #fdf5ea;
 }
 
 @theme inline {
@@ -88,7 +115,34 @@
   /* new design */
 
   /* colors */
-  --color-black-dark: var(--black-dark);
+  --color-white: var(--white);
+  --color-border: var(--border);
+  --color-divider: var(--divider);
+
+  --color-accent-normal: var(--blue);
+  --color-accent-light: var(--solitude);
+  --color-accent-interactions-dark: var(--matisse);
+  --color-accent-interactions-darker: var(--regal-blue);
+  --color-accent-interactions-light: var(--onahau);
+  --color-accent-interactions-lighter: var(--alice-blue);
+
+  --color-text-primary: var(--haiti);
+  --color-text-secondary: var(--pale-sky);
+  --color-text-additional: var(--santas-gray);
+
+  --color-success-normal: var(--green);
+  --color-success-light: var(--narvik);
+
+  --color-error-normal: var(--red);
+  --color-error-light: var(--chablis);
+
+  --color-bg-default: var(--white-lilac);
+  --color-bg-secondary: var(--athens-gray);
+  --color-bg-footer: var(--downriver);
+  --color-bg-footer-secondary: var(--cello);
+
+  --color-attention-normal: var(--fire-bush);
+  --color-attention-light: var(--old-lace);
 
   /* fonts */
   --font-manrope: var(--font-manrope);

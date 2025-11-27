@@ -5,10 +5,10 @@ import { ChildrenProps } from '../../types';
 import { LoaderCircle } from '@/shared/icons';
 
 export const Button = ({
+  loading,
   children,
   disabled,
   className,
-  loading,
   ...props
 }: ChildrenProps<ButtonProps>) => {
   const styles = cn(
