@@ -24,7 +24,10 @@ export const useLeonConnect = () => {
         window.location.href = resp.authorization_url;
       }
     } catch (error: unknown) {
-      const message = getErrorMessage(error, 'Failed to send connection request, connect with us');
+      const message = getErrorMessage(
+        error,
+        'Failed to send connection request, try again or connect with us'
+      );
       showMessage.error(message);
     } finally {
       setIsLoading(false);
