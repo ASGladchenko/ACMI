@@ -119,30 +119,30 @@
   --color-border: var(--border);
   --color-divider: var(--divider);
 
-  --accent-normal: var(--blue);
-  --accent-light: var(--solitude);
-  --accent-interactions-dark: var(--matisse);
-  --accent-interactions-darker: var(--regal-blue);
-  --accent-interactions-light: var(--onahau);
-  --accent-interactions-lighter: var(--alice-blue);
+  --color-accent-normal: var(--blue);
+  --color-accent-light: var(--solitude);
+  --color-accent-interactions-dark: var(--matisse);
+  --color-accent-interactions-darker: var(--regal-blue);
+  --color-accent-interactions-light: var(--onahau);
+  --color-accent-interactions-lighter: var(--alice-blue);
 
-  --text-primary: var(--haiti);
-  --text-secondary: var(--pale-sky);
-  --text-additional: var(--santas-gray);
+  --color-text-primary: var(--haiti);
+  --color-text-secondary: var(--pale-sky);
+  --color-text-additional: var(--santas-gray);
 
-  --success-normal: var(--green);
-  --success-light: var(--narvik);
+  --color-success-normal: var(--green);
+  --color-success-light: var(--narvik);
 
-  --error-normal: var(--red);
-  --error-light: var(--chablis);
+  --color-error-normal: var(--red);
+  --color-error-light: var(--chablis);
 
-  --bground-default: var(--white-lilac);
-  --bground-secondary: var(--athens-gray);
-  --bground-footer: var(--downriver);
-  --bground-secondary: var(--cello);
+  --color-bg-default: var(--white-lilac);
+  --color-bg-secondary: var(--athens-gray);
+  --color-bg-footer: var(--downriver);
+  --color-bg-footer-secondary: var(--cello);
 
-  --attention-normal: var(--fire-bush);
-  --attention-light: var(--old-lace);
+  --color-attention-normal: var(--fire-bush);
+  --color-attention-light: var(--old-lace);
 
   /* fonts */
   --font-manrope: var(--font-manrope);
