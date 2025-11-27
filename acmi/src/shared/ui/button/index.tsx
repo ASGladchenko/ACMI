@@ -1,24 +1,31 @@
 import { cn } from '@/utils';
+import { LoaderCircle } from '@/shared/icons';
 
 import { ButtonProps } from './types';
 import { ChildrenProps } from '../../types';
-import { LoaderCircle } from '@/shared/icons';
+import { configButton, configLoader } from './config';
 
 export const Button = ({
   loading,
   children,
   disabled,
   className,
+  buttonType = 'normal',
   ...props
 }: ChildrenProps<ButtonProps>) => {
   const styles = cn(
-    'flex items-center justify-center gap-2.5 w-full rounded-md px-6 py-2.5 cursor-pointer',
+    'relative flex items-center justify-center gap-2.5 w-full rounded-md px-6 py-2.5 cursor-pointer font-medium disabled:cursor-not-allowed transition duration-300 ease-in-out',
+    configButton(buttonType),
     className
   );
 
   return (
     <button {...props} disabled={loading || disabled} className={styles}>
-      {loading && <LoaderCircle color="red" />}
+      {loading && (
+        <LoaderCircle
+          className={cn('animate-spin-pulse absolute z-10', configLoader[buttonType])}
+        />
+      )}
       {children}
     </button>
   );
