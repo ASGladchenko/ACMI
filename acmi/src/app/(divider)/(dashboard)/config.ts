@@ -4,6 +4,7 @@ export const routes = {
     rfq_requests: '/dashboard-provider/rfq-requests',
     sent_offers: '/dashboard-provider/sent-offers',
     offers_archive: '/dashboard-provider/archive',
+    integrations: '/dashboard-provider/integrations',
     company: '/dashboard-provider/company',
     settings: '/dashboard-provider/settings',
   },
