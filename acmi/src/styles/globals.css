@@ -95,7 +95,8 @@
   --font-inter: var(--font-inter);
 
   /* radius */
-  --radius-button: 10px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
 }
 
 @media (prefers-color-scheme: dark) {

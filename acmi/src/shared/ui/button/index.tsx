@@ -12,7 +12,7 @@ export const Button = ({
   ...props
 }: ChildrenProps<ButtonProps>) => {
   const styles = cn(
-    'flex items-center justify-center gap-2.5 w-full rounded-button px-6 py-2.5 cursor-pointer',
+    'flex items-center justify-center gap-2.5 w-full rounded-md px-6 py-2.5 cursor-pointer',
     className
   );
 
