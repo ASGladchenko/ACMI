@@ -10,11 +10,11 @@ export const Button = ({
   children,
   disabled,
   className,
-  buttonType = 'normal',
+  buttonType = 'primary',
   ...props
 }: ChildrenProps<ButtonProps>) => {
   const styles = cn(
-    'relative flex items-center justify-center gap-2.5 w-full rounded-md px-6 py-2.5 cursor-pointer font-medium disabled:cursor-not-allowed transition duration-300 ease-in-out',
+    'relative flex items-center justify-center gap-2.5 w-full rounded-md px-6 py-2.5 cursor-pointer font-medium disabled:cursor-not-allowed transition duration-300 ease-in-out disabled:[&>*:not(.icon-loader)]:opacity-30',
     configButton(buttonType),
     className
   );
@@ -23,7 +23,7 @@ export const Button = ({
     <button {...props} disabled={loading || disabled} className={styles}>
       {loading && (
         <LoaderCircle
-          className={cn('animate-spin-pulse absolute z-10', configLoader[buttonType])}
+          className={cn('icon-loader animate-spin-pulse absolute z-10', configLoader[buttonType])}
         />
       )}
       {children}
