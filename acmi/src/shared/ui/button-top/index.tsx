@@ -1,4 +1,5 @@
 import { ArrowLong } from '@/shared/icons';
+
 import { ButtonTopProps } from './types';
 
 export const ButtonTop = (props: ButtonTopProps) => {
