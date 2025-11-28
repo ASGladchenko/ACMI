@@ -1,3 +1,3 @@
 export { BadgeButton } from './badge-button';
 export { Button } from './button';
-export { InputBase } from './input-base';
+export { ButtonTop } from './button-top';
