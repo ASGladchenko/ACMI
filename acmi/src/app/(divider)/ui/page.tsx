@@ -1,9 +1,15 @@
-import { Button } from '@/shared/ui';
+import { LoaderCircle } from '@/shared/icons';
+import { BadgeButton, Button } from '@/shared/ui';
 
 export default function Ui() {
   return (
     <div>
-      <Button>Button from shared UI</Button>
+      <Button loading={true} disabled={true} className="">
+        <LoaderCircle className="text-white" />
+        Button from shared UI
+      </Button>
+
+      <BadgeButton />
     </div>
   );
 }
