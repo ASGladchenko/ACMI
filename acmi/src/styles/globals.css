@@ -30,12 +30,43 @@
   --orange-05: rgba(245, 158, 11, 0.5);
 
   --red-05: rgba(220, 38, 38, 0.5);
+
+  /* new design */
+
+  /* colors */
+  --white: #ffffff;
+  --border: #d6d8db;
+  --divider: #ececee;
+
+  --blue: #105699;
+  --solitude: #e4f1ff;
+  --matisse: #246aad;
+  --regal-blue: #00387b;
+  --onahau: #d0e8ff;
+  --alice-blue: #f1f8ff;
+
+  --haiti: #090928;
+  --pale-sky: #707683;
+  --santas-gray: #989eab;
+
+  --green: #0e7436;
+  --narvik: #e6f6ec;
+
+  --red: #ea1b1b;
+  --chablis: #fff1f1;
+
+  --white-lilac: #fafbfd;
+  --athens-gray: #f6f7f9;
+  --downriver: #08294a;
+  --cello: #1c3d5e;
+
+  --fire-bush: #e89b1f;
+  --old-lace: #fdf5ea;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
   --color-blue-dark: #1a436b;
   --color-blue-deep: #316292;
   --color-gray-dark: #474747;
@@ -51,7 +82,6 @@
   --color-white-light: #e9e9e9;
 
   --font-roboto: var(--font-roboto);
-  --font-inter: var(--font-inter);
   --font-montserrat: var(--font-montserrat);
 
   /* shadow */
@@ -81,6 +111,89 @@
   --breakpoint-tablet: 768px;
   --breakpoint-laptop: 1024px;
   --breakpoint-desktop: 1440px;
+
+  /* new design */
+
+  /* colors */
+  --color-white: var(--white);
+  --color-border: var(--border);
+  --color-divider: var(--divider);
+
+  --color-accent-normal: var(--blue);
+  --color-accent-light: var(--solitude);
+  --color-accent-interactions-dark: var(--matisse);
+  --color-accent-interactions-darker: var(--regal-blue);
+  --color-accent-interactions-light: var(--onahau);
+  --color-accent-interactions-lighter: var(--alice-blue);
+
+  --color-text-primary: var(--haiti);
+  --color-text-secondary: var(--pale-sky);
+  --color-text-additional: var(--santas-gray);
+
+  --color-success-normal: var(--green);
+  --color-success-light: var(--narvik);
+
+  --color-error-normal: var(--red);
+  --color-error-light: var(--chablis);
+
+  --color-bg-default: var(--white-lilac);
+  --color-bg-secondary: var(--athens-gray);
+  --color-bg-footer: var(--downriver);
+  --color-bg-footer-secondary: var(--cello);
+
+  --color-attention-normal: var(--fire-bush);
+  --color-attention-light: var(--old-lace);
+
+  /* fonts */
+  --font-manrope: var(--font-manrope);
+  --font-inter: var(--font-inter);
+
+  /* radius */
+  --radius-md: 10px;
+  --radius-lg: 20px;
+
+  /* shadow */
+  --shadow-lg-blue-dark: 0px 10px 20px 0px #1f315326;
+
+  /* transitions & animations */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --animate-spin: spin 3s linear infinite;
+  --animate-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-bounce: bounce 1s infinite;
+  --animate-spin-pulse: var(--animate-spin), var(--animate-pulse);
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes ping {
+    75%,
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+  @keyframes pulse {
+    50% {
+      opacity: 0.5;
+    }
+  }
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(-25%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -91,9 +204,12 @@
 }
 
 body {
-  color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
+  color: var(--black-dark);
+  font-size: 17px;
+  line-height: 1.4;
+  font-family: var(--font-manrope), sans-serif;
 }
+
 .gutter {
   scrollbar-gutter: stable;
 }
