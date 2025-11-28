@@ -116,8 +116,8 @@
 
   /* colors */
   --color-white: var(--white);
-  --color-border: var(--border);
-  --color-divider: var(--divider);
+  --color-iron: var(--border);
+  --color-iron-gray: var(--divider);
 
   --color-accent-normal: var(--blue);
   --color-accent-light: var(--solitude);
