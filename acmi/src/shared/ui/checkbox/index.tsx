@@ -11,10 +11,11 @@ export const Checkbox = ({
   className,
   inputClassName,
   type = 'checkbox',
+  styleType = 'check',
   ...props
 }: CheckboxProps) => {
-  const typeRadio = type === 'radio';
-  const typeCheckbox = type === 'checkbox';
+  const typeRadio = styleType === 'circle';
+  const typeCheckbox = styleType === 'check';
 
   const styles = cn(
     'group/label-check flex cursor-pointer items-center gap-[15px] max-w-full',
@@ -30,7 +31,7 @@ export const Checkbox = ({
   );
 
   const stylesVisualCheck = cn(
-    'visual-check flex h-5 w-5 items-center justify-center border-2 border-[#DADBDD] bg-white',
+    'visual-check flex h-5 w-5 items-center justify-center border-2 border-[#DADBDD] bg-white shrink-0',
     {
       'rounded-full': typeRadio,
       'rounded-sm': typeCheckbox,

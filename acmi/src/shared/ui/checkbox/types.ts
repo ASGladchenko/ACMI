@@ -4,4 +4,5 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   className?: string;
   inputClassName?: string;
+  styleType?: 'check' | 'circle';
 }

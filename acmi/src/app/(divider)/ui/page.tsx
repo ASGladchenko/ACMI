@@ -7,6 +7,7 @@ import { Button, ButtonTop, InputBase, BadgeButton, Checkbox } from '@/shared/ui
 
 export default function Ui() {
   const [value, setValue] = useState('');
+
   return (
     <div className="flex flex-col gap-2">
       <Button loading={true} disabled={true} className="">
@@ -20,13 +21,23 @@ export default function Ui() {
 
       <Checkbox
         disabled={false}
+        onChange={(e) => console.log(e.target.checked, '0')}
         className="px-[15px] py-2 hover:bg-red-500"
         label="safsadfsadf sadfasdf "
       />
       <Checkbox
-        disabled={false}
+        name="radio"
+        onChange={(e) => console.log(e.target.checked, '1')}
         className="px-[15px] py-2 hover:bg-red-500"
         label="safsadfsadf sadfasdf "
+        type="radio"
+        styleType="circle"
+      />
+      <Checkbox
+        name="radio"
+        onChange={(e) => console.log(e.target.checked, '2')}
+        className="px-[15px] py-2 hover:bg-red-500"
+        label="safsadfsadf sadfasdf"
         type="radio"
       />
 
