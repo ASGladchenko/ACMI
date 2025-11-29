@@ -1,5 +1,5 @@
 import { LoaderCircle } from '@/shared/icons';
-import { BadgeButton, Button, ButtonTop } from '@/shared/ui';
+import { BadgeButton, Button, ButtonTop, Checkbox } from '@/shared/ui';
 
 export default function Ui() {
   return (
@@ -12,6 +12,18 @@ export default function Ui() {
       <BadgeButton text="sadfas adsfasd sadf asf asdf sa " />
 
       <ButtonTop />
+
+      <Checkbox
+        disabled={false}
+        className="px-[15px] py-2 hover:bg-red-500"
+        label="safsadfsadf sadfasdf "
+      />
+      <Checkbox
+        disabled={false}
+        className="px-[15px] py-2 hover:bg-red-500"
+        label="safsadfsadf sadfasdf "
+        type="radio"
+      />
     </div>
   );
 }
