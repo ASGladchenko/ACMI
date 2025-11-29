@@ -11,7 +11,7 @@ export default function Ui() {
   return (
     <div className="flex flex-col gap-2">
       <Button loading={true} disabled={true} className="">
-        <LoaderCircle className="shrink-0 text-white" />
+        <LoaderCircle className="h-6 w-6 shrink-0 text-white" />
         Button from shared UI
       </Button>
 

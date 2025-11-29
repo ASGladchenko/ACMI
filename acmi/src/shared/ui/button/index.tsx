@@ -23,7 +23,10 @@ export const Button = ({
     <button {...props} disabled={loading || disabled} className={styles}>
       {loading && (
         <LoaderCircle
-          className={cn('icon-loader animate-spin-pulse absolute z-10', configLoader[buttonType])}
+          className={cn(
+            'icon-loader animate-spin-pulse absolute z-10 h-6 w-6',
+            configLoader[buttonType]
+          )}
         />
       )}
       {children}
