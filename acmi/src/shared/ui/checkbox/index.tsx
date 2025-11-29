@@ -61,7 +61,13 @@ export const Checkbox = ({
       </span>
 
       {label && (
-        <span className={cn('truncate', disabled && 'text-text-additional', transitionClasses)}>
+        <span
+          className={cn(
+            'text-text-primary truncate',
+            disabled && 'text-text-additional',
+            transitionClasses
+          )}
+        >
           {label}
         </span>
       )}
