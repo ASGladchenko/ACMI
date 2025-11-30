@@ -3,11 +3,20 @@
 import { useState } from 'react';
 
 import { LoaderCircle } from '@/shared/icons';
-import { Button, ButtonTop, InputBase, BadgeButton, Checkbox, Switcher } from '@/shared/ui';
+import {
+  Button,
+  ButtonTop,
+  InputBase,
+  BadgeButton,
+  Checkbox,
+  Switcher,
+  BodySwitcher,
+} from '@/shared/ui';
 
 export default function Ui() {
   const [value, setValue] = useState('');
   const [isActive, setIsActive] = useState(false);
+  const [isWide, setIsWide] = useState(false);
 
   return (
     <div className="flex flex-col gap-2">
@@ -15,6 +24,8 @@ export default function Ui() {
         <LoaderCircle className="h-6 w-6 shrink-0 text-white" />
         Button from shared UI
       </Button>
+
+      <BodySwitcher isWide={isWide} setIsWide={setIsWide} />
 
       <Switcher onClick={(val) => setIsActive(val)} isActive={isActive} disabled={false} />
 
@@ -26,13 +37,13 @@ export default function Ui() {
         disabled={false}
         onChange={(e) => console.log(e.target.checked, '0')}
         className="px-[15px] py-2 hover:bg-red-500"
-        label="safsadfsadf sadfasdf "
+        label="safsadfsadf sadfasdf"
       />
       <Checkbox
         name="radio"
         onChange={(e) => console.log(e.target.checked, '1')}
         className="px-[15px] py-2 hover:bg-red-500"
-        label="safsadfsadf sadfasdf "
+        label="safsadfsadf sadfasdf"
         type="radio"
         styleType="circle"
       />
