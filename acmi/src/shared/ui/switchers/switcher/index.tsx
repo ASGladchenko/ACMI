@@ -36,7 +36,7 @@ export const Switcher = ({ isActive, disabled, onClick }: SwitcherProps) => {
 
   return (
     <div className={switcherClass} onClick={handleClick}>
-      <div className={switcherCircleClass} />
+      <button className={switcherCircleClass} />
     </div>
   );
 };
