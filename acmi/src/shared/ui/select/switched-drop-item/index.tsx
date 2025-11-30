@@ -1,3 +1,5 @@
+import { ArrowDown } from '@/shared/icons';
+
 import {
   ItemExtend,
   DropItemBase,
@@ -5,7 +7,7 @@ import {
   DropDownItemProps,
 } from '../../dropdown-items';
 
-export type SwitchedItemType = 'checkbox' | 'base';
+export type SwitchedItemType = 'checkbox' | 'base' | 'plane';
 
 export interface SwitchedDropItemProps<T extends ItemExtend> extends DropDownItemProps<T> {
   type: SwitchedItemType;
@@ -18,6 +20,8 @@ export const SwitchedDropItem = <T extends ItemExtend>({
   switch (type) {
     case 'checkbox':
       return <DropItemCheckbox {...props} />;
+    case 'plane':
+      return <DropItemBase {...props} Icon={ArrowDown} />;
     default:
       return <DropItemBase {...props} />;
   }

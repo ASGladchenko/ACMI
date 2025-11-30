@@ -3,6 +3,7 @@ export interface DropDownItemProps<T> {
   active?: T | null;
   disabled?: boolean;
   onClick: (item: T) => void;
+  Icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
 export type ItemExtend = { label: string; id: string | number };
