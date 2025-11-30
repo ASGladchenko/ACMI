@@ -1,42 +1,41 @@
+import { useState, useCallback } from 'react';
+
 import { useOutsideClick } from '@/hooks';
 import { OutsideClickRef } from '@/shared/types';
-import { useState, useCallback } from 'react';
 
 export type AnimationState = 'mount' | 'unmount';
 
 export interface UseSelectProps {
-  delayMount?: number;
+  disabled?: boolean;
   initialOpen?: boolean;
   delayUnmount?: number;
-  outSideClick?: (isOpen: boolean) => void;
   refs?: OutsideClickRef;
+  outSideClick?: (isOpen: boolean) => void;
 }
 
 export const useSelect = ({
   refs,
-  delayMount,
+  disabled,
   outSideClick,
   delayUnmount = 150,
   initialOpen = false,
 }: UseSelectProps) => {
   const [isOpen, setIsOpen] = useState(initialOpen);
-  const [animationState, setAnimationState] = useState<AnimationState>('mount');
+  const [animationState, setAnimationState] = useState<AnimationState>(
+    !initialOpen ? 'mount' : 'unmount'
+  );
 
   const actualRefs = Array.isArray(refs) ? refs : refs ? [refs] : [];
 
   const onToggleSelect = useCallback(
     (isOpen: boolean) => {
-      if (isOpen && !delayMount) {
+      if (disabled) return;
+
+      if (isOpen) {
         setAnimationState('mount');
         setIsOpen(true);
       }
 
-      if (isOpen && delayMount) {
-        setTimeout(() => {
-          setAnimationState('mount');
-          setIsOpen(true);
-        }, delayMount);
-      }
       if (!isOpen) {
         setAnimationState('unmount');
         setTimeout(() => {
@@ -44,7 +43,7 @@ export const useSelect = ({
         }, delayUnmount);
       }
     },
-    [delayUnmount, delayMount]
+    [delayUnmount, disabled]
   );
 
   useOutsideClick(() => {

@@ -11,6 +11,7 @@ export interface InputBaseProps
   error?: string | boolean;
   LeftItem?: React.ReactNode;
   RightItem?: React.ReactNode;
+  ref?: React.Ref<HTMLInputElement>;
   onChange?: (value: string, e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

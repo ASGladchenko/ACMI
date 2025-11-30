@@ -1,45 +1,40 @@
 import { useRef, useState } from 'react';
 
 import { cn } from '@/utils';
-import { ArrowDown } from '@/assets/svg';
 import { useSelect } from '@/shared/hooks';
+import { ArrowDown } from '@/shared/icons';
 
 import { InputBase } from '../input-base';
-
-export type SelectOption = {
-  label: string;
-  id: string | number;
-};
-
-export interface SelectNewProps<T> {
-  data: T[];
-  isLoading?: boolean;
-  placeholder?: string;
-  selectedItem?: T | null;
-  error?: string | boolean;
-  onSelectItem: (item: T | null) => void;
-}
+import { DropdownList } from '../dropdown-list';
+import { SelectOption, SelectNewProps } from './types';
+import { SwitchedDropItem } from './switched-drop-item';
 
 export const SelectNew = <T extends SelectOption>({
   data,
   error,
+  disabled,
   selectedItem,
   onSelectItem,
+  itemType = 'base',
+  animationDuration = 360,
   placeholder = 'Select an option',
 }: SelectNewProps<T>) => {
   const [search, setSearch] = useState('');
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const { isOpen, animation, onToggleSelect } = useSelect({
+    disabled,
     refs: wrapperRef,
+    delayUnmount: animationDuration,
     outSideClick: () => {
       onToggleSelect(false);
+      inputRef.current?.blur();
     },
   });
 
   const handleChangeSearch = (value: string) => {
     setSearch(value);
-
     onSelectItem(null);
   };
 
@@ -47,28 +42,36 @@ export const SelectNew = <T extends SelectOption>({
     item.label.toLowerCase().includes(search.toLowerCase())
   );
 
-  console.log({ data, search, animation, selectedItem });
+  const onIconClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+    e.preventDefault();
+
+    onToggleSelect(!isOpen);
+    if (!isOpen) {
+      inputRef.current?.blur();
+    }
+  };
+
+  const onItemClick = (item: T) => {
+    if (selectedItem && selectedItem.id === item.id) {
+      return;
+    }
+
+    onSelectItem(item);
+    onToggleSelect(false);
+  };
+
+  const selectedLabel = isOpen ? (selectedItem?.label ?? search) : (selectedItem?.label ?? '');
 
   const iconClass = cn(
     'h-5 w-5 shrink-0 text-inherit transition-all duration-200',
     isOpen && 'rotate-180 text-accent-interactions-dark'
   );
 
-  const onIconClick = () => {
-    onToggleSelect(!isOpen);
-  };
-
-  const onItemClick = (item: T) => {
-    onSelectItem(item);
-    onToggleSelect(false);
-  };
-
-  const selectedLabel = isOpen ? (selectedItem?.label ?? '') : (selectedItem?.label ?? '');
-
   return (
-    <div ref={wrapperRef}>
+    <div ref={wrapperRef} className="gutter scroll-bar-mini relative w-full shrink grow">
       <InputBase
         error={error}
+        ref={inputRef}
         isActive={isOpen}
         value={selectedLabel}
         placeholder={placeholder}
@@ -77,15 +80,21 @@ export const SelectNew = <T extends SelectOption>({
         RightItem={<ArrowDown className={iconClass} onClick={onIconClick} />}
       />
 
-      {isOpen && (
-        <div>
-          {filteredData.map((item) => (
-            <div onClick={() => onItemClick(item)} key={item.id}>
-              {item.label}
-            </div>
-          ))}
-        </div>
-      )}
+      <DropdownList<T>
+        isOpen={isOpen}
+        data={filteredData}
+        animation={animation}
+        animationDuration={animationDuration}
+        RenderItem={({ item }) => (
+          <SwitchedDropItem<T>
+            item={item}
+            type={itemType}
+            key={item.label}
+            active={selectedItem}
+            onClick={onItemClick}
+          />
+        )}
+      />
     </div>
   );
 };
