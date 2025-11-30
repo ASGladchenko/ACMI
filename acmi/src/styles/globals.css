@@ -154,6 +154,7 @@
 
   /* shadow */
   --shadow-lg-blue-dark: 0px 10px 20px 0px #1f315326;
+  --shadow-switcher: 0px 2px 4px 0px #00230b33;
 
   /* transitions & animations */
   --ease-in: cubic-bezier(0.4, 0, 1, 1);

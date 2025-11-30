@@ -3,10 +3,11 @@
 import { useState } from 'react';
 
 import { LoaderCircle } from '@/shared/icons';
-import { Button, ButtonTop, InputBase, BadgeButton, Checkbox } from '@/shared/ui';
+import { Button, ButtonTop, InputBase, BadgeButton, Checkbox, Switcher } from '@/shared/ui';
 
 export default function Ui() {
   const [value, setValue] = useState('');
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <div className="flex flex-col gap-2">
@@ -14,6 +15,8 @@ export default function Ui() {
         <LoaderCircle className="h-6 w-6 shrink-0 text-white" />
         Button from shared UI
       </Button>
+
+      <Switcher onClick={(val) => setIsActive(val)} isActive={isActive} disabled={false} />
 
       <BadgeButton text="sadfas adsfasd sadf asf asdf sa " />
 
