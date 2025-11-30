@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 
 import { cn } from '@/utils';
 import { useSelect } from '@/shared/hooks';
-import { ArrowDown } from '@/shared/icons';
+import { Plane, ArrowDown } from '@/shared/icons';
 
 import { InputBase } from '../input-base';
 import { DropdownList } from '../dropdown-list';
@@ -78,6 +78,9 @@ export const SelectNew = <T extends SelectOption>({
         onChange={handleChangeSearch}
         onFocus={() => onToggleSelect(true)}
         RightItem={<ArrowDown className={iconClass} onClick={onIconClick} />}
+        LeftItem={
+          itemType === 'plane' ? <Plane className="text-text-secondary h-5 w-5 shrink-0" /> : null
+        }
       />
 
       <DropdownList<T>
