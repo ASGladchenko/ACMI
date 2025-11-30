@@ -26,5 +26,5 @@ export { default as SearchPlane } from './search-plane.svg';
 export { default as Security } from './security.svg';
 export { default as UserRole } from './user-role.svg';
 export { default as Users } from './users.svg';
-export { default as Verified } from './Verified.svg';
+export { default as Verified } from './verified.svg';
 export { default as WarningField } from './warning-field.svg';
