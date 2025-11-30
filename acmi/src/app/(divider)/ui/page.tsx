@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { LoaderCircle } from '@/shared/icons';
 import { SelectNew } from '@/shared/ui/select';
-import { Button, Checkbox, ButtonTop, InputBase, BadgeButton } from '@/shared/ui';
+import { Button, Checkbox, Switcher, ButtonTop, InputBase, BadgeButton } from '@/shared/ui';
 
 type SelectItemProps = {
   id: number;
@@ -13,6 +13,7 @@ type SelectItemProps = {
 
 export default function Ui() {
   const [value, setValue] = useState('');
+  const [isActive, setIsActive] = useState(false);
   const [selectedItem, setSelectedItem] = useState<SelectItemProps | null>(null);
 
   return (
@@ -21,6 +22,8 @@ export default function Ui() {
         <LoaderCircle className="h-6 w-6 shrink-0 text-white" />
         Button from shared UI
       </Button>
+
+      <Switcher onClick={(val) => setIsActive(val)} isActive={isActive} disabled={false} />
 
       <BadgeButton text="sadfas adsfasd sadf asf asdf sa " />
 
