@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import { LoaderCircle } from '@/shared/icons';
-import { SelectNew } from '@/shared/ui/select';
+import { Select } from '@/shared/ui/select';
 import {
   Button,
   Checkbox,
@@ -19,10 +19,21 @@ type SelectItemProps = {
   label: string;
 };
 
+const options: SelectItemProps[] = [
+  { id: 1, label: 'Option 1' },
+  { id: 2, label: 'Option 2' },
+  { id: 3, label: 'Option 3' },
+  { id: 4, label: 'Option 4' },
+  { id: 5, label: 'Option 5' },
+  { id: 6, label: 'Option 6' },
+  { id: 7, label: 'Option 7' },
+  { id: 8, label: 'Option 8' },
+];
+
 export default function Ui() {
   const [value, setValue] = useState('');
   const [isActive, setIsActive] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<SelectItemProps | null>(null);
+  const [selected, setSelected] = useState<SelectItemProps | null>(null);
   const [isWide, setIsWide] = useState(false);
 
   return (
@@ -62,51 +73,26 @@ export default function Ui() {
         type="radio"
       />
 
-      <SelectNew<SelectItemProps>
-        selectedItem={selectedItem}
-        onSelectItem={setSelectedItem}
-        data={[
-          { id: 1, label: 'Option 1' },
-          { id: 2, label: 'Option 2' },
-          { id: 3, label: 'Option 3' },
-          { id: 4, label: 'Option 4' },
-          { id: 5, label: 'Option 5' },
-          { id: 6, label: 'Option 6' },
-          { id: 7, label: 'Option 7' },
-          { id: 8, label: 'Option 8' },
-        ]}
+      <Select<SelectItemProps>
+        isLoading
+        data={options}
+        selected={selected}
+        onSelect={setSelected}
       />
 
-      <SelectNew<SelectItemProps>
+      <Select<SelectItemProps>
+        data={options}
         itemType="plane"
-        selectedItem={selectedItem}
-        onSelectItem={setSelectedItem}
-        data={[
-          { id: 1, label: 'Option 1' },
-          { id: 2, label: 'Option 2' },
-          { id: 3, label: 'Option 3' },
-          { id: 4, label: 'Option 4' },
-          { id: 5, label: 'Option 5' },
-          { id: 6, label: 'Option 6' },
-          { id: 7, label: 'Option 7' },
-          { id: 8, label: 'Option 8' },
-        ]}
+        error="Error message"
+        selected={selected}
+        onSelect={setSelected}
       />
 
-      <SelectNew<SelectItemProps>
+      <Select<SelectItemProps>
+        data={null}
         itemType="checkbox"
-        selectedItem={selectedItem}
-        onSelectItem={setSelectedItem}
-        data={[
-          { id: 1, label: 'Option 1' },
-          { id: 2, label: 'Option 2' },
-          { id: 3, label: 'Option 3' },
-          { id: 4, label: 'Option 4' },
-          { id: 5, label: 'Option 5' },
-          { id: 6, label: 'Option 6' },
-          { id: 7, label: 'Option 7' },
-          { id: 8, label: 'Option 8' },
-        ]}
+        selected={selected}
+        onSelect={setSelected}
       />
 
       <InputBase placeholder="Disabled" value={value} onChange={setValue} readOnly disabled />

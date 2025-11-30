@@ -6,19 +6,20 @@ import { Plane, ArrowDown } from '@/shared/icons';
 
 import { InputBase } from '../input-base';
 import { DropdownList } from '../dropdown-list';
-import { SelectOption, SelectNewProps } from './types';
+import { SelectProps, SelectOption } from './types';
 import { SwitchedDropItem } from './switched-drop-item';
 
-export const SelectNew = <T extends SelectOption>({
+export const Select = <T extends SelectOption>({
   data,
   error,
   disabled,
-  selectedItem,
-  onSelectItem,
+  selected,
+  onSelect,
+  isLoading,
   itemType = 'base',
   animationDuration = 360,
   placeholder = 'Select an option',
-}: SelectNewProps<T>) => {
+}: SelectProps<T>) => {
   const [search, setSearch] = useState('');
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -35,10 +36,10 @@ export const SelectNew = <T extends SelectOption>({
 
   const handleChangeSearch = (value: string) => {
     setSearch(value);
-    onSelectItem(null);
+    onSelect(null);
   };
 
-  const filteredData = data.filter((item) =>
+  const filteredData = (data || []).filter((item) =>
     item.label.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -46,21 +47,22 @@ export const SelectNew = <T extends SelectOption>({
     e.preventDefault();
 
     onToggleSelect(!isOpen);
+
     if (!isOpen) {
       inputRef.current?.blur();
     }
   };
 
   const onItemClick = (item: T) => {
-    if (selectedItem && selectedItem.id === item.id) {
+    if (selected && selected.id === item.id) {
       return;
     }
 
-    onSelectItem(item);
+    onSelect(item);
     onToggleSelect(false);
   };
 
-  const selectedLabel = isOpen ? (selectedItem?.label ?? search) : (selectedItem?.label ?? '');
+  const selectedLabel = isOpen ? (selected?.label ?? search) : (selected?.label ?? '');
 
   const iconClass = cn(
     'h-5 w-5 shrink-0 text-inherit transition-all duration-200',
@@ -70,10 +72,10 @@ export const SelectNew = <T extends SelectOption>({
   return (
     <div ref={wrapperRef} className="gutter scroll-bar-mini relative w-full shrink grow">
       <InputBase
-        error={error}
         ref={inputRef}
         isActive={isOpen}
         value={selectedLabel}
+        error={Boolean(error)}
         placeholder={placeholder}
         onChange={handleChangeSearch}
         onFocus={() => onToggleSelect(true)}
@@ -84,16 +86,19 @@ export const SelectNew = <T extends SelectOption>({
       />
 
       <DropdownList<T>
+        error={error}
         isOpen={isOpen}
         data={filteredData}
+        disabled={disabled}
         animation={animation}
+        isLoading={isLoading}
         animationDuration={animationDuration}
         RenderItem={({ item }) => (
           <SwitchedDropItem<T>
             item={item}
             type={itemType}
             key={item.label}
-            active={selectedItem}
+            active={selected}
             onClick={onItemClick}
           />
         )}

@@ -5,14 +5,14 @@ export type SelectOption = {
   id: string | number;
 };
 
-export interface SelectNewProps<T> {
-  data: T[];
+export interface SelectProps<T> {
+  error?: string;
+  data: T[] | null;
   disabled?: boolean;
   isLoading?: boolean;
+  selected?: T | null;
   placeholder?: string;
-  selectedItem?: T | null;
-  error?: string | boolean;
   animationDuration?: number;
   itemType?: SwitchedItemType;
-  onSelectItem: (item: T | null) => void;
+  onSelect: (item: T | null) => void;
 }

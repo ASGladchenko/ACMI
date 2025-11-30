@@ -1,4 +1,5 @@
 import { cn } from '@/utils';
+import { LoaderCircle } from '@/shared/icons';
 import { AnimationState } from '@/shared/hooks';
 
 import { sizeToCSSString } from './helpers';
@@ -12,6 +13,7 @@ export interface DropdownListProps<T> {
   isOpen: boolean;
   data: T[] | null;
   className?: string;
+  disabled?: boolean;
   isLoading?: boolean;
   animation: AnimationState;
   height?: string | number;
@@ -53,23 +55,28 @@ export const DropdownList = <T extends DropdownItem>({
       }
     >
       <div className="scroll-bar-mini h-full w-full overflow-y-auto">
-        {isData(data) &&
-          !isLoading &&
-          data.map((item, idx) => <RenderItem index={idx} key={item.label} item={item} />)}
-
-        {!isData(data) && !isLoading && !error && (
-          <div className="text-text-secondary px-4 py-2 text-center">No options</div>
+        {isLoading && (
+          <div className="flex h-full items-center justify-center py-4">
+            <LoaderCircle className="text-accent-normal animate-spin-pulse h-[64px] w-auto max-w-full shrink duration-1000" />
+          </div>
         )}
 
         {error && !isLoading && (
-          <div className="text-text-secondary px-4 py-2 text-center">{error}</div>
-        )}
-
-        {isLoading && (
-          <div className="flex items-center justify-center py-4">
-            <div className="border-accent-interactions-dark h-5 w-5 animate-spin rounded-full border-4 border-t-transparent"></div>
+          <div className="text-error-normal flex h-full items-center justify-center px-4 py-2 font-semibold">
+            {error}
           </div>
         )}
+
+        {!isData(data) && !isLoading && !error && (
+          <div className="text-text-secondary flex h-full items-center justify-center px-4 py-2 font-semibold">
+            No options
+          </div>
+        )}
+
+        {isData(data) &&
+          !isLoading &&
+          !error &&
+          data.map((item, idx) => <RenderItem index={idx} key={item.label} item={item} />)}
       </div>
     </div>
   );

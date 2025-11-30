@@ -5,7 +5,7 @@ export { ButtonTop } from './button-top';
 export { Checkbox } from './checkbox';
 export { DropdownList } from './dropdown-list';
 export { InputBase } from './input-base';
-export { SelectNew } from './select';
+export { Select } from './select';
 export { Switcher } from './switchers/switcher';
 
 export * from './dropdown-items';
