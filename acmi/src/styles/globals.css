@@ -155,7 +155,7 @@
   /* shadow */
   --shadow-lg-blue-dark: 0px 10px 20px 0px #1f315326;
   --shadow-switcher: 0px 2px 4px 0px #00230b33;
-
+  
   /* transitions & animations */
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
@@ -166,6 +166,8 @@
   --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-bounce: bounce 1s infinite;
   --animate-spin-pulse: var(--animate-spin), var(--animate-pulse);
+  --animate-dropdown-in: expand var(--duration-dropdown, 330ms) var(--ease-out) forwards;
+  --animate-dropdown-out: collapse var(--duration-dropdown, 330ms) var(--ease-in) forwards;
 
   @keyframes spin {
     to {
@@ -193,6 +195,39 @@
     50% {
       transform: none;
       animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes expand {
+    0% {
+      height: var(--list-min-height, 0);
+    }
+    100% {
+      height: var(--list-height, auto);
+    }
+  }
+  @keyframes collapse {
+    0% {
+      height: var(--list-height, auto);
+    }
+    100% {
+      height: var(--list-min-height, 0);
     }
   }
 }

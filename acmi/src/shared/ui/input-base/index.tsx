@@ -11,6 +11,7 @@ export interface InputBaseProps
   error?: string | boolean;
   LeftItem?: React.ReactNode;
   RightItem?: React.ReactNode;
+  ref?: React.Ref<HTMLInputElement>;
   onChange?: (value: string, e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -35,7 +36,7 @@ export const InputBase = ({
   );
 
   const containerClassName = cn(
-    'flex gap-2.5 cursor-pointer border border-iron bg-white text-text-primary px-[15px] py-[9px] rounded-md items-center transition-all duration-100 ease-linear',
+    'flex gap-2.5 cursor-pointer border border-iron bg-white text-text-primary px-[15px] py-[9px] rounded-lg2 items-center transition-all duration-100 ease-linear',
     isError && 'border-error-normal',
     rest.disabled && 'cursor-not-allowed bg-bg-secondary text-text-secondary',
     !isError && !rest.disabled && !isActive && 'hover:border-text-additional',

@@ -1,3 +1,4 @@
+export { default as ArrowDown } from './arrow-down.svg';
 export { default as ArrowLong } from './arrow-long.svg';
 export { default as BigLocation } from './big-location.svg';
 export { default as Calendar } from './calendar.svg';
