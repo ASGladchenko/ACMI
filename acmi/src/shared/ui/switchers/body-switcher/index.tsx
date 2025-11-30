@@ -20,7 +20,7 @@ export const BodySwitcher = ({ className, isWide, setIsWide }: BodySwitcherProps
   const textClass =
     'flex items-center focus:outline-none text-text-secondary flex w-full h-full justify-center text-[15px] leading-[1.1] z-20';
 
-  const chosenClass = cn('text-accent-normal scale-110 font-semibold');
+  const chosenClass = 'text-accent-normal scale-110 font-semibold';
 
   const handleClick = (e: SyntheticEvent<HTMLDivElement>) => {
     const option = (e.target as HTMLElement).dataset.boolean === 'true';
