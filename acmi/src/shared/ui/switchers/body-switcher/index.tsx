@@ -18,7 +18,7 @@ export const BodySwitcher = ({ className, isWide, setIsWide }: BodySwitcherProps
   );
 
   const textClass =
-    'flex items-center focus:outline-none text-text-secondary flex w-full h-full justify-center text-[15px] leading-[1.1] z-20';
+    'flex items-center focus:outline-none text-text-secondary flex w-full h-full justify-center text-[15px] leading-[1.1] z-20 cursor-pointer';
 
   const chosenClass = 'text-accent-normal scale-110 font-semibold';
 
@@ -31,7 +31,7 @@ export const BodySwitcher = ({ className, isWide, setIsWide }: BodySwitcherProps
     <div className={wrapper} onClick={handleClick}>
       <div
         className={cn(
-          'rounded-lg2 border-iron absolute left-0 z-10 h-full w-1/2 border-2 bg-white',
+          'rounded-lg2 border-iron absolute left-0 z-10 h-full w-1/2 cursor-pointer border-2 bg-white',
           transitionClasses,
           {
             'left-full -translate-x-full': isWide,

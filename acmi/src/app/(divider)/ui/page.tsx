@@ -36,14 +36,14 @@ export default function Ui() {
       <Checkbox
         disabled={false}
         onChange={(e) => console.log(e.target.checked, '0')}
-        className="has-[input:focus]:bg-accent-interactions-dark px-[15px] py-2 hover:bg-red-500"
-        label="safsadfsadf sadfasdf "
+        className="px-[15px] py-2 hover:bg-red-500"
+        label="safsadfsadf sadfasdf"
       />
       <Checkbox
         name="radio"
         onChange={(e) => console.log(e.target.checked, '1')}
         className="px-[15px] py-2 hover:bg-red-500"
-        label="safsadfsadf sadfasdf "
+        label="safsadfsadf sadfasdf"
         type="radio"
         styleType="circle"
       />
