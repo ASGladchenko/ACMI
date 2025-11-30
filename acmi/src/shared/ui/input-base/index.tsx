@@ -41,7 +41,7 @@ export const InputBase = ({
     rest.disabled && 'cursor-not-allowed bg-bg-secondary text-text-secondary',
     !isError && !rest.disabled && !isActive && 'hover:border-text-additional',
     !isError && !rest.disabled && isActive && 'border-accent-interactions-dark',
-    !isError && !rest.disabled && 'has-[input:focus]:border-accent-interactions-dark ',
+    !isError && !rest.disabled && 'has-[input:focus]:border-accent-interactions-dark',
     containerClass
   );
 
