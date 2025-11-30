@@ -149,8 +149,8 @@
   --font-inter: var(--font-inter);
 
   /* radius */
-  --radius-md: 10px;
-  --radius-lg: 20px;
+  --radius-lg2: 10px;
+  --radius-2xl2: 20px;
 
   /* shadow */
   --shadow-lg-blue-dark: 0px 10px 20px 0px #1f315326;
