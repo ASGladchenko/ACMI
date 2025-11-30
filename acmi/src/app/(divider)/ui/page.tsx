@@ -3,13 +3,20 @@
 import { useState } from 'react';
 
 import { LoaderCircle } from '@/shared/icons';
-import { Button, ButtonTop, InputBase, BadgeButton, Checkbox } from '@/shared/ui';
+import { SelectNew } from '@/shared/ui/select';
+import { Button, Checkbox, ButtonTop, InputBase, BadgeButton } from '@/shared/ui';
+
+type SelectItemProps = {
+  id: number;
+  label: string;
+};
 
 export default function Ui() {
   const [value, setValue] = useState('');
+  const [selectedItem, setSelectedItem] = useState<SelectItemProps | null>(null);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 py-6">
       <Button loading={true} disabled={true} className="">
         <LoaderCircle className="h-6 w-6 shrink-0 text-white" />
         Button from shared UI
@@ -39,6 +46,16 @@ export default function Ui() {
         className="px-[15px] py-2 hover:bg-red-500"
         label="safsadfsadf sadfasdf"
         type="radio"
+      />
+
+      <SelectNew<SelectItemProps>
+        selectedItem={selectedItem}
+        onSelectItem={setSelectedItem}
+        data={[
+          { id: 1, label: 'Option 1' },
+          { id: 2, label: 'Option 2' },
+          { id: 3, label: 'Option 3' },
+        ]}
       />
 
       <InputBase placeholder="Disabled" value={value} onChange={setValue} readOnly disabled />

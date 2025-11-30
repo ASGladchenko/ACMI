@@ -1,3 +1,4 @@
+export { default as ArrowDown } from './arrow-down.svg';
 export { default as ArrowLong } from './arrow-long.svg';
 export { default as CheckCheckbox } from './check-checkbox.svg';
 export { default as Cross } from './x.svg';
