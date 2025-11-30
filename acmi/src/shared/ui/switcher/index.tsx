@@ -1,9 +1,9 @@
 import { cn } from '@/utils';
 
 export interface SwitcherProps {
+  error?: string;
   isActive: boolean;
   disabled?: boolean;
-  error?: string;
   onClick?: (isActive: boolean) => void;
 }
 

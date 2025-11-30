@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 import { LoaderCircle } from '@/shared/icons';
 import { Button, ButtonTop, InputBase, BadgeButton, Checkbox, Switcher } from '@/shared/ui';
-import { Switcher as Sv } from '@/components';
 
 export default function Ui() {
   const [value, setValue] = useState('');
@@ -16,8 +15,6 @@ export default function Ui() {
         <LoaderCircle className="h-6 w-6 shrink-0 text-white" />
         Button from shared UI
       </Button>
-
-      <Sv onClick={(val) => setIsActive(val)} isActive={isActive} />
 
       <Switcher onClick={(val) => setIsActive(val)} isActive={isActive} disabled={false} />
 
