@@ -5,7 +5,7 @@ import { BadgeButtonProps } from './types';
 
 export const BadgeButton = ({ text, className, ...props }: BadgeButtonProps) => {
   const styles = cn(
-    'group/badge flex items-center max-w-full text-[15px] leading-[1.2] text-accent-normal bg-accent-light gap-3 border border-accent-normal rounded-[8px] px-2.5 py-1.25 cursor-pointer',
+    'group/badge flex items-center max-w-full text-[15px] leading-[1.2] text-accent-normal bg-accent-light gap-3 border border-accent-normal rounded-[8px] px-2.5 py-0.5 cursor-pointer',
     className
   );
   return (

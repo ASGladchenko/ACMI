@@ -4,22 +4,22 @@ import { cn } from '@/utils';
 import { useSelect } from '@/shared/hooks';
 import { Plane, ArrowDown } from '@/shared/icons';
 
-import { InputBase } from '../input-base';
 import { DropdownList } from '../dropdown-list';
-import { SelectProps, SelectOption } from './types';
 import { SwitchedDropItem } from '../dropdown-items';
+import { MultiSelectItem } from './multi-select-item';
+import { SelectOption, MultiSelectProps } from './types';
 
-export const Select = <T extends SelectOption>({
+export const MultiSelect = <T extends SelectOption>({
   data,
   error,
   disabled,
-  selected,
   onSelect,
   isLoading,
+  selected = [],
   itemType = 'base',
   animationDuration = 360,
   placeholder = 'Select an option',
-}: SelectProps<T>) => {
+}: MultiSelectProps<T>) => {
   const [search, setSearch] = useState('');
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -46,23 +46,24 @@ export const Select = <T extends SelectOption>({
   const onIconClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
     e.preventDefault();
 
-    onToggleSelect(!isOpen);
-
     if (!isOpen) {
+      inputRef.current?.focus();
+    } else {
       inputRef.current?.blur();
     }
+
+    onToggleSelect(!isOpen);
   };
 
   const onItemClick = (item: T) => {
-    if (selected && selected.id === item.id) {
-      return;
-    }
+    const isIncludes = (selected || []).some((old) => old.id === item.id);
 
-    onSelect(item);
-    onToggleSelect(false);
+    const newSelected = isIncludes
+      ? (selected || []).filter((old) => old.id !== item.id)
+      : [...(selected || []), item];
+
+    onSelect(newSelected.length > 0 ? newSelected : null);
   };
-
-  const selectedLabel = isOpen ? (selected?.label ?? search) : (selected?.label ?? '');
 
   const iconClass = cn(
     'h-5 w-5 shrink-0 text-inherit transition-all duration-200',
@@ -71,14 +72,18 @@ export const Select = <T extends SelectOption>({
 
   return (
     <div ref={wrapperRef} className="gutter scroll-bar-mini relative w-full shrink grow">
-      <InputBase
+      <MultiSelectItem<T>
         ref={inputRef}
+        value={search}
         isActive={isOpen}
-        value={selectedLabel}
+        selected={selected}
+        animation={animation}
         error={Boolean(error)}
+        onSelectItem={onSelect}
         placeholder={placeholder}
         onChange={handleChangeSearch}
-        onFocus={() => onToggleSelect(true)}
+        animationDuration={animationDuration}
+        onFocus={() => !isOpen && onToggleSelect(true)}
         RightItem={<ArrowDown className={iconClass} onClick={onIconClick} />}
         LeftItem={
           itemType === 'plane' ? <Plane className="text-text-secondary h-5 w-5 shrink-0" /> : null
@@ -94,7 +99,9 @@ export const Select = <T extends SelectOption>({
         isLoading={isLoading}
         animationDuration={animationDuration}
         RenderItem={({ item }) => {
-          const isActive = Boolean(selected) && Boolean(selected && selected.id === item.id);
+          const isActive =
+            Boolean(selected) &&
+            Boolean(selected && selected.some((selectedItem) => selectedItem.id === item.id));
 
           return (
             <SwitchedDropItem<T>

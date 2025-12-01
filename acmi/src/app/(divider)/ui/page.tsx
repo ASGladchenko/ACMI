@@ -12,6 +12,7 @@ import {
   InputBase,
   BadgeButton,
   BodySwitcher,
+  MultiSelect,
 } from '@/shared/ui';
 
 type SelectItemProps = {
@@ -34,6 +35,8 @@ export default function Ui() {
   const [value, setValue] = useState('');
   const [isActive, setIsActive] = useState(false);
   const [selected, setSelected] = useState<SelectItemProps | null>(null);
+  const [selectedMulti, setSelectedMulti] = useState<SelectItemProps[] | null>(null);
+  const [selectedMulti1, setSelectedMulti1] = useState<SelectItemProps[] | null>(null);
   const [isWide, setIsWide] = useState(false);
 
   return (
@@ -67,10 +70,25 @@ export default function Ui() {
       />
       <Checkbox
         name="radio"
-        onChange={(e) => console.log(e.target.checked, '2')}
-        className="px-[15px] py-2 hover:bg-red-500"
-        label="safsadfsadf sadfasdf"
         type="radio"
+        label="safsadfsadf sadfasdf"
+        className="px-[15px] py-2 hover:bg-red-500"
+        onChange={(e) => console.log(e.target.checked, '2')}
+      />
+      <MultiSelect<SelectItemProps>
+        data={options}
+        itemType="plane"
+        selected={selectedMulti}
+        placeholder="Multi Select"
+        onSelect={setSelectedMulti}
+      />
+
+      <MultiSelect<SelectItemProps>
+        data={options}
+        isLoading
+        selected={selectedMulti1}
+        placeholder="Multi Select"
+        onSelect={setSelectedMulti1}
       />
 
       <Select<SelectItemProps>
