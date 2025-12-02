@@ -1,9 +1,10 @@
+import { cloneElement, isValidElement } from 'react';
+
 import { cn } from '@/utils';
+import { LoaderCircle } from '@/shared/icons';
 
 import { HeaderButtonProps } from './types';
-import { LoaderCircle } from '@/shared/icons';
-import { cloneElement, isValidElement } from 'react';
-import { configButton, configColor } from './config';
+import { configColor, configButton } from './config';
 
 const transitionClasses = 'transition duration-300 ease-in-out';
 
