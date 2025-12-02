@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { LoaderCircle } from '@/shared/icons';
+import { ArrowDown, LoaderCircle, Notification, Profile, UserRole } from '@/shared/icons';
 import { Select } from '@/shared/ui/select';
 import {
   Button,
@@ -12,6 +12,7 @@ import {
   InputBase,
   BadgeButton,
   BodySwitcher,
+  HeaderButton,
 } from '@/shared/ui';
 
 type SelectItemProps = {
@@ -44,6 +45,46 @@ export default function Ui() {
       </Button>
 
       <BodySwitcher isWide={isWide} setIsWide={setIsWide} />
+
+      <div className="flex gap-2 bg-gray-400 p-4">
+        <HeaderButton
+          loading={false}
+          disabled={true}
+          isActive={isActive}
+          onClick={() => setIsActive(!isActive)}
+          isMessage
+          leftIcon={<Notification width={20} height={20} />}
+        />
+        <HeaderButton
+          loading={false}
+          disabled={false}
+          isActive={isActive}
+          onClick={() => setIsActive(!isActive)}
+          leftIcon={<Profile width={20} height={20} />}
+        />
+
+        <HeaderButton
+          loading={false}
+          disabled={false}
+          isActive={isActive}
+          onClick={() => setIsActive(!isActive)}
+          leftIcon={<UserRole width={20} height={20} />}
+          buttonType="normal"
+          rightIcon={<ArrowDown width={20} height={20} />}
+          text="Customer"
+        />
+        <HeaderButton
+          loading={false}
+          disabled={false}
+          colorType="gray"
+          isActive={isActive}
+          onClick={() => setIsActive(!isActive)}
+          leftIcon={<UserRole width={20} height={20} />}
+          buttonType="normal"
+          rightIcon={<ArrowDown width={20} height={20} />}
+          text="Provider"
+        />
+      </div>
 
       <Switcher onClick={(val) => setIsActive(val)} isActive={isActive} disabled={false} />
 
