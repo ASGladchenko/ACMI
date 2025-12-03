@@ -21,7 +21,7 @@ export const Switcher = ({ isActive, disabled, onClick }: SwitcherProps) => {
   );
 
   const switcherCircleClass = cn(
-    'absolute w-[18px] h-[18px] left-[2px] top-1/2 -translate-y-1/2 shrink-0 bg-white rounded-full shadow-switcher',
+    'absolute w-[18px] h-[18px] left-[2px] top-1/2 -translate-y-1/2 shrink-0 bg-white rounded-full shadow-switcher cursor-pointer',
     {
       'left-[calc(100%-2px)] -translate-x-full': isActive,
     },
