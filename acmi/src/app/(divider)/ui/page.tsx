@@ -21,7 +21,10 @@ type SelectItemProps = {
 };
 
 const options: SelectItemProps[] = [
-  { id: 1, label: 'Option 1' },
+  {
+    id: 1,
+    label: 'Option 1Option 1Option 1Option 1Option 1Option 1Option 1Option 1Option 1Option 1',
+  },
   { id: 2, label: 'Option 2' },
   { id: 3, label: 'Option 3' },
   { id: 4, label: 'Option 4' },
@@ -77,7 +80,6 @@ export default function Ui() {
       />
       <MultiSelect<SelectItemProps>
         data={options}
-        itemType="plane"
         selected={selectedMulti}
         placeholder="Multi Select"
         onSelect={setSelectedMulti}
@@ -85,7 +87,6 @@ export default function Ui() {
 
       <MultiSelect<SelectItemProps>
         data={options}
-        isLoading
         selected={selectedMulti1}
         placeholder="Multi Select"
         onSelect={setSelectedMulti1}

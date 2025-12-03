@@ -48,13 +48,13 @@ export const MultiSelectItem = <T extends SelectOption>({
   };
 
   const wrapperClassName = cn(
-    'flex flex-col gap-1 ',
+    'flex flex-col gap-1 max-w-full',
     rest.disabled && 'cursor-not-allowed',
     className
   );
 
   const containerClassName = cn(
-    'flex gap-2.5 cursor-pointer border border-iron bg-white text-text-primary px-[15px] py-2.5 rounded-lg2 transition-all duration-200 ease-linear',
+    'flex gap-2.5 cursor-pointer border border-iron bg-white text-text-primary px-[15px] py-[7px] rounded-lg2 transition-all duration-200 ease-linear max-w-full shrink grow min-w-10',
     isError && 'border-error-normal',
     rest.disabled && 'cursor-not-allowed bg-bg-secondary text-text-secondary',
     !isError && !rest.disabled && !isActive && 'hover:border-text-additional',
@@ -64,7 +64,7 @@ export const MultiSelectItem = <T extends SelectOption>({
   );
 
   const inputClassName = cn(
-    'outline-none text-text-primary flex grow shrink min-w-2.50 bg-transparent placeholder:text-text-secondary transition-all duration-100 linear',
+    'outline-none text-text-primary flex grow shrink min-w-2.50 bg-transparent placeholder:text-text-secondary transition-all duration-100 linear h-[30px]',
     rest.readOnly && !rest.disabled && 'cursor-pointer',
     animation === 'mount' && isSelected && !isActive && 'animate-dropdown-in animation-delay-[10]',
     animation === 'unmount' && isSelected && 'animate-dropdown-out animation-delay-[10]',
@@ -76,7 +76,7 @@ export const MultiSelectItem = <T extends SelectOption>({
       <div className={containerClassName}>
         {LeftItem && LeftItem}
 
-        <div className="shrink grow">
+        <div className="max-w-full min-w-10 shrink grow">
           <input
             {...rest}
             value={value}
@@ -84,19 +84,15 @@ export const MultiSelectItem = <T extends SelectOption>({
             onChange={(e) => onChange?.(e.target.value, e)}
             style={
               {
-                '--list-height': '24px',
+                '--list-height': '30px',
                 '--duration-dropdown': `${animationDuration * 1.2}ms`,
               } as React.CSSProperties
             }
           />
 
-          {selected && (
+          {selected && selected.length > 0 && (
             <div
-              className={cn(
-                'flex shrink grow flex-wrap gap-2',
-                isSelected && 'animate-fade-in',
-                !isSelected && 'animate-fade-out'
-              )}
+              className={cn('flex min-w-10 shrink grow flex-wrap gap-2 pt-3', !isActive && 'pt-0')}
             >
               {selected.map((item, idx) => (
                 <BadgeButton

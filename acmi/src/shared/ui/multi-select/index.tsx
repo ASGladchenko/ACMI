@@ -71,7 +71,7 @@ export const MultiSelect = <T extends SelectOption>({
   );
 
   return (
-    <div ref={wrapperRef} className="gutter scroll-bar-mini relative w-full shrink grow">
+    <div ref={wrapperRef} className="relative w-full shrink grow">
       <MultiSelectItem<T>
         ref={inputRef}
         value={search}
