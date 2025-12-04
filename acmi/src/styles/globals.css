@@ -252,7 +252,7 @@ body {
 }
 
 .scroll-bar-mini {
-  scrollbar-gutter: stable;
+  /* scrollbar-gutter: stable; */
 }
 
 .scroll-bar-mini::-webkit-scrollbar {
