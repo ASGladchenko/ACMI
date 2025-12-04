@@ -24,6 +24,7 @@ export interface DropdownListProps<T> {
 }
 
 export const DropdownList = <T extends DropdownItem>({
+  ref,
   data,
   error,
   isOpen,
@@ -33,7 +34,6 @@ export const DropdownList = <T extends DropdownItem>({
   RenderItem,
   height = 140,
   animationDuration = 400,
-  ref,
 }: DropdownListProps<T>) => {
   if (!isOpen) {
     return null;
