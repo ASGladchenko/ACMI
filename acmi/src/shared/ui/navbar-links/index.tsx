@@ -69,7 +69,7 @@ export const NavbarLinks = ({ links }: NavbarLinksProps) => {
                     key={item.label}
                     className={cn('text-text-secondary flex w-full px-[15px] py-2', {
                       'text-accent-normal font-medium': pathname === item.href,
-                      'hover:bg-iron-gray': pathname !== item.href,
+                      'hover:bg-iron-gray hover:text-text-primary': pathname !== item.href,
                     })}
                   >
                     {item.label}
@@ -83,7 +83,7 @@ export const NavbarLinks = ({ links }: NavbarLinksProps) => {
         const isActive = pathname === nav.href;
 
         return (
-          <Link href={nav.href} key={nav.label} className={cn(getLinkStyles(isActive))}>
+          <Link href={nav.href} key={nav.label} className={getLinkStyles(isActive)}>
             {nav.label}
           </Link>
         );
