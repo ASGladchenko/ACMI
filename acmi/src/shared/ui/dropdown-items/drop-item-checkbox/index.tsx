@@ -3,12 +3,10 @@ import { ItemExtend, DropDownItemProps } from '../types';
 
 export const DropItemCheckbox = <T extends ItemExtend>({
   item,
-  active,
   onClick,
+  isActive,
   disabled,
 }: DropDownItemProps<T>) => {
-  const isActive = Boolean(active) && Boolean(active && active.id === item.id);
-
   return (
     <Checkbox
       label={item.label}

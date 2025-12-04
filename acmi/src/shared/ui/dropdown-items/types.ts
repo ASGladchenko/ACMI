@@ -1,6 +1,6 @@
 export interface DropDownItemProps<T> {
   item: T;
-  active?: T | null;
+  isActive?: boolean;
   disabled?: boolean;
   iconClassName?: string;
   onClick: (item: T) => void;

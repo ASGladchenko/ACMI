@@ -6,13 +6,11 @@ import { ItemExtend, DropDownItemProps } from '../types';
 export const DropItemBase = <T extends ItemExtend>({
   item,
   Icon,
-  active,
   onClick,
+  isActive,
   disabled,
   iconClassName,
 }: DropDownItemProps<T>) => {
-  const isActive = Boolean(active) && Boolean(active && active.id === item.id);
-
   const btnClass = cn(
     'focus:outline-none bg-transparent enabled:hover:bg-bg-secondary enabled:cursor-pointer enabled:focus:bg-bg-secondary flex items-center justify-between px-[15px] py-2 w-full text-left transition-colors duration-200 gap-[15px] disabled:cursor-not-allowed disabled:text-text-additional'
   );

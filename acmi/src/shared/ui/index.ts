@@ -6,6 +6,7 @@ export { Checkbox } from './checkbox';
 export { DropdownList } from './dropdown-list';
 export { HeaderButton } from './header-button';
 export { InputBase } from './input-base';
+export { MultiSelect } from './multi-select';
 export { Select } from './select';
 export { Switcher } from './switchers/switcher';
 
