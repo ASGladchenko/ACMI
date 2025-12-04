@@ -15,14 +15,16 @@ export interface DropdownListProps<T> {
   className?: string;
   disabled?: boolean;
   isLoading?: boolean;
-  animation: AnimationState;
   height?: string | number;
+  animation: AnimationState;
   animationDuration?: number;
   minHeight?: string | number;
+  ref?: React.Ref<HTMLDivElement>;
   RenderItem: (props: { item: T; index: number }) => React.ReactElement;
 }
 
 export const DropdownList = <T extends DropdownItem>({
+  ref,
   data,
   error,
   isOpen,
@@ -44,8 +46,10 @@ export const DropdownList = <T extends DropdownItem>({
     animation === 'mount' ? 'animate-dropdown-in' : 'animate-dropdown-out',
     className
   );
+
   return (
     <div
+      ref={ref}
       className={listClassName}
       style={
         {

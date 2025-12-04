@@ -14,6 +14,7 @@ import {
   BodySwitcher,
   MultiSelect,
   HeaderButton,
+  NavbarLinks,
 } from '@/shared/ui';
 
 type SelectItemProps = {
@@ -35,6 +36,20 @@ const options: SelectItemProps[] = [
   { id: 8, label: 'Option 8' },
 ];
 
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/ui', label: 'ACMI sales' },
+  {
+    label: 'Dashboard',
+    nested: [
+      { href: '/ui', label: 'Company' },
+      { href: '/ui', label: 'Fleet' },
+      { href: '/ui', label: 'Integrations' },
+      { href: '/', label: 'Settings' },
+    ],
+  },
+];
+
 export default function Ui() {
   const [value, setValue] = useState('');
   const [isActive, setIsActive] = useState(false);
@@ -45,6 +60,8 @@ export default function Ui() {
 
   return (
     <div className="flex flex-col gap-2 py-6">
+      <NavbarLinks links={navLinks} />
+
       <Button loading={true} disabled={true} className="">
         <LoaderCircle className="h-6 w-6 shrink-0 text-white" />
         Button from shared UI
