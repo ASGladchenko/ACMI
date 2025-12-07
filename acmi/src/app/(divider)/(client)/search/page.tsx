@@ -10,8 +10,8 @@ import { normalizeDetailedFindOffers } from '@/fetch-request/normalize/find-offe
 export const dynamic = 'force-dynamic';
 
 export default async function Home({ searchParams }: SearchParams) {
-  const params = await searchParams;
   const cookieStore = await cookies();
+  const params = await searchParams;
   const role = cookieStore.get('role')?.value as Role | undefined;
 
   const body = serializeQuery(params as Record<string, string>);
