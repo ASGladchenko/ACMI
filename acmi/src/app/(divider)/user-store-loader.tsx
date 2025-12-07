@@ -3,9 +3,9 @@
 import { useEffect } from 'react';
 
 import { useUserStore } from '@/store';
-import { apiClient } from '@/fetch-request';
-import { showMessage } from '@/components';
 import { getErrorMessage } from '@/utils';
+import { showMessage } from '@/components';
+import { apiClient } from '@/fetch-request';
 
 export const UserStoreLoader = ({}) => {
   const setUser = useUserStore((s) => s.setUser);
