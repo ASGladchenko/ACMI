@@ -62,7 +62,7 @@ const navLinks = [
       { href: '/ui', label: 'Company' },
       { href: '/ui', label: 'Fleet' },
       { href: '/ui', label: 'Integrations' },
-      { href: '/', label: 'Settings' },
+      { href: '/', label: 'Settingss' },
     ],
   },
 ];
