@@ -4,8 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { cn } from '@/utils/cn';
-import { appendClassIcon } from '@/utils';
+import { appendClassIcon, cn } from '@/utils';
 import { transitionClass } from '@/shared/constants';
 
 import { HeaderLinksProps } from './types';
@@ -34,6 +33,7 @@ export const HeaderLinks = ({ links, className }: HeaderLinksProps) => {
               nav.icon as React.ReactElement,
               cn('w-6 h-6', { 'text-accent-normal': isActive })
             )}
+
             {nav.label}
           </Link>
         );

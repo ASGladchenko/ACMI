@@ -1,4 +1,5 @@
 import { cloneElement, isValidElement } from 'react';
+
 import { cn } from './cn';
 
 export const appendClassIcon = (
