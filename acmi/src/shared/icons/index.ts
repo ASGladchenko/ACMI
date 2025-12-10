@@ -22,6 +22,8 @@ export { default as Plane } from './plane.svg';
 export { default as Profile } from './profile.svg';
 export { default as Provider } from './provider.svg';
 export { default as Quote } from './quote.svg';
+export { default as Requests } from './requests.svg';
+export { default as Sales } from './sales.svg';
 export { default as Search } from './search.svg';
 export { default as SearchPlane } from './search-plane.svg';
 export { default as Security } from './security.svg';

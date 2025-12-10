@@ -2,7 +2,16 @@
 
 import { useState } from 'react';
 
-import { ArrowDown, LoaderCircle, Notification, Profile, UserRole } from '@/shared/icons';
+import {
+  Plane,
+  Sales,
+  Profile,
+  Requests,
+  UserRole,
+  ArrowDown,
+  Notification,
+  LoaderCircle,
+} from '@/shared/icons';
 import { Select } from '@/shared/ui/select';
 import {
   Button,
@@ -11,10 +20,11 @@ import {
   ButtonTop,
   InputBase,
   BadgeButton,
-  BodySwitcher,
   MultiSelect,
-  HeaderButton,
   NavbarLinks,
+  HeaderLinks,
+  BodySwitcher,
+  HeaderButton,
 } from '@/shared/ui';
 
 type SelectItemProps = {
@@ -36,9 +46,16 @@ const options: SelectItemProps[] = [
   { id: 8, label: 'Option 8' },
 ];
 
+const links = [
+  { href: '/', label: 'My Fleet', icon: <Plane /> },
+  { href: '/ui', label: 'ACMI Sales', icon: <Sales /> },
+  { href: '/ui', label: 'ACMI Request', icon: <Requests /> },
+];
+
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/ui', label: 'ACMI sales' },
+  { href: '/', label: 'My Fleet' },
+  { href: '/ui', label: 'ACMI Sales' },
+  { href: '/ui', label: 'ACMI Request' },
   {
     label: 'Dashboard',
     nested: [
@@ -60,6 +77,8 @@ export default function Ui() {
 
   return (
     <div className="flex flex-col gap-2 py-6">
+      <HeaderLinks links={links} />
+
       <NavbarLinks links={navLinks} />
 
       <Button loading={true} disabled={true} className="">

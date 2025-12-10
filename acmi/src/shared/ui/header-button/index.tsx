@@ -1,12 +1,9 @@
-import { cloneElement, isValidElement } from 'react';
-
-import { cn } from '@/utils';
+import { cn, appendClassIcon } from '@/utils';
 import { LoaderCircle } from '@/shared/icons';
+import { transitionClass } from '@/shared/constants';
 
 import { configButton } from './config';
 import { HeaderButtonProps } from './types';
-
-const transitionClasses = 'transition duration-300 ease-in-out';
 
 export const HeaderButton = ({
   text,
@@ -24,19 +21,9 @@ export const HeaderButton = ({
     configButton(buttonType),
     isActive &&
       'not-disabled:bg-accent-interactions-lighter not-disabled:border-accent-interactions-light',
-    transitionClasses,
+    transitionClass,
     className
   );
-
-  const renderIcon = (icon: React.ReactElement | null | undefined, extraClasses: string) => {
-    if (!icon || !isValidElement(icon)) return null;
-
-    const element = icon as React.ReactElement<{ className?: string }>;
-
-    return cloneElement(element, {
-      className: cn(element.props.className, extraClasses),
-    });
-  };
 
   return (
     <button className={styles} {...props} disabled={loading}>
@@ -52,14 +39,14 @@ export const HeaderButton = ({
         <span className="bg-error-normal absolute top-[9px] right-2.5 z-10 h-[9px] w-[9px] rounded-full border border-white" />
       )}
 
-      {renderIcon(
+      {appendClassIcon(
         leftIcon,
         cn(
           'transition duration-300 ease-in-out z-0 group-active/header-button:text-accent-normal group-disabled/header-button:opacity-30',
           {
             'text-accent-normal': isActive && !loading,
           },
-          transitionClasses
+          transitionClass
         )
       )}
 
@@ -69,21 +56,21 @@ export const HeaderButton = ({
             'group-active/header-button:text-accent-normal z-10 group-disabled/header-button:opacity-30',
             isActive && !loading && 'text-accent-normal',
 
-            transitionClasses
+            transitionClass
           )}
         >
           {text}
         </span>
       )}
 
-      {renderIcon(
+      {appendClassIcon(
         rightIcon,
         cn(
           'ml-[15px] text-text-secondary group-disabled/header-button:opacity-30',
           {
             'rotate-180 ': isActive && !loading,
           },
-          transitionClasses
+          transitionClass
         )
       )}
     </button>
