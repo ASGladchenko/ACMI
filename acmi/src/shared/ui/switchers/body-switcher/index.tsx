@@ -13,14 +13,15 @@ const transitionClasses = 'transition-all duration-300 ease-in-out';
 
 export const BodySwitcher = ({ className, isWide, setIsWide }: BodySwitcherProps) => {
   const wrapper = cn(
-    'relative flex items-center bg-bg-secondary h-[45px] rounded-lg2 flex cursor-pointer overflow-hidden',
+    'relative flex items-center bg-bg-secondary h-10 rounded-lg2 flex cursor-pointer border border-iron-gray hover:bg-accent-interactions-lighter',
+    transitionClasses,
     className
   );
 
   const textClass =
-    'flex items-center focus:outline-none text-text-secondary flex w-full h-full justify-center text-[15px] leading-[1.1] z-20 cursor-pointer';
+    'flex items-center focus:outline-none text-text-secondary flex w-full h-full justify-center text-[15px] leading-[1.2] cursor-pointer z-[11] font-medium';
 
-  const chosenClass = 'text-accent-normal scale-110 font-semibold';
+  const chosenClass = 'text-accent-normal';
 
   const handleClick = (e: SyntheticEvent<HTMLDivElement>) => {
     const option = (e.target as HTMLElement).dataset.boolean === 'true';
@@ -31,11 +32,11 @@ export const BodySwitcher = ({ className, isWide, setIsWide }: BodySwitcherProps
     <div className={wrapper} onClick={handleClick}>
       <div
         className={cn(
-          'rounded-lg2 border-iron absolute left-0 z-10 h-full w-1/2 cursor-pointer border-2 bg-white',
-          transitionClasses,
+          'rounded-lg2 border-accent-interactions-dark absolute -left-[1px] z-10 h-[calc(100%+2px)] w-1/2 cursor-pointer border bg-white',
           {
-            'left-full -translate-x-full': isWide,
-          }
+            'left-[calc(100%+1px)] -translate-x-full': isWide,
+          },
+          transitionClasses
         )}
       />
 

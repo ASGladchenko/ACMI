@@ -1,47 +1,32 @@
-import { cloneElement, isValidElement } from 'react';
-
-import { cn } from '@/utils';
+import { cn, appendClassIcon } from '@/utils';
 import { LoaderCircle } from '@/shared/icons';
+import { transitionClass } from '@/shared/constants';
 
+import { configButton } from './config';
 import { HeaderButtonProps } from './types';
-import { configColor, configButton } from './config';
-
-const transitionClasses = 'transition duration-300 ease-in-out';
 
 export const HeaderButton = ({
   text,
   loading,
-  disabled,
   isActive,
   leftIcon,
   className,
   isMessage,
   rightIcon,
-  colorType = 'white',
   buttonType = 'square',
   ...props
 }: HeaderButtonProps) => {
   const styles = cn(
-    'group/header-button relative flex items-center rounded-lg2 text-[15px] leading-[1.2] border max-w-full bg-transparent font-medium cursor-pointer disabled:cursor-not-allowed',
-    configColor(colorType, isActive),
+    'group/header-button relative flex items-center rounded-lg2 border max-w-full font-medium cursor-pointer disabled:cursor-not-allowed  hover:not-disabled:bg-accent-interactions-lighter hover:not-disabled:border-accent-interactions-light border-[#D6D8DB]',
     configButton(buttonType),
-    isActive && 'not-disabled:bg-white',
-    transitionClasses,
+    isActive &&
+      'not-disabled:bg-accent-interactions-lighter not-disabled:border-accent-interactions-light',
+    transitionClass,
     className
   );
 
-  const renderIcon = (icon: React.ReactElement | null | undefined, extraClasses: string) => {
-    if (!icon || !isValidElement(icon)) return null;
-
-    const element = icon as React.ReactElement<{ className?: string }>;
-
-    return cloneElement(element, {
-      className: cn(element.props.className, extraClasses),
-    });
-  };
-
   return (
-    <button className={styles} {...props} disabled={loading || disabled}>
+    <button className={styles} {...props} disabled={loading}>
       {loading && (
         <LoaderCircle
           className={cn(
@@ -51,43 +36,41 @@ export const HeaderButton = ({
       )}
 
       {isMessage && (
-        <span className="bg-error-normal absolute top-[9px] right-2.5 z-10 h-[9px] w-[9px] rounded-full border border-white group-disabled/header-button:opacity-30" />
+        <span className="bg-error-normal absolute top-[9px] right-2.5 z-10 h-[9px] w-[9px] rounded-full border border-white" />
       )}
 
-      {renderIcon(
+      {appendClassIcon(
         leftIcon,
         cn(
-          'transition duration-300 ease-in-out z-0 group-disabled/header-button:opacity-30',
+          'transition duration-300 ease-in-out z-0 group-active/header-button:text-accent-normal group-disabled/header-button:opacity-30',
           {
-            'text-text-secondary': colorType === 'gray',
-            'text-accent-normal': isActive && !disabled && !loading,
+            'text-accent-normal': isActive && !loading,
           },
-          transitionClasses
+          transitionClass
         )
       )}
 
       {text && (
         <span
           className={cn(
-            'z-10 group-disabled/header-button:opacity-30',
-            isActive && !disabled && !loading && 'text-accent-normal',
+            'group-active/header-button:text-accent-normal z-10 group-disabled/header-button:opacity-30',
+            isActive && !loading && 'text-accent-normal',
 
-            transitionClasses
+            transitionClass
           )}
         >
           {text}
         </span>
       )}
 
-      {renderIcon(
+      {appendClassIcon(
         rightIcon,
         cn(
-          'ml-[15px] group-disabled/header-button:opacity-30 text-white',
+          'ml-[15px] text-text-secondary group-disabled/header-button:opacity-30',
           {
-            'rotate-180 text-text-secondary': isActive && !disabled && !loading,
-            'text-text-secondary': colorType === 'gray',
+            'rotate-180 ': isActive && !loading,
           },
-          transitionClasses
+          transitionClass
         )
       )}
     </button>

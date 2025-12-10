@@ -1,7 +1,6 @@
 import { ButtonHTMLAttributes, ReactElement } from 'react';
 
 export type HeaderBtnTypes = 'square' | 'normal';
-export type HeaderBtnColorType = 'white' | 'gray';
 
 export interface HeaderButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string;
@@ -12,5 +11,4 @@ export interface HeaderButtonProps extends ButtonHTMLAttributes<HTMLButtonElemen
   leftIcon?: ReactElement;
   rightIcon?: ReactElement;
   buttonType?: HeaderBtnTypes;
-  colorType?: HeaderBtnColorType;
 }

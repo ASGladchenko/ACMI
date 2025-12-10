@@ -2,7 +2,16 @@
 
 import { useState } from 'react';
 
-import { ArrowDown, LoaderCircle, Notification, Profile, UserRole } from '@/shared/icons';
+import {
+  Plane,
+  Sales,
+  Profile,
+  Requests,
+  UserRole,
+  ArrowDown,
+  Notification,
+  LoaderCircle,
+} from '@/shared/icons';
 import { Select } from '@/shared/ui/select';
 import {
   Button,
@@ -11,10 +20,11 @@ import {
   ButtonTop,
   InputBase,
   BadgeButton,
-  BodySwitcher,
   MultiSelect,
-  HeaderButton,
   NavbarLinks,
+  HeaderLinks,
+  BodySwitcher,
+  HeaderButton,
 } from '@/shared/ui';
 
 type SelectItemProps = {
@@ -36,16 +46,23 @@ const options: SelectItemProps[] = [
   { id: 8, label: 'Option 8' },
 ];
 
+const links = [
+  { href: '/', label: 'My Fleet', icon: <Plane /> },
+  { href: '/ui', label: 'ACMI Sales', icon: <Sales /> },
+  { href: '/ui', label: 'ACMI Request', icon: <Requests /> },
+];
+
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/ui', label: 'ACMI sales' },
+  { href: '/', label: 'My Fleet' },
+  { href: '/ui', label: 'ACMI Sales' },
+  { href: '/ui', label: 'ACMI Request' },
   {
     label: 'Dashboard',
     nested: [
       { href: '/ui', label: 'Company' },
       { href: '/ui', label: 'Fleet' },
       { href: '/ui', label: 'Integrations' },
-      { href: '/', label: 'Settings' },
+      { href: '/', label: 'Settingss' },
     ],
   },
 ];
@@ -60,6 +77,8 @@ export default function Ui() {
 
   return (
     <div className="flex flex-col gap-2 py-6">
+      <HeaderLinks links={links} />
+
       <NavbarLinks links={navLinks} />
 
       <Button loading={true} disabled={true} className="">
@@ -69,10 +88,9 @@ export default function Ui() {
 
       <BodySwitcher isWide={isWide} setIsWide={setIsWide} />
 
-      <div className="flex gap-2 bg-gray-400 p-4">
+      <div className="flex gap-2 p-4">
         <HeaderButton
-          loading={false}
-          disabled={true}
+          loading={true}
           isActive={isActive}
           onClick={() => setIsActive(!isActive)}
           isMessage
@@ -80,15 +98,13 @@ export default function Ui() {
         />
         <HeaderButton
           loading={false}
-          disabled={false}
           isActive={isActive}
           onClick={() => setIsActive(!isActive)}
           leftIcon={<Profile width={20} height={20} />}
         />
 
         <HeaderButton
-          loading={false}
-          disabled={false}
+          loading={true}
           isActive={isActive}
           onClick={() => setIsActive(!isActive)}
           leftIcon={<UserRole width={20} height={20} />}
@@ -98,13 +114,11 @@ export default function Ui() {
         />
         <HeaderButton
           loading={false}
-          disabled={false}
-          colorType="gray"
           isActive={isActive}
           onClick={() => setIsActive(!isActive)}
           leftIcon={<UserRole width={20} height={20} />}
           buttonType="normal"
-          rightIcon={<ArrowDown width={20} height={20} />}
+          rightIcon={<ArrowDown className="h-4 w-4" />}
           text="Provider"
         />
       </div>
