@@ -69,10 +69,9 @@ export default function Ui() {
 
       <BodySwitcher isWide={isWide} setIsWide={setIsWide} />
 
-      <div className="flex gap-2 bg-gray-400 p-4">
+      <div className="flex gap-2 p-4">
         <HeaderButton
-          loading={false}
-          disabled={true}
+          loading={true}
           isActive={isActive}
           onClick={() => setIsActive(!isActive)}
           isMessage
@@ -80,15 +79,13 @@ export default function Ui() {
         />
         <HeaderButton
           loading={false}
-          disabled={false}
           isActive={isActive}
           onClick={() => setIsActive(!isActive)}
           leftIcon={<Profile width={20} height={20} />}
         />
 
         <HeaderButton
-          loading={false}
-          disabled={false}
+          loading={true}
           isActive={isActive}
           onClick={() => setIsActive(!isActive)}
           leftIcon={<UserRole width={20} height={20} />}
@@ -98,13 +95,11 @@ export default function Ui() {
         />
         <HeaderButton
           loading={false}
-          disabled={false}
-          colorType="gray"
           isActive={isActive}
           onClick={() => setIsActive(!isActive)}
           leftIcon={<UserRole width={20} height={20} />}
           buttonType="normal"
-          rightIcon={<ArrowDown width={20} height={20} />}
+          rightIcon={<ArrowDown className="h-4 w-4" />}
           text="Provider"
         />
       </div>
