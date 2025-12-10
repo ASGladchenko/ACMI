@@ -28,7 +28,12 @@ export const Footer = ({}) => {
           </nav>
 
           <nav className="laptop:flex-row laptop:gap-10 flex max-w-[50%-10px] flex-col items-end">
-            <ClientLink className="text-sm min-[420px]:text-base" isDisabled href="/">
+            <ClientLink
+              href="/terms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm min-[420px]:text-base"
+            >
               Terms of service
             </ClientLink>
 
@@ -36,7 +41,12 @@ export const Footer = ({}) => {
               Contacts
             </ClientLink>
 
-            <ClientLink className="text-sm min-[420px]:text-base" isDisabled href="/">
+            <ClientLink
+              href="/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm min-[420px]:text-base"
+            >
               Privacy policy
             </ClientLink>
           </nav>
