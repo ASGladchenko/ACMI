@@ -22,9 +22,11 @@ export const HeaderLinks = ({ links, className }: HeaderLinksProps) => {
             href={nav.href}
             key={nav.label}
             className={cn(
-              'hover:bg-accent-interactions-lighter rounded-lg2 hover:border-accent-interactions-light flex items-center gap-2.5 border border-transparent p-[9px_19px]',
+              'rounded-lg2 flex items-center gap-2.5 border border-transparent p-[9px_19px]',
               {
-                'text-accent-normal': isActive,
+                'text-accent-normal cursor-default': isActive,
+                'hover:bg-accent-interactions-lighter hover:border-accent-interactions-light':
+                  !isActive,
               },
               transitionClass
             )}
