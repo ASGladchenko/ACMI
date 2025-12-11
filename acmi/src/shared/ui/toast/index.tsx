@@ -17,45 +17,45 @@ const messageShow = () => ({
   success: (message: string, options?: ToastOptions) => {
     toast.success(CustomNotification, {
       ...getOptions(options),
+      icon: false,
+      className: 'bg-success-light',
       data: {
         title: message,
         icon: <CheckField className="text-success-normal" />,
       },
-      className: 'bg-success-light',
-      icon: false,
     });
   },
   warn: (message: string, options?: ToastOptions) => {
     toast.warn(CustomNotification, {
       ...getOptions(options),
+      icon: false,
+      className: 'bg-attention-light',
       data: {
         title: message,
-        icon: <WarningField className="text-attention-normal" width={24} height={24} />,
+        icon: <WarningField className="text-attention-normal" />,
       },
-      className: 'bg-attention-light',
-      icon: false,
     });
   },
   error: (message: string, options?: ToastOptions) => {
     toast.error(CustomNotification, {
       ...getOptions(options),
+      icon: false,
+      className: 'bg-error-light',
       data: {
         title: message,
         icon: <ClearField className="text-error-normal" />,
       },
-      className: 'bg-error-light',
-      icon: false,
     });
   },
   info: (message: string, options?: ToastOptions) => {
     toast.info(CustomNotification, {
       ...getOptions(options),
+      icon: false,
+      className: 'bg-accent-interactions-lighter',
       data: {
         title: message,
         icon: <InfoFilled className="text-accent-normal" />,
       },
-      className: 'bg-accent-interactions-lighter',
-      icon: false,
     });
   },
 });
