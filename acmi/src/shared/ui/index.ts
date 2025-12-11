@@ -10,6 +10,7 @@ export { InputBase } from './input-base';
 export { MultiSelect } from './multi-select';
 export { NavbarLinks } from './navbar-links';
 export { Select } from './select';
+export { showMessage } from './toast';
 export { Switcher } from './switchers/switcher';
 
 export * from './dropdown-items';

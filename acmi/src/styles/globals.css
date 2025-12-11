@@ -281,3 +281,25 @@ body {
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }
+
+.Toastify__toast {
+  padding: 12px 15px 16px;
+  border-radius: var(--radius-lg2);
+}
+
+.Toastify__toast--error {
+  --toastify-color-progress-error: var(--color-error-normal);
+  --toastify-color-error: var(--color-error-normal);
+}
+.Toastify__toast--success {
+  --toastify-color-progress-success: var(--color-success-normal);
+  --toastify-color-success: var(--color-success-normal);
+}
+.Toastify__toast--warning {
+  --toastify-color-progress-warning: var(--color-attention-normal);
+  --toastify-color-warning: var(--color-attention-normal);
+}
+.Toastify__toast--info {
+  --toastify-color-progress-info: var(--color-accent-normal);
+  --toastify-color-info: var(--color-accent-normal);
+}

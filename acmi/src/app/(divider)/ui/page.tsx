@@ -25,6 +25,7 @@ import {
   HeaderLinks,
   BodySwitcher,
   HeaderButton,
+  showMessage,
 } from '@/shared/ui';
 
 type SelectItemProps = {
@@ -80,6 +81,34 @@ export default function Ui() {
       <HeaderLinks links={links} />
 
       <NavbarLinks links={navLinks} />
+      <div className="flex gap-2">
+        <Button
+          className=""
+          onClick={() => showMessage.success('The payment was declined. Sample notification text.')}
+        >
+          Success
+        </Button>
+        <Button
+          className=""
+          buttonType="secondary"
+          onClick={() => showMessage.error('The payment was declined. Sample notification text.')}
+        >
+          Error
+        </Button>
+        <Button
+          className=""
+          buttonType="normal"
+          onClick={() => showMessage.info('The payment was declined. Sample notification text.')}
+        >
+          Info
+        </Button>
+        <Button
+          className=""
+          onClick={() => showMessage.warn('The payment was declined. Sample notification text.')}
+        >
+          Warning
+        </Button>
+      </div>
 
       <Button loading={true} disabled={true} className="">
         <LoaderCircle className="h-6 w-6 shrink-0 text-white" />
