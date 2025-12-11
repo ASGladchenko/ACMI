@@ -25,6 +25,7 @@ import {
   HeaderLinks,
   BodySwitcher,
   HeaderButton,
+  Badge,
 } from '@/shared/ui';
 
 type SelectItemProps = {
@@ -87,6 +88,14 @@ export default function Ui() {
       </Button>
 
       <BodySwitcher isWide={isWide} setIsWide={setIsWide} />
+
+      <div className="flex gap-2 p-4">
+        <Badge text="RFQ received" badgeColor="orange" />
+        <Badge text="Offer sent" badgeColor="green" />
+        <Badge text="Rejected" badgeColor="red" />
+        <Badge text="Archive" badgeColor="gray" />
+        <Badge text="In negotiations" badgeColor="blue" />
+      </div>
 
       <div className="flex gap-2 p-4">
         <HeaderButton
