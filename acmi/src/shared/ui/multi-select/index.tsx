@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 
 import { cn } from '@/utils';
 import { useSelect } from '@/shared/hooks';
-import { Plane, ArrowDown } from '@/shared/icons';
+import { Plane, ArrowDown } from '@/shared/assets';
 
 import { DropdownList } from '../dropdown-list';
 import { SwitchedDropItem } from '../dropdown-items';

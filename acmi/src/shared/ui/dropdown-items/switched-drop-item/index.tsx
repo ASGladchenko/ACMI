@@ -1,4 +1,4 @@
-import { Plane } from '@/shared/icons';
+import { Plane } from '@/shared/assets';
 
 import {
   ItemExtend,

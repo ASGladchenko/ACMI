@@ -11,7 +11,7 @@ const transitionClasses = 'transform duration-200 ease-in-out';
 
 export const Switcher = ({ isActive, disabled, onClick }: SwitcherProps) => {
   const switcherClass = cn(
-    'relative w-11 h-[22px] rounded-2xl cursor-pointer bg-[#D6D8DB]',
+    'relative w-11 h-[22px] rounded-2xl cursor-pointer bg-iron',
     transitionClasses,
     {
       'bg-accent-normal': isActive,

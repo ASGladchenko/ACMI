@@ -11,7 +11,7 @@ import {
   ArrowDown,
   Notification,
   LoaderCircle,
-} from '@/shared/icons';
+} from '@/shared/assets/svg';
 import { Select } from '@/shared/ui/select';
 import {
   Button,
@@ -27,6 +27,7 @@ import {
   HeaderButton,
   showMessage,
   Badge,
+  SuggestionCard,
 } from '@/shared/ui';
 
 type SelectItemProps = {
@@ -82,6 +83,11 @@ export default function Ui() {
       <HeaderLinks links={links} />
 
       <NavbarLinks links={navLinks} />
+      <div className="flex gap-4">
+        <SuggestionCard />
+        <SuggestionCard />
+      </div>
+
       <div className="flex gap-2">
         <Button
           className=""

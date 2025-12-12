@@ -1,4 +1,4 @@
-import { ArrowLong } from '@/shared/icons';
+import { ArrowLong } from '@/shared/assets';
 
 import { ButtonTopProps } from './types';
 

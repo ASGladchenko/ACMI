@@ -1,7 +1,7 @@
 import { toast, ToastOptions, ToastContentProps } from 'react-toastify';
 
 import { appendClassIcon, cn } from '@/utils';
-import { CheckField, ClearField, InfoFilled, WarningField } from '@/shared/icons';
+import { CheckField, ClearField, InfoFilled, WarningField } from '@/shared/assets';
 
 import { toastConfig } from './config';
 
