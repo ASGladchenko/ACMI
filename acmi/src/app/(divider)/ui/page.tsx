@@ -28,6 +28,7 @@ import {
   showMessage,
   Badge,
 } from '@/shared/ui';
+import { Modal } from '@/shared/ui/modal';
 
 type SelectItemProps = {
   id: number;
@@ -76,9 +77,13 @@ export default function Ui() {
   const [selectedMulti, setSelectedMulti] = useState<SelectItemProps[] | null>(null);
   const [selectedMulti1, setSelectedMulti1] = useState<SelectItemProps[] | null>(null);
   const [isWide, setIsWide] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="flex flex-col gap-2 py-6">
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        asdfsadfsadf
+      </Modal>
       <HeaderLinks links={links} />
 
       <NavbarLinks links={navLinks} />
@@ -117,7 +122,7 @@ export default function Ui() {
           <LoaderCircle className="h-6 w-6 shrink-0 text-white" />
           Button primary
         </Button>
-        <Button className="" buttonType="secondary">
+        <Button className="" buttonType="secondary" onClick={() => setIsOpen(true)}>
           Button secondary
         </Button>
         <Button className="" buttonType="normal">

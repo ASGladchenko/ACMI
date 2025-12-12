@@ -57,7 +57,6 @@ export const NavbarLinks = ({ links }: NavbarLinksProps) => {
 
               <DropdownList<NavLink>
                 height={180}
-                isOpen={isOpen}
                 ref={elementRef}
                 data={nav.nested}
                 animation={animation}
