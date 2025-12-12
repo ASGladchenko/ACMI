@@ -10,7 +10,6 @@ export type DropdownItem = {
 
 export interface DropdownListProps<T> {
   error?: string;
-  isOpen: boolean;
   data: T[] | null;
   className?: string;
   disabled?: boolean;
@@ -27,7 +26,6 @@ export const DropdownList = <T extends DropdownItem>({
   ref,
   data,
   error,
-  isOpen,
   animation,
   isLoading,
   className,
@@ -35,7 +33,7 @@ export const DropdownList = <T extends DropdownItem>({
   height = 140,
   animationDuration = 400,
 }: DropdownListProps<T>) => {
-  if (!isOpen) {
+  if (animation === 'unmounted') {
     return null;
   }
 
@@ -43,7 +41,8 @@ export const DropdownList = <T extends DropdownItem>({
 
   const listClassName = cn(
     'absolute z-10 h-[var(--list-height,80px)] top-full w-full rounded-lg2 border border-iron bg-white shadow-md mt-0.5 py-2.5 shadow-lg-blue-dark',
-    animation === 'mount' ? 'animate-dropdown-in' : 'animate-dropdown-out',
+    animation === 'mounting' && 'animate-dropdown-in',
+    animation === 'unmounting' && 'animate-dropdown-out',
     className
   );
 

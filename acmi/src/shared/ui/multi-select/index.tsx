@@ -92,7 +92,6 @@ export const MultiSelect = <T extends SelectOption>({
 
       <DropdownList<T>
         error={error}
-        isOpen={isOpen}
         data={filteredData}
         disabled={disabled}
         animation={animation}
