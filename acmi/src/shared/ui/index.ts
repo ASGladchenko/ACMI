@@ -1,3 +1,4 @@
+export { AvailabilityBadge } from './availability-badge';
 export { Badge } from './badge';
 export { BadgeButton } from './badge-button';
 export { BodySwitcher } from './switchers/body-switcher';

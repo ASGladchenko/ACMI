@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 
-import { Button } from '@/shared/ui';
 import { NormalizedDetailedOffer } from '@/types';
-import { Location, Verified, planeDefault } from '@/shared/assets';
+import { Button, AvailabilityBadge } from '@/shared/ui';
+import { Location, planeDefault } from '@/shared/assets';
 
 interface SuggestionCardProps {
   isVerified?: boolean;
@@ -44,12 +44,7 @@ export const SuggestionCard = ({ isVerified, offer, onClick }: SuggestionCardPro
           className="object-contain max-[480px]:max-w-[280px] max-[380px]:max-w-[220px]"
           onError={() => setSrc(planeDefault)}
         />
-        {isVerified && (
-          <div className="text-success-normal absolute top-0 right-0 flex items-center gap-2">
-            <Verified className="h-5 w-5" />
-            <span className="text-[15px] leading-[1.2] font-semibold">Verified availability</span>
-          </div>
-        )}
+        {isVerified && <AvailabilityBadge />}
       </div>
 
       <div className="mb-[25px]">
