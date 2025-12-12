@@ -4,9 +4,8 @@ import type { NextRequest } from 'next/server';
 import { Role } from './types';
 
 export function middleware(request: NextRequest) {
-  // const token = request.cookies.get('session_id')?.value;
-
   const role = request.cookies.get('role')?.value;
+
   const isProvider = role === Role.PROVIDER;
   const isClient = role === Role.USER;
   const isGuest = role === Role.GUEST;
@@ -14,13 +13,11 @@ export function middleware(request: NextRequest) {
 
   const withRole = isProvider || isClient || isGuest || isAdmin;
 
-  const notAuth = !isProvider && !isClient && !isGuest && !isAdmin;
-
   const withIntegration = isProvider || isClient || isAdmin;
 
   const { pathname } = request.nextUrl;
 
-  if (notAuth && !pathname.startsWith('/auth')) {
+  if (!withRole && !pathname.startsWith('/auth')) {
     return NextResponse.redirect(new URL('/auth', request.url));
   }
 
