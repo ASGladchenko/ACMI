@@ -10,7 +10,7 @@ import { useDelayMount } from '@/shared/hooks';
 
 import { ModalProps } from './types';
 
-const duration = 500;
+const duration = 330;
 
 export const Modal = ({ isOpen, onClose, children, className }: ChildrenProps<ModalProps>) => {
   const [isClient, setIsClient] = useState(false);
