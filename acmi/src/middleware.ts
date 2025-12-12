@@ -6,6 +6,8 @@ import { Role } from './types';
 export function middleware(request: NextRequest) {
   const role = request.cookies.get('role')?.value;
 
+  console.log({ role });
+
   const isProvider = role === Role.PROVIDER;
   const isClient = role === Role.USER;
   const isGuest = role === Role.GUEST;
