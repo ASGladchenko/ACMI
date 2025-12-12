@@ -1,5 +1,5 @@
 import { cn } from '@/utils';
-import { CheckCheckbox } from '@/shared/icons';
+import { CheckCheckbox } from '@/shared/assets';
 
 import { CheckboxProps } from './types';
 

@@ -1,3 +1,4 @@
+export { AvailabilityBadge } from './availability-badge';
 export { Badge } from './badge';
 export { BadgeButton } from './badge-button';
 export { BodySwitcher } from './switchers/body-switcher';
@@ -12,6 +13,7 @@ export { MultiSelect } from './multi-select';
 export { NavbarLinks } from './navbar-links';
 export { Select } from './select';
 export { showMessage } from './toast';
+export { SuggestionCard } from './suggestion-card';
 export { Switcher } from './switchers/switcher';
 
 export * from './dropdown-items';

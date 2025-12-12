@@ -1,5 +1,5 @@
 import { cn } from '@/utils';
-import { LoaderCircle } from '@/shared/icons';
+import { LoaderCircle } from '@/shared/assets';
 import { AnimationState } from '@/shared/hooks';
 
 import { sizeToCSSString } from './helpers';

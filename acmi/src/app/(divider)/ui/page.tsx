@@ -11,7 +11,7 @@ import {
   ArrowDown,
   Notification,
   LoaderCircle,
-} from '@/shared/icons';
+} from '@/shared/assets/svg';
 import { Select } from '@/shared/ui/select';
 import {
   Button,
@@ -82,6 +82,7 @@ export default function Ui() {
       <HeaderLinks links={links} />
 
       <NavbarLinks links={navLinks} />
+
       <div className="flex gap-2">
         <Button
           className=""
@@ -111,10 +112,22 @@ export default function Ui() {
         </Button>
       </div>
 
-      <Button loading={true} disabled={true} className="">
-        <LoaderCircle className="h-6 w-6 shrink-0 text-white" />
-        Button from shared UI
-      </Button>
+      <div className="flex gap-1">
+        <Button loading={true} disabled={true} className="">
+          <LoaderCircle className="h-6 w-6 shrink-0 text-white" />
+          Button primary
+        </Button>
+        <Button className="" buttonType="secondary">
+          Button secondary
+        </Button>
+        <Button className="" buttonType="normal">
+          Button normal
+        </Button>
+        <Button className="" buttonType="outline">
+          <LoaderCircle className="text-accent-normal h-6 w-6 shrink-0" />
+          Button outline
+        </Button>
+      </div>
 
       <BodySwitcher isWide={isWide} setIsWide={setIsWide} />
 

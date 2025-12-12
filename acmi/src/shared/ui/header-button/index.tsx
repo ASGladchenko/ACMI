@@ -1,5 +1,5 @@
 import { cn, appendClassIcon } from '@/utils';
-import { LoaderCircle } from '@/shared/icons';
+import { LoaderCircle } from '@/shared/assets';
 import { transitionClass } from '@/shared/constants';
 
 import { configButton } from './config';
@@ -17,7 +17,7 @@ export const HeaderButton = ({
   ...props
 }: HeaderButtonProps) => {
   const styles = cn(
-    'group/header-button relative flex items-center rounded-lg2 border max-w-full font-medium cursor-pointer disabled:cursor-not-allowed  hover:not-disabled:bg-accent-interactions-lighter hover:not-disabled:border-accent-interactions-light border-[#D6D8DB]',
+    'group/header-button relative flex items-center rounded-lg2 border max-w-full font-medium cursor-pointer disabled:cursor-not-allowed  hover:not-disabled:bg-accent-interactions-lighter hover:not-disabled:border-accent-interactions-light border-iron',
     configButton(buttonType),
     isActive &&
       'not-disabled:bg-accent-interactions-lighter not-disabled:border-accent-interactions-light',
