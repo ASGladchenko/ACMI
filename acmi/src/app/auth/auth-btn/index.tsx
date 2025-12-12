@@ -3,19 +3,23 @@
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components';
-import { authUrl } from '@/constants/url';
 
-export default function AuthBtn() {
+export interface AuthBtnProps {
+  url: string;
+  text: string;
+  Icon?: React.ReactNode;
+}
+
+export default function AuthBtn({ text, Icon, url }: AuthBtnProps) {
   const router = useRouter();
-
-  console.log('authUrl', authUrl);
 
   return (
     <Button
-      className="mx-[16px] max-w-[260px] rounded-[4px]"
-      onClick={() => router.replace(authUrl)}
+      className="mx-[16px] flex max-w-[260px] items-center justify-between rounded-[4px]"
+      onClick={() => router.replace(url)}
     >
-      Login
+      <span>{text}</span>
+      {Icon && Icon}
     </Button>
   );
 }
