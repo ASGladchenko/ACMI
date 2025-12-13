@@ -34,26 +34,24 @@ export const Modal = ({ isOpen, onClose, children, className }: ChildrenProps<Mo
   if (!isMounted) return null;
 
   return (
-    <RemoveScroll enabled={isMounted}>
-      <ReactModal
-        isOpen={isMounted}
-        ariaHideApp={false}
-        className={modalClass}
-        onRequestClose={onClose}
-        style={{
-          overlay: {
-            '--fade-in': `${duration}ms`,
-            '--fade-out': `${duration}ms`,
-          } as React.CSSProperties,
-        }}
-        overlayClassName={cn(
-          'fixed inset-0 bg-black-10 z-[1000] cursor-pointer',
-          animationState === 'mounting' && 'animate-fadeIn',
-          animationState === 'unmounting' && 'animate-fadeOut'
-        )}
-      >
-        {children}
-      </ReactModal>
-    </RemoveScroll>
+    <ReactModal
+      isOpen={isMounted}
+      ariaHideApp={false}
+      className={modalClass}
+      onRequestClose={onClose}
+      style={{
+        overlay: {
+          '--fade-in': `${duration}ms`,
+          '--fade-out': `${duration}ms`,
+        } as React.CSSProperties,
+      }}
+      overlayClassName={cn(
+        'fixed inset-0 bg-black-10 z-[1000] cursor-pointer',
+        animationState === 'mounting' && 'animate-fadeIn',
+        animationState === 'unmounting' && 'animate-fadeOut'
+      )}
+    >
+      <RemoveScroll enabled={isMounted}>{children}</RemoveScroll>
+    </ReactModal>
   );
 };

@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import Image, { StaticImageData } from 'next/image';
+
+
+import Image from 'next/image';
 
 import { NormalizedDetailedOffer } from '@/types';
 import { Button, AvailabilityBadge } from '@/shared/ui';
@@ -19,10 +20,9 @@ export const SuggestionCard = ({ isVerified, offer, onClick }: SuggestionCardPro
     layout,
     region,
     engines,
-    imageUrl = planeDefault,
+    imageUrl,
   } = offer?.aircraftDetails ?? {};
 
-  const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
 
   const content = [
     { labelTop: 'Engines', valueTop: engines || 'N/A', labelBottom: 'Layout', valueBottom: layout },
@@ -38,11 +38,11 @@ export const SuggestionCard = ({ isVerified, offer, onClick }: SuggestionCardPro
     <div className="rounded-2xl2 border-iron hover:shadow-lg-blue-dark flex w-full flex-col border p-5 transition-shadow duration-300 ease-in-out">
       <div className="rounded-lg2 relative my-auto mb-5 flex h-[200px] w-full justify-center">
         <Image
-          src={src}
           priority
           alt={type || 'Aircraft Image'}
+          src={imageUrl || planeDefault}
           className="object-contain max-[480px]:max-w-[280px] max-[380px]:max-w-[220px]"
-          onError={() => setSrc(planeDefault)}
+          onError={(event) => (event.currentTarget.src = planeDefault.src)}
         />
         {isVerified && <AvailabilityBadge />}
       </div>

@@ -6,7 +6,7 @@ import { Input, Button } from '@/components';
 
 import { useLeonConnect } from './api';
 
-export const IntegrationsForm = ({}) => {
+export const IntegrationsForm = () => {
   const [id, setId] = useState('');
 
   const { isLoading, connect } = useLeonConnect();
