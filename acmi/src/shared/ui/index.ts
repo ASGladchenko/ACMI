@@ -12,6 +12,7 @@ export { InputBase } from './input-base';
 export { Modal } from './modal';
 export { ModalGeneral } from './modal-general';
 export { MultiSelect } from './multi-select';
+export { RoleGuard } from './role-guard';
 export { Select } from './select';
 export { showMessage } from './toast';
 export { SuggestionCard } from './suggestion-card';

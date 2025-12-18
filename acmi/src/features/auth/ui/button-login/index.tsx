@@ -13,6 +13,7 @@ export const ButtonLogin = ({}) => {
       <Button onClick={() => setIsOpen(true)} className="max-w-24">
         Login
       </Button>
+
       <ModalLogin isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   );

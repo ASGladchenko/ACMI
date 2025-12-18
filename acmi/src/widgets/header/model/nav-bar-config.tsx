@@ -3,11 +3,11 @@ import { Plane, Sales, Requests } from '@/shared/assets';
 
 export const navLinks = {
   [Role.PROVIDER]: [
-    { href: '/', label: 'My Fleet', icon: <Plane /> },
-    { href: '/ui', label: 'ACMI Sales', icon: <Sales /> },
-    { href: '/ui', label: 'ACMI Request', icon: <Requests /> },
+    { href: '/v2', label: 'My Fleet', icon: <Plane /> },
+    { href: '/v2/ui', label: 'ACMI Sales', icon: <Sales /> },
+    { href: '/v2/ui/card', label: 'ACMI Request', icon: <Requests /> },
   ],
-  [Role.USER]: [{ href: '/ui', label: 'ACMI Request', icon: <Requests /> }],
+  [Role.USER]: [{ href: '/v2/ui/card', label: 'ACMI Request', icon: <Requests /> }],
 };
 
 export type NavLinksTypes = typeof navLinks;

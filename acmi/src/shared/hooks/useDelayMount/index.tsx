@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
-export type AnimationState = 'unmounted' | 'mounting' | 'mounted' | 'unmounting';
+import { AnimationState } from '@/shared/types';
 
 interface UseDelayedMountConfig {
   delay?: number;
@@ -10,7 +10,7 @@ interface UseDelayedMountConfig {
 
 export function useDelayMount(
   isOpen: boolean,
-  { delay = 1, enterDuration, exitDuration = 300 }: UseDelayedMountConfig = {}
+  { delay = 10, enterDuration, exitDuration = 300 }: UseDelayedMountConfig = {}
 ) {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [state, setState] = useState<AnimationState>('unmounted');

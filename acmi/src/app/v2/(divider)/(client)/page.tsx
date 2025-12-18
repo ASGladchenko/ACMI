@@ -1,6 +1,7 @@
-import { Role } from '@/shared/types';
-import { Header } from '@/widgets';
 import { cookies } from 'next/headers';
+
+import { Header } from '@/widgets';
+import { Role } from '@/shared/types';
 
 export default async function Home() {
   const cookieStore = await cookies();

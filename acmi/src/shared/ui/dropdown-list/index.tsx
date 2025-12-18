@@ -1,26 +1,8 @@
 import { cn } from '@/utils';
 import { LoaderCircle } from '@/shared/assets';
-import { AnimationState } from '@/shared/hooks';
 
 import { sizeToCSSString } from './helpers';
-
-export type DropdownItem = {
-  label: string;
-};
-
-export interface DropdownListProps<T> {
-  error?: string;
-  data: T[] | null;
-  className?: string;
-  disabled?: boolean;
-  isLoading?: boolean;
-  height?: string | number;
-  animation: AnimationState;
-  animationDuration?: number;
-  minHeight?: string | number;
-  ref?: React.Ref<HTMLDivElement>;
-  RenderItem: (props: { item: T; index: number }) => React.ReactElement;
-}
+import { DropdownItem, DropdownListProps } from './types';
 
 export const DropdownList = <T extends DropdownItem>({
   ref,
@@ -30,7 +12,9 @@ export const DropdownList = <T extends DropdownItem>({
   isLoading,
   className,
   RenderItem,
+  renderArray,
   height = 140,
+  containerClassName,
   animationDuration = 400,
 }: DropdownListProps<T>) => {
   if (animation === 'unmounted') {
@@ -57,10 +41,10 @@ export const DropdownList = <T extends DropdownItem>({
         } as React.CSSProperties
       }
     >
-      <div className="scroll-bar-mini h-full w-full overflow-y-auto">
+      <div className={cn('scroll-bar-mini h-full w-full overflow-y-auto', containerClassName)}>
         {isLoading && (
           <div className="flex h-full items-center justify-center py-4">
-            <LoaderCircle className="text-accent-normal animate-spin-pulse h-[64px] w-auto max-w-full shrink duration-1000" />
+            <LoaderCircle className="text-accent-normal animate-spin-pulse h-16 w-auto max-w-full shrink duration-1000" />
           </div>
         )}
 
@@ -79,7 +63,10 @@ export const DropdownList = <T extends DropdownItem>({
         {isData(data) &&
           !isLoading &&
           !error &&
-          data.map((item, idx) => <RenderItem index={idx} key={item.label} item={item} />)}
+          RenderItem &&
+          data.map((item, idx) => <RenderItem index={idx} key={item.id} item={item} />)}
+
+        {isData(data) && !isLoading && !error && renderArray && renderArray(data)}
       </div>
     </div>
   );

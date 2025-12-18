@@ -7,6 +7,8 @@ export interface NavLink {
 }
 
 export interface NavbarProps {
-  role: Role;
+  isIcon?: boolean;
   className?: string;
+  role: Role | undefined;
+  type?: 'header' | 'burger';
 }

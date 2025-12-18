@@ -1,5 +1,6 @@
 import { cn, appendClassIcon } from '@/utils';
 import { LoaderCircle } from '@/shared/assets';
+import { ChildrenProps } from '@/shared/types';
 import { transitionClass } from '@/shared/constants';
 
 import { configButton } from './config';
@@ -10,12 +11,13 @@ export const HeaderButton = ({
   loading,
   isActive,
   leftIcon,
+  children,
   className,
   isMessage,
   rightIcon,
   buttonType = 'square',
   ...props
-}: HeaderButtonProps) => {
+}: ChildrenProps<HeaderButtonProps>) => {
   const styles = cn(
     'group/header-button relative flex items-center rounded-lg2 border max-w-full font-medium cursor-pointer disabled:cursor-not-allowed  hover:not-disabled:bg-accent-interactions-lighter hover:not-disabled:border-accent-interactions-light border-iron',
     configButton(buttonType),
@@ -62,6 +64,8 @@ export const HeaderButton = ({
           {text}
         </span>
       )}
+
+      {children}
 
       {appendClassIcon(
         rightIcon,
