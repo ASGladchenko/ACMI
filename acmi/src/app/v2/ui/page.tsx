@@ -21,7 +21,6 @@ import {
   InputBase,
   BadgeButton,
   MultiSelect,
-  NavbarLinks,
   HeaderLinks,
   BodySwitcher,
   HeaderButton,
@@ -29,6 +28,7 @@ import {
   Badge,
 } from '@/shared/ui';
 import { Modal } from '@/shared/ui/modal';
+import { ToastContainer } from 'react-toastify';
 
 type SelectItemProps = {
   id: number;
@@ -55,21 +55,6 @@ const links = [
   { href: '/ui', label: 'ACMI Request', icon: <Requests /> },
 ];
 
-const navLinks = [
-  { href: '/', label: 'My Fleet' },
-  { href: '/ui', label: 'ACMI Sales' },
-  { href: '/ui', label: 'ACMI Request' },
-  {
-    label: 'Dashboard',
-    nested: [
-      { href: '/ui', label: 'Company' },
-      { href: '/ui', label: 'Fleet' },
-      { href: '/ui', label: 'Integrations' },
-      { href: '/', label: 'Settingss' },
-    ],
-  },
-];
-
 export default function Ui() {
   const [value, setValue] = useState('');
   const [isActive, setIsActive] = useState(false);
@@ -85,8 +70,6 @@ export default function Ui() {
         asdfsadfsadf
       </Modal>
       <HeaderLinks links={links} />
-
-      <NavbarLinks links={navLinks} />
 
       <div className="flex gap-2">
         <Button
@@ -181,7 +164,7 @@ export default function Ui() {
 
       <Switcher onClick={(val) => setIsActive(val)} isActive={isActive} disabled={false} />
 
-      <BadgeButton text="sadfas adsfasd sadf asf asdf sa " />
+      <BadgeButton text="sadfas adsfasd sadf asf asdf sa" />
 
       <ButtonTop />
 
@@ -220,12 +203,7 @@ export default function Ui() {
         onSelect={setSelectedMulti1}
       />
 
-      <Select<SelectItemProps>
-        isLoading
-        data={options}
-        selected={selected}
-        onSelect={setSelected}
-      />
+      <Select<SelectItemProps> data={options} selected={selected} onSelect={setSelected} />
 
       <Select<SelectItemProps>
         data={options}
@@ -259,6 +237,7 @@ export default function Ui() {
         RightItem={<LoaderCircle className="h-5 w-5 shrink-0 text-inherit" />}
         error="Error messageError messageError messageError messageError messageError messageError messageError messageError message Error messagemessageError messageError messageError messageError message Error message"
       />
+      <ToastContainer />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { cn } from '@/utils';
-import { AnimationState } from '@/shared/hooks';
+import { AnimationState } from '@/shared/types';
 
 import { SelectOption } from '../types';
 import { BadgeButton } from '../../badge-button';
@@ -94,7 +94,10 @@ export const MultiSelectItem = <T extends SelectOption>({
 
           {selected && selected.length > 0 && (
             <div
-              className={cn('flex min-w-10 shrink grow flex-wrap gap-2 pt-3', !isActive && 'pt-0')}
+              className={cn(
+                'flex min-w-10 shrink grow flex-wrap gap-2 pt-3 transition-all duration-300',
+                !isActive && 'pt-0'
+              )}
             >
               {selected.map((item, idx) => (
                 <BadgeButton

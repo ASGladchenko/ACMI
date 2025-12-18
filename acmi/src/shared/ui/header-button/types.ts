@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactElement } from 'react';
+import { ButtonHTMLAttributes, ReactElement, Ref } from 'react';
 
 export type HeaderBtnTypes = 'square' | 'normal';
 
@@ -11,4 +11,5 @@ export interface HeaderButtonProps extends ButtonHTMLAttributes<HTMLButtonElemen
   leftIcon?: ReactElement;
   rightIcon?: ReactElement;
   buttonType?: HeaderBtnTypes;
+  ref?: Ref<HTMLButtonElement>;
 }
