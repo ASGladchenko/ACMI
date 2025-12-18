@@ -61,6 +61,7 @@ export const ProfileDropdown = ({ data, onClose, className, isDivide }: ProfileD
             <span className="block h-px w-full bg-[#E2E5EA]"></span>
           </div>
         )}
+
         <CurrentLink
           onClose={onClose}
           className="flex py-[15px]"

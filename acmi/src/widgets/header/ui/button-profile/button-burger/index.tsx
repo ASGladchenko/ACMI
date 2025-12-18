@@ -36,7 +36,7 @@ export const ButtonBurger = ({ isMain, role }: { isMain?: boolean; role?: Role }
   return (
     <>
       <HeaderButton onClick={() => setIsOpen(!isOpen)} ref={buttonRef}>
-        <Burger duration={duration * (4 / 3)} isOpen={isOpen} />
+        <Burger duration={duration * 0.75} isOpen={isOpen} />
       </HeaderButton>
 
       <Modal

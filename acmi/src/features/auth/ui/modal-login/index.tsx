@@ -19,6 +19,7 @@ export const ModalLogin = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
         <Google className="h-5 w-5 shrink-0" />
         Sign in with Google
       </Button>
+
       <Button buttonType="outline" onClick={() => (window.location.href = microsoftUrl)}>
         <Microsoft className="h-5 w-5 shrink-0" />
         Sign in with Microsoft

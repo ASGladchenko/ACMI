@@ -13,7 +13,7 @@ interface HeaderProps {
   isMain?: boolean;
 }
 
-export const Header = ({ role, isMain }: HeaderProps) => {
+export const Header = ({ role = Role.USER, isMain }: HeaderProps) => {
   return (
     <HeaderWrapper isMain={isMain}>
       <Logo className="laptop:w-52 laptop:h-5 text-accent-normal h-4 w-[166px] shrink-0" />
