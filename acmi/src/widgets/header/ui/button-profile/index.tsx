@@ -10,7 +10,7 @@ import { ButtonBurger } from './button-burger';
 
 const duration = 330;
 
-export const ButtonProfile = ({ isMain, role }: { isMain?: boolean , role?: Role;}) => {
+export const ButtonProfile = ({ isMain, role }: { isMain?: boolean; role?: Role }) => {
   const buttonRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowWidth();
   const [isMounted, setIsMounted] = useState(false);
@@ -29,6 +29,7 @@ export const ButtonProfile = ({ isMain, role }: { isMain?: boolean , role?: Role
 
   const laptopMore = width > 960;
 
+  //TODO: found out hydration
   if (!isMounted) {
     return null;
   }
@@ -44,7 +45,7 @@ export const ButtonProfile = ({ isMain, role }: { isMain?: boolean , role?: Role
         />
       )}
 
-      {!laptopMore && <ButtonBurger isMain={isMain} role={role}/>}
+      {!laptopMore && <ButtonBurger isMain={isMain} role={role} />}
     </div>
   );
 };

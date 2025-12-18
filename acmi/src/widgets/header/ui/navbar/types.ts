@@ -9,6 +9,6 @@ export interface NavLink {
 export interface NavbarProps {
   isIcon?: boolean;
   className?: string;
-  role: Role | undefined;
+  role?: Role | undefined;
   type?: 'header' | 'burger';
 }

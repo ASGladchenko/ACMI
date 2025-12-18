@@ -1,9 +1,9 @@
 'use client';
 
 import { HeaderButton } from '@/shared/ui';
-import { useModalLeonStore } from '@/store';
 
 import { HeaderLeonModal } from '../header-leon-modal';
+import { useModalLeonStore } from '../../model/modal-store';
 
 export const ButtonIntegrationLeon = ({
   className,

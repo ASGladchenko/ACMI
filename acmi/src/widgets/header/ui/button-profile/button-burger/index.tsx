@@ -4,10 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/utils';
 import { Role } from '@/shared/types';
-import { useModalLeonStore } from '@/store';
 import { useOutsideClick } from '@/shared/hooks';
 import { Modal, RoleGuard, HeaderButton } from '@/shared/ui';
-import { HeaderLeonModal, ButtonIntegrationLeon } from '@/features';
+import { HeaderLeonModal, ButtonIntegrationLeon, useModalLeonStore } from '@/features';
 
 import { Burger } from './burger';
 import { Navbar } from '../../navbar';

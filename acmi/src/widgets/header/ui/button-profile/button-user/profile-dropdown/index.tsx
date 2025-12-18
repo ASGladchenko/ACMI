@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import Link from 'next/link';
 
 import { cn } from '@/utils';
@@ -39,20 +38,13 @@ export const ProfileDropdown = ({ data, onClose, className, isDivide }: ProfileD
   return (
     <div className={cn('bg-white', className)}>
       <div className="scroll-bar-mini flex h-[calc(100%-40px)] flex-col overflow-hidden">
-        {data.map((item, idx, arr) => {
-          const lastEl = arr.length - 1 === idx;
+        {data.map((item) => (
+          <CurrentLink data={item} onClose={onClose} key={`link-${item.id}-${item.label}`} />
+        ))}
 
-          return (
-            <Fragment key={`link-${item.id}`}>
-              <CurrentLink data={item} key={item.id + idx} onClose={onClose} />
-              {lastEl && (
-                <div className="mt-[5px] px-[15px] py-[9px]">
-                  <span className="block h-px w-full bg-[#E2E5EA]"></span>
-                </div>
-              )}
-            </Fragment>
-          );
-        })}
+        <div className="mt-[5px] px-[15px] py-[9px]">
+          <span className="block h-px w-full bg-[#E2E5EA]"></span>
+        </div>
       </div>
 
       <div className="flex flex-col">
