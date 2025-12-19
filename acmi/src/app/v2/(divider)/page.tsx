@@ -1,7 +1,9 @@
 import { cookies } from 'next/headers';
 
-import { Header } from '@/widgets';
 import { Role } from '@/shared/types';
+import { Footer, Header } from '@/widgets';
+
+import { HomePage } from './home';
 
 export default async function Home() {
   const cookieStore = await cookies();
@@ -10,6 +12,9 @@ export default async function Home() {
   return (
     <>
       <Header role={role} isMain />
+      <HomePage />
+
+      <Footer />
     </>
   );
 }

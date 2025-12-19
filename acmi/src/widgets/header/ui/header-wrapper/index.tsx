@@ -5,7 +5,7 @@ export const HeaderWrapper = ({ isMain, children }: ChildrenProps<{ isMain?: boo
   return (
     <header
       className={cn(
-        'tablet:h-[74px] desktop:h-[84px] desktop:px-[70px] flex h-16 w-full items-center px-5',
+        'tablet:h-[74px] desktop:h-[84px] flex h-16 w-full items-center px-5',
         isMain && 'laptop:h-[84px] fixed top-0 left-0'
       )}
     >
