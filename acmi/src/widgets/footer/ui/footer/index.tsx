@@ -1,8 +1,9 @@
 import { Logo } from '@/shared/assets';
-import { FooterEmail } from '../footer-email';
-import { FooterLink } from '../footer-link';
 
-export const Footer = ({}) => {
+import { FooterLink } from '../footer-link';
+import { FooterEmail } from '../footer-email';
+
+export const Footer = () => {
   return (
     <footer className="bg-footer w-full p-5">
       <div className="container">
@@ -25,7 +26,7 @@ export const Footer = ({}) => {
               Terms of service
             </FooterLink>
 
-            <FooterLink className="" href="/policy" target="_blank" rel="noopener noreferrer">
+            <FooterLink className="" href="/privacy" target="_blank" rel="noopener noreferrer">
               Privacy policy
             </FooterLink>
           </div>
