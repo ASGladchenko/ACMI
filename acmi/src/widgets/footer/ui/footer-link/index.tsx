@@ -5,6 +5,8 @@ import Link, { LinkProps } from 'next/link';
 import { cn } from '@/utils';
 
 export interface FooterLinkProps extends LinkProps {
+  rel?: string;
+  target?: string;
   className?: string;
   isDisabled?: boolean;
   children: React.ReactNode;

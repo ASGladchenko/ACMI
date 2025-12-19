@@ -21,11 +21,11 @@ export const Footer = ({}) => {
 
         <div className="mob-lg:flex-row mob-lg:items-center mob-lg:justify-between flex flex-col items-start justify-center gap-2.5">
           <div className="tablet:gap-[30px] flex gap-5">
-            <FooterLink className="" href="/">
+            <FooterLink className="" href="/terms" target="_blank" rel="noopener noreferrer">
               Terms of service
             </FooterLink>
 
-            <FooterLink className="" href="/">
+            <FooterLink className="" href="/policy" target="_blank" rel="noopener noreferrer">
               Privacy policy
             </FooterLink>
           </div>
