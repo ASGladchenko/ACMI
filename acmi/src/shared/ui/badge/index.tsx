@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 
 interface BadgeProps {
   text?: string;

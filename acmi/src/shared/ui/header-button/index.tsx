@@ -1,6 +1,6 @@
-import { cn, appendClassIcon } from '@/utils';
 import { LoaderCircle } from '@/shared/assets';
 import { ChildrenProps } from '@/shared/types';
+import { cn, appendClassIcon } from '@/shared/utils';
 import { transitionClass } from '@/shared/constants';
 
 import { configButton } from './config';

@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { CheckCheckbox } from '@/shared/assets';
 
 import { CheckboxProps } from './types';

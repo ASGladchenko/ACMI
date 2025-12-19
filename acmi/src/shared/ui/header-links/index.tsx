@@ -4,7 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { appendClassIcon, cn } from '@/utils';
+import { appendClassIcon, cn } from '@/shared/utils';
+
 import { transitionClass } from '@/shared/constants';
 
 import { HeaderLinksProps } from './types';

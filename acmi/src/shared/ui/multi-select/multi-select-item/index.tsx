@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { AnimationState } from '@/shared/types';
 
 import { SelectOption } from '../types';

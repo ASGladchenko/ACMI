@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { ChildrenProps } from '@/shared/types';
 
 export const HeaderWrapper = ({ isMain, children }: ChildrenProps<{ isMain?: boolean }>) => {

@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { useSelect } from '@/shared/hooks';
 import { Plane, ArrowDown } from '@/shared/assets';
 

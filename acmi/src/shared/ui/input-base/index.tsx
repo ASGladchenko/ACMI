@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 
 export interface InputBaseProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {

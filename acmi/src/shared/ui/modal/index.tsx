@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import { RemoveScroll } from 'react-remove-scroll';
 
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { ChildrenProps } from '@/types';
 import { useDelayMount } from '@/shared/hooks';
 
