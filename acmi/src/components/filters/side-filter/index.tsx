@@ -17,11 +17,11 @@ import {
 
 import { getStyles } from './styles';
 import {
+  InputQuery,
+  SelectQuery,
   CheckboxQuery,
   DatePickerQuery,
-  InputQuery,
   MultiSelectQuery,
-  SelectQuery,
 } from '@/features';
 
 export interface SideFilterProps {

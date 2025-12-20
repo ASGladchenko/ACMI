@@ -12,6 +12,7 @@ export const authUrl =
   `nonce=test123`;
 
 const ensureTrailingSlash = (url: string): string => {
+  if (!url) return '/';
   return url.endsWith('/') ? url : url + '/';
 };
 
