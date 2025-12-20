@@ -31,6 +31,8 @@ export function useDelayMount(
         });
       }, delay);
     } else {
+      if (state === 'unmounted') return;
+
       setState('unmounting');
 
       timeoutRef.current = setTimeout(() => {

@@ -43,19 +43,19 @@ export const DropdownList = <T extends DropdownItem>({
     >
       <div className={cn('scroll-bar-mini h-full w-full overflow-y-auto', containerClassName)}>
         {isLoading && (
-          <div className="flex h-full items-center justify-center py-4">
-            <LoaderCircle className="text-accent-normal animate-spin-pulse h-16 w-auto max-w-full shrink duration-1000" />
+          <div className="flex items-center justify-center h-full py-4">
+            <LoaderCircle className="w-auto h-16 max-w-full duration-1000 text-accent-normal animate-spin-pulse shrink" />
           </div>
         )}
 
         {error && !isLoading && (
-          <div className="text-error-normal flex h-full items-center justify-center px-4 py-2 font-semibold">
+          <div className="flex items-center justify-center h-full px-4 py-2 font-semibold text-error-normal">
             {error}
           </div>
         )}
 
         {!isData(data) && !isLoading && !error && (
-          <div className="text-text-secondary flex h-full items-center justify-center px-4 py-2 font-semibold">
+          <div className="flex items-center justify-center h-full px-4 py-2 font-semibold text-text-secondary">
             No options
           </div>
         )}

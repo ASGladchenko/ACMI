@@ -67,9 +67,8 @@ export const MultiSelectItem = <T extends SelectOption>({
     'outline-none text-text-primary flex grow shrink min-w-2.50 bg-transparent placeholder:text-text-secondary transition-all duration-100 linear h-[30px]',
     rest.readOnly && !rest.disabled && 'cursor-pointer',
     animation === 'mounting' && isSelected && 'animate-dropdown-in',
-    (animation === 'unmounting' || animation === 'unmounted') &&
-      isSelected &&
-      'animate-dropdown-out',
+    animation === 'unmounting' && isSelected && 'animate-dropdown-out',
+    animation === 'unmounted' && isSelected && 'h-0 duration-0',
     inputClass
   );
 
