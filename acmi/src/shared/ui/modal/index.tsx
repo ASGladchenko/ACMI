@@ -1,16 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+
 import ReactModal from 'react-modal';
 import { RemoveScroll } from 'react-remove-scroll';
 
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { ChildrenProps } from '@/types';
 import { useDelayMount } from '@/shared/hooks';
 
 import { ModalProps } from './types';
 
-const duration = 330;
+const duration = 1500;
 
 export const Modal = ({ isOpen, onClose, children, className }: ChildrenProps<ModalProps>) => {
   const [isClient, setIsClient] = useState(false);

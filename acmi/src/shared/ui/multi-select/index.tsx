@@ -1,13 +1,16 @@
-import { useRef, useState } from 'react';
+'use client';
 
-import { cn } from '@/utils';
+import { JSX, memo, useRef, useState } from 'react';
+
+import { cn } from '@/shared/utils';
 import { useSelect } from '@/shared/hooks';
+import { SelectOption } from '@/shared/types';
 import { Plane, ArrowDown } from '@/shared/assets';
 
+import { MultiSelectProps } from './types';
 import { DropdownList } from '../dropdown-list';
 import { SwitchedDropItem } from '../dropdown-items';
 import { MultiSelectItem } from './multi-select-item';
-import { SelectOption, MultiSelectProps } from './types';
 
 export const MultiSelect = <T extends SelectOption>({
   data,
@@ -40,7 +43,7 @@ export const MultiSelect = <T extends SelectOption>({
   };
 
   const filteredData = (data || []).filter((item) =>
-    item.label.toLowerCase().includes(search.toLowerCase())
+    item.label?.toLowerCase().includes(search?.toLowerCase())
   );
 
   const onIconClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
@@ -86,7 +89,7 @@ export const MultiSelect = <T extends SelectOption>({
         onFocus={() => !isOpen && onToggleSelect(true)}
         RightItem={<ArrowDown className={iconClass} onClick={onIconClick} />}
         LeftItem={
-          itemType === 'plane' ? <Plane className="text-text-secondary h-5 w-5 shrink-0" /> : null
+          itemType === 'plane' ? <Plane className="w-5 h-5 text-text-secondary shrink-0" /> : null
         }
       />
 
@@ -116,3 +119,7 @@ export const MultiSelect = <T extends SelectOption>({
     </div>
   );
 };
+
+MultiSelect.Memo = memo(MultiSelect) as <T>(props: MultiSelectProps<T>) => JSX.Element;
+
+MultiSelect.displayName = 'MultiSelect';
