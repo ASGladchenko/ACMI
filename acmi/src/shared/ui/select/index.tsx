@@ -1,3 +1,5 @@
+'use client';
+
 import { JSX, memo, useRef, useState } from 'react';
 
 import { cn } from '@/shared/utils';
@@ -71,7 +73,7 @@ export const Select = <T extends SelectOption>({
   );
 
   return (
-    <div ref={wrapperRef} className="gutter scroll-bar-mini relative w-full shrink grow">
+    <div ref={wrapperRef} className="relative w-full gutter scroll-bar-mini shrink grow">
       <InputBase
         ref={inputRef}
         isActive={isOpen}
@@ -82,7 +84,7 @@ export const Select = <T extends SelectOption>({
         onFocus={() => onToggleSelect(true)}
         RightItem={<ArrowDown className={iconClass} onClick={onIconClick} />}
         LeftItem={
-          itemType === 'plane' ? <Plane className="text-text-secondary h-5 w-5 shrink-0" /> : null
+          itemType === 'plane' ? <Plane className="w-5 h-5 text-text-secondary shrink-0" /> : null
         }
       />
 

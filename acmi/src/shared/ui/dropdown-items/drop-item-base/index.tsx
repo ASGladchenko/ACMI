@@ -19,7 +19,7 @@ export const DropItemBase = <T extends ItemExtend>({
     <button disabled={disabled} className={btnClass} onClick={() => onClick(item)}>
       {Icon && <Icon className={cn('h-6 w-6 shrink-0', iconClassName)} />}
 
-      <span className="min-w-[0] shrink grow truncate">{item.label}</span>
+      <span className="min-w-0 shrink grow truncate">{item.label}</span>
 
       {isActive && <CheckCheckbox className="text-accent-interactions-dark h-6 w-6" />}
     </button>

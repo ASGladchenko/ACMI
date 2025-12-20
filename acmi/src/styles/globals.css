@@ -113,6 +113,12 @@
   --breakpoint-desktop: 1440px;
 
   /* new design */
+  /* breakpoints */
+  --breakpoint-*: initial;
+  --breakpoint-mob-lg: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-laptop: 960px;
+  --breakpoint-desktop: 1440px;
 
   /* colors */
   --color-white: var(--white);
@@ -167,8 +173,10 @@
   --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-bounce: bounce 1s infinite;
   --animate-spin-pulse: var(--animate-spin), var(--animate-pulse);
+
   --animate-dropdown-in: expand var(--duration-dropdown, 330ms) var(--ease-out) forwards;
   --animate-dropdown-out: collapse var(--duration-dropdown, 330ms) var(--ease-in) forwards;
+
   --animate-fadeIn: fade-in var(--fade-in, 330ms) var(--ease-out) forwards;
   --animate-fadeOut: fade-out var(--fade-out, 330ms) var(--ease-in) forwards;
 
@@ -221,6 +229,7 @@
     0% {
       height: var(--list-min-height, 0);
     }
+
     100% {
       height: var(--list-height, auto);
     }
@@ -247,6 +256,17 @@ body {
   font-size: 17px;
   line-height: 1.4;
   font-family: var(--font-manrope), sans-serif;
+}
+
+.button-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 .gutter {

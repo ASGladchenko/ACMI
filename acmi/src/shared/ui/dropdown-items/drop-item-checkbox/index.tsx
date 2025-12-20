@@ -12,10 +12,8 @@ export const DropItemCheckbox = <T extends ItemExtend>({
       label={item.label}
       checked={isActive}
       disabled={disabled}
+      onChange={() => onClick(item)}
       className="hover:bg-bg-secondary has-[input:focus]:bg-bg-secondary px-[15px] py-2.5 transition-colors duration-200"
-      onChange={() => {
-        onClick(item);
-      }}
     />
   );
 };

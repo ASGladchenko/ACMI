@@ -1,5 +1,4 @@
 'use client';
-
 import { JSX, memo, useRef, useState } from 'react';
 
 import { cn } from '@/shared/utils';

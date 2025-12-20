@@ -11,11 +11,17 @@ import { useDelayMount } from '@/shared/hooks';
 
 import { ModalProps } from './types';
 
-const duration = 1500;
-
-export const Modal = ({ isOpen, onClose, children, className }: ChildrenProps<ModalProps>) => {
+export const Modal = ({
+  style,
+  isOpen,
+  onClose,
+  children,
+  className,
+  contentRef,
+  duration = 330,
+  overlayClassName,
+}: ChildrenProps<ModalProps>) => {
   const [isClient, setIsClient] = useState(false);
-
   const { animationState, isMounted } = useDelayMount(isOpen, {
     exitDuration: duration,
   });
@@ -27,34 +33,35 @@ export const Modal = ({ isOpen, onClose, children, className }: ChildrenProps<Mo
 
   const modalClass = cn(
     'absolute top-1/2 left-1/2 max-h-[calc(100dvh-40px)] max-w-[calc(100dvw-20px)] -translate-x-1/2 -translate-y-1/2 overflow-auto outline-none',
-    className
+    typeof className === 'function' ? className(animationState) : className
   );
 
   if (!isClient) return null;
-
-  if (!isMounted) return null;
+  if (!isOpen && !isMounted) return null;
 
   return (
-    <RemoveScroll enabled={isMounted}>
-      <ReactModal
-        isOpen={isMounted}
-        ariaHideApp={false}
-        className={modalClass}
-        onRequestClose={onClose}
-        style={{
-          overlay: {
-            '--fade-in': `${duration}ms`,
-            '--fade-out': `${duration}ms`,
-          } as React.CSSProperties,
-        }}
-        overlayClassName={cn(
-          'fixed inset-0 bg-black-10 z-[1000] cursor-pointer',
-          animationState === 'mounting' && 'animate-fadeIn',
-          animationState === 'unmounting' && 'animate-fadeOut'
-        )}
-      >
+    <ReactModal
+      ariaHideApp={false}
+      className={modalClass}
+      contentRef={contentRef}
+      onRequestClose={onClose}
+      isOpen={isOpen || isMounted}
+      style={{
+        overlay: {
+          '--fade-in': `${duration}ms`,
+          '--fade-out': `${duration}ms`,
+        } as React.CSSProperties,
+        ...(style ?? {}),
+      }}
+      overlayClassName={cn(
+        'fixed inset-0 bg-[#353647]/60 z-[1000] cursor-pointer animate-fadeIn',
+        animationState === 'unmounting' && 'animate-fadeOut',
+        overlayClassName
+      )}
+    >
+      <RemoveScroll enabled={isOpen} className="w-full h-full">
         {children}
-      </ReactModal>
-    </RemoveScroll>
+      </RemoveScroll>
+    </ReactModal>
   );
 };

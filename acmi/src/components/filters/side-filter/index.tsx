@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@/shared/utils';
 import { queryParams } from '@/constants';
 import { useScrollThreshold } from '@/hooks';
 import {
@@ -15,7 +16,13 @@ import {
 } from '@/components';
 
 import { getStyles } from './styles';
-import { cn } from '@/utils';
+import {
+  CheckboxQuery,
+  DatePickerQuery,
+  InputQuery,
+  MultiSelectQuery,
+  SelectQuery,
+} from '@/features';
 
 export interface SideFilterProps {
   className?: string;
@@ -38,6 +45,9 @@ export const SideFilter = ({ className, onFind, type = 'standard' }: SideFilterP
         )}
       >
         <SelectAircraftTypes />
+        <MultiSelectQuery dictionaryKey="aircraft" queryKey="aircraft_types" />
+
+        <DatePickerQuery />
 
         <FilterLayout />
 
@@ -51,16 +61,18 @@ export const SideFilter = ({ className, onFind, type = 'standard' }: SideFilterP
           label="Max age, years"
           queryName={queryParams.maxAge}
         />
+        <InputQuery queryKey="economy" />
         <SelectNoiseStage />
 
+        <SelectQuery queryKey="min_approach_cat" dictionaryKey="ils" />
         <SelectILSCategory />
 
+        <CheckboxQuery queryKey="iosa" label="IOSA" />
         <SearchCheckbox
           label="IOSA"
           queryName={queryParams.iosa}
           className={styles.checkboxesHalf}
         />
-
         <SearchCheckbox className={styles.checkboxesHalf} queryName={queryParams.act} label="ACT" />
 
         <SearchCheckbox
