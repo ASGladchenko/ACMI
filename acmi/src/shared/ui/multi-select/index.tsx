@@ -88,7 +88,7 @@ export const MultiSelect = <T extends SelectOption>({
         onFocus={() => !isOpen && onToggleSelect(true)}
         RightItem={<ArrowDown className={iconClass} onClick={onIconClick} />}
         LeftItem={
-          itemType === 'plane' ? <Plane className="w-5 h-5 text-text-secondary shrink-0" /> : null
+          itemType === 'plane' ? <Plane className="text-text-secondary h-5 w-5 shrink-0" /> : null
         }
       />
 
@@ -98,7 +98,7 @@ export const MultiSelect = <T extends SelectOption>({
         disabled={disabled}
         animation={animation}
         isLoading={isLoading}
-        animationDuration={animationDuration}
+        animationDuration={animationDuration / 0.8}
         RenderItem={({ item }) => {
           const isActive =
             Boolean(selected) &&

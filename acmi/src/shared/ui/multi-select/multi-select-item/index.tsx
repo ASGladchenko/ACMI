@@ -64,11 +64,11 @@ export const MultiSelectItem = <T extends SelectOption>({
   );
 
   const inputClassName = cn(
-    'outline-none text-text-primary flex grow shrink min-w-2.50 bg-transparent placeholder:text-text-secondary transition-all duration-100 linear h-[30px]',
+    'outline-none text-text-primary flex grow shrink min-w-2.50 bg-transparent placeholder:text-text-secondary transition-all linear h-[30px] duration-200 ease-linear',
     rest.readOnly && !rest.disabled && 'cursor-pointer',
-    animation === 'mounting' && isSelected && 'animate-dropdown-in',
-    animation === 'unmounting' && isSelected && 'animate-dropdown-out',
-    animation === 'unmounted' && isSelected && 'h-0 duration-0',
+    animation === 'unmounted' && !isSelected && '!duration-0',
+    animation === 'unmounted' && isSelected && 'h-0 p-0 m-0 opacity-0',
+    animation === 'unmounting' && isSelected && 'h-0 opacity-0',
     inputClass
   );
 
@@ -85,8 +85,7 @@ export const MultiSelectItem = <T extends SelectOption>({
             onChange={(e) => onChange?.(e.target.value, e)}
             style={
               {
-                '--list-height': '30px',
-                '--duration-dropdown': `${animationDuration * 1.2}ms`,
+                transitionDuration: `${animationDuration}ms`,
               } as React.CSSProperties
             }
           />
@@ -95,7 +94,7 @@ export const MultiSelectItem = <T extends SelectOption>({
             <div
               className={cn(
                 'flex min-w-10 shrink grow flex-wrap gap-2 pt-3 transition-all duration-300',
-                !isActive && 'pt-0'
+                (animation === 'unmounted' || animation === 'unmounting') && 'pt-0'
               )}
             >
               {selected.map((item, idx) => (
