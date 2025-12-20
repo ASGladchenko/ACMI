@@ -1,7 +1,7 @@
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
+import { SelectOption } from '@/shared/types';
 import { AnimationState } from '@/shared/hooks';
 
-import { SelectOption } from '../types';
 import { BadgeButton } from '../../badge-button';
 
 export interface MultiSelectItemProps<T>
