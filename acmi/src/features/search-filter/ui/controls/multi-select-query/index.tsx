@@ -3,10 +3,10 @@
 import { memo, useMemo, useCallback } from 'react';
 
 import { SelectOption } from '@/shared/types';
+import { DictionaryKey, useDictionary } from '@/entities';
 import { MultiSelect, MultiSelectProps } from '@/shared/ui';
 
-import { useUrlParam } from '../../model/useUrlParam';
-import { DictionaryKey, useDictionary } from '@/entities';
+import { useUrlParam } from '../../../model/useUrlParam';
 
 export interface MultiSelectQueryProps
   extends Omit<
