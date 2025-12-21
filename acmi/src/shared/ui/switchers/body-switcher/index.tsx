@@ -1,6 +1,6 @@
-import { cn } from '@/utils';
+import { memo, SyntheticEvent } from 'react';
 
-import { SyntheticEvent } from 'react';
+import { cn } from '@/shared/utils';
 
 export interface BodySwitcherProps {
   isWide: boolean;
@@ -66,3 +66,5 @@ export const BodySwitcher = ({ className, isWide, setIsWide }: BodySwitcherProps
     </div>
   );
 };
+
+BodySwitcher.Memo = memo(BodySwitcher);

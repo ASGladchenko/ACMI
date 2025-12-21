@@ -1,0 +1,21 @@
+@media screen and (max-width: 768px) {
+  #calendar-hero .react-datepicker__month-container,
+  #calendar-mobile-main .react-datepicker__month-container {
+    width: 100%;
+  }
+}
+.picker-modal .react-datepicker {
+  width: 100%;
+}
+
+.picker-modal .react-datepicker .react-datepicker__month-container {
+  width: 50%;
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .picker-modal .react-datepicker .react-datepicker__month-container {
+    width: 100%;
+    height: 50%;
+  }
+}

@@ -4,3 +4,5 @@ export { ButtonIntegrationLeon } from './leon-integration/ui/button-integration-
 export { HeaderLeonModal } from './leon-integration/ui/header-leon-modal';
 export { useLeonConnect } from './leon-integration/model/useLeonConnect';
 export { useModalLeonStore } from './leon-integration/model/modal-store';
+
+export * from './search-filter';

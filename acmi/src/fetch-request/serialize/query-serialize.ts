@@ -1,4 +1,6 @@
 import { queryParams } from '@/constants';
+// For date range serialization
+// const toString = (date: string | null) => (date ? date.toString() : null);
 
 export function serializeQuery(params: Record<string, string>) {
   const dateFromISO = params.date_from
@@ -8,6 +10,15 @@ export function serializeQuery(params: Record<string, string>) {
   const dateToISO = params.date_to
     ? new Date(Number(params.date_to)).toISOString().split('T')[0]
     : null;
+  // TODO update date range serialization
+  // const [start, end] = params.date?.split('-') || [];
+
+  // const dates = {
+  //   a: toString(start),
+  //   b: toString(end),
+  // };
+
+  // console.log({ dates });
 
   const airportCode = params[queryParams.opsFrom]
     ? params[queryParams.opsFrom].split(',')[0]

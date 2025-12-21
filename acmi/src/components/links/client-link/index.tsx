@@ -5,13 +5,21 @@ import Link, { LinkProps } from 'next/link';
 import { cn } from '@/utils';
 
 export interface ClientLinkProps extends LinkProps {
+  rel?: string;
+  target?: string;
   className?: string;
   isActive?: boolean;
   isDisabled?: boolean;
   children: React.ReactNode;
 }
 
-export const ClientLink = ({ children, isActive, className, isDisabled, ...props }: ClientLinkProps) => {
+export const ClientLink = ({
+  children,
+  isActive,
+  className,
+  isDisabled,
+  ...props
+}: ClientLinkProps) => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     if (isDisabled) {
       e.preventDefault();

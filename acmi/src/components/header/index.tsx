@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import { Role } from '@/types';
 import { useUrlWithParams } from '@/hooks';
 import { Logo, Button, ClientLink } from '@/components';
@@ -9,9 +11,16 @@ import { Logo, Button, ClientLink } from '@/components';
 import { BurgerMenu } from './burger-menu';
 
 export const Header = ({ role }: { role?: Role }) => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   const isNotCustomer = role === Role.ADMIN || role === Role.GUEST;
+
+  const isClient = role === Role.USER;
+
+  const becomeProvider = () => {
+    router.push('/integration');
+  };
 
   return (
     <>
@@ -30,16 +39,18 @@ export const Header = ({ role }: { role?: Role }) => {
               Customer Dashboard
             </ClientLink>
 
-            <Button className="w-[182px]" buttonType="outline">
-              Login/ Registration
-            </Button>
+            {isClient && (
+              <Button onClick={becomeProvider} className="w-[182px]" buttonType="outline">
+                Become a Provider
+              </Button>
+            )}
           </nav>
 
           <BurgerMenu
             isOpen={isOpen}
             setIsOpen={setIsOpen}
-            isProvider={role === Role.PROVIDER}
             isNotCustomer={isNotCustomer}
+            isProvider={role === Role.PROVIDER}
           />
         </div>
       </header>

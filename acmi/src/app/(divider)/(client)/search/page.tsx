@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import { cookies } from 'next/headers';
 
-import { apiRedirect } from '@/utils';
+import { getErrorMessage } from '@/utils';
 import { PaginatedSuggestionList } from '@/components';
 import { apiServer, serializeQuery } from '@/fetch-request';
 import { Role, SearchParams, AircraftResponse } from '@/types';
@@ -10,14 +10,14 @@ import { normalizeDetailedFindOffers } from '@/fetch-request/normalize/find-offe
 export const dynamic = 'force-dynamic';
 
 export default async function Home({ searchParams }: SearchParams) {
-  const params = await searchParams;
   const cookieStore = await cookies();
+  const params = await searchParams;
   const role = cookieStore.get('role')?.value as Role | undefined;
 
   const body = serializeQuery(params as Record<string, string>);
 
   let initialData;
-  let errorText;
+  let message;
 
   if (body.date_from && body.date_to && body.airport_code) {
     try {
@@ -27,11 +27,11 @@ export default async function Home({ searchParams }: SearchParams) {
 
       initialData = normalizeDetailedFindOffers(raw);
     } catch (error) {
-      if (error instanceof AxiosError && error.response?.status === 403) {
-        errorText = 'You have reached the request limit';
-      }
+      message = getErrorMessage(error);
 
-      apiRedirect(error);
+      if (error instanceof AxiosError && error.response?.status === 403) {
+        message = 'You have reached the request limit';
+      }
     }
   }
 
@@ -42,7 +42,7 @@ export default async function Home({ searchParams }: SearchParams) {
       <PaginatedSuggestionList
         role={role}
         dates={dates}
-        errorText={errorText}
+        errorText={message}
         initialData={initialData || []}
       />
     </div>

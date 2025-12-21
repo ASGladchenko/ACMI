@@ -41,7 +41,13 @@ export const DropdownList = <T extends DropdownItem>({
         } as React.CSSProperties
       }
     >
-      <div className={cn('scroll-bar-mini h-full w-full overflow-y-auto', containerClassName)}>
+      <div
+        className={cn(
+          'scroll-bar-mini h-full w-full overflow-y-auto',
+          (animation === 'unmounting' || animation === 'mounting') && 'overflow-hidden',
+          containerClassName
+        )}
+      >
         {isLoading && (
           <div className="flex h-full items-center justify-center py-4">
             <LoaderCircle className="text-accent-normal animate-spin-pulse h-16 w-auto max-w-full shrink duration-1000" />

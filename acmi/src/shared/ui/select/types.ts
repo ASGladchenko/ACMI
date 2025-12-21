@@ -1,10 +1,5 @@
 import { SwitchedItemType } from '../dropdown-items';
 
-export type SelectOption = {
-  label: string;
-  id: string | number;
-};
-
 export interface SelectProps<T> {
   error?: string;
   data: T[] | null;

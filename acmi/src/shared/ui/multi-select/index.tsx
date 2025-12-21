@@ -1,15 +1,15 @@
 'use client';
+import { JSX, memo, useRef, useState } from 'react';
 
-import { useRef, useState } from 'react';
-
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { useSelect } from '@/shared/hooks';
+import { SelectOption } from '@/shared/types';
 import { Plane, ArrowDown } from '@/shared/assets';
 
+import { MultiSelectProps } from './types';
 import { DropdownList } from '../dropdown-list';
 import { SwitchedDropItem } from '../dropdown-items';
 import { MultiSelectItem } from './multi-select-item';
-import { SelectOption, MultiSelectProps } from './types';
 
 export const MultiSelect = <T extends SelectOption>({
   data,
@@ -42,7 +42,7 @@ export const MultiSelect = <T extends SelectOption>({
   };
 
   const filteredData = (data || []).filter((item) =>
-    item.label.toLowerCase().includes(search.toLowerCase())
+    item.label?.toLowerCase().includes(search?.toLowerCase())
   );
 
   const onIconClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
@@ -98,7 +98,7 @@ export const MultiSelect = <T extends SelectOption>({
         disabled={disabled}
         animation={animation}
         isLoading={isLoading}
-        animationDuration={animationDuration}
+        animationDuration={animationDuration / 0.8}
         RenderItem={({ item }) => {
           const isActive =
             Boolean(selected) &&
@@ -118,3 +118,7 @@ export const MultiSelect = <T extends SelectOption>({
     </div>
   );
 };
+
+MultiSelect.Memo = memo(MultiSelect) as <T>(props: MultiSelectProps<T>) => JSX.Element;
+
+MultiSelect.displayName = 'MultiSelect';

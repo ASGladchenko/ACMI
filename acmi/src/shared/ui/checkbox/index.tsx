@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { cn } from '@/utils';
 import { CheckCheckbox } from '@/shared/assets';
 
@@ -75,3 +77,7 @@ export const Checkbox = ({
     </label>
   );
 };
+
+Checkbox.Memo = memo(Checkbox);
+
+Checkbox.displayName = 'Checkbox';

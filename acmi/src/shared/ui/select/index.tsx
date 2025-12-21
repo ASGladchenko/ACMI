@@ -1,14 +1,15 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { JSX, memo, useRef, useState } from 'react';
 
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { useSelect } from '@/shared/hooks';
+import { SelectOption } from '@/shared/types';
 import { Plane, ArrowDown } from '@/shared/assets';
 
+import { SelectProps } from './types';
 import { InputBase } from '../input-base';
 import { DropdownList } from '../dropdown-list';
-import { SelectProps, SelectOption } from './types';
 import { SwitchedDropItem } from '../dropdown-items';
 
 export const Select = <T extends SelectOption>({
@@ -42,7 +43,7 @@ export const Select = <T extends SelectOption>({
   };
 
   const filteredData = (data || []).filter((item) =>
-    item.label.toLowerCase().includes(search.toLowerCase())
+    item.label?.toLowerCase().includes(search?.toLowerCase())
   );
 
   const onIconClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
@@ -72,7 +73,7 @@ export const Select = <T extends SelectOption>({
   );
 
   return (
-    <div ref={wrapperRef} className="gutter scroll-bar-mini relative w-full shrink grow">
+    <div ref={wrapperRef} className="relative w-full gutter scroll-bar-mini shrink grow">
       <InputBase
         ref={inputRef}
         isActive={isOpen}
@@ -83,7 +84,7 @@ export const Select = <T extends SelectOption>({
         onFocus={() => onToggleSelect(true)}
         RightItem={<ArrowDown className={iconClass} onClick={onIconClick} />}
         LeftItem={
-          itemType === 'plane' ? <Plane className="text-text-secondary h-5 w-5 shrink-0" /> : null
+          itemType === 'plane' ? <Plane className="w-5 h-5 text-text-secondary shrink-0" /> : null
         }
       />
 
@@ -111,3 +112,7 @@ export const Select = <T extends SelectOption>({
     </div>
   );
 };
+
+Select.Memo = memo(Select) as <T>(props: SelectProps<T>) => JSX.Element;
+
+Select.displayName = 'Select';
