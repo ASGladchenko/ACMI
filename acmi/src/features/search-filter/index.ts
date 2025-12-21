@@ -1,3 +1,3 @@
 export { useUrlParam } from './model/useUrlParam';
 
-export * from './ui';
+export * from './ui/controls';
