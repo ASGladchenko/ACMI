@@ -21,7 +21,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/shared/*": ["./src/shared/*"],
-      "@/entities/*": ["./src/entities/index.ts"],
+      "@/entities/*": ["./src/entities/*/index.ts"],
       "@/features/*": ["./src/features/index.ts"],
       "@/widgets/*": ["./src/widgets/index.ts"]
     }
