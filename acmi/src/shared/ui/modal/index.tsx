@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+
 import ReactModal from 'react-modal';
 import { RemoveScroll } from 'react-remove-scroll';
 
@@ -58,7 +59,7 @@ export const Modal = ({
         overlayClassName
       )}
     >
-      <RemoveScroll enabled={isOpen} className="h-full w-full">
+      <RemoveScroll enabled={isOpen} className="w-full h-full">
         {children}
       </RemoveScroll>
     </ReactModal>

@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { cn } from '@/shared/utils';
 
 export interface InputBaseProps
@@ -30,7 +32,7 @@ export const InputBase = ({
   const isError = Boolean(error);
 
   const wrapperClassName = cn(
-    'flex flex-col gap-1 ',
+    'flex flex-col gap-1 w-full',
     rest.disabled && 'cursor-not-allowed',
     className
   );
@@ -74,3 +76,7 @@ export const InputBase = ({
     </label>
   );
 };
+
+InputBase.Memo = memo(InputBase);
+
+InputBase.displayName = 'InputBase';

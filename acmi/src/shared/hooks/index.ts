@@ -1,3 +1,4 @@
+export { useDebouncedCallback } from './useDebounceCallback';
 export { useWindowWidth } from './useWindowWidth';
 
 export * from './useDelayMount';

@@ -1,4 +1,6 @@
-import { cn } from '@/shared/utils';
+import { memo } from 'react';
+
+import { cn } from '@/utils';
 import { CheckCheckbox } from '@/shared/assets';
 
 import { CheckboxProps } from './types';
@@ -75,3 +77,7 @@ export const Checkbox = ({
     </label>
   );
 };
+
+Checkbox.Memo = memo(Checkbox);
+
+Checkbox.displayName = 'Checkbox';

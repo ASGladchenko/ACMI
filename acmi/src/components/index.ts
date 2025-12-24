@@ -12,6 +12,7 @@ export { RfqOfferRow } from './rfq-offer-row';
 export { showMessage } from './toast';
 export { SuggestionCard } from './suggestion-card';
 export { TextArea } from './text-area';
+export { IntegrationsForm } from './integration-form';
 
 export * from './badges';
 export * from './checkboxes';
