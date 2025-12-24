@@ -18,7 +18,7 @@ export const HomePage = () => {
         </div>
       </div>
 
-      <div className="desktop:py-[100px] laptop:flex-row desktop:gap-[130px] container flex flex-col gap-10 px-5 py-[60px]">
+      <div className="desktop:py-[100px] laptop:flex-row desktop:gap-[130px] laptop:justify-between container flex flex-col gap-10 px-5 py-[60px]">
         <div className="tablet:gap-[25px] flex w-full flex-col gap-[15px]">
           <h2 className="mob-lg:leading-[1.4] desktop:text-[28px] text-2xl leading-[1.3] font-medium">
             <Logo className="text-accent-normal mr-2 inline-block h-5 w-[210px]" />
@@ -35,7 +35,7 @@ export const HomePage = () => {
           </h3>
         </div>
 
-        <div className="mob-lg:gap-y-10 mob-lg:grid mob-lg:grid-cols-2 desktop:gap-x-10 flex flex-col gap-[30px]">
+        <div className="mob-lg:gap-y-10 mob-lg:grid mob-lg:grid-cols-2 desktop:gap-x-10 laptop:max-w-[calc(50%-10px)] flex flex-col gap-[30px]">
           {configInfo.map((item) => (
             <div
               className="mob-lg:flex-col mob-lg:gap-5 desktop:gap-[25px] flex gap-[25px]"
