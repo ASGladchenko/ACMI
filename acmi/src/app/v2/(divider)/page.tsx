@@ -1,8 +1,9 @@
 import { cookies } from 'next/headers';
 
-import { HomePage } from '@/pages';
 import { Role } from '@/shared/types';
 import { Footer, Header } from '@/widgets';
+
+import { HomePage } from './ui';
 
 export default async function Home() {
   const cookieStore = await cookies();
