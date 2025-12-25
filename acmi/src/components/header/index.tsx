@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Role } from '@/types';
+import { useUserStore } from '@/store';
 import { useUrlWithParams } from '@/hooks';
 import { Logo, Button, ClientLink } from '@/components';
 
@@ -12,11 +13,15 @@ import { BurgerMenu } from './burger-menu';
 
 export const Header = ({ role }: { role?: Role }) => {
   const router = useRouter();
+
   const [isOpen, setIsOpen] = useState(false);
+  const storeRole = useUserStore((s) => s.user.role);
 
-  const isNotCustomer = role === Role.ADMIN || role === Role.GUEST;
+  const actualRole = storeRole || role;
 
-  const isClient = role === Role.USER;
+  const isVisibleCD = actualRole === Role.PROVIDER || actualRole === Role.USER;
+
+  const isClient = actualRole === Role.USER;
 
   const becomeProvider = () => {
     router.push('/integration');
@@ -35,7 +40,7 @@ export const Header = ({ role }: { role?: Role }) => {
               Provider Dashboard
             </ClientLink>
 
-            <ClientLink isDisabled={isNotCustomer} href="/dashboard-customer">
+            <ClientLink isDisabled={!isVisibleCD} href="/dashboard-customer">
               Customer Dashboard
             </ClientLink>
 
@@ -49,7 +54,7 @@ export const Header = ({ role }: { role?: Role }) => {
           <BurgerMenu
             isOpen={isOpen}
             setIsOpen={setIsOpen}
-            isNotCustomer={isNotCustomer}
+            isNotCustomer={isVisibleCD}
             isProvider={role === Role.PROVIDER}
           />
         </div>

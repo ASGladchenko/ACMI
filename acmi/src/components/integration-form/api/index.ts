@@ -18,7 +18,6 @@ export const useLeonConnect = () => {
       const resp: LeonConnectResponse = await apiClient
         .post('/leon/auth', { oprId })
         .then((resp) => resp.data);
-      console.log({ resp });
 
       if (resp.authorization_url) {
         window.location.href = resp.authorization_url;

@@ -6,8 +6,6 @@ import { Role } from './types';
 export function middleware(request: NextRequest) {
   const role = request.cookies.get('role')?.value;
 
-  console.log({ role });
-
   const isProvider = role === Role.PROVIDER;
   const isClient = role === Role.USER;
   const isGuest = role === Role.GUEST;
@@ -16,6 +14,8 @@ export function middleware(request: NextRequest) {
   const withRole = isProvider || isClient || isGuest || isAdmin;
 
   const withIntegration = isProvider || isClient || isAdmin;
+
+  const isRoleWithCD = isProvider || isClient;
 
   const { pathname } = request.nextUrl;
 
@@ -31,11 +31,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  if (!isProvider && pathname.startsWith('/dashboard-customer')) {
+  if (!isRoleWithCD && pathname.startsWith('/dashboard-customer')) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  if (!isClient && pathname.startsWith('/dashboard-provider')) {
+  if (!isProvider && pathname.startsWith('/dashboard-provider')) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 

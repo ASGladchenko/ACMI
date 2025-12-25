@@ -1,10 +1,12 @@
 import { create } from 'zustand';
 
+import { Role } from '@/types';
+
 export interface User {
   company: string;
   email: string;
   name: string;
-  role: string;
+  role: Role;
 }
 
 type UserState = {
@@ -17,7 +19,7 @@ const defaultUser = {
   company: '',
   email: '',
   name: '',
-  role: '',
+  role: Role.GUEST,
 };
 
 export const useUserStore = create<UserState>((set, get) => ({

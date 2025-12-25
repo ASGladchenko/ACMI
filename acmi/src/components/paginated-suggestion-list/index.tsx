@@ -2,7 +2,7 @@
 
 import { cn } from '@/utils';
 import { SuggestionCard } from '@/components';
-import { Role, NormalizedDetailedOffer } from '@/types';
+import { NormalizedDetailedOffer } from '@/types';
 import {
   useOffers,
   useETOPSDictionary,
@@ -11,7 +11,6 @@ import {
 } from '@/hooks';
 
 export interface PaginatedSuggestionListProps {
-  role?: Role;
   errorText?: string;
   // isHasMore: boolean;
   initialData: NormalizedDetailedOffer[];
@@ -19,7 +18,6 @@ export interface PaginatedSuggestionListProps {
 }
 
 export const PaginatedSuggestionList = ({
-  role,
   errorText,
   initialData,
   // isHasMore,
@@ -59,12 +57,7 @@ export const PaginatedSuggestionList = ({
         !error &&
         data.map((item, index) => {
           return (
-            <SuggestionCard
-              role={role}
-              offer={item}
-              fetchOffers={fetchOffers}
-              key={`${item.id}-${index}`}
-            />
+            <SuggestionCard offer={item} fetchOffers={fetchOffers} key={`${item.id}-${index}`} />
           );
         })}
 

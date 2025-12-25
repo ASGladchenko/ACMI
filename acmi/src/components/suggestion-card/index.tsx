@@ -19,15 +19,16 @@ import { RFQBlock, ProviderBlock, SpecificationBlock } from '../specification';
 import './styles.css';
 
 interface SuggestionCardProps {
-  role?: Role;
   fetchOffers: () => Promise<void>;
   offer: NormalizedDetailedOffer;
 }
 
-export const SuggestionCard = ({ offer, role = Role.GUEST, fetchOffers }: SuggestionCardProps) => {
+export const SuggestionCard = ({ offer, fetchOffers }: SuggestionCardProps) => {
   const { type, engines, mtow, age, layout, region, imageUrl = '' } = offer.aircraftDetails;
 
   const [src, setSrc] = useState<string | StaticImageData>(imageUrl);
+
+  const role = useUserStore((state) => state.user.role);
 
   const { user } = useUserStore();
   const { queries } = useQueryStore();
@@ -135,7 +136,7 @@ export const SuggestionCard = ({ offer, role = Role.GUEST, fetchOffers }: Sugges
 
             <ProviderBlock {...offer.providerDetails} />
 
-            {role !== 'guest' && (
+            {role !== Role.GUEST && (
               <>
                 <RFQBlock
                   isEditing
@@ -146,7 +147,7 @@ export const SuggestionCard = ({ offer, role = Role.GUEST, fetchOffers }: Sugges
               </>
             )}
 
-            {role === 'guest' && (
+            {role === Role.GUEST && (
               <p className="text-blue-dark text-center text-[40px] font-bold">
                 You must be verified to send RFQ
               </p>

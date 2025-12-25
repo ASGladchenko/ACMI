@@ -8,8 +8,6 @@ export default async function CollaboraTest() {
   const base = 'https://collabora.acmi.direct/browser/dist/cool.html';
   const iframeSrc = base + cfi.HostEditUrl;
 
-  console.log({ cfi, iframeSrc });
-
   return (
     <div className="h-[600px] w-[100%]">
       <iframe

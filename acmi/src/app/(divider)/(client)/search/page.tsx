@@ -1,18 +1,15 @@
 import { AxiosError } from 'axios';
-import { cookies } from 'next/headers';
 
 import { getErrorMessage } from '@/utils';
 import { PaginatedSuggestionList } from '@/components';
 import { apiServer, serializeQuery } from '@/fetch-request';
-import { Role, SearchParams, AircraftResponse } from '@/types';
+import { SearchParams, AircraftResponse } from '@/types';
 import { normalizeDetailedFindOffers } from '@/fetch-request/normalize/find-offers-normalize';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home({ searchParams }: SearchParams) {
-  const cookieStore = await cookies();
   const params = await searchParams;
-  const role = cookieStore.get('role')?.value as Role | undefined;
 
   const body = serializeQuery(params as Record<string, string>);
 
@@ -39,12 +36,7 @@ export default async function Home({ searchParams }: SearchParams) {
 
   return (
     <div className="laptop:block block h-full py-5 min-[1240px]:pl-6">
-      <PaginatedSuggestionList
-        role={role}
-        dates={dates}
-        errorText={message}
-        initialData={initialData || []}
-      />
+      <PaginatedSuggestionList dates={dates} errorText={message} initialData={initialData || []} />
     </div>
   );
 }

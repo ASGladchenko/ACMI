@@ -17,7 +17,7 @@ export default async function ContractPage({ params }: { params: Promise<{ id: s
   const base = 'https://collabora.acmi.direct/browser/dist/cool.html';
   const iframeSrc = base + cfi?.HostEditUrl;
 
-  console.log({ cfi, errors, iframeSrc });
+  console.log({ errors });
 
   return (
     <div className="laptop:px-0 laptop:pr-1 h-[calc(100vh-120px)] w-full px-2">
