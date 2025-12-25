@@ -4,7 +4,7 @@ import { memo, useCallback } from 'react';
 
 import { DatePickerInput, DatePickerInputProps, DatePickerInputOnChangeProps } from '@/shared/ui';
 
-import { useUrlParam } from '../../model/useUrlParam';
+import { useUrlParam } from '../../../model/useUrlParam';
 import { getPreparedDate, normalizeInitialDates } from './helpers';
 
 export type DatePickerQueryProps = Omit<

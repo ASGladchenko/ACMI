@@ -5,7 +5,7 @@ import { memo, useMemo, useCallback } from 'react';
 import { SelectOption } from '@/shared/types';
 import { Select, SelectProps } from '@/shared/ui';
 
-import { useUrlParam } from '../../model/useUrlParam';
+import { useUrlParam } from '../../../model/useUrlParam';
 import { DictionaryKey, useDictionary } from '@/entities';
 
 export interface SelectQueryProps

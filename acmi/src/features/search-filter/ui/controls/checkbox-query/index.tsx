@@ -4,7 +4,7 @@ import { memo, useCallback } from 'react';
 
 import { Checkbox, CheckboxProps } from '@/shared/ui';
 
-import { useUrlParam } from '../../model/useUrlParam';
+import { useUrlParam } from '../../../model/useUrlParam';
 
 export interface CheckboxQueryProps extends Omit<CheckboxProps, 'value' | 'checked' | 'onChange'> {
   queryKey: string;

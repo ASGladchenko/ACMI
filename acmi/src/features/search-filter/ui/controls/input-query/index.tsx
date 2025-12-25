@@ -5,7 +5,7 @@ import { memo, useState, useEffect, useCallback } from 'react';
 import { useDebouncedCallback } from '@/shared/hooks';
 import { InputBase, InputBaseProps } from '@/shared/ui';
 
-import { useUrlParam } from '../../model/useUrlParam';
+import { useUrlParam } from '../../../model/useUrlParam';
 
 export interface InputQueryProps extends Omit<InputBaseProps, 'value' | 'onChange'> {
   queryKey: string;

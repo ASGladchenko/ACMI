@@ -1,5 +1,3 @@
-
-
 import Image from 'next/image';
 
 import { NormalizedDetailedOffer } from '@/types';
@@ -13,16 +11,7 @@ interface SuggestionCardProps {
 }
 
 export const SuggestionCard = ({ isVerified, offer, onClick }: SuggestionCardProps) => {
-  const {
-    age,
-    type,
-    mtow,
-    layout,
-    region,
-    engines,
-    imageUrl,
-  } = offer?.aircraftDetails ?? {};
-
+  const { age, type, mtow, layout, region, engines, imageUrl } = offer?.aircraftDetails ?? {};
 
   const content = [
     { labelTop: 'Engines', valueTop: engines || 'N/A', labelBottom: 'Layout', valueBottom: layout },
@@ -35,13 +24,13 @@ export const SuggestionCard = ({ isVerified, offer, onClick }: SuggestionCardPro
   ];
 
   return (
-    <div className="rounded-2xl2 border-iron hover:shadow-lg-blue-dark flex w-full flex-col border p-5 transition-shadow duration-300 ease-in-out">
-      <div className="rounded-lg2 relative my-auto mb-5 flex h-[200px] w-full justify-center">
+    <div className="rounded-2xl2 border-iron hover:shadow-lg-blue-dark @container flex w-full flex-col border p-5 transition-shadow duration-500 ease-in-out">
+      <div className="rounded-lg2 relative my-auto mb-5 flex h-[200px] w-full max-w-full justify-center overflow-hidden">
         <Image
           priority
           alt={type || 'Aircraft Image'}
           src={imageUrl || planeDefault}
-          className="object-contain max-[480px]:max-w-[280px] max-[380px]:max-w-[220px]"
+          className="object-contain @max-[440px]:object-cover"
           onError={(event) => (event.currentTarget.src = planeDefault.src)}
         />
         {isVerified && <AvailabilityBadge />}
@@ -56,11 +45,11 @@ export const SuggestionCard = ({ isVerified, offer, onClick }: SuggestionCardPro
         </p>
       </div>
 
-      <div className="mb-[25px] flex w-full flex-wrap gap-5">
+      <div className="mb-[25px] flex w-full flex-wrap gap-5 @max-[316px]:gap-y-3.5">
         {content.map((item, index) => (
           <div
             key={`card-${index}`}
-            className="max- flex w-full max-w-[calc(50%-10px)] flex-col gap-[15px_0] max-[450px]:max-w-full"
+            className="max- flex w-full max-w-full flex-col gap-[15px_0] @min-[280px]:max-w-[calc(50%-10px)]"
           >
             <div className="flex flex-col gap-1.5">
               <span className="text-text-secondary text-[15px] leading-[1.2]">{item.labelTop}</span>

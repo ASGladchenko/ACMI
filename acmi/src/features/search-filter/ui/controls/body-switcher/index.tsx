@@ -4,7 +4,7 @@ import { memo, useCallback } from 'react';
 
 import { BodySwitcher, BodySwitcherProps } from '@/shared/ui';
 
-import { useUrlParam } from '../../model/useUrlParam';
+import { useUrlParam } from '../../../model/useUrlParam';
 
 export type BodySwitcherQueryProps = Omit<BodySwitcherProps, 'isWide' | 'setIsWide'>;
 
