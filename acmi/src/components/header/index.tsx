@@ -21,6 +21,8 @@ export const Header = ({ role }: { role?: Role }) => {
 
   const isVisibleCD = actualRole === Role.PROVIDER || actualRole === Role.USER;
 
+  const isProvider = actualRole === Role.PROVIDER;
+
   const isClient = actualRole === Role.USER;
 
   const becomeProvider = () => {
@@ -36,7 +38,7 @@ export const Header = ({ role }: { role?: Role }) => {
           <nav className="laptop:flex hidden items-center gap-10">
             <ClientLink href={useUrlWithParams({ url: '/' })}>Home</ClientLink>
 
-            <ClientLink isDisabled={role !== Role.PROVIDER} href="/dashboard-provider">
+            <ClientLink isDisabled={!isProvider} href="/dashboard-provider">
               Provider Dashboard
             </ClientLink>
 
