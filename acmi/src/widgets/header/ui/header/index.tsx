@@ -1,5 +1,5 @@
-import { Role } from '@/types';
 import { cn } from '@/shared/utils';
+import { Role } from '@/shared/types';
 import { Logo } from '@/shared/assets';
 import { RoleGuard } from '@/shared/ui';
 import { ButtonLogin, ButtonIntegrationLeon } from '@/features';
