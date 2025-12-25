@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { HeaderBtnTypes } from './types';
 
 export const configButton = (buttonType: HeaderBtnTypes) => {

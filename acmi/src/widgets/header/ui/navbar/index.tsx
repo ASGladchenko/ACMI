@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { appendClassIcon, cn } from '@/utils';
+import { appendClassIcon, cn } from '@/shared/utils';
 import { transitionClass } from '@/shared/constants';
 
 import { NavbarProps } from './types';

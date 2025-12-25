@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { Cross } from '@/shared/assets';
 
 import { BadgeButtonProps } from './types';
