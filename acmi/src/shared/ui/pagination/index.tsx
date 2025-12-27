@@ -88,7 +88,7 @@ export const Pagination: FC<Props> = (props) => {
           type="button"
           onClick={handlePrevious}
           disabled={currentPage === 1}
-          className="group border-iron rounded-lg2 flex cursor-pointer items-center gap-1 border px-[11px] py-2 disabled:opacity-30"
+          className="group border-iron rounded-lg2 flex cursor-pointer items-center gap-1 border px-[11px] py-2 disabled:cursor-not-allowed disabled:opacity-30"
           aria-label="Go to previous page"
         >
           <ArrowDown
@@ -104,7 +104,7 @@ export const Pagination: FC<Props> = (props) => {
           <button
             type="button"
             onClick={() => onPageChange(1)}
-            className={cn('group border-iron rounded-lg2 cursor-pointer border px-[11px] py-2')}
+            className="group border-iron rounded-lg2 cursor-pointer border px-[11px] py-2"
             aria-current={currentPage === 1 ? 'page' : undefined}
           >
             <span className={cn('inline-block group-hover:scale-110', transitionClass)}>1</span>
@@ -182,9 +182,7 @@ export const Pagination: FC<Props> = (props) => {
           onClick={handleNext}
           aria-label="Go to next page"
           disabled={currentPage === totalPages}
-          className={cn(
-            'group border-iron rounded-lg2 flex cursor-pointer items-center gap-1 border px-[11px] py-2 disabled:opacity-30'
-          )}
+          className="group border-iron rounded-lg2 flex cursor-pointer items-center gap-1 border px-[11px] py-2 disabled:cursor-not-allowed disabled:opacity-30"
         >
           Next
           <ArrowDown
