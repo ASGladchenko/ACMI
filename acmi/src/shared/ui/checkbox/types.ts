@@ -22,7 +22,6 @@ export type CheckboxCheckOnChange = (
 
 type CheckboxRadioProps = CheckBoxBaseProps & {
   type?: 'radio';
-  name: string;
   value: string | number;
   onChange: CheckboxRadioOnChange;
 };

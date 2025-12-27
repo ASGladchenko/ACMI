@@ -5,10 +5,7 @@ import { Checkbox, CheckboxProps } from '@/shared/ui';
 
 import { FieldMode, SmartField } from '../smart-field';
 
-type CheckboxIncomeProps = Omit<
-  CheckboxProps,
-  'onChange' | 'onChange' | 'checked' | 'name' | 'type'
->;
+type CheckboxIncomeProps = Omit<CheckboxProps, 'onChange' | 'checked' | 'name' | 'type'>;
 
 export type CheckboxFieldProps = CheckboxIncomeProps & {
   name: string;
