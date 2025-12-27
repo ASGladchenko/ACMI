@@ -1,15 +1,19 @@
+'use client';
 import { memo } from 'react';
 
 import { cn } from '@/utils';
 import { CheckCheckbox } from '@/shared/assets';
 
-import { CheckboxProps } from './types';
+import { CheckboxCheckOnChange, CheckboxProps, CheckboxRadioOnChange } from './types';
 
 const transitionClasses = 'transition duration-300 ease-in-out';
 
 export const Checkbox = ({
   label,
+  value,
+  error,
   disabled,
+  onChange,
   className,
   inputClassName,
   type = 'checkbox',
@@ -20,7 +24,7 @@ export const Checkbox = ({
   const typeCheckbox = styleType === 'check';
 
   const styles = cn(
-    'group/label-check flex cursor-pointer items-center gap-[15px] max-w-full',
+    'flex flex-col  max-w-full',
     transitionClasses,
     className,
     disabled && 'cursor-not-allowed hover:bg-transparent'
@@ -43,38 +47,71 @@ export const Checkbox = ({
     transitionClasses
   );
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (type === 'checkbox') {
+      (onChange as CheckboxCheckOnChange)(e.target.checked, e);
+    } else if (type === 'radio') {
+      (onChange as CheckboxRadioOnChange)(e.target.value as string, e);
+    }
+  };
+
+  const val = type === 'radio' ? value : undefined;
+
   return (
-    <label className={styles}>
-      <input type={type} className={stylesInput} {...props} disabled={disabled} />
-
-      <span className={stylesVisualCheck}>
-        {typeCheckbox && (
-          <CheckCheckbox
-            width={13}
-            height={10}
-            className={cn('shrink-0 appearance-none text-white opacity-0', transitionClasses)}
-          />
+    <div className={styles}>
+      <label
+        className={cn(
+          'group/label-check checkbox-label flex max-w-full cursor-pointer items-center gap-[15px]'
         )}
+      >
+        <input
+          {...props}
+          value={val}
+          type={type}
+          disabled={disabled}
+          onChange={handleChange}
+          className={stylesInput}
+        />
 
-        {typeRadio && (
+        <span className={stylesVisualCheck}>
+          {typeCheckbox && (
+            <CheckCheckbox
+              width={13}
+              height={10}
+              className={cn('shrink-0 appearance-none text-white opacity-0', transitionClasses)}
+            />
+          )}
+
+          {typeRadio && (
+            <span
+              className={cn('bg-accent-normal h-3 w-3 rounded-full opacity-0', transitionClasses)}
+            />
+          )}
+        </span>
+
+        {label && (
           <span
-            className={cn('bg-accent-normal h-3 w-3 rounded-full opacity-0', transitionClasses)}
-          />
+            className={cn(
+              'text-text-primary truncate',
+              disabled && 'text-text-additional',
+              transitionClasses
+            )}
+          >
+            {label}
+          </span>
         )}
-      </span>
+      </label>
 
-      {label && (
+      {Boolean(error) && (
         <span
           className={cn(
-            'text-text-primary truncate',
-            disabled && 'text-text-additional',
-            transitionClasses
+            'text-error-normal font-manrope error-check max-w-full text-[13px] leading-[1.2]'
           )}
         >
-          {label}
+          {error}
         </span>
       )}
-    </label>
+    </div>
   );
 };
 

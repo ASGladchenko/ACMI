@@ -1,12 +1,19 @@
+import { DropdownPlaceholder } from '@/types';
+
+import { AppliedLabelProps } from '../label';
 import { SwitchedItemType } from '../dropdown-items';
-export interface MultiSelectProps<T> {
+
+export type MultiSelectProps<T> = {
   error?: string;
-  data: T[] | null;
   disabled?: boolean;
+  value?: T[] | null;
+  className?: string;
+  options: T[] | null;
   isLoading?: boolean;
-  selected?: T[] | null;
   placeholder?: string;
+  withCount?: boolean;
   animationDuration?: number;
   itemType?: SwitchedItemType;
-  onSelect: (item: T[] | null) => void;
-}
+  onChange: (item: T[] | null) => void;
+  placeholderDropdown?: DropdownPlaceholder;
+} & Omit<AppliedLabelProps, 'labelAs'>;

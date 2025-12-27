@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from '@/utils';
 
 export interface SwitcherProps {
@@ -11,12 +13,12 @@ const transitionClasses = 'transform duration-200 ease-in-out';
 
 export const Switcher = ({ isActive, disabled, onClick }: SwitcherProps) => {
   const switcherClass = cn(
-    'relative w-11 h-[22px] rounded-2xl cursor-pointer bg-iron',
+    'relative w-11 h-[22px] rounded-2xl cursor-pointer bg-iron overflow-hidden',
     transitionClasses,
     {
       'bg-accent-normal': isActive,
-      'cursor-not-allowed opacity-30': disabled,
       'bg-[#E2E5EA]': !isActive && disabled,
+      'cursor-not-allowed opacity-30': disabled,
     }
   );
 
@@ -36,7 +38,7 @@ export const Switcher = ({ isActive, disabled, onClick }: SwitcherProps) => {
 
   return (
     <div className={switcherClass} onClick={handleClick}>
-      <button className={switcherCircleClass} />
+      <button type="button" className={switcherCircleClass} />
     </div>
   );
 };

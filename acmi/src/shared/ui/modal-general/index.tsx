@@ -5,6 +5,7 @@ import { ChildrenProps } from '@/shared/types';
 import { Modal } from '../modal';
 
 interface ModalGeneralProps {
+  id?: string;
   title: string;
   isOpen: boolean;
   className?: string;
@@ -18,10 +19,11 @@ export const ModalGeneral = ({
   onClose,
   children,
   className,
+  id,
   isCloseable = true,
 }: ChildrenProps<ModalGeneralProps>) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} id={id}>
       <div className={cn('rounded-lg2 w-full bg-white p-4', className)}>
         <div className="mb-[25px] flex items-center justify-between">
           <h4 className="tablet:text-[28px] tablet:leading-[1.3] text-2xl leading-[1.2] font-bold">

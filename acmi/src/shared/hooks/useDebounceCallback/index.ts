@@ -42,16 +42,13 @@ export const useDebouncedCallback = <T extends AnyFn>(
 
   const debounced = useCallback(
     (...args: Parameters<T>) => {
-      console.log('Debounced called with:', args);
       lastArgsRef.current = args;
 
       if (timeoutRef.current !== null) {
-        console.log('Clearing previous timeout');
         clearTimeout(timeoutRef.current);
       }
 
       timeoutRef.current = setTimeout(() => {
-        console.log('Executing debounced callback after delay');
         callbackRef.current(...(lastArgsRef.current || args));
         timeoutRef.current = null;
         lastArgsRef.current = null;

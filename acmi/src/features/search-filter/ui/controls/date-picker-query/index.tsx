@@ -10,17 +10,21 @@ import { getPreparedDate, normalizeInitialDates } from './helpers';
 export type DatePickerQueryProps = Omit<
   DatePickerInputProps,
   'initialStart' | 'initialEnd' | 'onChange'
->;
+> & {
+  queryKey: string;
+};
 
-export const DatePickerQuery = memo(({ ...props }: DatePickerQueryProps) => {
-  const { value: date, setValue: setDate } = useUrlParam('dates');
+export const DatePickerQuery = memo(({ queryKey, ...props }: DatePickerQueryProps) => {
+  const { value: date, setValue: setDate } = useUrlParam(queryKey);
 
   const onChange = useCallback(
     (value: DatePickerInputOnChangeProps) => {
       const newDate = getPreparedDate(value);
-      setDate(newDate);
+      if (date !== newDate) {
+        setDate(newDate);
+      }
     },
-    [setDate]
+    [setDate, date]
   );
 
   const { start, end } = normalizeInitialDates(date);

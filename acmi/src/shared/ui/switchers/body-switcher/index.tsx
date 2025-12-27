@@ -32,15 +32,14 @@ export const BodySwitcher = ({ className, isWide, setIsWide }: BodySwitcherProps
     <div className={wrapper} onClick={handleClick}>
       <div
         className={cn(
-          'rounded-lg2 border-accent-interactions-dark absolute -left-[1px] z-10 h-[calc(100%+2px)] w-1/2 cursor-pointer border bg-white',
-          {
-            'left-[calc(100%+1px)] -translate-x-full': isWide,
-          },
+          'rounded-lg2 border-accent-interactions-dark absolute left-[1px] z-10 h-[calc(100%+2px)] w-1/2 cursor-pointer border bg-white',
+          isWide && 'left-1/2',
           transitionClasses
         )}
       />
 
       <button
+        type="button"
         data-boolean={false}
         className={cn(
           textClass,
@@ -53,6 +52,7 @@ export const BodySwitcher = ({ className, isWide, setIsWide }: BodySwitcherProps
       </button>
 
       <button
+        type="button"
         data-boolean={true}
         className={cn(
           textClass,

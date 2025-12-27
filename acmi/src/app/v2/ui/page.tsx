@@ -2,6 +2,13 @@
 
 import { useState } from 'react';
 
+import { ToastContainer } from 'react-toastify';
+
+import { Modal } from '@/shared/ui/modal';
+import { SelectAirport } from '@/entities';
+import { Select } from '@/shared/ui/select';
+import { SelectOption } from '@/shared/types';
+import { SwitcherQuery, DatePickerQuery, SelectAirportQuery } from '@/features';
 import {
   Plane,
   Sales,
@@ -12,8 +19,8 @@ import {
   Notification,
   LoaderCircle,
 } from '@/shared/assets/svg';
-import { Select } from '@/shared/ui/select';
 import {
+  Badge,
   Button,
   Checkbox,
   Switcher,
@@ -22,13 +29,10 @@ import {
   BadgeButton,
   MultiSelect,
   HeaderLinks,
+  showMessage,
   BodySwitcher,
   HeaderButton,
-  showMessage,
-  Badge,
 } from '@/shared/ui';
-import { Modal } from '@/shared/ui/modal';
-import { ToastContainer } from 'react-toastify';
 
 type SelectItemProps = {
   id: number;
@@ -63,6 +67,9 @@ export default function Ui() {
   const [selectedMulti1, setSelectedMulti1] = useState<SelectItemProps[] | null>(null);
   const [isWide, setIsWide] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [radio, setRadio] = useState<string>('');
+  const [check, setCheck] = useState<boolean>(false);
+  const [airport, setAirport] = useState<SelectOption | null>(null);
 
   return (
     <div className="flex flex-col gap-2 py-6">
@@ -99,6 +106,8 @@ export default function Ui() {
           Warning
         </Button>
       </div>
+
+      <DatePickerQuery queryKey="dates" label="Choose the dates" />
 
       <div className="flex gap-1">
         <Button loading={true} disabled={true} className="">
@@ -169,55 +178,79 @@ export default function Ui() {
       <ButtonTop />
 
       <Checkbox
-        disabled={false}
-        onChange={(e) => console.log(e.target.checked, '0')}
-        className="px-[15px] py-2 hover:bg-red-500"
-        label="safsadfsadf sadfasdf"
-      />
-      <Checkbox
         name="radio"
-        onChange={(e) => console.log(e.target.checked, '1')}
-        className="px-[15px] py-2 hover:bg-red-500"
-        label="safsadfsadf sadfasdf"
         type="radio"
+        label="Radio 1"
+        value={'radio_1'}
         styleType="circle"
+        onChange={setRadio}
+        checked={radio === 'radio_1'}
+        className="[&>.checkbox-label]:px-[15px] [&>.checkbox-label]:py-2 hover:[&>.checkbox-label]:bg-blue-200 [&>.error-check]:px-[15px]"
       />
       <Checkbox
         name="radio"
         type="radio"
-        label="safsadfsadf sadfasdf"
-        className="px-[15px] py-2 hover:bg-red-500"
-        onChange={(e) => console.log(e.target.checked, '2')}
+        label="Radio 2"
+        value={'radio_2'}
+        onChange={setRadio}
+        checked={radio === 'radio_2'}
+        className="[&>.checkbox-label]:px-[15px] [&>.checkbox-label]:py-2 hover:[&>.checkbox-label]:bg-blue-200 [&>.error-check]:px-[15px]"
       />
+
+      <Checkbox
+        disabled
+        name="radio"
+        type="radio"
+        label="Radio 3"
+        value={'radio_3'}
+        onChange={setRadio}
+        checked={radio === 'radio_3'}
+        className="[&>.checkbox-label]:px-[15px] [&>.checkbox-label]:py-2 hover:[&>.checkbox-label]:bg-blue-200 [&>.error-check]:px-[15px]"
+      />
+      <Checkbox
+        checked={check}
+        disabled={false}
+        label="Checkbox"
+        error="Error radio"
+        onChange={(val) => setCheck(val)}
+        className="[&>.checkbox-label]:px-[15px] [&>.checkbox-label]:py-2 hover:[&>.checkbox-label]:bg-blue-200 [&>.error-check]:px-[15px]"
+      />
+
+      <Button onClick={() => console.log({ check, radio })}>Log checkbox</Button>
+
       <MultiSelect<SelectItemProps>
-        data={options}
-        selected={selectedMulti}
+        options={options}
+        value={selectedMulti}
         placeholder="Multi Select"
-        onSelect={setSelectedMulti}
+        onChange={setSelectedMulti}
       />
 
       <MultiSelect<SelectItemProps>
-        data={options}
-        selected={selectedMulti1}
+        withCount
+        options={options}
+        value={selectedMulti1}
         placeholder="Multi Select"
-        onSelect={setSelectedMulti1}
+        label="Multi Select Label"
+        onChange={setSelectedMulti1}
       />
 
-      <Select<SelectItemProps> data={options} selected={selected} onSelect={setSelected} />
+      <Select<SelectItemProps> options={options} value={selected} onChange={setSelected} />
 
       <Select<SelectItemProps>
-        data={options}
+        options={options}
         itemType="plane"
         error="Error message"
-        selected={selected}
-        onSelect={setSelected}
+        value={selected}
+        onChange={setSelected}
       />
 
+      <SelectAirport placeholder="Select airport" value={airport} onChange={setAirport} />
+
       <Select<SelectItemProps>
-        data={null}
+        options={null}
         itemType="checkbox"
-        selected={selected}
-        onSelect={setSelected}
+        value={selected}
+        onChange={setSelected}
       />
 
       <InputBase placeholder="Disabled" value={value} onChange={setValue} readOnly disabled />
@@ -226,7 +259,20 @@ export default function Ui() {
 
       <InputBase value={value} onChange={setValue} placeholder="Default" />
 
-      <InputBase value={value} onChange={setValue} placeholder="Error" error={!Boolean(value)} />
+      <InputBase
+        value={value}
+        labelAs="label"
+        onChange={setValue}
+        placeholder="Error"
+        error={!Boolean(value)}
+        label="Fuck you Spilberg"
+      />
+
+      <SelectAirportQuery placeholder="Select airport from query" />
+
+      <SwitcherQuery queryKey="is_wide" styleType="body" />
+
+      <SwitcherQuery queryKey="popka" />
 
       <InputBase
         value={value}

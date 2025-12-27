@@ -8,6 +8,8 @@ export type SearchParams<T = unknown> = {
 
 export type TypeFleet = 'aircraftTypes' | 'etops' | 'ilsCategory' | 'noiseStage';
 
+export type DropdownPlaceholder = (val: string) => string | string;
+
 export interface LayOutItem {
   seats: string;
   pitch: string;

@@ -1,17 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
 import ReactModal from 'react-modal';
 import { RemoveScroll } from 'react-remove-scroll';
 
 import { cn } from '@/shared/utils';
 import { ChildrenProps } from '@/types';
-import { useDelayMount } from '@/shared/hooks';
+import { useHydrated, useDelayMount } from '@/shared/hooks';
 
 import { ModalProps } from './types';
 
 export const Modal = ({
+  id,
   style,
   isOpen,
   onClose,
@@ -20,31 +19,33 @@ export const Modal = ({
   contentRef,
   duration = 330,
   overlayClassName,
+  shouldReturnFocusAfterClose = true,
 }: ChildrenProps<ModalProps>) => {
-  const [isClient, setIsClient] = useState(false);
+  const isHydrated = useHydrated();
+
   const { animationState, isMounted } = useDelayMount(isOpen, {
     exitDuration: duration,
   });
 
-  useEffect(() => {
-    setIsClient(true);
-    ReactModal.setAppElement('body');
-  }, []);
+  if (!isHydrated) return null;
 
   const modalClass = cn(
     'absolute top-1/2 left-1/2 max-h-[calc(100dvh-40px)] max-w-[calc(100dvw-20px)] -translate-x-1/2 -translate-y-1/2 overflow-auto outline-none',
     typeof className === 'function' ? className(animationState) : className
   );
 
-  if (!isClient) return null;
   if (!isOpen && !isMounted) return null;
 
   return (
     <ReactModal
+      id={id}
+      shouldCloseOnEsc
       ariaHideApp={false}
       className={modalClass}
       contentRef={contentRef}
       onRequestClose={onClose}
+      shouldReturnFocusAfterClose={shouldReturnFocusAfterClose}
+      appElement={document.body}
       isOpen={isOpen || isMounted}
       style={{
         overlay: {
@@ -59,7 +60,7 @@ export const Modal = ({
         overlayClassName
       )}
     >
-      <RemoveScroll enabled={isOpen} className="w-full h-full">
+      <RemoveScroll enabled={isOpen} className="h-full w-full">
         {children}
       </RemoveScroll>
     </ReactModal>

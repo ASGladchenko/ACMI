@@ -11,7 +11,7 @@ import { DictionaryKey, useDictionary } from '@/entities';
 export interface SelectQueryProps
   extends Omit<
     SelectProps<SelectOption>,
-    'data' | 'selected' | 'onSelect' | 'error' | 'isLoading'
+    'options' | 'value' | 'onChange' | 'error' | 'isLoading'
   > {
   queryKey: string;
   dictionaryKey: DictionaryKey;
@@ -35,9 +35,9 @@ export const SelectQuery = memo(({ queryKey, dictionaryKey, ...props }: SelectQu
   return (
     <Select.Memo<(typeof options)[number]>
       {...props}
-      data={options}
-      selected={selected}
-      onSelect={onSelect}
+      value={selected}
+      options={options}
+      onChange={onSelect}
       error={error || undefined}
       isLoading={status === 'loading'}
     />

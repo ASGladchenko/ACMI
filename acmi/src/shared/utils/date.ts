@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 export const formatDate = (dateStr: string): string => {
   const date = new Date(dateStr);
@@ -32,4 +32,18 @@ export const toUTCDate = (localDate: Date | null): Date | null => {
   const dateObj = typeof localDate === 'string' ? new Date(localDate) : localDate;
 
   return new Date(Date.UTC(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate()));
+};
+
+export const toISO = (date: Date | null): string | null => {
+  if (!date) return null;
+  return format(date, 'yyyy-MM-dd');
+};
+
+export const fromISO = (value: string | null | undefined): Date | null => {
+  if (!value) return null;
+  try {
+    return parseISO(value);
+  } catch {
+    return null;
+  }
 };

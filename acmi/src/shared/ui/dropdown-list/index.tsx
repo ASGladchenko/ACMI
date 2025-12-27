@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { LoaderCircle } from '@/shared/assets';
 
 import { sizeToCSSString } from './helpers';
@@ -16,6 +16,7 @@ export const DropdownList = <T extends DropdownItem>({
   height = 140,
   containerClassName,
   animationDuration = 400,
+  placeholder = 'No options',
 }: DropdownListProps<T>) => {
   if (animation === 'unmounted') {
     return null;
@@ -24,7 +25,7 @@ export const DropdownList = <T extends DropdownItem>({
   const isData = (data: T[] | null): data is T[] => Boolean(data) && Boolean(data?.length);
 
   const listClassName = cn(
-    'absolute z-10 h-[var(--list-height,80px)] top-full w-full rounded-lg2 border border-iron bg-white shadow-md mt-0.5 py-2.5 shadow-lg-blue-dark',
+    'absolute z-40 h-[var(--list-height,80px)] top-full w-full rounded-lg2 border border-iron bg-white shadow-md mt-0.5 py-2.5 shadow-lg-blue-dark',
     animation === 'mounting' && 'animate-dropdown-in',
     animation === 'unmounting' && 'animate-dropdown-out',
     className
@@ -62,7 +63,7 @@ export const DropdownList = <T extends DropdownItem>({
 
         {!isData(data) && !isLoading && !error && (
           <div className="text-text-secondary flex h-full items-center justify-center px-4 py-2 font-semibold">
-            No options
+            {placeholder}
           </div>
         )}
 

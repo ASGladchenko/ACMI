@@ -11,7 +11,7 @@ import { useUrlParam } from '../../../model/useUrlParam';
 export interface MultiSelectQueryProps
   extends Omit<
     MultiSelectProps<SelectOption>,
-    'data' | 'selected' | 'onSelect' | 'error' | 'isLoading'
+    'options' | 'value' | 'onChange' | 'error' | 'isLoading'
   > {
   queryKey: string;
   dictionaryKey: DictionaryKey;
@@ -22,6 +22,8 @@ export const MultiSelectQuery = memo(
     const { value, setValue } = useUrlParam(queryKey);
     const { options, status, error } = useDictionary(dictionaryKey);
 
+    const stableOptions = useMemo(() => options, [options]);
+
     const onSelect = useCallback(
       (opt: SelectOption[] | null) => {
         setValue(opt ? opt.map((o) => o.id).join(',') : null);
@@ -31,15 +33,15 @@ export const MultiSelectQuery = memo(
 
     const selected = useMemo(() => {
       const allTypes = value?.split(',') ?? [];
-      return options.filter((option) => allTypes.includes(`${option.id}`));
-    }, [value, options]);
+      return stableOptions.filter((option) => allTypes.includes(`${option.id}`));
+    }, [value, stableOptions]);
 
     return (
-      <MultiSelect.Memo<(typeof options)[number]>
+      <MultiSelect.Memo<(typeof stableOptions)[number]>
         {...props}
-        data={options}
-        selected={selected}
-        onSelect={onSelect}
+        value={selected}
+        onChange={onSelect}
+        options={stableOptions}
         error={error || undefined}
         isLoading={status === 'loading'}
       />

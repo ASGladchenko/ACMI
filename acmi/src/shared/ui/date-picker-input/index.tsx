@@ -1,14 +1,14 @@
 'use client';
 
-import { memo, useState, useEffect, useRef } from 'react';
+import { memo, useRef, useState, useEffect, useCallback } from 'react';
 
 import DatePicker from 'react-datepicker';
 
-import { Cross, Calendar } from '@/shared/assets';
 import { cn, toUTCDate, formatDateRange, fixUTCDateForDatePicker } from '@/shared/utils';
 
 import { Modal } from '../modal';
-import { InputBase } from '../input-base';
+import { Label, AppliedLabelProps } from '../label';
+import { CustomDateTrigger } from './custom-trigger';
 import { CustomHeaderDatePiker } from './custom-header';
 
 //
@@ -17,23 +17,26 @@ import './style.css';
 
 export type DatePickerInputOnChangeProps = [Date | null, Date | null];
 
-export interface DatePickerInputProps {
+export type DatePickerInputProps = {
   minDate?: Date;
   error?: string;
   maxDate?: Date;
   portalId?: string;
   className?: string;
+  disabled?: boolean;
   initialEnd: Date | null;
   initialStart: Date | null;
   onChange: (dates: DatePickerInputOnChangeProps) => void;
-}
+} & Omit<AppliedLabelProps, 'labelAs'>;
 
 const initialMaxDate = new Date();
 initialMaxDate.setFullYear(initialMaxDate.getFullYear() + 10);
 
 export const DatePickerInput = ({
   error,
+  label,
   portalId,
+  disabled,
   onChange,
   className,
   initialEnd = null,
@@ -42,31 +45,38 @@ export const DatePickerInput = ({
   maxDate = initialMaxDate,
 }: DatePickerInputProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const wrapperRef = useRef<HTMLInputElement>(null);
 
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
-  const onHandleChange = (dates: [Date | null, Date | null]) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
+  const onCloseCalendar = useCallback(
+    (dates: [Date | null, Date | null]) => {
+      setIsOpen(false);
+      onChange([toUTCDate(dates[0]), toUTCDate(dates[1] || dates[0])]);
+      wrapperRef.current?.focus();
+    },
+    [onChange]
+  );
 
-    if (start && end) {
-      onCloseCalendar([start, end]);
-    }
-  };
+  const onHandleChange = useCallback(
+    (dates: [Date | null, Date | null]) => {
+      const [start, end] = dates;
+      setStartDate(start);
+      setEndDate(end);
 
-  const onCloseCalendar = (dates: [Date | null, Date | null]) => {
-    setIsOpen(false);
-    onChange([toUTCDate(dates[0]), toUTCDate(dates[1] || dates[0])]);
-  };
+      if (start && end) {
+        onCloseCalendar([start, end]);
+      }
+    },
+    [onCloseCalendar]
+  );
 
-  const onClear = () => {
+  const onClear = useCallback(() => {
     onChange([null, null]);
     setStartDate(null);
     setEndDate(null);
-  };
+  }, [onChange]);
 
   useEffect(() => {
     setStartDate(fixUTCDateForDatePicker(initialStart));
@@ -75,54 +85,45 @@ export const DatePickerInput = ({
 
   const value = formatDateRange(startDate, endDate);
 
-  const onFocus = () => {
-    setIsOpen(true);
-    inputRef.current?.blur();
-  };
-
   return (
-    <div className={cn('date-search w-full [&>div]:w-full', className)}>
-      <InputBase
-        error={error}
-        value={value}
-        ref={inputRef}
-        isActive={isOpen}
-        onFocus={onFocus}
-        placeholder="Select date range"
-        LeftItem={<Calendar className="w-5 h-5 text-color-iron" />}
-        RightItem={
-          value && (
-            <Cross
-              className="w-5 h-5 transition duration-150 text-color-iron hover:text-error-normal"
-              onClick={onClear}
-            />
-          )
-        }
-      />
+    <Label label={label} className={className}>
+      <div
+        ref={wrapperRef}
+        className={cn('date-search w-full outline-none [&>div]:w-full', !label && className)}
+      >
+        <CustomDateTrigger
+          value={value}
+          onClear={onClear}
+          isError={!!error}
+          isActive={isOpen}
+          isDisabled={disabled}
+          onOpen={() => setIsOpen(true)}
+          placeholder="Select date range"
+        />
 
-      <Modal isOpen={isOpen} onClose={() => onCloseCalendar([startDate, endDate])}>
-        <div className="picker-modal flex h-[300px] w-[600px] max-[768px]:h-[600px] max-[768px]:w-[290px]">
-          <DatePicker
-            inline
-            selectsRange
-            monthsShown={2}
-            endDate={endDate}
-            minDate={minDate}
-            maxDate={maxDate}
-            portalId={portalId}
-            startDate={startDate}
-            calendarStartDay={0}
-            dateFormat="dd/MM/yyyy"
-            onChange={onHandleChange}
-            onCalendarClose={() => onCloseCalendar([startDate, endDate])}
-            onCalendarOpen={() => setIsOpen(true)}
-            renderCustomHeader={({ ...props }) => (
-              <CustomHeaderDatePiker minDate={minDate} maxDate={maxDate} {...props} />
-            )}
-          />
-        </div>
-      </Modal>
-    </div>
+        <Modal isOpen={isOpen} onClose={() => onCloseCalendar([startDate, endDate])}>
+          <div className="picker-modal flex h-[300px] w-[600px] max-[768px]:h-[600px] max-[768px]:w-[290px]">
+            <DatePicker
+              inline
+              selectsRange
+              monthsShown={2}
+              endDate={endDate}
+              minDate={minDate}
+              maxDate={maxDate}
+              portalId={portalId}
+              startDate={startDate}
+              calendarStartDay={0}
+              dateFormat="dd/MM/yyyy"
+              onChange={onHandleChange}
+              onCalendarClose={() => onCloseCalendar([startDate, endDate])}
+              renderCustomHeader={({ ...props }) => (
+                <CustomHeaderDatePiker minDate={minDate} maxDate={maxDate} {...props} />
+              )}
+            />
+          </div>
+        </Modal>
+      </div>
+    </Label>
   );
 };
 

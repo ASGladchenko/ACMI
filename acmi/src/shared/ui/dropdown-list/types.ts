@@ -14,12 +14,13 @@ interface RenderArrayType<T> {
   renderArray: (item: T[]) => React.ReactElement;
 }
 
- interface DropdownBase<T> {
+interface DropdownBase<T> {
   error?: string;
   data: T[] | null;
   className?: string;
   disabled?: boolean;
   isLoading?: boolean;
+  placeholder?: string;
   height?: string | number;
   animation: AnimationState;
   animationDuration?: number;

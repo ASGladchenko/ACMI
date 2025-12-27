@@ -15,15 +15,7 @@ export const InputQuery = memo(({ queryKey, onBlur, ...props }: InputQueryProps)
   const { value: urlValue, setValue } = useUrlParam(queryKey);
   const [localValue, setLocalValue] = useState(urlValue);
 
-  const setValueStable = useCallback(
-    (val: string | null) => {
-      setValue(val);
-      setLocalValue(val ?? '');
-    },
-    [setValue]
-  );
-
-  const debounced = useDebouncedCallback(setValueStable, 500);
+  const debounced = useDebouncedCallback(setValue, 500);
 
   const handleBlur = useCallback(
     (e: React.FocusEvent<HTMLInputElement>) => {

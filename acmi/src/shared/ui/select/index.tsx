@@ -1,25 +1,31 @@
 'use client';
 
-import { JSX, memo, useRef, useState } from 'react';
+import { JSX, memo, useRef, useState, useCallback } from 'react';
 
 import { cn } from '@/shared/utils';
 import { useSelect } from '@/shared/hooks';
 import { SelectOption } from '@/shared/types';
 import { Plane, ArrowDown } from '@/shared/assets';
 
+import { Label } from '../label';
 import { SelectProps } from './types';
 import { InputBase } from '../input-base';
 import { DropdownList } from '../dropdown-list';
 import { SwitchedDropItem } from '../dropdown-items';
 
 export const Select = <T extends SelectOption>({
-  data,
   error,
+  value,
+  label,
+  options,
+  labelAs,
   disabled,
-  selected,
-  onSelect,
+  onChange,
+  className,
   isLoading,
+  onSearchChange,
   itemType = 'base',
+  placeholderDropdown,
   animationDuration = 360,
   placeholder = 'Select an option',
 }: SelectProps<T>) => {
@@ -37,79 +43,100 @@ export const Select = <T extends SelectOption>({
     },
   });
 
-  const handleChangeSearch = (value: string) => {
-    setSearch(value);
-    onSelect(null);
-  };
+  const handleChangeSearch = useCallback(
+    (value: string) => {
+      setSearch(value);
+      onSearchChange?.(value);
+      onChange(null);
+    },
+    [onChange, onSearchChange]
+  );
 
-  const filteredData = (data || []).filter((item) =>
+  const filteredOptions = (options || []).filter((item) =>
     item.label?.toLowerCase().includes(search?.toLowerCase())
   );
 
-  const onIconClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
-    e.preventDefault();
+  const onIconClick = useCallback(
+    (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+      e.preventDefault();
 
-    onToggleSelect(!isOpen);
+      onToggleSelect(!isOpen);
 
-    if (!isOpen) {
-      inputRef.current?.blur();
-    }
-  };
+      if (!isOpen) {
+        inputRef.current?.blur();
+      }
+    },
+    [isOpen, onToggleSelect]
+  );
 
   const onItemClick = (item: T) => {
-    if (selected && selected.id === item.id) {
+    if (value && value.id === item.id) {
       return;
     }
 
-    onSelect(item);
+    onChange(item);
     onToggleSelect(false);
   };
 
-  const selectedLabel = isOpen ? (selected?.label ?? search) : (selected?.label ?? '');
+  const selectedLabel = isOpen ? (value?.label ?? search) : (value?.label ?? '');
 
   const iconClass = cn(
     'h-5 w-5 shrink-0 text-inherit transition-all duration-200',
     isOpen && 'rotate-180 text-accent-interactions-dark'
   );
 
+  const getPlaceholderDropDown = useCallback(
+    (search: string) =>
+      typeof placeholderDropdown === 'function'
+        ? placeholderDropdown(search)
+        : placeholderDropdown || 'No options',
+    [placeholderDropdown]
+  );
+
   return (
-    <div ref={wrapperRef} className="relative w-full gutter scroll-bar-mini shrink grow">
-      <InputBase
-        ref={inputRef}
-        isActive={isOpen}
-        value={selectedLabel}
-        error={Boolean(error)}
-        placeholder={placeholder}
-        onChange={handleChangeSearch}
-        onFocus={() => onToggleSelect(true)}
-        RightItem={<ArrowDown className={iconClass} onClick={onIconClick} />}
-        LeftItem={
-          itemType === 'plane' ? <Plane className="w-5 h-5 text-text-secondary shrink-0" /> : null
-        }
-      />
+    <Label as={labelAs} label={label} className={className}>
+      <div
+        ref={wrapperRef}
+        className={cn('gutter scroll-bar-mini relative w-full shrink grow', !label && className)}
+      >
+        <InputBase
+          ref={inputRef}
+          isActive={isOpen}
+          value={selectedLabel}
+          error={Boolean(error)}
+          placeholder={placeholder}
+          onChange={handleChangeSearch}
+          onFocus={() => onToggleSelect(true)}
+          RightItem={<ArrowDown className={iconClass} onClick={onIconClick} />}
+          LeftItem={
+            itemType === 'plane' ? <Plane className="text-text-secondary h-5 w-5 shrink-0" /> : null
+          }
+        />
 
-      <DropdownList<T>
-        error={error}
-        data={filteredData}
-        disabled={disabled}
-        animation={animation}
-        isLoading={isLoading}
-        animationDuration={animationDuration}
-        RenderItem={({ item }) => {
-          const isActive = Boolean(selected) && Boolean(selected && selected.id === item.id);
+        <DropdownList<T>
+          error={error}
+          disabled={disabled}
+          animation={animation}
+          isLoading={isLoading}
+          data={filteredOptions}
+          animationDuration={animationDuration}
+          placeholder={getPlaceholderDropDown(search)}
+          RenderItem={({ item }) => {
+            const isActive = Boolean(value) && Boolean(value && value.id === item.id);
 
-          return (
-            <SwitchedDropItem<T>
-              item={item}
-              type={itemType}
-              key={item.label}
-              isActive={isActive}
-              onClick={onItemClick}
-            />
-          );
-        }}
-      />
-    </div>
+            return (
+              <SwitchedDropItem<T>
+                item={item}
+                type={itemType}
+                key={item.label}
+                isActive={isActive}
+                onClick={onItemClick}
+              />
+            );
+          }}
+        />
+      </div>
+    </Label>
   );
 };
 

@@ -18,7 +18,7 @@ export const useUrlParam = (k: string) => {
         currentParams.set(k, paramValue);
       }
 
-      router.push(`${pathname}?${currentParams.toString()}`);
+      router.replace(`${pathname}?${currentParams.toString()}`, { scroll: false });
     },
     [router, pathname, k]
   );

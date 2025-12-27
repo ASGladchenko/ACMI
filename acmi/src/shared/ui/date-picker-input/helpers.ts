@@ -47,3 +47,10 @@ export const getVisibleMonths = ({
 
   return months.slice(start, end);
 };
+
+export const handleDivKeyDown = (e: React.KeyboardEvent<HTMLDivElement>, func: () => void) => {
+  if (e.key === ' ' || e.key === 'Enter') {
+    e.preventDefault();
+    func();
+  }
+};
