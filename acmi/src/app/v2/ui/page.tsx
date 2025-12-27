@@ -26,6 +26,7 @@ import {
   HeaderButton,
   showMessage,
   Badge,
+  Pagination,
 } from '@/shared/ui';
 import { Modal } from '@/shared/ui/modal';
 import { ToastContainer } from 'react-toastify';
@@ -63,6 +64,9 @@ export default function Ui() {
   const [selectedMulti1, setSelectedMulti1] = useState<SelectItemProps[] | null>(null);
   const [isWide, setIsWide] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const [currentPage, setCurrent] = useState(1);
+  const [perPage, setPerPage] = useState(10);
 
   return (
     <div className="flex flex-col gap-2 py-6">
@@ -126,6 +130,14 @@ export default function Ui() {
         <Badge text="Archive" badgeColor="gray" />
         <Badge text="In negotiations" badgeColor="blue" />
       </div>
+
+      <Pagination
+        totalPages={20}
+        pageSize={perPage}
+        currentPage={currentPage}
+        onPageChange={setCurrent}
+        onPageSizeChange={setPerPage}
+      />
 
       <div className="flex gap-2 p-4">
         <HeaderButton
