@@ -5,14 +5,14 @@ import { JSX, memo, useRef, useState, useCallback } from 'react';
 import { cn } from '@/shared/utils';
 import { useSelect } from '@/shared/hooks';
 import { SelectOption } from '@/shared/types';
-import { ArrowDown, Cross } from '@/shared/assets';
+import { Cross, ArrowDown } from '@/shared/assets';
 
+import { Icon } from './helper';
 import { Label } from '../label';
 import { SelectProps } from './types';
 import { InputBase } from '../input-base';
 import { DropdownList } from '../dropdown-list';
 import { SwitchedDropItem } from '../dropdown-items';
-import { Icon } from './helper';
 
 export const Select = <T extends SelectOption>({
   error,
@@ -117,6 +117,7 @@ export const Select = <T extends SelectOption>({
           placeholder={placeholder}
           onChange={handleChangeSearch}
           onFocus={() => onToggleSelect(true)}
+          LeftItem={<Icon itemType={itemType} className="text-text-secondary h-5 w-5 shrink-0" />}
           RightItem={
             <>
               {value && !isOpen && (
@@ -128,10 +129,6 @@ export const Select = <T extends SelectOption>({
 
               <ArrowDown className={iconClass} onClick={onIconClick} />
             </>
-          }
-          LeftItem={
-            // itemType === 'plane' ? <Plane className="text-text-secondary h-5 w-5 shrink-0" /> : null
-            <Icon itemType={itemType} className="text-text-secondary h-5 w-5 shrink-0" />
           }
         />
 
