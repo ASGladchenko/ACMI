@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 
 import { NavLinksType } from '../../../../model/user-nav-bar-config';
 

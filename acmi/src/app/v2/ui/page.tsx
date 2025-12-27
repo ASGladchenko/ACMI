@@ -26,6 +26,7 @@ import {
   Switcher,
   ButtonTop,
   InputBase,
+  Pagination,
   BadgeButton,
   MultiSelect,
   HeaderLinks,
@@ -61,15 +62,20 @@ const links = [
 
 export default function Ui() {
   const [value, setValue] = useState('');
-  const [isActive, setIsActive] = useState(false);
-  const [selected, setSelected] = useState<SelectItemProps | null>(null);
-  const [selectedMulti, setSelectedMulti] = useState<SelectItemProps[] | null>(null);
-  const [selectedMulti1, setSelectedMulti1] = useState<SelectItemProps[] | null>(null);
+  const [radio, setRadio] = useState('');
+  const [check, setCheck] = useState(false);
   const [isWide, setIsWide] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [radio, setRadio] = useState<string>('');
-  const [check, setCheck] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState(false);
+
   const [airport, setAirport] = useState<SelectOption | null>(null);
+  const [selected, setSelected] = useState<SelectItemProps | null>(null);
+
+  const [selectedMulti, setSelectedMulti] = useState<SelectItemProps[] | null>(null);
+  const [selectedMulti1, setSelectedMulti1] = useState<SelectItemProps[] | null>(null);
+
+  const [currentPage, setCurrent] = useState(1);
+  const [perPage, setPerPage] = useState(10);
 
   return (
     <div className="flex flex-col gap-2 py-6">
@@ -135,6 +141,14 @@ export default function Ui() {
         <Badge text="Archive" badgeColor="gray" />
         <Badge text="In negotiations" badgeColor="blue" />
       </div>
+
+      <Pagination
+        totalPages={20}
+        pageSize={perPage}
+        currentPage={currentPage}
+        onPageChange={setCurrent}
+        onPageSizeChange={setPerPage}
+      />
 
       <div className="flex gap-2 p-4">
         <HeaderButton

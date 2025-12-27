@@ -144,8 +144,8 @@
 
   --color-bg-default: var(--white-lilac);
   --color-bg-secondary: var(--athens-gray);
-  --color-bg-footer: var(--downriver);
-  --color-bg-footer-secondary: var(--cello);
+  --color-footer: var(--downriver);
+  --color-footer-secondary: var(--cello);
 
   --color-attention-normal: var(--fire-bush);
   --color-attention-light: var(--old-lace);
@@ -258,6 +258,18 @@ body {
   font-family: var(--font-manrope), sans-serif;
 }
 
+.container {
+  margin-inline: auto;
+  max-width: 1300px;
+
+  width: 100%;
+  padding-inline: 20px;
+
+  @media screen and (min-width: 1440px) {
+    padding-inline: 0;
+  }
+}
+
 .button-reset {
   display: inline-flex;
   align-items: center;
@@ -274,7 +286,11 @@ body {
 }
 
 .scroll-bar-mini {
-  /* scrollbar-gutter: stable; */
+  scrollbar-gutter: stable;
+}
+
+.gutter-off {
+  scrollbar-gutter: unset;
 }
 
 .scroll-bar-mini::-webkit-scrollbar {

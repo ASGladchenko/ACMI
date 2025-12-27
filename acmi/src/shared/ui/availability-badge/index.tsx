@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { Verified } from '@/shared/assets';
 
 export const AvailabilityBadge = ({ className }: { className?: string }) => {

@@ -15,6 +15,7 @@ export { Label } from './label';
 export { Modal } from './modal';
 export { ModalGeneral } from './modal-general';
 export { MultiSelect } from './multi-select';
+export { Pagination } from './pagination';
 export { RoleGuard } from './role-guard';
 export { Select } from './select';
 export { showMessage } from './toast';

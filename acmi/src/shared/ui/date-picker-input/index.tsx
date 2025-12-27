@@ -11,7 +11,6 @@ import { Label, AppliedLabelProps } from '../label';
 import { CustomDateTrigger } from './custom-trigger';
 import { CustomHeaderDatePiker } from './custom-header';
 
-//
 import 'react-datepicker/dist/react-datepicker.css';
 import './style.css';
 

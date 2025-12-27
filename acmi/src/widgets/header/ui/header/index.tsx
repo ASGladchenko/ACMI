@@ -1,4 +1,5 @@
-import { Role } from '@/types';
+import { cn } from '@/shared/utils';
+import { Role } from '@/shared/types';
 import { Logo } from '@/shared/assets';
 import { RoleGuard } from '@/shared/ui';
 import { ButtonLogin, ButtonIntegrationLeon } from '@/features';
@@ -11,12 +12,19 @@ import { ButtonMessage } from '../button-message';
 interface HeaderProps {
   role?: Role;
   isMain?: boolean;
+  className?: string;
 }
 
-export const Header = ({ role, isMain }: HeaderProps) => {
+export const Header = ({ role, isMain, className }: HeaderProps) => {
   return (
-    <HeaderWrapper isMain={isMain}>
-      <Logo className="laptop:w-52 laptop:h-5 text-accent-normal h-4 w-[166px] shrink-0" />
+    <HeaderWrapper isMain={isMain} className={className}>
+      <Logo
+        className={cn(
+          'laptop:w-52 laptop:h-5 text-accent-normal h-4 w-[166px] shrink-0',
+          isMain && 'text-white'
+        )}
+      />
+
       <Navbar role={role} className="laptop:flex hidden" />
 
       <div className="flex items-center gap-[15px]">

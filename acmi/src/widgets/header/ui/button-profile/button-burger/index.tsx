@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { Role } from '@/shared/types';
 import { useOutsideClick } from '@/shared/hooks';
 import { Modal, RoleGuard, HeaderButton } from '@/shared/ui';

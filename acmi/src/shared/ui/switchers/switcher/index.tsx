@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 
 export interface SwitcherProps {
   error?: string;

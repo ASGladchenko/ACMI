@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import { LoaderCircle } from '@/shared/assets';
 
 import { ButtonProps } from './types';
