@@ -54,8 +54,8 @@ export const CustomDateTrigger = ({
 
       {value && (
         <Cross
-          className="text-color-iron hover:text-error-normal h-5 w-5 transition duration-150"
           onClick={onClear}
+          className="text-iron hover:text-error-normal h-5 w-5 transition duration-150"
         />
       )}
     </div>

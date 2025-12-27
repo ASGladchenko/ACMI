@@ -5,13 +5,14 @@ import { JSX, memo, useRef, useState, useCallback } from 'react';
 import { cn } from '@/shared/utils';
 import { useSelect } from '@/shared/hooks';
 import { SelectOption } from '@/shared/types';
-import { Plane, ArrowDown } from '@/shared/assets';
+import { ArrowDown, Cross } from '@/shared/assets';
 
 import { Label } from '../label';
 import { SelectProps } from './types';
 import { InputBase } from '../input-base';
 import { DropdownList } from '../dropdown-list';
 import { SwitchedDropItem } from '../dropdown-items';
+import { Icon } from './helper';
 
 export const Select = <T extends SelectOption>({
   error,
@@ -93,6 +94,15 @@ export const Select = <T extends SelectOption>({
     [placeholderDropdown]
   );
 
+  const onClear = useCallback(
+    (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+      e.stopPropagation();
+      e.preventDefault();
+      onChange(null);
+    },
+    [onChange]
+  );
+
   return (
     <Label as={labelAs} label={label} className={className}>
       <div
@@ -102,14 +112,26 @@ export const Select = <T extends SelectOption>({
         <InputBase
           ref={inputRef}
           isActive={isOpen}
-          value={selectedLabel}
+          value={isOpen ? search : selectedLabel}
           error={Boolean(error)}
           placeholder={placeholder}
           onChange={handleChangeSearch}
           onFocus={() => onToggleSelect(true)}
-          RightItem={<ArrowDown className={iconClass} onClick={onIconClick} />}
+          RightItem={
+            <>
+              {value && !isOpen && (
+                <Cross
+                  onClick={onClear}
+                  className="hover:text-error-normal h-5 w-5 text-inherit transition duration-150"
+                />
+              )}
+
+              <ArrowDown className={iconClass} onClick={onIconClick} />
+            </>
+          }
           LeftItem={
-            itemType === 'plane' ? <Plane className="text-text-secondary h-5 w-5 shrink-0" /> : null
+            // itemType === 'plane' ? <Plane className="text-text-secondary h-5 w-5 shrink-0" /> : null
+            <Icon itemType={itemType} className="text-text-secondary h-5 w-5 shrink-0" />
           }
         />
 

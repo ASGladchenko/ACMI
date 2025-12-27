@@ -46,10 +46,11 @@ export const SelectAirport = ({
     <Select.Memo
       {...props}
       options={items}
+      itemType="airport"
+      placeholder={placeholder}
       onSearchChange={onSearchChange}
       isLoading={status === 'loading'}
       error={(error || props.error) ?? undefined}
-      placeholder={placeholder}
       placeholderDropdown={(v) => dynamicPlaceholder(v, status)}
     />
   );

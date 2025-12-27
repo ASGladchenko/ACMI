@@ -1,4 +1,4 @@
-import { Plane } from '@/shared/assets';
+import { Plane, Airport } from '@/shared/assets';
 
 import {
   ItemExtend,
@@ -7,7 +7,7 @@ import {
   DropDownItemProps,
 } from '../../dropdown-items';
 
-export type SwitchedItemType = 'base' | 'checkbox' | 'plane';
+export type SwitchedItemType = 'base' | 'checkbox' | 'plane' | 'airport';
 
 export interface SwitchedDropItemProps<T extends ItemExtend> extends DropDownItemProps<T> {
   type: SwitchedItemType;
@@ -22,6 +22,8 @@ export const SwitchedDropItem = <T extends ItemExtend>({
       return <DropItemCheckbox {...props} />;
     case 'plane':
       return <DropItemBase {...props} Icon={Plane} iconClassName="text-text-secondary" />;
+    case 'airport':
+      return <DropItemBase {...props} Icon={Airport} iconClassName="text-text-secondary" />;
     default:
       return <DropItemBase {...props} />;
   }
