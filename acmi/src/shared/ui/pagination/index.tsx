@@ -75,11 +75,11 @@ export const Pagination: FC<Props> = (props) => {
 
   return (
     <div
-      className={cn('flex items-center gap-[30px] text-[15px] leading-[1.2]', className)}
       role="navigation"
       aria-label="Pagination"
+      className={cn('flex items-center gap-[30px] text-[15px] leading-[1.2]', className)}
     >
-      <span className="">
+      <span className="tablet:inline-block hidden">
         {firstItem}-{lastItem} of {totalCount}
       </span>
 
@@ -88,8 +88,8 @@ export const Pagination: FC<Props> = (props) => {
           type="button"
           onClick={handlePrevious}
           disabled={currentPage === 1}
-          className="group border-iron rounded-lg2 flex cursor-pointer items-center gap-1 border px-[11px] py-2 disabled:cursor-not-allowed disabled:opacity-30"
           aria-label="Go to previous page"
+          className="group border-iron rounded-lg2 flex cursor-pointer items-center gap-1 border px-[11px] py-2 disabled:cursor-not-allowed disabled:opacity-30"
         >
           <ArrowDown
             className={cn(
@@ -104,8 +104,8 @@ export const Pagination: FC<Props> = (props) => {
           <button
             type="button"
             onClick={() => onPageChange(1)}
-            className="group border-iron rounded-lg2 cursor-pointer border px-[11px] py-2"
             aria-current={currentPage === 1 ? 'page' : undefined}
+            className="group border-iron rounded-lg2 cursor-pointer border px-[11px] py-2"
           >
             <span className={cn('inline-block group-hover:scale-110', transitionClass)}>1</span>
           </button>
@@ -113,13 +113,13 @@ export const Pagination: FC<Props> = (props) => {
 
         {showStartEllipsis && (
           <span
-            className="border-iron rounded-lg2 flex h-9 w-[31px] items-center justify-center gap-0.5 border px-[11px] py-2"
             aria-hidden="true"
+            className="border-iron rounded-lg2 flex h-9 w-[31px] items-center justify-center gap-0.5 border px-[11px] py-2"
           >
             {Array.from({ length: 3 }, (_, i) => (
               <span
-                className="bg-text-primary h-0.5 w-0.5 shrink-0 rounded-full"
                 key={`start_${i}`}
+                className="bg-text-primary h-0.5 w-0.5 shrink-0 rounded-full"
               />
             ))}
           </span>
@@ -152,13 +152,13 @@ export const Pagination: FC<Props> = (props) => {
 
         {showEndEllipsis && (
           <span
-            className="border-iron rounded-lg2 flex h-9 w-[31px] items-center justify-center gap-0.5 border px-[11px] py-2"
             aria-hidden="true"
+            className="border-iron rounded-lg2 flex h-9 w-[31px] items-center justify-center gap-0.5 border px-[11px] py-2"
           >
             {Array.from({ length: 3 }, (_, i) => (
               <span
-                className="bg-text-primary h-0.5 w-0.5 shrink-0 rounded-full"
                 key={`end_${i}`}
+                className="bg-text-primary h-0.5 w-0.5 shrink-0 rounded-full"
               />
             ))}
           </span>
@@ -194,7 +194,7 @@ export const Pagination: FC<Props> = (props) => {
         </button>
       </div>
 
-      <div className="flex items-center justify-end gap-2">
+      <div className="desktop:flex hidden items-center justify-end gap-2">
         <span className="text-[15px] leading-[1.2]">Result per page</span>
 
         <div

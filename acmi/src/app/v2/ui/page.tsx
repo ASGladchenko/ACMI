@@ -132,7 +132,7 @@ export default function Ui() {
       </div>
 
       <Pagination
-        totalPages={10}
+        totalPages={20}
         pageSize={perPage}
         currentPage={currentPage}
         onPageChange={setCurrent}
