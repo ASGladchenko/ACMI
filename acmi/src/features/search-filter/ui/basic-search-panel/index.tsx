@@ -4,8 +4,7 @@ import { cn } from '@/shared/utils';
 import { Button } from '@/shared/ui';
 import { Plane } from '@/shared/assets';
 
-import { InputQuery, MultiSelectQuery, BodySwitcherQuery, DatePickerQuery } from '../controls';
-import { ButtonIntegrationLeon } from '@/features/leon-integration/ui/button-integration-leon';
+import { InputQuery, SwitcherQuery, DatePickerQuery, MultiSelectQuery } from '../controls';
 
 export const BasicSearchPanel = ({ className }: { className?: string }) => {
   const cln = cn(
@@ -22,7 +21,7 @@ export const BasicSearchPanel = ({ className }: { className?: string }) => {
       </h1>
 
       <div className="flex w-full max-w-full flex-col gap-5">
-        <BodySwitcherQuery />
+        <SwitcherQuery queryKey="isWide" styleType="body" />
 
         <InputQuery
           queryKey="min_pax"
@@ -41,8 +40,6 @@ export const BasicSearchPanel = ({ className }: { className?: string }) => {
           LeftItem={<Plane className="h-6 w-6 shrink-0" />}
           placeholder="Enter minimum number of passengers"
         />
-
-        <ButtonIntegrationLeon className="tablet:flex hidden" />
 
         <InputQuery
           queryKey="min_pax"
@@ -52,7 +49,7 @@ export const BasicSearchPanel = ({ className }: { className?: string }) => {
 
         <MultiSelectQuery queryKey="aircraft_types" dictionaryKey="aircraft" />
 
-        <DatePickerQuery />
+        <DatePickerQuery queryKey="dates" />
       </div>
 
       <Button className="w-full">Search</Button>
