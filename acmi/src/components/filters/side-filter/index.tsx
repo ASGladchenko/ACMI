@@ -16,13 +16,6 @@ import {
 } from '@/components';
 
 import { getStyles } from './styles';
-import {
-  InputQuery,
-  SelectQuery,
-  CheckboxQuery,
-  DatePickerQuery,
-  MultiSelectQuery,
-} from '@/features';
 
 export interface SideFilterProps {
   className?: string;
@@ -45,10 +38,6 @@ export const SideFilter = ({ className, onFind, type = 'standard' }: SideFilterP
         )}
       >
         <SelectAircraftTypes />
-        <MultiSelectQuery dictionaryKey="aircraft" queryKey="aircraft_types" />
-
-        <DatePickerQuery />
-
         <FilterLayout />
 
         <SelectCertification />
@@ -61,13 +50,10 @@ export const SideFilter = ({ className, onFind, type = 'standard' }: SideFilterP
           label="Max age, years"
           queryName={queryParams.maxAge}
         />
-        <InputQuery queryKey="economy" />
         <SelectNoiseStage />
 
-        <SelectQuery queryKey="min_approach_cat" dictionaryKey="ils" />
         <SelectILSCategory />
 
-        <CheckboxQuery queryKey="iosa" label="IOSA" />
         <SearchCheckbox
           label="IOSA"
           queryName={queryParams.iosa}
