@@ -11,7 +11,6 @@ import { Modal } from '../modal';
 import { InputBase } from '../input-base';
 import { CustomHeaderDatePiker } from './custom-header';
 
-//
 import 'react-datepicker/dist/react-datepicker.css';
 import './style.css';
 
@@ -89,11 +88,11 @@ export const DatePickerInput = ({
         isActive={isOpen}
         onFocus={onFocus}
         placeholder="Select date range"
-        LeftItem={<Calendar className="w-5 h-5 text-color-iron" />}
+        LeftItem={<Calendar className="text-color-iron h-5 w-5" />}
         RightItem={
           value && (
             <Cross
-              className="w-5 h-5 transition duration-150 text-color-iron hover:text-error-normal"
+              className="text-color-iron hover:text-error-normal h-5 w-5 transition duration-150"
               onClick={onClear}
             />
           )
