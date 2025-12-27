@@ -1,14 +1,16 @@
 'use client';
-import { useMemo, useCallback } from 'react';
 
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useMemo, useState, useEffect, useCallback } from 'react';
+
+import { useRouter, usePathname } from 'next/navigation';
 
 export const useUrlParam = (k: string) => {
   const router = useRouter();
   const pathname = usePathname();
-  const params = useSearchParams();
 
-  const setValue = useCallback(
+  const [value, setValue] = useState('');
+
+  const update = useCallback(
     (paramValue: string | null) => {
       const currentParams = new URLSearchParams(window.location.search);
 
@@ -17,14 +19,19 @@ export const useUrlParam = (k: string) => {
       } else {
         currentParams.set(k, paramValue);
       }
+      setValue(paramValue ?? '');
 
       router.replace(`${pathname}?${currentParams.toString()}`, { scroll: false });
     },
     [router, pathname, k]
   );
 
-  const value = params.get(k) ?? '';
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const v = params.get(k) ?? '';
+    setValue(v);
+  }, [k]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  return useMemo(() => ({ value, setValue }), [value]);
+  return useMemo(() => ({ value, setValue: update }), [value]);
 };
