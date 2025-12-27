@@ -48,14 +48,14 @@ export const CustomDateTrigger = ({
       className={containerClassName}
       onKeyDown={(e) => handleDivKeyDown(e, onOpen)}
     >
-      <Calendar className="text-iron h-5 w-5 shrink-0" />
+      <Calendar className="text-text-secondary h-5 w-5 shrink-0" />
 
       <p className={valueClassName}>{value || placeholder}</p>
 
       {value && (
         <Cross
           onClick={onClear}
-          className="text-iron hover:text-error-normal h-5 w-5 transition duration-150"
+          className="text-text-secondary hover:text-error-normal h-5 w-5 transition duration-150"
         />
       )}
     </div>
